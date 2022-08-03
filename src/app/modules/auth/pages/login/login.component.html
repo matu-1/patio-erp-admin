@@ -1,0 +1,11 @@
+<div class="my-3">
+  <h1 class="title">Iniciar sesión</h1>
+</div>
+<form (ngSubmit)="login()" [formGroup]="form">
+  <button mat-raised-button class="btn" type="submit" color="primary">
+    INICIAR SESIÓN
+  </button>
+  <div class="mt2 forget">
+    <span>Se te olvidó tu contraseña?</span>
+  </div>
+</form>
