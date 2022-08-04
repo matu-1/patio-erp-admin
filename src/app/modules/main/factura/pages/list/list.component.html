@@ -1,1 +1,38 @@
 <p>list works!</p>
+<app-data-table
+  [rows]="facturas"
+  [columns]="facturaColumns"
+  (refresh)="getInvoices()"
+  [rowClass]="getRowClass"
+>
+  <ng-template customColumn="id" let-value="value">
+    {{ value.gestion }}
+  </ng-template>
+  <ng-template customColumn="pagado" let-value="value">
+    <ng-container *ngIf="value.pagado == 'no'; else pagado">
+      {{ value.estado == 0 ? "" : "Recibida" }}
+    </ng-container>
+    <ng-template #pagado>
+      <mat-chip-list>
+        <mat-chip>{{ value.pagado }}</mat-chip>
+      </mat-chip-list>
+    </ng-template>
+  </ng-template>
+  <ng-template customColumn="acciones" let-value="value">
+    <button mat-icon-button>
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>visibility</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>email</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>smartphone</mat-icon>
+    </button>
+  </ng-template>
+</app-data-table>

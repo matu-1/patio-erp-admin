@@ -7,6 +7,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [],
@@ -18,7 +23,12 @@ import {MatListModule} from '@angular/material/list';
     MatButtonModule,
     MatMenuModule,
     MatExpansionModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatCardModule,
+    MatChipsModule,
   ],
   exports: [
     MatSidenavModule,
@@ -27,7 +37,12 @@ import {MatListModule} from '@angular/material/list';
     MatButtonModule,
     MatMenuModule,
     MatExpansionModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatCardModule,
+    MatChipsModule,
   ],
 })
 export class MaterialModule {}

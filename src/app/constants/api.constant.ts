@@ -6,5 +6,8 @@ export const API = {
   AUTH: {
     LOGIN: `${API_URL}/auth/login`,
     RENEW: `${API_URL}/auth/renew`,
+  },
+  INVOICE: {
+    GET_ALL: `${API_URL}/factura`,
   }
 }

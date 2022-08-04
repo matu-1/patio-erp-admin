@@ -1,0 +1,65 @@
+<div class="mat-elevation-z2">
+  <mat-card class="toolbar-search mat-elevation-z0">
+    <mat-form-field
+      appearance="outline"
+      floatLabel="never"
+      class="form-field-pb-0"
+    >
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Buscar..."
+        #input
+      />
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+    <button mat-icon-button class="edge-end" (click)="onRefresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </mat-card>
+  <div class="table-responsive">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container *ngFor="let column of columns">
+        <ng-container [matColumnDef]="column.field">
+          <th mat-header-cell *matHeaderCellDef>{{ column.headerName }}</th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="rows; else loading">
+              <ng-container
+                *ngIf="getTemplateRef(column); else noCustomColumn"
+                [ngTemplateOutlet]="getTemplateRef(column)!"
+                [ngTemplateOutletContext]="{ value: element }"
+              >
+              </ng-container>
+              <ng-template #noCustomColumn>
+                {{ getValue(column, element) }}
+              </ng-template>
+            </ng-container>
+            <ng-template #loading>
+              <app-skeleton></app-skeleton>
+            </ng-template>
+          </td>
+        </ng-container>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        [class]="rowClass && rowClass(row)"
+      ></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [colSpan]="displayedColumns.length">
+          No hay datos
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>
