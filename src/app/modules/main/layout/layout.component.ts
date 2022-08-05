@@ -39,4 +39,8 @@ export class LayoutComponent implements OnDestroy {
     this.authService.logout();
     this.router.navigateByUrl(PAGE_ROUTE.AUTH.LOGIN);
   }
+
+  get user() {
+    return this.authService.user;
+  }
 }

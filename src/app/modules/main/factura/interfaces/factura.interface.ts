@@ -37,3 +37,9 @@ export interface Factura {
   monto_ventas: string;
   id_ultimo_pago: null;
 }
+
+export type QueryInvoice = {
+  limit: number;
+  page: number;
+  length: number;
+};

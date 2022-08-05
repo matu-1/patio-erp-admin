@@ -14,8 +14,11 @@ body {
 .active {
   background-color: #f4f4f4;
 }
-.mt2 {
+.mt-2 {
   margin-top: 1rem;
+}
+.mt-3 {
+  margin-top: 1.5rem;
 }
 .my-3 {
   margin: 1.5rem 0;
@@ -35,7 +38,7 @@ body {
 }
 // facturas bg
 .bg-pagado {
-  background-color: #00a65a !important;
+  background-color: #3dc1d3 !important; // #00a65a
 }
 .bg-parcial {
   background-color: #ff851b !important;
@@ -44,7 +47,7 @@ body {
   background-color: #0000ff !important;
 }
 .bg-incobrable {
-  background-color: #ff0000 !important;
+  background-color: #e15f41 !important; //#ff0000
 }
 .bg-en {
   background-color: #d7eff0 !important;
@@ -53,15 +56,15 @@ body {
   background-color: #d0f1d0 !important;
 }
 .bg-cobro {
-  background-color: #f4c8c6 !important;
+  background-color: #f5cd79 !important; //#f4c8c6
 }
 .bg-bloqueado td {
-  color: #999999 !important;
-  background-color: #e1e1e1 !important;
+  color: #ececec !important; //#999999
+  background-color: #778beb !important; //#e1e1e1
 }
 .bg-retirado td {
-  color: #bcbcbc !important;
-  background-color: #6d4a4a !important;
+  color: #ececec !important; //#bcbcbc
+  background-color: #786fa6 !important; //#6d4a4a
 }
 // end facturas bg
 // app-title-bar

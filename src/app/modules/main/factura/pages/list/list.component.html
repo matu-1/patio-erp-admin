@@ -4,11 +4,13 @@
 <app-title-bar title="Facturas">
   <button mat-raised-button color="accent">Exportar</button>
 </app-title-bar>
+<app-simple-card class="mb-3">Filtros</app-simple-card>
 <app-data-table
   [rows]="facturas"
   [columns]="facturaColumns"
   (refresh)="getInvoices()"
   [rowClass]="getRowClass"
+  [showPagination]="false"
 >
   <ng-template customColumn="pagado" let-value="value">
     <ng-container *ngIf="value.pagado == 'no'; else pagado">
@@ -21,32 +23,52 @@
     </ng-template>
   </ng-template>
   <ng-template customColumn="acciones" let-value="value">
-    <button mat-icon-button>
+    <button
+      *ngIf="hasPayment(value)"
+      mat-icon-button
+      matTooltip="Revertir pago"
+    >
       <mat-icon>undo</mat-icon>
     </button>
-    <button mat-icon-button>
-      <mat-icon>refresh</mat-icon>
-    </button>
-    <button mat-icon-button>
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button mat-icon-button>
+    <ng-container *ngIf="!isDisable(value)">
+      <button mat-icon-button matTooltip="Recalcular Factura">
+        <mat-icon>refresh</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Editar factura">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Click para dar por pagada la factura">
+        <mat-icon>handshake</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Programar pago">
+        <mat-icon>schedule</mat-icon>
+      </button>
+    </ng-container>
+    <button mat-icon-button matTooltip="Ver la factura">
       <mat-icon>visibility</mat-icon>
     </button>
-    <button mat-icon-button>
+    <button mat-icon-button matTooltip="Enviar por correo">
       <mat-icon>email</mat-icon>
     </button>
-    <button mat-icon-button>
+    <button mat-icon-button matTooltip="Enviar por whatsapp">
       <mat-icon>smartphone</mat-icon>
     </button>
-    <button mat-icon-button>
+    <button
+      *ngIf="value.contacto_verificado == null"
+      mat-icon-button
+      matTooltip="Contacto no verificado"
+    >
       <mat-icon>unpublished</mat-icon>
-    </button>
-    <button mat-icon-button>
-      <mat-icon>handshake</mat-icon>
-    </button>
-    <button mat-icon-button>
-      <mat-icon>schedule</mat-icon>
     </button>
   </ng-template>
 </app-data-table>
+<mat-paginator
+  [length]="query.length"
+  [pageSize]="query.limit"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  showFirstLastButtons
+  aria-label="Seleccionar pagina"
+  class="mat-elevation-z2"
+  (page)="changePage($event)"
+>
+</mat-paginator>

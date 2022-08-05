@@ -8,6 +8,7 @@ import { ChipComponent } from './chip/chip.component';
 import { TitleBarComponent } from './title-bar/title-bar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { RouterModule } from '@angular/router';
+import { SimpleCardComponent } from './simple-card/simple-card.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { RouterModule } from '@angular/router';
     ChipComponent,
     TitleBarComponent,
     BreadcrumbsComponent,
+    SimpleCardComponent,
   ],
   imports: [CommonModule, MaterialModule, DirectivesModule, RouterModule],
   exports: [
@@ -24,6 +26,7 @@ import { RouterModule } from '@angular/router';
     ChipComponent,
     TitleBarComponent,
     BreadcrumbsComponent,
+    SimpleCardComponent,
   ],
 })
 export class ComponentsModule {}

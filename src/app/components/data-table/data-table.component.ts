@@ -33,6 +33,7 @@ export class DataTableComponent implements AfterViewInit, OnInit {
   @ContentChildren(CustomColumnDirective)
   customColumns!: QueryList<CustomColumnDirective>;
   @Input() rowClass?: (item: any) => string;
+  @Input() showPagination = true;
 
   get rows() {
     return this._rows;
@@ -44,7 +45,7 @@ export class DataTableComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    if (this.showPagination) this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(event: Event) {
