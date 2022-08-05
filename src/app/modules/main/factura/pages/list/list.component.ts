@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { facturaColumns } from '../../configs/table-columns';
 import { Factura } from '../../interfaces/factura.interface';
 import { FacturaService } from '../../services/factura.service';
@@ -9,6 +10,7 @@ import { FacturaService } from '../../services/factura.service';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
+  pageRoute = PAGE_ROUTE;
   facturas?: Factura[];
   facturaColumns = facturaColumns;
 

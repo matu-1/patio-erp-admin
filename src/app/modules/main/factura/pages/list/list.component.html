@@ -1,24 +1,29 @@
-<p>list works!</p>
+<app-breadcrumbs
+  [breadcrumbs]="[{ path: '', title: 'Facturas' }]"
+></app-breadcrumbs>
+<app-title-bar title="Facturas">
+  <button mat-raised-button color="accent">Exportar</button>
+</app-title-bar>
 <app-data-table
   [rows]="facturas"
   [columns]="facturaColumns"
   (refresh)="getInvoices()"
   [rowClass]="getRowClass"
 >
-  <ng-template customColumn="id" let-value="value">
-    {{ value.gestion }}
-  </ng-template>
   <ng-template customColumn="pagado" let-value="value">
     <ng-container *ngIf="value.pagado == 'no'; else pagado">
       {{ value.estado == 0 ? "" : "Recibida" }}
     </ng-container>
     <ng-template #pagado>
-      <mat-chip-list>
-        <mat-chip>{{ value.pagado }}</mat-chip>
-      </mat-chip-list>
+      <app-chip variant="primary" [class]="'bg-' + value.pagado">
+        {{ value.pagado }}
+      </app-chip>
     </ng-template>
   </ng-template>
   <ng-template customColumn="acciones" let-value="value">
+    <button mat-icon-button>
+      <mat-icon>undo</mat-icon>
+    </button>
     <button mat-icon-button>
       <mat-icon>refresh</mat-icon>
     </button>
@@ -33,6 +38,15 @@
     </button>
     <button mat-icon-button>
       <mat-icon>smartphone</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>unpublished</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>handshake</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>schedule</mat-icon>
     </button>
   </ng-template>
 </app-data-table>

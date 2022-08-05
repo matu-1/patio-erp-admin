@@ -20,6 +20,15 @@ $light-theme: mat.define-light-theme(
 $primary-main: mat.get-color-from-palette($primary, "default");
 $primary-darker: mat.get-color-from-palette($primary, "darker");
 $primary-lighter: mat.get-color-from-palette($primary, "lighter");
+
+$accent-main: mat.get-color-from-palette($accent, "default");
+$accent-darker: mat.get-color-from-palette($accent, "darker");
+$accent-lighter: mat.get-color-from-palette($accent, "lighter");
+
+$warn-main: mat.get-color-from-palette($warn, "default");
+$warn-darker: mat.get-color-from-palette($warn, "darker");
+$warn-lighter: mat.get-color-from-palette($warn, "lighter");
+
 $color-config: mat.get-color-config($light-theme);
 $background-palette: map.get($color-config, "background");
 $background: mat.get-color-from-palette($background-palette, "background");

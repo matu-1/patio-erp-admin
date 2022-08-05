@@ -1,10 +1,12 @@
 table {
   width: 100%;
 }
-td, th {
+td,
+th {
   padding-left: 0.5rem !important;
 }
-td:first-of-type, th:first-of-type {
+td:first-of-type,
+th:first-of-type {
   padding-left: 24px !important;
 }
 mat-form-field {

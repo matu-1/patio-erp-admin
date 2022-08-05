@@ -14,6 +14,8 @@ export const facturaColumns: TableColumns = [
   {
     field: 'nombre_cliente',
     headerName: 'Cliente',
+    valueFormatter: (item) =>
+      `${item.nombre_cliente} - ${item.ciudad} - ${item.telefono}`,
   },
   {
     field: 'nombre_cobrador',

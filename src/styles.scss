@@ -64,3 +64,15 @@ body {
   background-color: #6d4a4a !important;
 }
 // end facturas bg
+// app-title-bar
+.title-bar {
+  & > div {
+    & > * {
+      margin: 0.5rem 0;
+      margin-right: 0.5rem;
+    }
+    & > *:last-child {
+      margin-right: 0;
+    }
+  }
+}

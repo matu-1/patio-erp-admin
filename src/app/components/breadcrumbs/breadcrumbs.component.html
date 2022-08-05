@@ -1,0 +1,17 @@
+<nav class="root">
+  <ul>
+    <li><a [routerLink]="pageRoute.HOME">Inicio</a></li>
+    <li *ngIf="breadcrumbs.length > 0">›</li>
+    <ng-container *ngFor="let item of breadcrumbs; let i = index">
+      <ng-container *ngIf="i != breadcrumbs.length - 1; else last">
+        <li>
+          <a [routerLink]="item.path">{{ item.title }}</a>
+        </li>
+        <li>›</li>
+      </ng-container>
+      <ng-template #last>
+        <li>{{ item.title }}</li>
+      </ng-template>
+    </ng-container>
+  </ul>
+</nav>
