@@ -1,0 +1,30 @@
+<div [ngSwitch]="textFieldValue.inputType" [formGroup]="form">
+  <mat-form-field *ngSwitchCase="TextFieldType.Dropdown" appearance="legacy">
+    <mat-label>{{ textFieldValue.label }}</mat-label>
+    <mat-select [formControlName]="textFieldValue.name">
+      <mat-option
+        *ngFor="let option of textFieldValue.options"
+        [value]="option.value"
+        >{{ option.label }}</mat-option
+      >
+    </mat-select>
+    <mat-error *ngFor="let error of textFieldValue.validators">
+      <ng-container *ngIf="control?.hasError(error.name)">
+        {{ error.message }}
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field *ngSwitchDefault appearance="legacy">
+    <mat-label>{{ textFieldValue.label }}</mat-label>
+    <input
+      matInput
+      [type]="textFieldValue.type!"
+      [formControlName]="textFieldValue.name"
+    />
+    <mat-error *ngFor="let error of textFieldValue.validators">
+      <ng-container *ngIf="control?.hasError(error.name)">
+        {{ error.message }}
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+</div>

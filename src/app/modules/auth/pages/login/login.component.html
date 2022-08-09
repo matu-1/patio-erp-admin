@@ -1,7 +1,10 @@
 <div class="my-3">
   <h1 class="title">Iniciar sesión</h1>
 </div>
-<form (ngSubmit)="login()" [formGroup]="form">
+<form markAllSubmit (validSubmit)="login()" [formGroup]="form">
+  <div *ngFor="let value of authSchema">
+    <app-text-field [form]="form" [textFieldValue]="value"></app-text-field>
+  </div>
   <button mat-raised-button class="btn" type="submit" color="primary">
     INICIAR SESIÓN
   </button>

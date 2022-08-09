@@ -9,6 +9,8 @@ import { TitleBarComponent } from './title-bar/title-bar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { RouterModule } from '@angular/router';
 import { SimpleCardComponent } from './simple-card/simple-card.component';
+import { TextFieldComponent } from './text-field/text-field.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,8 +20,15 @@ import { SimpleCardComponent } from './simple-card/simple-card.component';
     TitleBarComponent,
     BreadcrumbsComponent,
     SimpleCardComponent,
+    TextFieldComponent,
   ],
-  imports: [CommonModule, MaterialModule, DirectivesModule, RouterModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    DirectivesModule,
+    RouterModule,
+    ReactiveFormsModule,
+  ],
   exports: [
     DataTableComponent,
     SkeletonComponent,
@@ -27,6 +36,7 @@ import { SimpleCardComponent } from './simple-card/simple-card.component';
     TitleBarComponent,
     BreadcrumbsComponent,
     SimpleCardComponent,
+    TextFieldComponent,
   ],
 })
 export class ComponentsModule {}
