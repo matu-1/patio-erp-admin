@@ -1,5 +1,5 @@
 import { Validators } from '@angular/forms';
-import { TextFieldSchema } from '../../../components/text-field/text-field.interface';
+import { TextFieldSchema } from 'src/app/components/text-field/text-field.interface';
 
 export const authSchema: TextFieldSchema = [
   {

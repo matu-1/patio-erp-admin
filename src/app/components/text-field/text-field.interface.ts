@@ -1,4 +1,4 @@
-import { FormGroup, ValidatorFn } from '@angular/forms';
+import { ValidatorFn } from '@angular/forms';
 
 export enum TextFieldType {
   TextField,
@@ -35,6 +35,7 @@ export interface TextFieldValue {
   inputType?: TextFieldType;
   type?: Type;
   validators?: Validator[];
+  multiple?: boolean; //select
   options?: Option[] | any[]; //select | autocomplete
   getOptionLabel?: (value: any) => string; //autocomplete
   minRows?: number;
@@ -48,9 +49,3 @@ export interface TextFieldValue {
 }
 
 export type TextFieldSchema = TextFieldValue[];
-
-export type TextFieldProps = {
-  form: FormGroup;
-  textFieldValue: TextFieldValue;
-  mb?: number;
-};

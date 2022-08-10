@@ -11,6 +11,9 @@ import { RouterModule } from '@angular/router';
 import { SimpleCardComponent } from './simple-card/simple-card.component';
 import { TextFieldComponent } from './text-field/text-field.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BackdropComponent } from './backdrop/backdrop.component';
+import { ProgressDialogComponent } from './progress-dialog/progress-dialog.component';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     BreadcrumbsComponent,
     SimpleCardComponent,
     TextFieldComponent,
+    BackdropComponent,
+    ProgressDialogComponent,
+    SnackBarComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +43,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BreadcrumbsComponent,
     SimpleCardComponent,
     TextFieldComponent,
+    BackdropComponent,
+    ProgressDialogComponent,
   ],
 })
 export class ComponentsModule {}

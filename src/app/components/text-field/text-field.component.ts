@@ -12,6 +12,8 @@ export class TextFieldComponent implements OnInit {
   form!: FormGroup;
   @Input()
   textFieldValue!: TextFieldValue;
+  @Input()
+  class?: string;
   TextFieldType = TextFieldType;
 
   constructor() {}

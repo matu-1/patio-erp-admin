@@ -2,9 +2,12 @@
   <h1 class="title">Iniciar sesión</h1>
 </div>
 <form markAllSubmit (validSubmit)="login()" [formGroup]="form">
-  <div *ngFor="let value of authSchema">
-    <app-text-field [form]="form" [textFieldValue]="value"></app-text-field>
-  </div>
+  <app-text-field
+    *ngFor="let value of authSchema"
+    [form]="form"
+    [textFieldValue]="value"
+    class="mb-2"
+  ></app-text-field>
   <button mat-raised-button class="btn" type="submit" color="primary">
     INICIAR SESIÓN
   </button>

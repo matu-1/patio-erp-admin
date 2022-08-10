@@ -26,6 +26,9 @@ body {
 .mb-0 {
   margin-bottom: 0;
 }
+.mb-2 {
+  margin-bottom: 1rem;
+}
 .mb-3 {
   margin-bottom: 1.5rem;
 }
@@ -35,6 +38,22 @@ body {
 .table-responsive {
   width: 100%;
   overflow-x: auto;
+}
+//snackBar  bg
+.snackbar-bg {
+  color: white;
+}
+.snackbar-bg-success {
+  background-color: #43a047;
+}
+.snackbar-bg-warning {
+  background-color: #ff9800;
+}
+.snackbar-bg-error {
+  background-color: #d32f2f;
+}
+.snackbar-bg-info {
+  background-color: #2196f3;
 }
 // facturas bg
 .bg-pagado {
