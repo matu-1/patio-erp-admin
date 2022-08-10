@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, delay, map, Observable, of, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { API } from 'src/app/constants/api.constant';
 import { Response } from 'src/app/utils/response';
 import { UserTokenDto } from '../interfaces/auth.interface';
@@ -21,7 +21,6 @@ export class AuthService {
 
   login(dto: LoginDto) {
     return this.http.post<Response<UserTokenDto>>(API.AUTH.LOGIN, dto).pipe(
-      delay(3000),
       tap(({ data }) => {
         this._user = data;
         this.tokenService.setToken(data.accessToken);

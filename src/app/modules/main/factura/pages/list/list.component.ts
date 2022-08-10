@@ -4,6 +4,8 @@ import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { facturaColumns } from '../../configs/table-columns';
 import { Factura, QueryInvoice } from '../../interfaces/factura.interface';
 import { FacturaService } from '../../services/factura.service';
+import { invoiceFilterSchema } from '../../configs/form-schema';
+import { buildform } from 'src/app/components/text-field/text-field.util';
 
 @Component({
   selector: 'app-list',
@@ -14,6 +16,8 @@ export class ListComponent implements OnInit {
   pageRoute = PAGE_ROUTE;
   facturas?: Factura[];
   facturaColumns = facturaColumns;
+  invoiceFilterSchema = invoiceFilterSchema;
+  filterForm  = buildform(invoiceFilterSchema);
   query: QueryInvoice = { page: 0, limit: 20, length: 0 };
 
   constructor(private facturaService: FacturaService) {}

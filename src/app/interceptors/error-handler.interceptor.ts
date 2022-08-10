@@ -19,14 +19,14 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
-        console.log('err', err);
         if (err.error instanceof ProgressEvent) {
           return throwError(
             () => new ResponseError(500, 'Ups ocurrio un error', 'error')
           );
         }
         return throwError(
-          () => new ResponseError(err.status, err.error.message)
+          () =>
+            new ResponseError(err.status, err.error.message, err.error.errors)
         );
       })
     );

@@ -4,7 +4,23 @@
 <app-title-bar title="Facturas">
   <button mat-raised-button color="accent">Exportar</button>
 </app-title-bar>
-<app-simple-card class="mb-3">Filtros</app-simple-card>
+<app-simple-card class="mb-3">
+  <div fxLayout="row wrap" fxLayoutGap="16px 0 grid">
+    <app-text-field
+      fxFlex="16.6%"
+      fxFlex.xs="100%"
+      fxFlex.sm="25%"
+      *ngFor="let value of invoiceFilterSchema"
+      [textFieldValue]="value"
+      [form]="filterForm"
+    ></app-text-field>
+    <div fxFlex="16.6%" fxFlex.xs="100%">
+      <button mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+</app-simple-card>
 <app-data-table
   [rows]="facturas"
   [columns]="facturaColumns"
