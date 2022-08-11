@@ -43,3 +43,19 @@ export type QueryInvoice = {
   page: number;
   length: number;
 };
+
+export interface RevertPaymentDto {
+  gloss: string;
+  lastPaymentId: number;
+  invoiceId: number;
+}
+
+export interface Pago {
+  id: number;
+  id_factura: number;
+  monto: number;
+  fecha: Date;
+  metodo_pago: string;
+  detalle: string;
+  saldo: number;
+}

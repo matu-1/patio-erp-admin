@@ -9,5 +9,6 @@ export const API = {
   },
   INVOICE: {
     GET_ALL: `${API_URL}/factura`,
+    REVERT_PAYMENT: `${API_URL}/factura/revert-payment`
   }
 }

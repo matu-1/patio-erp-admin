@@ -1,3 +1,4 @@
+import { Validators } from '@angular/forms';
 import {
   TextFieldSchema,
   TextFieldType,
@@ -21,8 +22,8 @@ export const invoiceFilterSchema: TextFieldSchema = [
       {
         name: 'int',
         validatorFn: CustomValidators.int,
-        message: 'must be integer'
-      }
+        message: 'must be integer',
+      },
     ],
     df: '16.6%',
     xs: '100%',
@@ -31,7 +32,7 @@ export const invoiceFilterSchema: TextFieldSchema = [
   {
     name: 'mes',
     label: 'Meses',
-    inputType: TextFieldType.Dropdown,
+    fieldType: TextFieldType.Dropdown,
     multiple: true,
     options: [
       { value: 1, label: 'Enero' },
@@ -54,7 +55,7 @@ export const invoiceFilterSchema: TextFieldSchema = [
   {
     name: 'gestion',
     label: 'Gestión',
-    inputType: TextFieldType.Dropdown,
+    fieldType: TextFieldType.Dropdown,
     options: generateYears(2020).map((year) => ({ value: year, label: year })),
     df: '14.6%',
     xs: '100%',
@@ -63,7 +64,7 @@ export const invoiceFilterSchema: TextFieldSchema = [
   {
     name: 'ciudad',
     label: 'Ciudades',
-    inputType: TextFieldType.Dropdown,
+    fieldType: TextFieldType.Dropdown,
     multiple: true,
     options: [
       { value: 'Santa Cruz de la Sierra', label: 'Santa Cruz' },
@@ -79,7 +80,7 @@ export const invoiceFilterSchema: TextFieldSchema = [
   {
     name: 'estado',
     label: 'Estados',
-    inputType: TextFieldType.Dropdown,
+    fieldType: TextFieldType.Dropdown,
     multiple: true,
     options: [
       { value: 1, label: 'Recibida' },
@@ -92,7 +93,7 @@ export const invoiceFilterSchema: TextFieldSchema = [
   {
     name: 'pagado',
     label: 'Moras',
-    inputType: TextFieldType.Dropdown,
+    fieldType: TextFieldType.Dropdown,
     multiple: true,
     options: [
       { value: 'pagado', label: 'Pagada' },
@@ -108,7 +109,7 @@ export const invoiceFilterSchema: TextFieldSchema = [
   {
     name: 'id_cobrador',
     label: 'Cobrador',
-    inputType: TextFieldType.Dropdown,
+    fieldType: TextFieldType.Dropdown,
     options: [
       { value: 1, label: 'Ejecutivo 1' },
       { value: 2, label: 'Ejecutivo 2' },
@@ -123,7 +124,7 @@ export const invoiceFilterSchema: TextFieldSchema = [
   {
     name: 'orderBy',
     label: 'Ordenar',
-    inputType: TextFieldType.Dropdown,
+    fieldType: TextFieldType.Dropdown,
     options: [
       { value: 'nombre_cliente', label: 'Nombre' },
       { value: 'monto_conciliado', label: 'Monto' },
@@ -135,7 +136,7 @@ export const invoiceFilterSchema: TextFieldSchema = [
   {
     name: 'estado_cobro',
     label: 'Programadas',
-    inputType: TextFieldType.Dropdown,
+    fieldType: TextFieldType.Dropdown,
     multiple: true,
     options: [
       { value: 'en fecha', label: 'Futuras' },
@@ -150,7 +151,7 @@ export const invoiceFilterSchema: TextFieldSchema = [
   {
     name: 'estado_cliente',
     label: 'Clientes',
-    inputType: TextFieldType.Dropdown,
+    fieldType: TextFieldType.Dropdown,
     multiple: true,
     options: [
       { value: 'bloqueado', label: 'Bloqueado' },
@@ -163,8 +164,60 @@ export const invoiceFilterSchema: TextFieldSchema = [
   {
     name: 'search',
     label: 'Buscar',
-    df: '16.6%',
+    df: '19.6%',
     xs: '100%',
     sm: '25%',
+  },
+];
+
+export const revertPaymentSchema: TextFieldSchema = [
+  {
+    name: 'gloss',
+    label: 'Glosa',
+    validators: [
+      {
+        name: 'required',
+        validatorFn: Validators.required,
+        message: 'Is required',
+      },
+      {
+        name: 'minlength',
+        validatorFn: Validators.minLength(3),
+        message: 'Minimum 3 characters',
+      },
+    ],
+  },
+];
+
+export const paySchema: TextFieldSchema = [
+  {
+    name: 'id_caja',
+    label: 'Caja',
+    df: '50%',
+    xs: '100%',
+  },
+  {
+    name: 'cuenta_contable_id',
+    label: 'Banco',
+    df: '50%',
+    xs: '100%',
+  },
+  {
+    name: 'ingreso',
+    label: 'Ingreso',
+    df: '50%',
+    xs: '100%',
+  },
+  {
+    name: 'fecha',
+    label: 'Fecha',
+    df: '50%',
+    xs: '100%',
+  },
+  {
+    name: 'glosa',
+    label: 'Glosa',
+    df: '100%',
+    xs: '100%',
   },
 ];

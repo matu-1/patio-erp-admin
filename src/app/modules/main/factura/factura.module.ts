@@ -8,10 +8,14 @@ import { DirectivesModule } from 'src/app/directives/directives.module';
 import { MaterialModule } from '../../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RevertPaymentDialog } from './components/revert-payment/revert-payment.dialog';
+import { PayDialog } from './components/pay/pay.dialog';
 
 @NgModule({
   declarations: [
-    ListComponent
+    ListComponent,
+    RevertPaymentDialog,
+    PayDialog
   ],
   imports: [
     CommonModule,

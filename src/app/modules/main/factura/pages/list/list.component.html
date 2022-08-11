@@ -20,7 +20,7 @@
       [textFieldValue]="value"
       [form]="filterForm"
     ></app-text-field>
-    <div fxFlex="16.6%" fxFlex.xs="100%">
+    <div fxFlex="13.6%" fxFlex.xs="100%">
       <button mat-icon-button type="submit">
         <mat-icon>search</mat-icon>
       </button>
@@ -49,6 +49,7 @@
       *ngIf="hasPayment(value)"
       mat-icon-button
       matTooltip="Revertir pago"
+      (click)="openRevertPaymentDlg(value)"
     >
       <mat-icon>undo</mat-icon>
     </button>
@@ -59,7 +60,11 @@
       <button mat-icon-button matTooltip="Editar factura">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="Click para dar por pagada la factura">
+      <button
+        mat-icon-button
+        matTooltip="Click para dar por pagada la factura"
+        (click)="openPayDlg(value)"
+      >
         <mat-icon>handshake</mat-icon>
       </button>
       <button mat-icon-button matTooltip="Programar pago">

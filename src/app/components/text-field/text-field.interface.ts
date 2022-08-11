@@ -32,7 +32,7 @@ export interface TextFieldValue {
   name: string;
   value?: string | number | Date;
   label: string;
-  inputType?: TextFieldType;
+  fieldType?: TextFieldType;
   type?: Type;
   validators?: Validator[];
   multiple?: boolean; //select

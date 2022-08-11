@@ -2,11 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { facturaColumns } from '../../configs/table-columns';
-import { Factura, QueryInvoice } from '../../interfaces/factura.interface';
+import {
+  Factura,
+  QueryInvoice,
+  RevertPaymentDto,
+} from '../../interfaces/factura.interface';
 import { FacturaService } from '../../services/factura.service';
 import { invoiceFilterSchema } from '../../configs/form-schema';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { ObjectUtils } from 'src/app/utils/object.util';
+import { MatDialog } from '@angular/material/dialog';
+import { RevertPaymentDialog } from '../../components/revert-payment/revert-payment.dialog';
+import { handleRequestPg } from 'src/app/utils/handle-request';
+import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
+import { PayDialog } from '../../components/pay/pay.dialog';
 
 @Component({
   selector: 'app-list',
@@ -21,7 +30,10 @@ export class ListComponent implements OnInit {
   filterForm = buildform(invoiceFilterSchema);
   query: QueryInvoice = { page: 0, limit: 20, length: 0 };
 
-  constructor(private facturaService: FacturaService) {}
+  constructor(
+    private facturaService: FacturaService,
+    private revertPaymentDialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getInvoices();
@@ -30,10 +42,12 @@ export class ListComponent implements OnInit {
   getInvoices() {
     const filterValue = ObjectUtils.clear(this.filterForm.value);
     this.facturas = undefined;
-    this.facturaService.getAll({ ...this.query, ...filterValue }).subscribe((res) => {
-      this.facturas = res.data.records;
-      this.query.length = res.data.totalRecords;
-    });
+    this.facturaService
+      .getAll({ ...this.query, ...filterValue })
+      .subscribe((res) => {
+        this.facturas = res.data.records;
+        this.query.length = res.data.totalRecords;
+      });
   }
 
   getRowClass(value: any) {
@@ -57,4 +71,39 @@ export class ListComponent implements OnInit {
   filter() {
     this.getInvoices();
   }
+
+  openRevertPaymentDlg(invoice: Factura) {
+    const dialogRef = this.revertPaymentDialog.open(
+      RevertPaymentDialog,
+      DIALOG_CONFIG_XS
+    );
+    dialogRef.afterClosed().subscribe(async (data) => {
+      if (data) this.revertPayment(invoice, data);
+    });
+  }
+
+  async revertPayment(invoice: Factura, data: any) {
+    const body: RevertPaymentDto = {
+      invoiceId: invoice.id,
+      lastPaymentId: invoice.id_ultimo_pago ?? 0,
+      ...data,
+    };
+    const res = await handleRequestPg(
+      () => this.facturaService.revertPayment(body),
+      true
+    );
+    if (res) this.getInvoices();
+  }
+
+  openPayDlg(invoice: Factura) {
+    const dialogRef = this.revertPaymentDialog.open(
+      PayDialog,
+      DIALOG_CONFIG_XS
+    );
+    dialogRef.afterClosed().subscribe(async (data) => {
+      if (data) this.pay(invoice, data);
+    });
+  }
+
+  pay(invoice: Factura, data: any) {}
 }
