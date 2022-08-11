@@ -43,6 +43,7 @@ export interface TextFieldValue {
   fullWidth?: boolean;
   readOnly?: boolean;
   disabled?: boolean;
+  df?: number | string;
   xs?: number | string;
   sm?: number | string;
   md?: number | string;

@@ -7,6 +7,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { DirectivesModule } from 'src/app/directives/directives.module';
 import { MaterialModule } from '../../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     DirectivesModule,
     MaterialModule,
     FlexLayoutModule,
+    ReactiveFormsModule,
   ]
 })
 export class FacturaModule { }

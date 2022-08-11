@@ -6,6 +6,7 @@ import { Factura, QueryInvoice } from '../../interfaces/factura.interface';
 import { FacturaService } from '../../services/factura.service';
 import { invoiceFilterSchema } from '../../configs/form-schema';
 import { buildform } from 'src/app/components/text-field/text-field.util';
+import { ObjectUtils } from 'src/app/utils/object.util';
 
 @Component({
   selector: 'app-list',
@@ -17,7 +18,7 @@ export class ListComponent implements OnInit {
   facturas?: Factura[];
   facturaColumns = facturaColumns;
   invoiceFilterSchema = invoiceFilterSchema;
-  filterForm  = buildform(invoiceFilterSchema);
+  filterForm = buildform(invoiceFilterSchema);
   query: QueryInvoice = { page: 0, limit: 20, length: 0 };
 
   constructor(private facturaService: FacturaService) {}
@@ -27,8 +28,9 @@ export class ListComponent implements OnInit {
   }
 
   getInvoices() {
+    const filterValue = ObjectUtils.clear(this.filterForm.value);
     this.facturas = undefined;
-    this.facturaService.getAll(this.query).subscribe((res) => {
+    this.facturaService.getAll({ ...this.query, ...filterValue }).subscribe((res) => {
       this.facturas = res.data.records;
       this.query.length = res.data.totalRecords;
     });
@@ -49,6 +51,10 @@ export class ListComponent implements OnInit {
   changePage(pageEvent: PageEvent) {
     this.query.page = pageEvent.pageIndex;
     this.query.limit = pageEvent.pageSize;
+    this.getInvoices();
+  }
+
+  filter() {
     this.getInvoices();
   }
 }

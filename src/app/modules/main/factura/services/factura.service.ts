@@ -12,10 +12,9 @@ export class FacturaService {
   constructor(private http: HttpClient) {}
 
   getAll(params: QueryInvoice) {
+    const paramsUrl = new URLSearchParams(params as any);
     return this.http
-      .get<ResponsePagination<Factura[]>>(API.INVOICE.GET_ALL, {
-        params,
-      })
+      .get<ResponsePagination<Factura[]>>(`${API.INVOICE.GET_ALL}?${paramsUrl}`)
       .pipe(delay(2000));
   }
 }

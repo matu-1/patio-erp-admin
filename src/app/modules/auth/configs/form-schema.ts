@@ -11,6 +11,11 @@ export const authSchema: TextFieldSchema = [
         name: 'required',
         validatorFn: Validators.required,
       },
+      {
+        message: 'Minimum 3 characters',
+        name: 'minlength',
+        validatorFn: Validators.minLength(3),
+      },
     ],
   },
   {
@@ -22,6 +27,11 @@ export const authSchema: TextFieldSchema = [
         message: 'Is required',
         name: 'required',
         validatorFn: Validators.required,
+      },
+      {
+        message: 'Minimum 6 characters',
+        name: 'minlength',
+        validatorFn: Validators.minLength(6),
       },
     ],
   },

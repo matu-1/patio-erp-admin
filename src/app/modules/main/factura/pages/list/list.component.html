@@ -5,21 +5,27 @@
   <button mat-raised-button color="accent">Exportar</button>
 </app-title-bar>
 <app-simple-card class="mb-3">
-  <div fxLayout="row wrap" fxLayoutGap="16px 0 grid">
+  <form
+    fxLayout="row wrap"
+    fxLayoutGap="16px 8px grid"
+    [formGroup]="filterForm"
+    markAllSubmit
+    (validSubmit)="filter()"
+  >
     <app-text-field
-      fxFlex="16.6%"
-      fxFlex.xs="100%"
-      fxFlex.sm="25%"
+      [fxFlex]="value.df"
+      [fxFlex.xs]="value.xs"
+      [fxFlex.sm]="value.sm"
       *ngFor="let value of invoiceFilterSchema"
       [textFieldValue]="value"
       [form]="filterForm"
     ></app-text-field>
     <div fxFlex="16.6%" fxFlex.xs="100%">
-      <button mat-icon-button>
+      <button mat-icon-button type="submit">
         <mat-icon>search</mat-icon>
       </button>
     </div>
-  </div>
+  </form>
 </app-simple-card>
 <app-data-table
   [rows]="facturas"
