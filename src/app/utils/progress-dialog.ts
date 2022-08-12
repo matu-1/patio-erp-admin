@@ -1,6 +1,6 @@
 import { ProgressDialogService } from '../components/progress-dialog/progress-dialog.service';
 
-export class ProgressDialog {
+export abstract class ProgressDialog {
   static instance: ProgressDialogService;
 
   static show() {

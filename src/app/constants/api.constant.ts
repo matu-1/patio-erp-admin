@@ -1,4 +1,4 @@
-import { environment } from "src/environments/environment"
+import { environment } from 'src/environments/environment';
 
 const API_URL = environment.apiUrl;
 
@@ -9,6 +9,13 @@ export const API = {
   },
   INVOICE: {
     GET_ALL: `${API_URL}/factura`,
-    REVERT_PAYMENT: `${API_URL}/factura/revert-payment`
-  }
-}
+    REVERT_PAYMENT: `${API_URL}/factura/revert-payment`,
+    PAY: `${API_URL}/factura/pay`,
+  },
+  CAJA: {
+    GET_ALL: `${API_URL}/caja`,
+  },
+  CUENTA_CONTABLE: {
+    GET_ALL: `${API_URL}/cuenta-contable`,
+  },
+};

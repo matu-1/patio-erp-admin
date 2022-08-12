@@ -50,6 +50,15 @@ export interface RevertPaymentDto {
   invoiceId: number;
 }
 
+export interface PayInvoiceDto {
+  fecha: string;
+  id: number;
+  id_caja: number;
+  cuenta_contable_id: number;
+  ingreso: number;
+  glosa: string;
+}
+
 export interface Pago {
   id: number;
   id_factura: number;

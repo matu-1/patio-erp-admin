@@ -13,9 +13,10 @@ import { buildform } from 'src/app/components/text-field/text-field.util';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import { MatDialog } from '@angular/material/dialog';
 import { RevertPaymentDialog } from '../../components/revert-payment/revert-payment.dialog';
-import { handleRequestPg } from 'src/app/utils/handle-request';
+import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
 import { PayDialog } from '../../components/pay/pay.dialog';
+import { months } from 'src/app/constants/months.constant';
 
 @Component({
   selector: 'app-list',
@@ -39,15 +40,16 @@ export class ListComponent implements OnInit {
     this.getInvoices();
   }
 
-  getInvoices() {
+  async getInvoices() {
     const filterValue = ObjectUtils.clear(this.filterForm.value);
     this.facturas = undefined;
-    this.facturaService
-      .getAll({ ...this.query, ...filterValue })
-      .subscribe((res) => {
-        this.facturas = res.data.records;
-        this.query.length = res.data.totalRecords;
-      });
+    const res = await handleRequest(() =>
+      this.facturaService.getAll({ ...this.query, ...filterValue })
+    );
+    if (res) {
+      this.facturas = res.data.records;
+      this.query.length = res.data.totalRecords;
+    }
   }
 
   getRowClass(value: any) {
@@ -96,14 +98,54 @@ export class ListComponent implements OnInit {
   }
 
   openPayDlg(invoice: Factura) {
-    const dialogRef = this.revertPaymentDialog.open(
-      PayDialog,
-      DIALOG_CONFIG_XS
-    );
+    const dialogRef = this.revertPaymentDialog.open(PayDialog, {
+      ...DIALOG_CONFIG_XS,
+      data: invoice,
+    });
     dialogRef.afterClosed().subscribe(async (data) => {
       if (data) this.pay(invoice, data);
     });
   }
 
-  pay(invoice: Factura, data: any) {}
+  async pay(invoice: Factura, data: any) {
+    const body = {
+      ...data,
+      id: invoice.id,
+    };
+    const res = await handleRequestPg(
+      () => this.facturaService.pay(body),
+      true
+    );
+    if (res) this.getInvoices();
+  }
+
+  sendMessageWhatsApp(invoice: Factura) {
+    const code = window.btoa(
+      `${invoice.gestion}-${invoice.mes}-${invoice.id}-${invoice.id_cliente}`
+    );
+    const link = `http://api.whatsapp.com/send?phone=591${
+      invoice.telefono
+    }&text=Estimado%20cliente%20sirvase%20encontrar%20su%20recibo%20correspondiente%20a%20${
+      months[invoice.mes - 1]
+    }%20${
+      invoice.gestion
+    },%20a%20través%20del%20siguiente%20link:%0A%0Ahttp://labs.patio.com.bo/recibo/${code}`;
+    window.open(link, '_blank');
+  }
+
+  sendMessageEmail(invoice: Factura) {
+    const code = window.btoa(
+      `${invoice.gestion}-${invoice.mes}-${invoice.id}-${invoice.id_cliente}`
+    );
+    const link = `http://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=${
+      invoice.email
+    }&su=[PATIO%20SERVICE]%20Recibo%20${months[invoice.mes - 1]}%20${
+      invoice.gestion
+    }%20&body=Estimado%20Cliente%2C%0A%0ASírvase%20encontrar%20su%20factura%20correspondiente%20a%20${
+      months[invoice.mes - 1]
+    }%20${
+      invoice.gestion
+    },%20a%20través%20del%20siguiente%20link:%0A%0Ahttp://labs.patio.com.bo/recibo/${code}%0A%0ASaludos`;
+    window.open(link, '_blank');
+  }
 }

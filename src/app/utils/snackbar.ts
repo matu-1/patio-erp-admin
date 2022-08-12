@@ -5,7 +5,7 @@ type Config = {
   variant?: 'success' | 'warning' | 'error' | 'info' | 'default';
 };
 
-export class SnackBar {
+export abstract class SnackBar {
   static instance: MatSnackBar;
 
   static show(message: string, config: Config = {}) {

@@ -8,6 +8,7 @@ import {
   QueryInvoice,
   RevertPaymentDto,
   Pago,
+  PayInvoiceDto,
 } from '../interfaces/factura.interface';
 
 @Injectable({
@@ -20,10 +21,14 @@ export class FacturaService {
     const paramsUrl = new URLSearchParams(params as any);
     return this.http
       .get<ResponsePagination<Factura[]>>(`${API.INVOICE.GET_ALL}?${paramsUrl}`)
-      .pipe(delay(2000));
+      .pipe(delay(1000));
   }
 
   revertPayment(dto: RevertPaymentDto) {
     return this.http.post<Response<Pago>>(API.INVOICE.REVERT_PAYMENT, dto);
+  }
+
+  pay(dto: PayInvoiceDto) {
+    return this.http.post<Response<Pago>>(API.INVOICE.PAY, dto);
   }
 }

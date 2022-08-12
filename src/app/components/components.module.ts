@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BackdropComponent } from './backdrop/backdrop.component';
 import { ProgressDialogComponent } from './progress-dialog/progress-dialog.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
+import { ProgressBarDialogComponent } from './progress-bar-dialog/progress-bar-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SnackBarComponent } from './snack-bar/snack-bar.component';
     BackdropComponent,
     ProgressDialogComponent,
     SnackBarComponent,
+    ProgressBarDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +47,7 @@ import { SnackBarComponent } from './snack-bar/snack-bar.component';
     TextFieldComponent,
     BackdropComponent,
     ProgressDialogComponent,
+    ProgressBarDialogComponent,
   ],
 })
 export class ComponentsModule {}

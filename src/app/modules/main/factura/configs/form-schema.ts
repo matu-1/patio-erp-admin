@@ -164,7 +164,7 @@ export const invoiceFilterSchema: TextFieldSchema = [
   {
     name: 'search',
     label: 'Buscar',
-    df: '19.6%',
+    df: '21.6%',
     xs: '100%',
     sm: '25%',
   },
@@ -193,30 +193,67 @@ export const paySchema: TextFieldSchema = [
   {
     name: 'id_caja',
     label: 'Caja',
+    fieldType: TextFieldType.Dropdown,
     df: '50%',
     xs: '100%',
   },
   {
     name: 'cuenta_contable_id',
     label: 'Banco',
+    fieldType: TextFieldType.Dropdown,
     df: '50%',
     xs: '100%',
   },
   {
     name: 'ingreso',
     label: 'Ingreso',
+    validators: [
+      {
+        name: 'required',
+        validatorFn: Validators.required,
+        message: 'Is required',
+      },
+      {
+        name: 'number',
+        validatorFn: CustomValidators.number,
+        message: 'must be number',
+      },
+    ],
     df: '50%',
     xs: '100%',
   },
   {
     name: 'fecha',
     label: 'Fecha',
+    fieldType: TextFieldType.DatePicker,
+    validators: [
+      {
+        name: 'required',
+        validatorFn: Validators.required,
+        message: 'Is required',
+      },
+    ],
     df: '50%',
     xs: '100%',
   },
   {
     name: 'glosa',
     label: 'Glosa',
+    fieldType: TextFieldType.Textarea,
+    minRows: 3,
+    maxRows: 6,
+    validators: [
+      {
+        name: 'required',
+        validatorFn: Validators.required,
+        message: 'Is required',
+      },
+      {
+        name: 'minlength',
+        validatorFn: Validators.minLength(2),
+        message: 'Minimum 2 characters',
+      },
+    ],
     df: '100%',
     xs: '100%',
   },

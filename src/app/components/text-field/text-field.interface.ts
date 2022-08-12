@@ -3,6 +3,7 @@ import { ValidatorFn } from '@angular/forms';
 export enum TextFieldType {
   TextField,
   Dropdown,
+  Textarea,
   Autocomplete,
   Radio,
   DatePicker,

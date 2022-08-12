@@ -20,7 +20,7 @@
       [textFieldValue]="value"
       [form]="filterForm"
     ></app-text-field>
-    <div fxFlex="13.6%" fxFlex.xs="100%">
+    <div fxFlex="11.6%" fxFlex.xs="100%">
       <button mat-icon-button type="submit">
         <mat-icon>search</mat-icon>
       </button>
@@ -74,10 +74,18 @@
     <button mat-icon-button matTooltip="Ver la factura">
       <mat-icon>visibility</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Enviar por correo">
+    <button
+      mat-icon-button
+      matTooltip="Enviar por correo"
+      (click)="sendMessageEmail(value)"
+    >
       <mat-icon>email</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Enviar por whatsapp">
+    <button
+      mat-icon-button
+      matTooltip="Enviar por whatsapp"
+      (click)="sendMessageWhatsApp(value)"
+    >
       <mat-icon>smartphone</mat-icon>
     </button>
     <button
