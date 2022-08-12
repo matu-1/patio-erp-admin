@@ -120,6 +120,7 @@ export class ListComponent implements OnInit {
   }
 
   sendMessageWhatsApp(invoice: Factura) {
+    //TODO: se puede mejorar
     const code = window.btoa(
       `${invoice.gestion}-${invoice.mes}-${invoice.id}-${invoice.id_cliente}`
     );
