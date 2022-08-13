@@ -17,6 +17,8 @@ import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
 import { PayDialog } from '../../components/pay/pay.dialog';
 import { months } from 'src/app/constants/months.constant';
+import { SchedulePaymentDto } from '../../interfaces/factura.interface';
+import { SchedulePaymentDialog } from '../../components/schedule-payment/schedule-payment.dialog';
 
 @Component({
   selector: 'app-list',
@@ -33,7 +35,7 @@ export class ListComponent implements OnInit {
 
   constructor(
     private facturaService: FacturaService,
-    private revertPaymentDialog: MatDialog
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -75,10 +77,7 @@ export class ListComponent implements OnInit {
   }
 
   openRevertPaymentDlg(invoice: Factura) {
-    const dialogRef = this.revertPaymentDialog.open(
-      RevertPaymentDialog,
-      DIALOG_CONFIG_XS
-    );
+    const dialogRef = this.dialog.open(RevertPaymentDialog, DIALOG_CONFIG_XS);
     dialogRef.afterClosed().subscribe(async (data) => {
       if (data) this.revertPayment(invoice, data);
     });
@@ -98,7 +97,7 @@ export class ListComponent implements OnInit {
   }
 
   openPayDlg(invoice: Factura) {
-    const dialogRef = this.revertPaymentDialog.open(PayDialog, {
+    const dialogRef = this.dialog.open(PayDialog, {
       ...DIALOG_CONFIG_XS,
       data: invoice,
     });
@@ -120,7 +119,6 @@ export class ListComponent implements OnInit {
   }
 
   sendMessageWhatsApp(invoice: Factura) {
-    //TODO: se puede mejorar
     const code = window.btoa(
       `${invoice.gestion}-${invoice.mes}-${invoice.id}-${invoice.id_cliente}`
     );
@@ -148,5 +146,28 @@ export class ListComponent implements OnInit {
       invoice.gestion
     },%20a%20través%20del%20siguiente%20link:%0A%0Ahttp://labs.patio.com.bo/recibo/${code}%0A%0ASaludos`;
     window.open(link, '_blank');
+  }
+
+  openSchedulePaymentDlg(invoice: Factura) {
+    const dialogRef = this.dialog.open(SchedulePaymentDialog, {
+      ...DIALOG_CONFIG_XS,
+      data: invoice,
+    });
+    dialogRef.afterClosed().subscribe(async (data) => {
+      if (data) this.schedulePayment(invoice, data);
+    });
+  }
+
+  async schedulePayment(invoice: Factura, data: any) {
+    const body: SchedulePaymentDto = {
+      ...data,
+      id_factura: invoice.id,
+      id_pago: invoice.id_ultimo_pago ?? 0,
+    };
+    const res = await handleRequestPg(
+      () => this.facturaService.schedulePayment(body),
+      true
+    );
+    if (res) this.getInvoices();
   }
 }

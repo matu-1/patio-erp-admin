@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { delay } from 'rxjs';
 import { API } from 'src/app/constants/api.constant';
 import { ResponsePagination, Response } from 'src/app/utils/response';
+import { SchedulePaymentDto } from '../interfaces/factura.interface';
 import {
   Factura,
   QueryInvoice,
@@ -30,5 +31,9 @@ export class FacturaService {
 
   pay(dto: PayInvoiceDto) {
     return this.http.post<Response<Pago>>(API.INVOICE.PAY, dto);
+  }
+
+  schedulePayment(dto: SchedulePaymentDto) {
+    return this.http.post<Response<Pago>>(API.INVOICE.SCHEDULE_PAYMENT, dto);
   }
 }

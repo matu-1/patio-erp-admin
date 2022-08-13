@@ -67,7 +67,11 @@
       >
         <mat-icon>handshake</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="Programar pago">
+      <button
+        mat-icon-button
+        matTooltip="Programar pago"
+        (click)="openSchedulePaymentDlg(value)"
+      >
         <mat-icon>schedule</mat-icon>
       </button>
     </ng-container>

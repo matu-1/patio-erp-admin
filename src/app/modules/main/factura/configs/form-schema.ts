@@ -258,3 +258,18 @@ export const paySchema: TextFieldSchema = [
     xs: '100%',
   },
 ];
+
+export const schedulePaymentSchema: TextFieldSchema = [
+  {
+    name: 'fecha_cobro',
+    label: 'Fecha Cobro',
+    fieldType: TextFieldType.DatePicker,
+    validators: [
+      {
+        name: 'required',
+        validatorFn: Validators.required,
+        message: 'Is required',
+      },
+    ],
+  },
+];

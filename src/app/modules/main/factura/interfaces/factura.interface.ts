@@ -59,6 +59,12 @@ export interface PayInvoiceDto {
   glosa: string;
 }
 
+export interface SchedulePaymentDto {
+  fecha_cobro: string;
+  id_factura: number;
+  id_pago: number;
+}
+
 export interface Pago {
   id: number;
   id_factura: number;

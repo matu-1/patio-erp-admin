@@ -11,6 +11,7 @@ export const API = {
     GET_ALL: `${API_URL}/factura`,
     REVERT_PAYMENT: `${API_URL}/factura/revert-payment`,
     PAY: `${API_URL}/factura/pay`,
+    SCHEDULE_PAYMENT: `${API_URL}/factura/schedule-payment`,
   },
   CAJA: {
     GET_ALL: `${API_URL}/caja`,

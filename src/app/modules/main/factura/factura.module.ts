@@ -10,12 +10,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RevertPaymentDialog } from './components/revert-payment/revert-payment.dialog';
 import { PayDialog } from './components/pay/pay.dialog';
+import { SchedulePaymentDialog } from './components/schedule-payment/schedule-payment.dialog';
 
 @NgModule({
   declarations: [
     ListComponent,
     RevertPaymentDialog,
-    PayDialog
+    PayDialog,
+    SchedulePaymentDialog
   ],
   imports: [
     CommonModule,
