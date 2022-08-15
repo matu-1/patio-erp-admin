@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
 html,
 body {
   height: 100%;
@@ -86,15 +85,14 @@ body {
   background-color: #786fa6 !important; //#6d4a4a
 }
 // end facturas bg
-// app-title-bar
-.title-bar {
-  & > div {
-    & > * {
-      margin: 0.5rem 0;
-      margin-right: 0.5rem;
-    }
-    & > *:last-child {
-      margin-right: 0;
-    }
-  }
+.of-h {
+  overflow: hidden;
+}
+.dt-dlg {
+  box-shadow: none !important;
+}
+hr {
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1rem 0;
 }

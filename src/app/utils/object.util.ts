@@ -6,7 +6,7 @@ export abstract class ObjectUtils {
     const newObj = { ...obj };
     Object.keys(newObj).forEach((key) => {
       if (
-        !newObj[key] ||
+        (!newObj[key] && newObj[key] !== 0) ||
         (Array.isArray(newObj[key]) && newObj[key].length == 0)
       )
         delete newObj[key];

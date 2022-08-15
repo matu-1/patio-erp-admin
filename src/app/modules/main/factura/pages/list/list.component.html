@@ -57,7 +57,11 @@
       <button mat-icon-button matTooltip="Recalcular Factura">
         <mat-icon>refresh</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="Editar factura">
+      <button
+        mat-icon-button
+        matTooltip="Editar factura"
+        (click)="openEditDlg(value)"
+      >
         <mat-icon>edit</mat-icon>
       </button>
       <button

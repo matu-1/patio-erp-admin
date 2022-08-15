@@ -54,3 +54,30 @@ export const facturaColumns: TableColumns = [
     headerName: 'Acciones',
   },
 ];
+
+export const invoiceDetailColumns: TableColumns = [
+  {
+    field: 'id_local',
+    headerName: '# Local'
+  },
+  {
+    field: 'razon_adicional',
+    headerName: 'Detalle'
+  },
+  {
+    field: 'nro_pedidos',
+    headerName: 'Pedidos'
+  },
+  {
+    field: 'monto_sin_comision',
+    headerName: 'Monto Pedidos'
+  },
+  {
+    field: 'porcentaje_comision',
+    headerName: 'Comisión (%)'
+  },
+  {
+    field: 'monto',
+    headerName: 'Monto Comisión'
+  }
+];
