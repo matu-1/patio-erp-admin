@@ -65,6 +65,18 @@ export interface SchedulePaymentDto {
   id_pago: number;
 }
 
+export interface UpdateInvoiceDto {
+  nro_factura: string;
+  nit: string;
+  razon_social: string;
+  monto_conciliado: number;
+  comentarios: string;
+  monto_incobrable: number;
+  es_recibo: number;
+  incobrable: number;
+  id_cliente: number;
+}
+
 export interface Pago {
   id: number;
   id_factura: number;
@@ -73,4 +85,27 @@ export interface Pago {
   metodo_pago: string;
   detalle: string;
   saldo: number;
+}
+
+export interface InvoiceDetail {
+  id: number;
+  id_factura: number;
+  id_servicio: string;
+  nro_pedidos: number;
+  ticket_promedio: number;
+  porcentaje_comision: string;
+  monto_descuento: null;
+  razon_descuento: null;
+  monto_adicional: null;
+  razon_adicional: null;
+  monto: string;
+  incobrable: number;
+  pagado: number;
+  id_local: string;
+  monto_sin_comision: string;
+  DateCreation: Date;
+  DateModification: Date;
+  IsDeleted: number;
+  UserCreation: string;
+  UserModification: string;
 }

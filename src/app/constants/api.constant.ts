@@ -9,9 +9,13 @@ export const API = {
   },
   INVOICE: {
     GET_ALL: `${API_URL}/factura`,
+    UPDATE: `${API_URL}/factura/:id`,
     REVERT_PAYMENT: `${API_URL}/factura/revert-payment`,
     PAY: `${API_URL}/factura/pay`,
     SCHEDULE_PAYMENT: `${API_URL}/factura/schedule-payment`,
+  },
+  INVOICE_DETAIL: {
+    GET_BY_INVOICE: `${API_URL}/detalle-factura/invoice/:id`
   },
   CAJA: {
     GET_ALL: `${API_URL}/caja`,

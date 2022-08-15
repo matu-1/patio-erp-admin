@@ -19,6 +19,8 @@ import { PayDialog } from '../../components/pay/pay.dialog';
 import { months } from 'src/app/constants/months.constant';
 import { SchedulePaymentDto } from '../../interfaces/factura.interface';
 import { SchedulePaymentDialog } from '../../components/schedule-payment/schedule-payment.dialog';
+import { EditDialog } from '../../components/edit/edit.dialog';
+import { DIALOG_CONFIG_SM } from '../../../../../constants/dialog.constant';
 
 @Component({
   selector: 'app-list',
@@ -166,6 +168,27 @@ export class ListComponent implements OnInit {
     };
     const res = await handleRequestPg(
       () => this.facturaService.schedulePayment(body),
+      true
+    );
+    if (res) this.getInvoices();
+  }
+
+  openEditDlg(invoice: Factura) {
+    const dialogRef = this.dialog.open(EditDialog, {
+      ...DIALOG_CONFIG_SM,
+      data: invoice,
+    });
+    dialogRef.afterClosed().subscribe(async (data) => {
+      if (data) this.update(invoice, data);
+    });
+  }
+
+  async update(invoice: Factura, data: any) {
+    const body = {
+      ...data,
+    };
+    const res = await handleRequestPg(
+      () => this.facturaService.update(invoice.id, body),
       true
     );
     if (res) this.getInvoices();

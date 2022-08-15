@@ -34,6 +34,7 @@ export class DataTableComponent implements AfterViewInit, OnInit {
   customColumns!: QueryList<CustomColumnDirective>;
   @Input() rowClass?: (item: any) => string;
   @Input() showPagination = true;
+  @Input() class: string = '';
 
   get rows() {
     return this._rows;

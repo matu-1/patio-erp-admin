@@ -4,7 +4,7 @@
 <form [formGroup]="form" markAllSubmit (validSubmit)="save()">
   <h2 mat-dialog-title>Pago</h2>
   <div mat-dialog-content>
-    <div style="overflow: hidden">
+    <div class="of-h">
       <div fxLayout="row wrap" fxLayoutGap="16px grid">
         <app-text-field
           *ngFor="let value of paySchema"
