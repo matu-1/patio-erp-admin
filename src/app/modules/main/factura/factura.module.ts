@@ -12,6 +12,7 @@ import { RevertPaymentDialog } from './components/revert-payment/revert-payment.
 import { PayDialog } from './components/pay/pay.dialog';
 import { SchedulePaymentDialog } from './components/schedule-payment/schedule-payment.dialog';
 import { EditDialog } from './components/edit/edit.dialog';
+import { DetailComponent } from './pages/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { EditDialog } from './components/edit/edit.dialog';
     RevertPaymentDialog,
     PayDialog,
     SchedulePaymentDialog,
-    EditDialog
+    EditDialog,
+    DetailComponent
   ],
   imports: [
     CommonModule,

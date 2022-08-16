@@ -21,6 +21,8 @@ import { SchedulePaymentDto } from '../../interfaces/factura.interface';
 import { SchedulePaymentDialog } from '../../components/schedule-payment/schedule-payment.dialog';
 import { EditDialog } from '../../components/edit/edit.dialog';
 import { DIALOG_CONFIG_SM } from '../../../../../constants/dialog.constant';
+import { Router } from '@angular/router';
+import { routeParams } from 'src/app/utils/route-params';
 
 @Component({
   selector: 'app-list',
@@ -37,7 +39,8 @@ export class ListComponent implements OnInit {
 
   constructor(
     private facturaService: FacturaService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -120,10 +123,14 @@ export class ListComponent implements OnInit {
     if (res) this.getInvoices();
   }
 
-  sendMessageWhatsApp(invoice: Factura) {
-    const code = window.btoa(
+  generateCode(invoice: Factura) {
+    return window.btoa(
       `${invoice.gestion}-${invoice.mes}-${invoice.id}-${invoice.id_cliente}`
     );
+  }
+
+  sendMessageWhatsApp(invoice: Factura) {
+    const code = this.generateCode(invoice);
     const link = `http://api.whatsapp.com/send?phone=591${
       invoice.telefono
     }&text=Estimado%20cliente%20sirvase%20encontrar%20su%20recibo%20correspondiente%20a%20${
@@ -135,9 +142,7 @@ export class ListComponent implements OnInit {
   }
 
   sendMessageEmail(invoice: Factura) {
-    const code = window.btoa(
-      `${invoice.gestion}-${invoice.mes}-${invoice.id}-${invoice.id_cliente}`
-    );
+    const code = this.generateCode(invoice);
     const link = `http://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=${
       invoice.email
     }&su=[PATIO%20SERVICE]%20Recibo%20${months[invoice.mes - 1]}%20${
@@ -192,5 +197,19 @@ export class ListComponent implements OnInit {
       true
     );
     if (res) this.getInvoices();
+  }
+
+  async recalculateInvoice(invoice: Factura) {
+    const res = await handleRequestPg(
+      () => this.facturaService.recalculateInvoice(invoice.id),
+      true
+    );
+    if (res) this.getInvoices();
+  }
+
+  goDetail(invoice: Factura) {
+    this.router.navigateByUrl(
+      routeParams(PAGE_ROUTE.INVOICE.DETAIL, { id: this.generateCode(invoice) })
+    );
   }
 }

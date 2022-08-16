@@ -12,11 +12,15 @@ export const PAGE_ROUTE = {
     ROOT: 'invoice',
     LIST_ROOT: '',
     CREATE_ROOT: 'create',
+    DETAIL_ROOT: 'detail/:id',
     get LIST() {
       return `/${this.ROOT}/${this.LIST_ROOT}`;
     },
     get CREATE() {
       return `/${this.ROOT}/${this.CREATE_ROOT}`;
+    },
+    get DETAIL() {
+      return `/${this.ROOT}/${this.DETAIL_ROOT}`;
     },
   },
 };
