@@ -1,0 +1,26 @@
+.title {
+  font-weight: bold;
+}
+.subtitle {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+.text {
+  color: rgba($color: #000000, $alpha: 0.85);
+  margin-bottom: 0.5rem;
+}
+.text-secondary{
+  color: rgba($color: #000000, $alpha: 0.7);
+}
+.text-bold{
+  font-weight: bold;
+}
+.send-payment{
+  display: flex;
+  align-items: center;
+}
+.payment{
+  background-color: #f2f2f2;
+  height: 100%;
+}

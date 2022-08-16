@@ -16,6 +16,7 @@ import {
   Pago,
   PayInvoiceDto,
 } from '../interfaces/factura.interface';
+import { InvoiceInfo } from '../interfaces/invoice-info.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -59,6 +60,12 @@ export class FacturaService {
     return this.http.put<Response<Factura>>(
       routeParams(API.INVOICE.RECALCULATE_INVOICE, { id }),
       {}
+    );
+  }
+
+  getInfo(id: number) {
+    return this.http.get<Response<InvoiceInfo>>(
+      routeParams(API.INVOICE.INFO, { id })
     );
   }
 }

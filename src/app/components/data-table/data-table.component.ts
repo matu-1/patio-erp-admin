@@ -35,6 +35,7 @@ export class DataTableComponent implements AfterViewInit, OnInit {
   @Input() rowClass?: (item: any) => string;
   @Input() showPagination = true;
   @Input() class: string = '';
+  @Input() showSearcher = true;
 
   get rows() {
     return this._rows;

@@ -8,6 +8,9 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { ErrorHandlerInterceptor } from './interceptors/error-handler.interceptor';
 import { MaterialModule } from './modules/material/material.module';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { registerLocaleData } from '@angular/common';
+import es from '@angular/common/locales/es';
+registerLocaleData(es);
 
 @NgModule({
   declarations: [AppComponent],

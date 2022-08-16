@@ -1,5 +1,5 @@
 <div [ngClass]="['mat-elevation-z2', class]">
-  <mat-card class="toolbar-search mat-elevation-z0">
+  <mat-card class="toolbar-search mat-elevation-z0" *ngIf="showSearcher">
     <mat-form-field
       appearance="outline"
       floatLabel="never"

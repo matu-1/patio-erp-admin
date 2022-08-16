@@ -14,6 +14,7 @@ export const API = {
     PAY: `${API_URL}/factura/pay`,
     SCHEDULE_PAYMENT: `${API_URL}/factura/schedule-payment`,
     RECALCULATE_INVOICE: `${API_URL}/factura/recalculate-invoice/:id`,
+    INFO: `${API_URL}/factura/info/:id`,
   },
   INVOICE_DETAIL: {
     GET_BY_INVOICE: `${API_URL}/detalle-factura/invoice/:id`,

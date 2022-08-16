@@ -209,7 +209,7 @@ export class ListComponent implements OnInit {
 
   goDetail(invoice: Factura) {
     this.router.navigateByUrl(
-      routeParams(PAGE_ROUTE.INVOICE.DETAIL, { id: this.generateCode(invoice) })
+      routeParams(PAGE_ROUTE.INVOICE.DETAIL, { code: this.generateCode(invoice) })
     );
   }
 }

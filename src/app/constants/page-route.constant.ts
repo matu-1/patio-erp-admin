@@ -12,7 +12,7 @@ export const PAGE_ROUTE = {
     ROOT: 'invoice',
     LIST_ROOT: '',
     CREATE_ROOT: 'create',
-    DETAIL_ROOT: 'detail/:id',
+    DETAIL_ROOT: 'detail/:code',
     get LIST() {
       return `/${this.ROOT}/${this.LIST_ROOT}`;
     },
