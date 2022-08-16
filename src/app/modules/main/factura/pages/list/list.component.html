@@ -54,7 +54,11 @@
       <mat-icon>undo</mat-icon>
     </button>
     <ng-container *ngIf="!isDisable(value)">
-      <button mat-icon-button matTooltip="Recalcular Factura">
+      <button
+        mat-icon-button
+        matTooltip="Recalcular Factura"
+        (click)="recalculateInvoice(value)"
+      >
         <mat-icon>refresh</mat-icon>
       </button>
       <button
@@ -79,7 +83,7 @@
         <mat-icon>schedule</mat-icon>
       </button>
     </ng-container>
-    <button mat-icon-button matTooltip="Ver la factura">
+    <button mat-icon-button matTooltip="Ver la factura" (click)="goDetail(value)">
       <mat-icon>visibility</mat-icon>
     </button>
     <button

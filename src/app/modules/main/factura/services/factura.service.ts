@@ -54,4 +54,11 @@ export class FacturaService {
       routeParams(API.INVOICE_DETAIL.GET_BY_INVOICE, { id })
     );
   }
+
+  recalculateInvoice(id: number) {
+    return this.http.put<Response<Factura>>(
+      routeParams(API.INVOICE.RECALCULATE_INVOICE, { id }),
+      {}
+    );
+  }
 }
