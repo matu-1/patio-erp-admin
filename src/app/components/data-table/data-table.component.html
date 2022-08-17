@@ -27,12 +27,12 @@
       <ng-container *ngFor="let column of columns">
         <ng-container [matColumnDef]="column.field">
           <th mat-header-cell *matHeaderCellDef>{{ column.headerName }}</th>
-          <td mat-cell *matCellDef="let element">
+          <td mat-cell *matCellDef="let element; let i = index">
             <ng-container *ngIf="rows; else loading">
               <ng-container
                 *ngIf="getTemplateRef(column); else noCustomColumn"
                 [ngTemplateOutlet]="getTemplateRef(column)!"
-                [ngTemplateOutletContext]="{ value: element }"
+                [ngTemplateOutletContext]="{ value: element, index: i }"
               >
               </ng-container>
               <ng-template #noCustomColumn>

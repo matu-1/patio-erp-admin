@@ -1,7 +1,7 @@
-export type TableColumn = {
+export type TableColumn<T = any> = {
   field: string;
   headerName: string;
-  valueFormatter?: (value: any) => any;
+  valueFormatter?: (value: T) => any;
 };
 
-export type TableColumns = TableColumn[];
+export type TableColumns<T = any> = TableColumn<T>[];

@@ -142,7 +142,7 @@ export const invoiceFilterSchema: TextFieldSchema = [
       { value: 'en fecha', label: 'Futuras' },
       { value: 'cobrar hoy', label: 'Hoy' },
       { value: 'cobro vencido', label: 'Vencidas' },
-      { value: 'sin', label: 'Sin Programacion' },
+      { value: 'sin', label: 'Sin Programación' },
     ],
     df: '16.6%',
     xs: '100%',

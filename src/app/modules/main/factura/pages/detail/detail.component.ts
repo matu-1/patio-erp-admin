@@ -4,7 +4,7 @@ import { handleRequestPg } from 'src/app/utils/handle-request';
 import { FacturaService } from '../../services/factura.service';
 import { InvoiceInfo } from '../../interfaces/invoice-info.interface';
 import { months } from 'src/app/constants/months.constant';
-import { additionalServiceColumns } from '../../configs/table-columns';
+import { additionalServiceColumns, salesColumns } from '../../configs/table-columns';
 
 @Component({
   selector: 'app-detail',
@@ -15,6 +15,7 @@ export class DetailComponent implements OnInit {
   invoiceInfo?: InvoiceInfo;
   months = months;
   additionalServiceColumns = additionalServiceColumns;
+  salesColumns = salesColumns;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,5 +46,11 @@ export class DetailComponent implements OnInit {
       id: dataArray[2],
       id_cliente: dataArray[3],
     };
+  }
+
+  getInvoiceDetails(isService = true) {
+    return this.invoiceInfo?.invoiceDetails.filter((item) =>
+      isService ? item.id_servicio != '11' : item.id_servicio == '11'
+    );
   }
 }

@@ -35,9 +35,9 @@
         </p>
         <p>
           Comision:
-          <span class="text-bold">{{
-            invoiceInfo.montoNetoSum | number: ".2-2"
-          }} Bs.</span>
+          <span class="text-bold"
+            >{{ invoiceInfo.montoNetoSum | number: ".2-2" }} Bs.</span
+          >
         </p>
       </div>
       <div class="send-payment">
@@ -59,20 +59,28 @@
     <h3 class="subtitle">Servicios Adicionales</h3>
     <app-data-table
       class="dt-unstyle"
-      [rows]="invoiceInfo.invoiceDetails"
+      [rows]="getInvoiceDetails()"
       [columns]="additionalServiceColumns"
       [showPagination]="false"
       [showSearcher]="false"
-    ></app-data-table>
+    >
+      <ng-template customColumn="id" let-i="index">
+        {{ i + 1 }}
+      </ng-template>
+    </app-data-table>
   </div>
   <div class="mt-3">
     <h3 class="subtitle">Ventas por el ERP</h3>
     <app-data-table
       class="dt-unstyle"
-      [rows]="invoiceInfo.invoiceDetails"
-      [columns]="additionalServiceColumns"
+      [rows]="getInvoiceDetails(false)"
+      [columns]="salesColumns"
       [showPagination]="false"
       [showSearcher]="false"
-    ></app-data-table>
+    >
+      <ng-template customColumn="id" let-i="index">
+        {{ i + 1 }}
+      </ng-template></app-data-table
+    >
   </div>
 </ng-container>
