@@ -20,9 +20,11 @@ import { months } from 'src/app/constants/months.constant';
 import { SchedulePaymentDto } from '../../interfaces/factura.interface';
 import { SchedulePaymentDialog } from '../../components/schedule-payment/schedule-payment.dialog';
 import { EditDialog } from '../../components/edit/edit.dialog';
-import { DIALOG_CONFIG_SM } from '../../../../../constants/dialog.constant';
+import { DIALOG_CONFIG_SM } from 'src/app/constants/dialog.constant';
 import { Router } from '@angular/router';
 import { routeParams } from 'src/app/utils/route-params';
+import { BULLETS } from '../../constants/bullets.constant';
+import { ExcelUtils } from 'src/app/utils/excel.util';
 
 @Component({
   selector: 'app-list',
@@ -36,6 +38,7 @@ export class ListComponent implements OnInit {
   invoiceFilterSchema = invoiceFilterSchema;
   filterForm = buildform(invoiceFilterSchema);
   query: QueryInvoice = { page: 0, limit: 20, length: 0 };
+  bullets = BULLETS;
 
   constructor(
     private facturaService: FacturaService,
@@ -209,7 +212,21 @@ export class ListComponent implements OnInit {
 
   goDetail(invoice: Factura) {
     this.router.navigateByUrl(
-      routeParams(PAGE_ROUTE.INVOICE.DETAIL, { code: this.generateCode(invoice) })
+      routeParams(PAGE_ROUTE.PUBLIC.INVOICE_DETAIL, {
+        code: this.generateCode(invoice),
+      })
     );
+  }
+
+  async download() {
+    const query: QueryInvoice = { page: 0, limit: 1000000000000, length: 0 };
+    const filterValue = ObjectUtils.clear(this.filterForm.value);
+    const res = await handleRequestPg(
+      () => this.facturaService.getAll({ ...query, ...filterValue }),
+      true
+    );
+    if (res) {
+      ExcelUtils.download(res.data.records, 'invoices');
+    }
   }
 }

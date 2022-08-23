@@ -11,7 +11,9 @@ mat-sidenav {
   font-weight: normal;
 }
 .logo {
+  box-sizing: border-box;
   padding: 1.2rem 1.5rem;
+  height: 64px;
   img {
     width: 100%;
   }

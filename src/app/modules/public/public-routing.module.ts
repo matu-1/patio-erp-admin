@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
-import { ListComponent } from './pages/list/list.component';
+import { InvoiceDetailComponent } from './pages/invoice-detail/invoice-detail.component';
 
 const routes: Routes = [
   {
-    path: PAGE_ROUTE.INVOICE.LIST_ROOT,
-    component: ListComponent,
+    path: PAGE_ROUTE.PUBLIC.INVOICE_DETAIL_ROOT,
+    component: InvoiceDetailComponent,
   },
   {
     path: '**',
-    redirectTo: PAGE_ROUTE.INVOICE.LIST_ROOT,
+    redirectTo: PAGE_ROUTE.PUBLIC.INVOICE_DETAIL_ROOT,
   },
 ];
 
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class FacturaRoutingModule {}
+export class PublicRoutingModule {}

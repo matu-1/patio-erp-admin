@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { handleRequestPg } from 'src/app/utils/handle-request';
-import { FacturaService } from '../../services/factura.service';
-import { InvoiceInfo } from '../../interfaces/invoice-info.interface';
+import { FacturaService } from '../../../main/factura/services/factura.service';
+import { InvoiceInfo } from '../../../main/factura/interfaces/invoice-info.interface';
 import { months } from 'src/app/constants/months.constant';
-import { additionalServiceColumns, salesColumns } from '../../configs/table-columns';
+import {
+  additionalServiceColumns,
+  salesColumns,
+} from '../../configs/table-columns';
 
 @Component({
   selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss'],
+  templateUrl: './invoice-detail.component.html',
+  styleUrls: ['./invoice-detail.component.scss'],
 })
-export class DetailComponent implements OnInit {
+export class InvoiceDetailComponent implements OnInit {
   invoiceInfo?: InvoiceInfo;
   months = months;
   additionalServiceColumns = additionalServiceColumns;
@@ -52,5 +55,15 @@ export class DetailComponent implements OnInit {
     return this.invoiceInfo?.invoiceDetails.filter((item) =>
       isService ? item.id_servicio != '11' : item.id_servicio == '11'
     );
+  }
+
+  sendEmail() {
+    const url = `https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=patioservicedelivery%40gmail.com&su=[PATIOSERVICE]%20Recibo%20%23${this.invoiceInfo?.id}%20&body=Adjunto%20el%20comprobante%20de%20pago`;
+    window.open(url, '_blank');
+  }
+
+  sendMessage() {
+    const url = `https://api.whatsapp.com/send?phone=59177666780&text=comprobante%20de%20pago%20del%20recibo%20${this.invoiceInfo?.id}`;
+    window.open(url, '_blank');
   }
 }

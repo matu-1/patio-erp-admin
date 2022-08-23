@@ -2,7 +2,9 @@
   [breadcrumbs]="[{ path: '', title: 'Facturas' }]"
 ></app-breadcrumbs>
 <app-title-bar title="Facturas">
-  <button mat-raised-button color="accent">Exportar</button>
+  <button mat-raised-button color="accent" (click)="download()">
+    Exportar
+  </button>
 </app-title-bar>
 <app-simple-card class="mb-3">
   <form
@@ -20,13 +22,19 @@
       [textFieldValue]="value"
       [form]="filterForm"
     ></app-text-field>
-    <div fxFlex="11.6%" fxFlex.xs="100%">
+    <div fxFlex="5.6%" fxFlex.xs="100%">
       <button mat-icon-button type="submit">
         <mat-icon>search</mat-icon>
       </button>
     </div>
   </form>
 </app-simple-card>
+<div class="bullets mb-2">
+  <div *ngFor="let item of bullets" class="bullet">
+    <div class="bg-bullet" [class]="item.bgColor"></div>
+    <span> {{ item.title }}</span>
+  </div>
+</div>
 <app-data-table
   [rows]="facturas"
   [columns]="facturaColumns"
@@ -83,7 +91,11 @@
         <mat-icon>schedule</mat-icon>
       </button>
     </ng-container>
-    <button mat-icon-button matTooltip="Ver la factura" (click)="goDetail(value)">
+    <button
+      mat-icon-button
+      matTooltip="Ver la factura"
+      (click)="goDetail(value)"
+    >
       <mat-icon>visibility</mat-icon>
     </button>
     <button

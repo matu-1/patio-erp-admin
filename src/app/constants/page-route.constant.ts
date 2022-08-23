@@ -12,15 +12,18 @@ export const PAGE_ROUTE = {
     ROOT: 'invoice',
     LIST_ROOT: '',
     CREATE_ROOT: 'create',
-    DETAIL_ROOT: 'detail/:code',
     get LIST() {
       return `/${this.ROOT}/${this.LIST_ROOT}`;
     },
     get CREATE() {
       return `/${this.ROOT}/${this.CREATE_ROOT}`;
     },
-    get DETAIL() {
-      return `/${this.ROOT}/${this.DETAIL_ROOT}`;
+  },
+  PUBLIC: {
+    ROOT: 'public',
+    INVOICE_DETAIL_ROOT: 'invoice/:code',
+    get INVOICE_DETAIL() {
+      return `/${this.ROOT}/${this.INVOICE_DETAIL_ROOT}`;
     },
   },
 };

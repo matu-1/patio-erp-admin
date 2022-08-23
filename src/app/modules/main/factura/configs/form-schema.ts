@@ -164,7 +164,7 @@ export const invoiceFilterSchema: TextFieldSchema = [
   {
     name: 'search',
     label: 'Buscar',
-    df: '21.6%',
+    df: '27.6%',
     xs: '100%',
     sm: '25%',
   },
