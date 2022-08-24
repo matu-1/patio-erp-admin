@@ -37,7 +37,7 @@ export interface InvoiceDetail {
 }
 
 export interface Excel {
-  pdf_array: any[];
+  pdf_array: PDFArray[];
   mes: number;
   gestion: string;
 }
@@ -47,11 +47,24 @@ export interface PDF {
   fecha: string;
   monto_neto_sum: string;
   monto_pedidos_sum: string;
-  pdf_array: any[];
+  pdf_array: PDFArray[];
   nombre: string;
   ciudad: string;
   mes: number;
   gestion: string;
   id_servicio: string;
   razon_adicional: null;
+}
+
+export interface PDFArray {
+  nombre: string;
+  ciudad: string;
+  id_pedido: string;
+  fecha: Date;
+  fecha_hora: Date;
+  monto: string;
+  id_local: number;
+  monto_neto: string;
+  porcentaje_comision: string;
+  metodo_pago: string;
 }

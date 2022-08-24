@@ -1,6 +1,9 @@
-import { TableColumns } from "src/app/components/data-table/data-table.interface";
-import { InvoiceDetail } from '../../main/factura/interfaces/invoice-info.interface';
-import { formatNumber } from '@angular/common';
+import { TableColumns } from 'src/app/components/data-table/data-table.interface';
+import {
+  InvoiceDetail,
+  PDFArray,
+} from '../../main/factura/interfaces/invoice-info.interface';
+import { formatDate, formatNumber } from '@angular/common';
 
 export const additionalServiceColumns: TableColumns<InvoiceDetail> = [
   {
@@ -58,5 +61,41 @@ export const salesColumns: TableColumns<InvoiceDetail> = [
   {
     field: 'actions',
     headerName: 'Acciones',
+  },
+];
+
+export const salesExcelColumns: TableColumns<PDFArray> = [
+  {
+    field: 'id_pedido',
+    headerName: 'Id Pedido',
+  },
+  {
+    field: 'fecha',
+    headerName: 'Fecha',
+    valueFormatter: ({ fecha }) => formatDate(fecha, 'dd/MM/yyyy', 'es'),
+  },
+  {
+    field: 'fecha_hora',
+    headerName: 'Fecha Hora',
+    valueFormatter: ({ fecha_hora }) =>
+      formatDate(fecha_hora, 'dd/MM/yyyy HH:mm', 'es'),
+  },
+  {
+    field: 'monto',
+    headerName: 'Monto por Pedido',
+  },
+  {
+    field: 'porcentaje_comision',
+    headerName: 'Comisión',
+  },
+  {
+    field: 'monto_neto',
+    headerName: 'Monto por Pagar',
+    valueFormatter: ({ monto_neto }) =>
+      formatNumber(Number(monto_neto), 'es', '.2-2'),
+  },
+  {
+    field: 'metodo_pago',
+    headerName: 'Método Pago',
   },
 ];

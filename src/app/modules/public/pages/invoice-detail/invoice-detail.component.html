@@ -39,7 +39,7 @@
             >
           </p>
           <p>
-            Comision:
+            Comisión:
             <span class="text-bold"
               >{{ invoiceInfo.montoNetoSum | number: ".2-2" }} Bs.</span
             >
@@ -91,9 +91,9 @@
         <ng-template customColumn="id" let-i="index">
           {{ i + 1 }}
         </ng-template>
-        <ng-template customColumn="actions">
-          <button mat-button color="primary">EXCEL</button>
-          <button mat-button color="warn">PDF</button>
+        <ng-template customColumn="actions" let-value="value">
+          <button mat-button color="primary" (click)="exportToExcel(value)">EXCEL</button>
+          <button mat-button color="warn" (click)="exportToPDF(value)">PDF</button>
         </ng-template>
       </app-data-table>
     </div>

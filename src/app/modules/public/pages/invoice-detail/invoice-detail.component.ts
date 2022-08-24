@@ -2,12 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { handleRequestPg } from 'src/app/utils/handle-request';
 import { FacturaService } from '../../../main/factura/services/factura.service';
-import { InvoiceInfo } from '../../../main/factura/interfaces/invoice-info.interface';
+import {
+  InvoiceDetail,
+  InvoiceInfo,
+} from '../../../main/factura/interfaces/invoice-info.interface';
 import { months } from 'src/app/constants/months.constant';
 import {
   additionalServiceColumns,
   salesColumns,
+  salesExcelColumns,
 } from '../../configs/table-columns';
+import { ExcelUtils } from 'src/app/utils/excel.util';
+import parseByColumns from 'src/app/components/data-table/parse-by-columns';
+import { createSalesInvoice } from '../../utils/create-sales-invoice';
 
 @Component({
   selector: 'app-detail',
@@ -65,5 +72,16 @@ export class InvoiceDetailComponent implements OnInit {
   sendMessage() {
     const url = `https://api.whatsapp.com/send?phone=59177666780&text=comprobante%20de%20pago%20del%20recibo%20${this.invoiceInfo?.id}`;
     window.open(url, '_blank');
+  }
+
+  exportToExcel(invoiceDetail: InvoiceDetail) {
+    ExcelUtils.download(
+      parseByColumns(invoiceDetail.pdf?.pdf_array ?? [], salesExcelColumns),
+      'sales order'
+    );
+  }
+
+  exportToPDF(invoiceDetail: InvoiceDetail) {
+    createSalesInvoice(invoiceDetail.pdf!);
   }
 }
