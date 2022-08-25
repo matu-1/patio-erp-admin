@@ -84,4 +84,14 @@ export class InvoiceDetailComponent implements OnInit {
   exportToPDF(invoiceDetail: InvoiceDetail) {
     createSalesInvoice(invoiceDetail.pdf!);
   }
+
+  loadMultipago() {
+    const h = screen.height;
+    const w = screen.width;
+    window.open(
+      this.invoiceInfo?.urlMultipago,
+      '_blank',
+      `toolbar=no,location=0,scrollbars=yes,resizable=yes,top=0,left=0,width=${w},height=${h}`
+    );
+  }
 }

@@ -8,6 +8,12 @@ export interface InvoiceInfo {
   mes: number;
   gestion: string;
   id: number;
+  isPagado: boolean,
+  isVisto: boolean,
+  programado: string,
+  telefono: string,
+  email: string,
+  urlMultipago: string,
 }
 
 export interface InvoiceDetail {

@@ -21,10 +21,10 @@ import { SchedulePaymentDto } from '../../interfaces/factura.interface';
 import { SchedulePaymentDialog } from '../../components/schedule-payment/schedule-payment.dialog';
 import { EditDialog } from '../../components/edit/edit.dialog';
 import { DIALOG_CONFIG_SM } from 'src/app/constants/dialog.constant';
-import { Router } from '@angular/router';
 import { routeParams } from 'src/app/utils/route-params';
 import { BULLETS } from '../../constants/bullets.constant';
 import { ExcelUtils } from 'src/app/utils/excel.util';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-list',
@@ -43,7 +43,7 @@ export class ListComponent implements OnInit {
   constructor(
     private facturaService: FacturaService,
     private dialog: MatDialog,
-    private router: Router
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -211,11 +211,10 @@ export class ListComponent implements OnInit {
   }
 
   goDetail(invoice: Factura) {
-    this.router.navigateByUrl(
-      routeParams(PAGE_ROUTE.PUBLIC.INVOICE_DETAIL, {
-        code: this.generateCode(invoice),
-      })
-    );
+    const url = routeParams(PAGE_ROUTE.PUBLIC.INVOICE_DETAIL, {
+      code: this.generateCode(invoice),
+    });
+    window.open(this.location.prepareExternalUrl(url), '_blank');
   }
 
   async download() {

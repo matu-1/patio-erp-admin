@@ -61,7 +61,76 @@
         </div>
       </div>
       <div fxFlex.xs="100%" fxFlex="50%">
-        <div class="payment"></div>
+        <div class="payment">
+          <ng-container *ngIf="!invoiceInfo.isPagado">
+            <h3 class="subtitle">Método de Pago</h3>
+            <mat-accordion displayMode="flat">
+              <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                  <mat-panel-title> Pago por transferencia </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>
+                  <strong
+                    >BANCO MERCANTIL SANTA CRUZ<br />
+                    CUENTA CTE M/N Bs Nro 4011053252<br />
+                    PATIOSERVICE S.R.L.<br />
+                    NIT 401053028<br />
+                    (*) GLOSA: {{ invoiceInfo.id }}<br
+                  /></strong>
+                  AGENCIA SANTA CRUZ<br />
+                  (*) por favor poner la glosa tal cual se describe para
+                  brindarle un mejor servicio
+                </p>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>Pago con Tarjeta</mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>
+                  <strong class="mr-2"
+                    >Multipago te permite pagar por diferentes medios</strong
+                  >
+                  <button mat-button (click)="loadMultipago()">
+                    <img src="assets/images/factura/multipago.png" />
+                  </button>
+                </p>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>Pago con QR</mat-panel-title>
+                </mat-expansion-panel-header>
+                <div
+                  class="qr-bg center"
+                  style="
+                    background-image: url(assets/images/factura/qrscananimation.gif);
+                  "
+                >
+                  <img
+                    [src]="
+                      'https://apipos.patio.com.bo/qrpayment?amount=' +
+                      invoiceInfo.montoNetoSum +
+                      '&orderid=' +
+                      invoiceInfo.id +
+                      '&sistema=erp-facturacion'
+                    "
+                  />
+                </div>
+                <img class="qr-step" src="assets/images/factura/pasos_qr.png" />
+              </mat-expansion-panel>
+            </mat-accordion>
+          </ng-container>
+          <div class="center" *ngIf="invoiceInfo.isPagado">
+            <img
+              class="paid-img"
+              src="assets/images/factura/pagado.png"
+              alt="paid"
+            />
+          </div>
+          <div *ngIf="invoiceInfo.programado" class="center mt-2">
+            <h3>Su pago se program&oacute; para</h3>
+            <h2>{{ invoiceInfo.programado }}</h2>
+          </div>
+        </div>
       </div>
     </div>
     <hr />
@@ -92,8 +161,12 @@
           {{ i + 1 }}
         </ng-template>
         <ng-template customColumn="actions" let-value="value">
-          <button mat-button color="primary" (click)="exportToExcel(value)">EXCEL</button>
-          <button mat-button color="warn" (click)="exportToPDF(value)">PDF</button>
+          <button mat-button color="primary" (click)="exportToExcel(value)">
+            EXCEL
+          </button>
+          <button mat-button color="warn" (click)="exportToPDF(value)">
+            PDF
+          </button>
         </ng-template>
       </app-data-table>
     </div>

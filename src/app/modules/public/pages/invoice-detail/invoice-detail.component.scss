@@ -44,6 +44,8 @@
 .payment {
   background-color: #f2f2f2;
   height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 .toolbar {
   height: 64px;
@@ -57,7 +59,27 @@
   font-size: 12px;
   position: sticky;
   top: 0;
+  z-index: 1;
   img {
     height: 23px;
   }
+}
+.paid-img {
+  width: 180px;
+}
+.center {
+  text-align: center;
+}
+.qr-bg {
+  min-height: 250px;
+  // background-image: url(assets/images/factura/qrscananimation.gif);
+  background-repeat: none;
+  background-position: center center;
+  margin-bottom: 1.5rem;
+  img {
+    max-width: 100%;
+  }
+}
+.qr-step {
+  max-width: 100%;
 }

@@ -83,10 +83,13 @@ export const salesExcelColumns: TableColumns<PDFArray> = [
   {
     field: 'monto',
     headerName: 'Monto por Pedido',
+    valueFormatter: ({ monto }) => formatNumber(Number(monto), 'es', '.2-2'),
   },
   {
     field: 'porcentaje_comision',
     headerName: 'Comisión',
+    valueFormatter: ({ porcentaje_comision }) =>
+      formatNumber(Number(porcentaje_comision), 'es'),
   },
   {
     field: 'monto_neto',
