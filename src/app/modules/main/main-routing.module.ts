@@ -20,6 +20,11 @@ const routes: Routes = [
           import('./factura/factura.module').then((m) => m.FacturaModule),
       },
       {
+        path: PAGE_ROUTE.REPORT.ROOT,
+        loadChildren: () =>
+          import('./report/report.module').then((m) => m.ReportModule),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',

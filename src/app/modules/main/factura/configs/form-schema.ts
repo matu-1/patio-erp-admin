@@ -3,16 +3,8 @@ import {
   TextFieldSchema,
   TextFieldType,
 } from 'src/app/components/text-field/text-field.interface';
+import { generateYears } from 'src/app/utils/utils';
 import { CustomValidators } from 'src/app/utils/validators';
-
-function generateYears(start: number = 2020) {
-  const currentYear = new Date().getFullYear();
-  const years: number[] = [];
-  for (let i = 0; i <= currentYear - start; i++) {
-    years.push(start + i);
-  }
-  return years;
-}
 
 export const invoiceFilterSchema: TextFieldSchema = [
   {

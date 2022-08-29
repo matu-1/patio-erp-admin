@@ -25,4 +25,7 @@ export const API = {
   CUENTA_CONTABLE: {
     GET_ALL: `${API_URL}/cuenta-contable`,
   },
+  REPORT: {
+    GET_PAYMENT_DETAIL: `${API_URL}/factura/payment-detail`,
+  },
 };

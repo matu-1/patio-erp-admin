@@ -45,4 +45,15 @@ export const MENU: MenuItem[] = [
       },
     ],
   },
+  {
+    label: 'Reportes',
+    icon: 'flag',
+    items: [
+      {
+        label: 'Detalle Pago',
+        icon: 'remove',
+        route: PAGE_ROUTE.REPORT.PAYMENT_DETAIL,
+      },
+    ],
+  },
 ];

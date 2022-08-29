@@ -26,4 +26,11 @@ export const PAGE_ROUTE = {
       return `/${this.ROOT}/${this.INVOICE_DETAIL_ROOT}`;
     },
   },
+  REPORT: {
+    ROOT: 'report',
+    PAYMENT_DETAIL_ROOT: 'payment-detail',
+    get PAYMENT_DETAIL() {
+      return `/${this.ROOT}/${this.PAYMENT_DETAIL_ROOT}`;
+    },
+  },
 };
