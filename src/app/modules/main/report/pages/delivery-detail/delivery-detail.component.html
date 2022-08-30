@@ -1,0 +1,26 @@
+<app-breadcrumbs
+  [breadcrumbs]="[{ path: '', title: 'Detalle Delivery' }]"
+></app-breadcrumbs>
+<app-title-bar title="Detalle Delivery">
+  <button mat-button>Exportar</button>
+</app-title-bar>
+<app-simple-card>
+  <form
+    [formGroup]="form"
+    markAllSubmit
+    (validSubmit)="filter()"
+    fxLayout="row"
+    fxLayoutGap="16px grid"
+  >
+    <app-text-field
+      *ngFor="let value of deliveryDetailSchema"
+      fxFlex.xs="100%"
+      [fxFlex]="value.df"
+      [textFieldValue]="value"
+      [form]="form"
+    ></app-text-field>
+    <div fxFlex.xs="100%" fxFlex="20%">
+      <button type="submit" mat-raised-button color="accent">Filtrar</button>
+    </div>
+  </form>
+</app-simple-card>

@@ -54,6 +54,11 @@ export const MENU: MenuItem[] = [
         icon: 'remove',
         route: PAGE_ROUTE.REPORT.PAYMENT_DETAIL,
       },
+      {
+        label: 'Detalle Delivery',
+        icon: 'remove',
+        route: PAGE_ROUTE.REPORT.DELIVERY_DETAIL,
+      },
     ],
   },
 ];

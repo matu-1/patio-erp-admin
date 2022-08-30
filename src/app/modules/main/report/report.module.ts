@@ -7,9 +7,10 @@ import { MaterialModule } from '../../material/material.module';
 import { FlexModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DirectivesModule } from 'src/app/directives/directives.module';
+import { DeliveryDetailComponent } from './pages/delivery-detail/delivery-detail.component';
 
 @NgModule({
-  declarations: [PaymentDetailComponent],
+  declarations: [PaymentDetailComponent, DeliveryDetailComponent],
   imports: [
     CommonModule,
     ReportRoutingModule,

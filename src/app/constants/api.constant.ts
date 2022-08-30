@@ -27,5 +27,6 @@ export const API = {
   },
   REPORT: {
     GET_PAYMENT_DETAIL: `${API_URL}/factura/payment-detail`,
+    GET_DELIVERY_DETAIL: `${API_URL}/factura/delivery-detail`,
   },
 };

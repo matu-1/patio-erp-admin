@@ -39,4 +39,5 @@ export class PaymentDetailComponent implements OnInit {
   download() {
     ExcelUtils.download(this.paymentDetailList!, 'payment-detail');
   }
+
 }

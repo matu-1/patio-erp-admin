@@ -29,8 +29,12 @@ export const PAGE_ROUTE = {
   REPORT: {
     ROOT: 'report',
     PAYMENT_DETAIL_ROOT: 'payment-detail',
+    DELIVERY_DETAIL_ROOT: 'delivery-detail',
     get PAYMENT_DETAIL() {
       return `/${this.ROOT}/${this.PAYMENT_DETAIL_ROOT}`;
+    },
+    get DELIVERY_DETAIL() {
+      return `/${this.ROOT}/${this.DELIVERY_DETAIL_ROOT}`;
     },
   },
 };

@@ -52,6 +52,7 @@ export class ListComponent implements OnInit {
 
   async getInvoices() {
     const filterValue = ObjectUtils.clear(this.filterForm.value);
+    if (filterValue.search) filterValue.search = filterValue.search.trim();
     this.facturas = undefined;
     const res = await handleRequest(() =>
       this.facturaService.getAll({ ...this.query, ...filterValue })
