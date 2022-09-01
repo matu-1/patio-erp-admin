@@ -2,9 +2,11 @@
   [breadcrumbs]="[{ path: '', title: 'Detalle Delivery' }]"
 ></app-breadcrumbs>
 <app-title-bar title="Detalle Delivery">
-  <button mat-button>Exportar</button>
+  <button mat-button [disabled]="!deliveryDetailList" (click)="downloadExcel()">
+    Exportar
+  </button>
 </app-title-bar>
-<app-simple-card>
+<app-simple-card class="mb-3">
   <form
     [formGroup]="form"
     markAllSubmit
@@ -24,3 +26,8 @@
     </div>
   </form>
 </app-simple-card>
+<app-data-table
+  [rows]="deliveryDetailList"
+  [columns]="deliveryDetailColumns"
+  (refresh)="filter()"
+></app-data-table>
