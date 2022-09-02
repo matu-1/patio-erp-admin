@@ -15,6 +15,7 @@ import { BackdropComponent } from './backdrop/backdrop.component';
 import { ProgressDialogComponent } from './progress-dialog/progress-dialog.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { ProgressBarDialogComponent } from './progress-bar-dialog/progress-bar-dialog.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ProgressBarDialogComponent } from './progress-bar-dialog/progress-bar-d
     ProgressDialogComponent,
     SnackBarComponent,
     ProgressBarDialogComponent,
+    AlertComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ import { ProgressBarDialogComponent } from './progress-bar-dialog/progress-bar-d
     BackdropComponent,
     ProgressDialogComponent,
     ProgressBarDialogComponent,
+    AlertComponent
   ],
 })
 export class ComponentsModule {}

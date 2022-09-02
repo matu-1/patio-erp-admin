@@ -1,0 +1,6 @@
+<div class="alert" #alert [class]="color">
+  <ng-content></ng-content>
+  <button mat-icon-button (click)="close(alert)">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
