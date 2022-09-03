@@ -59,6 +59,11 @@ export const MENU: MenuItem[] = [
         icon: 'remove',
         route: PAGE_ROUTE.REPORT.DELIVERY_DETAIL,
       },
+      {
+        label: 'Horas Trabajadas',
+        icon: 'remove',
+        route: PAGE_ROUTE.REPORT.HOURS_WORKED,
+      },
     ],
   },
 ];

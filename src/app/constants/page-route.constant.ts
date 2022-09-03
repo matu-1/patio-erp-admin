@@ -30,11 +30,15 @@ export const PAGE_ROUTE = {
     ROOT: 'report',
     PAYMENT_DETAIL_ROOT: 'payment-detail',
     DELIVERY_DETAIL_ROOT: 'delivery-detail',
+    HOURS_WORKED_ROOT: 'hours-worked',
     get PAYMENT_DETAIL() {
       return `/${this.ROOT}/${this.PAYMENT_DETAIL_ROOT}`;
     },
     get DELIVERY_DETAIL() {
       return `/${this.ROOT}/${this.DELIVERY_DETAIL_ROOT}`;
+    },
+    get HOURS_WORKED() {
+      return `/${this.ROOT}/${this.HOURS_WORKED_ROOT}`;
     },
   },
 };

@@ -8,9 +8,10 @@ import { FlexModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DirectivesModule } from 'src/app/directives/directives.module';
 import { DeliveryDetailComponent } from './pages/delivery-detail/delivery-detail.component';
+import { HoursWorkedComponent } from './pages/hours-worked/hours-worked.component';
 
 @NgModule({
-  declarations: [PaymentDetailComponent, DeliveryDetailComponent],
+  declarations: [PaymentDetailComponent, DeliveryDetailComponent, HoursWorkedComponent],
   imports: [
     CommonModule,
     ReportRoutingModule,
