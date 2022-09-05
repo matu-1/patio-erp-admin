@@ -85,3 +85,32 @@ export const deliveryDetailSchema: TextFieldSchema = [
     df: '15%',
   },
 ];
+
+export const hoursWorkedFilterSchema: TextFieldSchema = [
+  {
+    name: 'start',
+    label: 'Fecha Inicial',
+    fieldType: TextFieldType.DatePicker,
+    value: DateUtils.getMinHour(),
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+  },
+  {
+    name: 'end',
+    label: 'Fecha Final',
+    fieldType: TextFieldType.DatePicker,
+    value: DateUtils.getMaxHour(),
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+  },
+];

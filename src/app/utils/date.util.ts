@@ -21,4 +21,10 @@ export abstract class DateUtils {
     const parseDate = new Date(date);
     return !isNaN(parseDate.getTime());
   }
+
+  static formatToTimer(hour: number) {
+    const minutes = (hour * 60) % 60;
+    const seconds = (minutes * 60) % 60;
+    return `${Math.floor(hour)}:${Math.floor(minutes)}:${Math.round(seconds)}`;
+  }
 }

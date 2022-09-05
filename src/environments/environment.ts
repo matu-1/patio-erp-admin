@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:3000/api",
+  apiUrl: 'http://localhost:3000/api',
+  patioStoreApiUrl: 'http://localhost:8000/api',
+  patioStoreToken:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsInVzZXJuYW1lIjoibWF0dUBnbWFpbC5jb20iLCJpYXQiOjE2NjIzODY3MzIsImV4cCI6MTY5MzkyMjczMn0.TWrdVRpRmoT0U5xTuIG7WzpDjRwR2lfzgH-lW4l8i30',
 };
 
 /*

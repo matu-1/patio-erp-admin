@@ -2,5 +2,32 @@
   [breadcrumbs]="[{ path: '', title: 'Horas Trabajadas' }]"
 ></app-breadcrumbs>
 <app-title-bar title="Horas Trabajadas">
-  <button mat-button>Exportar</button>
+  <button mat-button (click)="download()" [disabled]="!hoursWorkedDrivers">
+    Exportar
+  </button>
 </app-title-bar>
+<app-simple-card class="mb-3">
+  <form
+    [formGroup]="form"
+    markAllSubmit
+    (validSubmit)="filter()"
+    fxLayout="row wrap"
+    fxLayoutGap="16px 8px grid"
+  >
+    <app-text-field
+      fxFlex="20%"
+      fxFlex.xs="100%"
+      *ngFor="let value of hoursWorkedFilterSchema"
+      [form]="form"
+      [textFieldValue]="value"
+    ></app-text-field>
+    <div fxFlex="20%" fxFlex.xs="100%">
+      <button mat-raised-button color="accent">Filtrar</button>
+    </div>
+  </form>
+</app-simple-card>
+<app-data-table
+  [columns]="hoursWorkedColumns"
+  [rows]="hoursWorkedDrivers"
+  (refresh)="filter()"
+></app-data-table>

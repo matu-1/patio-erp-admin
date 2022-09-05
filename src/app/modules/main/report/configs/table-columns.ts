@@ -1,6 +1,8 @@
 import { formatDate, formatNumber } from '@angular/common';
 import { TableColumns } from 'src/app/components/data-table/data-table.interface';
+import { DateUtils } from 'src/app/utils/date.util';
 import { DeliveryDetail } from '../interface/delivery-detail.interface';
+import { HoursWorkedDriver } from '../interface/hours-worked-driver.interface';
 import { PaymentDetail } from '../interface/payment-detail.interface';
 
 export const paymentDetailColumns: TableColumns<PaymentDetail> = [
@@ -88,5 +90,45 @@ export const deliveryDetailColumns: TableColumns<DeliveryDetail> = [
     field: 'fecha',
     headerName: 'Fecha',
     valueFormatter: ({ fecha }) => formatDate(fecha, 'dd/MM/yyyy', 'es'),
+  },
+];
+
+export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
+  {
+    field: 'id',
+    headerName: 'Id',
+  },
+  {
+    field: 'name',
+    headerName: 'Nombre',
+  },
+  {
+    field: 'hoursWorked',
+    headerName: 'Horas',
+    valueFormatter: ({ hoursWorked }) => DateUtils.formatToTimer(hoursWorked),
+  },
+  {
+    field: 'orderQuantity',
+    headerName: 'Cant. Pedidos',
+  },
+  {
+    field: 'totalEarning',
+    headerName: 'Ganancia',
+    valueFormatter: ({ totalEarning }) => formatNumber(totalEarning, 'es'),
+  },
+  {
+    field: 'tips',
+    headerName: 'Propina',
+    valueFormatter: ({ tips }) => formatNumber(tips, 'es'),
+  },
+  {
+    field: 'discounts',
+    headerName: 'Descuento',
+    valueFormatter: ({ discounts }) => formatNumber(discounts, 'es'),
+  },
+  {
+    field: 'total',
+    headerName: 'Total',
+    valueFormatter: ({ total }) => formatNumber(total, 'es'),
   },
 ];
