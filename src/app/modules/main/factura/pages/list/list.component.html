@@ -42,6 +42,11 @@
   [rowClass]="getRowClass"
   [showPagination]="false"
 >
+  <ng-template customColumn="nombre_cliente" let-value="value">
+    {{ value.nombre_cliente }} <br />
+    {{ value.ciudad }} <br />
+    {{ value.telefono }}
+  </ng-template>
   <ng-template customColumn="pagado" let-value="value">
     <ng-container *ngIf="value.pagado == 'no'; else pagado">
       {{ value.estado == 0 ? "" : "Recibida" }}
