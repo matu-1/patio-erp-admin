@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
@@ -38,6 +39,9 @@ export class HoursWorkedComponent implements OnInit {
   }
 
   download() {
-    ExcelUtils.download(this.hoursWorkedDrivers!, 'Hours worked drivers');
+    ExcelUtils.download(
+      parseByColumns(this.hoursWorkedDrivers!, hoursWorkedColumns),
+      'Hours worked drivers'
+    );
   }
 }

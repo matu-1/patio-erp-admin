@@ -104,13 +104,26 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     headerName: 'Nombre',
   },
   {
+    field: 'phoneNumber',
+    headerName: 'Telefono',
+  },
+  {
+    field: 'modality',
+    headerName: 'Tipo Acuerdo',
+  },
+  {
+    field: 'quantity',
+    headerName: 'Cant. Pedidos',
+  },
+  {
+    field: 'tips',
+    headerName: 'Propina',
+    valueFormatter: ({ tips }) => formatNumber(tips, 'es'),
+  },
+  {
     field: 'hoursWorked',
     headerName: 'Horas',
     valueFormatter: ({ hoursWorked }) => DateUtils.formatToTimer(hoursWorked),
-  },
-  {
-    field: 'orderQuantity',
-    headerName: 'Cant. Pedidos',
   },
   {
     field: 'totalEarning',
@@ -118,9 +131,14 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     valueFormatter: ({ totalEarning }) => formatNumber(totalEarning, 'es'),
   },
   {
-    field: 'tips',
-    headerName: 'Propina',
-    valueFormatter: ({ tips }) => formatNumber(tips, 'es'),
+    field: 'fees',
+    headerName: 'Fees',
+    valueFormatter: ({ fees }) => formatNumber(fees, 'es'),
+  },
+  {
+    field: 'extraFees',
+    headerName: 'Extra Fees',
+    valueFormatter: ({ extraFees }) => formatNumber(extraFees, 'es'),
   },
   {
     field: 'discounts',
