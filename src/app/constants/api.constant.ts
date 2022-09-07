@@ -29,6 +29,7 @@ export const API = {
   REPORT: {
     GET_PAYMENT_DETAIL: `${API_URL}/factura/payment-detail`,
     GET_DELIVERY_DETAIL: `${API_URL}/factura/delivery-detail`,
-    GET_HOURS_WORKED_DRIVERS: `${PATIO_STORE_API_URL}/drivers/hours/worked`
+    GET_HOURS_WORKED_DRIVERS: `${PATIO_STORE_API_URL}/drivers/hours/worked`,
+    GET_ORDERS_RECEIVED: `${PATIO_STORE_API_URL}/drivers/order/received`,
   },
 };

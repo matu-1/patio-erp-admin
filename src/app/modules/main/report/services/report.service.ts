@@ -9,6 +9,7 @@ import {
   GetDeliveryDetailDto,
 } from '../interface/delivery-detail.interface';
 import { HoursWorkedDriver } from '../interface/hours-worked-driver.interface';
+import { OrderReceived } from '../interface/order-received.interface';
 import {
   GetPaymentDetailDto,
   PaymentDetail,
@@ -37,6 +38,19 @@ export class ReportService {
   getHoursWorkedDrives(start: Date, end: Date) {
     return this.http.get<Response<HoursWorkedDriver[]>>(
       API.REPORT.GET_HOURS_WORKED_DRIVERS,
+      {
+        params: { start, end } as any,
+        context: skipToken(),
+        headers: {
+          Authorization: `Bearer ${environment.patioStoreToken}`,
+        },
+      }
+    );
+  }
+
+  getOrdersReceivedDriver(start: Date, end: Date) {
+    return this.http.get<Response<OrderReceived[]>>(
+      API.REPORT.GET_ORDERS_RECEIVED,
       {
         params: { start, end } as any,
         context: skipToken(),

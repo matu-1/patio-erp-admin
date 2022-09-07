@@ -19,7 +19,6 @@ export class AppComponent {
   constructor(snackBar: MatSnackBar, router: Router) {
     SnackBar.instance = snackBar;
     router.events.subscribe((event) => {
-      console.log('event', event);
       if (event instanceof RouteConfigLoadStart) ProgressDialog.show();
       else if (event instanceof RouteConfigLoadEnd) ProgressDialog.hide();
     });

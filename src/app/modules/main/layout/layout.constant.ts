@@ -64,6 +64,11 @@ export const MENU: MenuItem[] = [
         icon: 'remove',
         route: PAGE_ROUTE.REPORT.HOURS_WORKED,
       },
+      {
+        label: 'Ordenes Recibidas',
+        icon: 'remove',
+        route: PAGE_ROUTE.REPORT.ORDERS_RECEIVED,
+      },
     ],
   },
 ];

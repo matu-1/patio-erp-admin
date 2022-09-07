@@ -3,6 +3,7 @@ import { TableColumns } from 'src/app/components/data-table/data-table.interface
 import { DateUtils } from 'src/app/utils/date.util';
 import { DeliveryDetail } from '../interface/delivery-detail.interface';
 import { HoursWorkedDriver } from '../interface/hours-worked-driver.interface';
+import { OrderReceived } from '../interface/order-received.interface';
 import { PaymentDetail } from '../interface/payment-detail.interface';
 
 export const paymentDetailColumns: TableColumns<PaymentDetail> = [
@@ -130,5 +131,45 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     field: 'total',
     headerName: 'Total',
     valueFormatter: ({ total }) => formatNumber(total, 'es'),
+  },
+];
+
+export const ordersReceivedColumns: TableColumns<OrderReceived> = [
+  {
+    field: 'driver_id',
+    headerName: 'Id driver',
+  },
+  {
+    field: 'driver',
+    headerName: 'Driver',
+  },
+  {
+    field: 'order_id',
+    headerName: 'Id Order',
+  },
+  {
+    field: 'merchant',
+    headerName: 'Merchant',
+    valueFormatter: ({ merchant }) => merchant ?? '---',
+  },
+  {
+    field: 'client',
+    headerName: 'Client',
+  },
+  {
+    field: 'to_address',
+    headerName: 'Address', //'Dirección'
+  },
+  {
+    field: 'moneyReceived',
+    headerName: 'Money Received',
+    valueFormatter: ({ moneyReceived }) =>
+      formatNumber(moneyReceived, 'es', '.2-2'),
+  },
+  {
+    field: 'moneyToReturn',
+    headerName: 'Money To Return',
+    valueFormatter: ({ moneyToReturn }) =>
+      formatNumber(moneyToReturn, 'es', '.2-2'),
   },
 ];

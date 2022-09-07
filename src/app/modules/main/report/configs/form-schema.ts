@@ -114,3 +114,5 @@ export const hoursWorkedFilterSchema: TextFieldSchema = [
     ],
   },
 ];
+
+export const ordersReceivedFilterSchema = [...hoursWorkedFilterSchema];

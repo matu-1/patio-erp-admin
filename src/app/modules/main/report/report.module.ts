@@ -9,9 +9,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DirectivesModule } from 'src/app/directives/directives.module';
 import { DeliveryDetailComponent } from './pages/delivery-detail/delivery-detail.component';
 import { HoursWorkedComponent } from './pages/hours-worked/hours-worked.component';
+import { OrdersReceivedComponent } from './pages/orders-received/orders-received.component';
 
 @NgModule({
-  declarations: [PaymentDetailComponent, DeliveryDetailComponent, HoursWorkedComponent],
+  declarations: [PaymentDetailComponent, DeliveryDetailComponent, HoursWorkedComponent, OrdersReceivedComponent],
   imports: [
     CommonModule,
     ReportRoutingModule,

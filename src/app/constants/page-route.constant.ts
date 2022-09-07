@@ -31,6 +31,7 @@ export const PAGE_ROUTE = {
     PAYMENT_DETAIL_ROOT: 'payment-detail',
     DELIVERY_DETAIL_ROOT: 'delivery-detail',
     HOURS_WORKED_ROOT: 'hours-worked',
+    ORDERS_RECEIVED_ROOT: 'orders-received',
     get PAYMENT_DETAIL() {
       return `/${this.ROOT}/${this.PAYMENT_DETAIL_ROOT}`;
     },
@@ -39,6 +40,9 @@ export const PAGE_ROUTE = {
     },
     get HOURS_WORKED() {
       return `/${this.ROOT}/${this.HOURS_WORKED_ROOT}`;
+    },
+    get ORDERS_RECEIVED() {
+      return `/${this.ROOT}/${this.ORDERS_RECEIVED_ROOT}`;
     },
   },
 };
