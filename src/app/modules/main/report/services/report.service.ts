@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API } from 'src/app/constants/api.constant';
+import { PATIO_STORE_CONFIG_HTTP } from 'src/app/constants/http-header.constant';
 import { skipToken } from 'src/app/interceptors/token.interceptor';
 import { Response } from 'src/app/utils/response';
 import { environment } from 'src/environments/environment';
@@ -40,10 +41,7 @@ export class ReportService {
       API.REPORT.GET_HOURS_WORKED_DRIVERS,
       {
         params: { start, end } as any,
-        context: skipToken(),
-        headers: {
-          Authorization: `Bearer ${environment.patioStoreToken}`,
-        },
+        ...PATIO_STORE_CONFIG_HTTP,
       }
     );
   }
@@ -53,10 +51,7 @@ export class ReportService {
       API.REPORT.GET_ORDERS_RECEIVED,
       {
         params: { start, end } as any,
-        context: skipToken(),
-        headers: {
-          Authorization: `Bearer ${environment.patioStoreToken}`,
-        },
+        ...PATIO_STORE_CONFIG_HTTP,
       }
     );
   }

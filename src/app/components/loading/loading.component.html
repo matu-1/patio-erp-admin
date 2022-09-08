@@ -1,0 +1,8 @@
+<ng-container *ngIf="isLoading; else hasData">
+  <app-center [minHeight]="minHeight">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </app-center>
+</ng-container>
+<ng-template #hasData>
+  <ng-content></ng-content>
+</ng-template>

@@ -32,4 +32,10 @@ export const API = {
     GET_HOURS_WORKED_DRIVERS: `${PATIO_STORE_API_URL}/drivers/hours/worked`,
     GET_ORDERS_RECEIVED: `${PATIO_STORE_API_URL}/drivers/order/received`,
   },
+  DASHBOARD: {
+    GET_AVERAGE_STATUS: `${PATIO_STORE_API_URL}/orders/average/status`,
+  },
+  CITY: {
+    GET_CITIES: `${PATIO_STORE_API_URL}/cities`,
+  },
 };

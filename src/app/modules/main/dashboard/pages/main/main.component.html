@@ -1,4 +1,47 @@
 <app-breadcrumbs
   [breadcrumbs]="[{ path: '', title: 'Dashboard' }]"
 ></app-breadcrumbs>
-<h1 class="mat-display-1">Bienvenido</h1>
+
+<app-simple-card class="mb-3" [isLoading]="isLoadingFilter">
+  <form
+    fxLayout="row wrap"
+    fxLayoutGap="16px 8px grid"
+    [formGroup]="form"
+    markAllSubmit
+    (validSubmit)="filter()"
+    style="overflow: hidden"
+  >
+    <app-text-field
+      *ngFor="let value of averageFilter"
+      [form]="form"
+      [textFieldValue]="value"
+      fxFlex.xs="100%"
+      [fxFlex.sm]="value.sm"
+      [fxFlex]="value.df"
+    ></app-text-field>
+    <div>
+      <button type="submit" mat-raised-button color="accent">Filtrar</button>
+    </div>
+  </form>
+</app-simple-card>
+
+<app-loading minHeight="50vh" [isLoading]="!averagesStatus">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div
+      *ngFor="let item of averagesStatus"
+      fxFlex="25%"
+      fxFlex.xs="100%"
+      fxFlex.sm="33.3%"
+    >
+      <div class="flag">
+        <div class="icon">
+          <mat-icon> {{ item.icon }} </mat-icon>
+        </div>
+        <div class="flag-text">
+          <p class="title">{{ item.title }}</p>
+          <p class="value">{{ item.value }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-loading>

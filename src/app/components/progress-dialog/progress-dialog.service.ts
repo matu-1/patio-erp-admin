@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ProgressDialogService {
-  open = false;
+  open = true;
 
   constructor() {}
 

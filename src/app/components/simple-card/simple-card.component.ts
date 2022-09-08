@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class SimpleCardComponent {
   @Input() class?: string;
+  @Input() isLoading: boolean = false;
 
   constructor() {}
 }
