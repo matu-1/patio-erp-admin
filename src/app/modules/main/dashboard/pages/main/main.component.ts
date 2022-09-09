@@ -4,10 +4,7 @@ import { DateUtils } from 'src/app/utils/date.util';
 import { handleRequest } from 'src/app/utils/handle-request';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import { averageFilter } from '../../configs/form-schema';
-import {
-  AverageStatus,
-  ParsedAverageStatus,
-} from '../../interfaces/average-status.interface';
+import { ParsedAverageStatus } from '../../interfaces/average-status.interface';
 import { DashboardService } from '../../services/dashboard.service';
 import { parseAverageStatus } from './main.constant';
 
@@ -26,6 +23,7 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     this.getAverageStatus();
     this.getCities();
+    this.getMerchants();
   }
 
   async getAverageStatus() {
@@ -42,14 +40,31 @@ export class MainComponent implements OnInit {
   async getCities() {
     const res = await handleRequest(() => this.dashboardService.getCities());
     if (res)
-      averageFilter[2].options = res.data.map((city) => ({
-        value: city.id,
-        label: city.name,
-      }));
+      averageFilter[2].options = [
+        { label: 'All', value: undefined },
+        ...res.data.map((city) => ({
+          value: city.id,
+          label: city.name,
+        })),
+      ];
+  }
+
+  async getMerchants() {
+    const res = await handleRequest(() => this.dashboardService.getMerchants());
+    if (res)
+      averageFilter[3].options = [
+        { label: 'All', value: undefined },
+        ...res.data.map((merchant) => ({
+          value: merchant.id,
+          label: merchant.name,
+        })),
+      ];
   }
 
   get isLoadingFilter() {
-    return !Boolean(averageFilter[2].options);
+    return (
+      !Boolean(averageFilter[2].options) || !Boolean(averageFilter[3].options)
+    );
   }
 
   filter() {

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { API } from 'src/app/constants/api.constant';
 import { PATIO_STORE_CONFIG_HTTP } from 'src/app/constants/http-header.constant';
 import { skipToken } from 'src/app/interceptors/token.interceptor';
+import { ObjectUtils } from 'src/app/utils/object.util';
 import { Response } from 'src/app/utils/response';
 import { environment } from 'src/environments/environment';
 import {
@@ -46,11 +47,12 @@ export class ReportService {
     );
   }
 
-  getOrdersReceivedDriver(start: Date, end: Date) {
+  getOrdersReceivedDriver(start: Date, end: Date, paymentModeId?: number) {
+    const params = ObjectUtils.clear({ start, end, paymentModeId });
     return this.http.get<Response<OrderReceived[]>>(
       API.REPORT.GET_ORDERS_RECEIVED,
       {
-        params: { start, end } as any,
+        params,
         ...PATIO_STORE_CONFIG_HTTP,
       }
     );

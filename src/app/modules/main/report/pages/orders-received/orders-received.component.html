@@ -17,7 +17,8 @@
       [form]="form"
       [textFieldValue]="value"
       fxFlex.xs="100%"
-      fxFlex="20%"
+      fxFlex.sm="25%"
+      [fxFlex]="value.df"
     ></app-text-field>
     <div fxFlex.xs="100%">
       <button mat-raised-button color="accent" type="submit">Filtrar</button>

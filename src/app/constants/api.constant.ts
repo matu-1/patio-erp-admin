@@ -38,4 +38,7 @@ export const API = {
   CITY: {
     GET_CITIES: `${PATIO_STORE_API_URL}/cities`,
   },
+  MERCHANT: {
+    GET_MERCHANTS: `${PATIO_STORE_API_URL}/merchants`,
+  },
 };

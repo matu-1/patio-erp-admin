@@ -99,6 +99,7 @@ export const hoursWorkedFilterSchema: TextFieldSchema = [
         validatorFn: Validators.required,
       },
     ],
+    df: '20%',
   },
   {
     name: 'end',
@@ -112,7 +113,22 @@ export const hoursWorkedFilterSchema: TextFieldSchema = [
         validatorFn: Validators.required,
       },
     ],
+    df: '20%',
   },
 ];
 
-export const ordersReceivedFilterSchema = [...hoursWorkedFilterSchema];
+export const ordersReceivedFilterSchema: TextFieldSchema = [
+  ...hoursWorkedFilterSchema,
+  {
+    name: 'paymentModeId',
+    label: 'Método Pago',
+    value: 1,
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      { label: 'All', value: undefined },
+      { label: 'Cash', value: 1 },
+      { label: 'Online', value: 2 },
+    ],
+    df: '15%',
+  },
+];

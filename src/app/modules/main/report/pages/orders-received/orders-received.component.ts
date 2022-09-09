@@ -27,11 +27,12 @@ export class OrdersReceivedComponent implements OnInit {
   }
 
   async getOrdersReveived() {
-    const { start, end } = this.form.value;
+    const { start, end, paymentModeId } = this.form.value;
     const res = await handleRequest(() =>
       this.reportService.getOrdersReceivedDriver(
         start,
-        DateUtils.getMaxHour(end)
+        DateUtils.getMaxHour(end),
+        paymentModeId
       )
     );
     if (res) this.ordersReceived = res.data;

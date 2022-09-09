@@ -1,1 +1,4 @@
-export interface Merchant {}
+export interface Merchant {
+  id: number;
+  name: string;
+}
