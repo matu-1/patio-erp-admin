@@ -25,6 +25,13 @@ const routes: Routes = [
           import('./report/report.module').then((m) => m.ReportModule),
       },
       {
+        path: PAGE_ROUTE.PAYMENT_DRIVER.ROOT,
+        loadChildren: () =>
+          import('./payment-driver/payment-driver.module').then(
+            (m) => m.PaymentDriverModule
+          ),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',

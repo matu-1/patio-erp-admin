@@ -43,6 +43,11 @@ export const MENU: MenuItem[] = [
         icon: 'remove',
         route: PAGE_ROUTE.HOME,
       },
+      {
+        label: 'Pagos Driver',
+        icon: 'remove',
+        route: PAGE_ROUTE.PAYMENT_DRIVER.LIST,
+      },
     ],
   },
   {

@@ -27,3 +27,15 @@ export interface PaymentDetail {
   glosa: null | string;
   usuario: string | null;
 }
+
+export interface PaymentDriverDto {
+  driverId: number;
+  name: string;
+  amount: number;
+}
+
+export interface CreatePaymentDriverDto {
+  startDate: Date;
+  endDate: Date;
+  drivers: PaymentDriverDto[];
+}

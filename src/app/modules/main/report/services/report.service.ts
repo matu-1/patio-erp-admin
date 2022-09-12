@@ -13,6 +13,7 @@ import {
 import { HoursWorkedDriver } from '../interface/hours-worked-driver.interface';
 import { OrderReceived } from '../interface/order-received.interface';
 import {
+  CreatePaymentDriverDto,
   GetPaymentDetailDto,
   PaymentDetail,
 } from '../interface/payment-detail.interface';
@@ -55,6 +56,13 @@ export class ReportService {
         params,
         ...PATIO_STORE_CONFIG_HTTP,
       }
+    );
+  }
+
+  generatePayments(dto: CreatePaymentDriverDto) {
+    return this.http.post<Response<boolean>>(
+      API.PAYMENT_DRIVER.GENERATE_PAYMENTS,
+      dto
     );
   }
 }

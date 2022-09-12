@@ -41,4 +41,8 @@ export const API = {
   MERCHANT: {
     GET_MERCHANTS: `${PATIO_STORE_API_URL}/merchants`,
   },
+  PAYMENT_DRIVER: {
+    GET_ALL: `${API_URL}/payment-driver`,
+    GENERATE_PAYMENTS: `${API_URL}/payment-driver`,
+  },
 };

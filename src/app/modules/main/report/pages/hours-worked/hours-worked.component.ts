@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { buildform } from 'src/app/components/text-field/text-field.util';
-import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest } from 'src/app/utils/handle-request';
@@ -23,10 +20,7 @@ export class HoursWorkedComponent implements OnInit {
   hoursWorkedColumns = hoursWorkedColumns;
   hoursWorkedDrivers?: HoursWorkedDriver[];
 
-  constructor(
-    private reportService: ReportService,
-    private dialog: MatDialog
-  ) {}
+  constructor(private reportService: ReportService) {}
 
   ngOnInit(): void {
     this.getHoursWorkedDriver();
@@ -49,23 +43,5 @@ export class HoursWorkedComponent implements OnInit {
       parseByColumns(this.hoursWorkedDrivers!, hoursWorkedColumns),
       'Hours worked drivers'
     );
-  }
-
-  openGenerateConfirmDlg() {
-    const dialogRef = this.dialog.open(ConfirmDialog, {
-      ...DIALOG_CONFIG_XS,
-      data: {
-        title: 'Confirmar',
-        message: '¿Esta seguro de generar los pagos?',
-      },
-    });
-    dialogRef.afterClosed().subscribe((isOk) => {
-      if (isOk) this.generatePaymentDrivers();
-    });
-  }
-
-  generatePaymentDrivers() {
-    //TODO: add service
-    alert('Ok');
   }
 }

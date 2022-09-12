@@ -45,4 +45,15 @@ export const PAGE_ROUTE = {
       return `/${this.ROOT}/${this.ORDERS_RECEIVED_ROOT}`;
     },
   },
+  PAYMENT_DRIVER: {
+    ROOT: 'payment-driver',
+    LIST_ROOT: '',
+    CREATE_ROOT: 'create',
+    get LIST() {
+      return `/${this.ROOT}/${this.LIST_ROOT}`;
+    },
+    get CREATE() {
+      return `/${this.ROOT}/${this.CREATE_ROOT}`;
+    },
+  },
 };

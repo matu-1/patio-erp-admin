@@ -1,0 +1,13 @@
+<app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
+<app-title-bar [title]="title"></app-title-bar>
+<app-data-table
+  [rows]="paymentsDriver"
+  [columns]="paymentsDriverColumns"
+  (refresh)="getPaymentsDriver()"
+>
+  <ng-template customColumn="actions">
+    <button mat-icon-button matTooltip="Pagar">
+      <mat-icon class="action-icon">payment</mat-icon>
+    </button>
+  </ng-template>
+</app-data-table>
