@@ -6,15 +6,20 @@ import { ListComponent } from './pages/list/list.component';
 import { MaterialModule } from '../../material/material.module';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { DirectivesModule } from 'src/app/directives/directives.module';
+import { PayDialog } from './components/pay/pay.dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
-  declarations: [ListComponent],
+  declarations: [ListComponent, PayDialog],
   imports: [
     CommonModule,
     PaymentDriverRoutingModule,
     MaterialModule,
     ComponentsModule,
     DirectivesModule,
+    ReactiveFormsModule,
+    FlexLayoutModule,
   ],
 })
 export class PaymentDriverModule {}

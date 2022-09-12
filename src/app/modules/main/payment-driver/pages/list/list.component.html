@@ -5,8 +5,8 @@
   [columns]="paymentsDriverColumns"
   (refresh)="getPaymentsDriver()"
 >
-  <ng-template customColumn="actions">
-    <button mat-icon-button matTooltip="Pagar">
+  <ng-template customColumn="actions" let-value="value">
+    <button mat-icon-button matTooltip="Pagar" (click)="openPaymentDlg(value)">
       <mat-icon class="action-icon">payment</mat-icon>
     </button>
   </ng-template>

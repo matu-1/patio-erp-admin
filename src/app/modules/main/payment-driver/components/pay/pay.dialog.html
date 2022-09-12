@@ -1,0 +1,20 @@
+<form [formGroup]="form" markAllSubmit (validSubmit)="save()">
+  <h2>Pagar</h2>
+  <mat-dialog-content>
+    <div class="of-h">
+      <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">
+        <app-text-field
+          fxFlex.xs="100%"
+          fxFlex="50%"
+          *ngFor="let value of paySchema"
+          [form]="form"
+          [textFieldValue]="value"
+        ></app-text-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button cdkFocusInitial type="submit">Aceptar</button>
+  </mat-dialog-actions>
+</form>
