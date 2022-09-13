@@ -35,6 +35,7 @@ export class OrdersReceivedComponent implements OnInit {
   }
 
   async getOrdersReveived() {
+    this.ordersReceived = undefined;
     const { start, end, paymentModeId } = this.form.value;
     const res = await handleRequest(() =>
       this.reportService.getOrdersReceivedDriver(

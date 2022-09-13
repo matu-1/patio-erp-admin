@@ -13,3 +13,8 @@ export interface PaymentDriver {
   startDate: Date;
   endDate: Date;
 }
+
+export interface PayDriverDto {
+  amount: number;
+  paymentMethod: number;
+}

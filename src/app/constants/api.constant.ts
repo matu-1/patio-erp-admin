@@ -44,5 +44,6 @@ export const API = {
   PAYMENT_DRIVER: {
     GET_ALL: `${API_URL}/payment-driver`,
     GENERATE_PAYMENTS: `${API_URL}/payment-driver`,
+    PAY: `${API_URL}/payment-driver/pay/:id`,
   },
 };

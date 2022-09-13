@@ -27,6 +27,7 @@ export class HoursWorkedComponent implements OnInit {
   }
 
   async getHoursWorkedDriver() {
+    this.hoursWorkedDrivers = undefined;
     const { start, end } = this.form.value;
     const res = await handleRequest(() =>
       this.reportService.getHoursWorkedDrives(start, DateUtils.getMaxHour(end))

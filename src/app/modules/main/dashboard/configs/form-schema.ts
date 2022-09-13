@@ -24,7 +24,7 @@ export const averageFilter: TextFieldSchema = [
   {
     name: 'end',
     label: 'Fecha Final',
-    value: DateUtils.getMinHour(),
+    value: DateUtils.getMaxHour(),
     fieldType: TextFieldType.DatePicker,
     validators: [
       {

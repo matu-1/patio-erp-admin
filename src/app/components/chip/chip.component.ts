@@ -8,7 +8,7 @@ import { ChipVariant } from './chip.interface';
 })
 export class ChipComponent {
   @Input() variant: ChipVariant = 'default';
-  @Input() class?: string;
+  @Input() class?: string = '';
 
   get getClass() {
     switch (this.variant) {
