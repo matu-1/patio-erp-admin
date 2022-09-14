@@ -25,7 +25,7 @@ export const MENU: MenuItem[] = [
       {
         label: 'Clientes',
         icon: 'remove',
-        route: PAGE_ROUTE.HOME,
+        route: PAGE_ROUTE.CLIENT.LIST,
       },
     ],
   },

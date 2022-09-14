@@ -56,4 +56,11 @@ export const PAGE_ROUTE = {
       return `/${this.ROOT}/${this.CREATE_ROOT}`;
     },
   },
+  CLIENT: {
+    ROOT: 'client',
+    LIST_ROOT: '',
+    get LIST() {
+      return `/${this.ROOT}/${this.LIST_ROOT}`;
+    },
+  },
 };

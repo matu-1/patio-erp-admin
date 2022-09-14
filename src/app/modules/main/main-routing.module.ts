@@ -32,6 +32,11 @@ const routes: Routes = [
           ),
       },
       {
+        path: PAGE_ROUTE.CLIENT.ROOT,
+        loadChildren: () =>
+          import('./client/client.module').then((m) => m.ClientModule),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',
