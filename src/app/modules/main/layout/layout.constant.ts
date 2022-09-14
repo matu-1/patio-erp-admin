@@ -55,24 +55,36 @@ export const MENU: MenuItem[] = [
     icon: 'flag',
     items: [
       {
-        label: 'Detalle Pago',
-        icon: 'remove',
-        route: PAGE_ROUTE.REPORT.PAYMENT_DETAIL,
+        label: 'Financieros',
+        icon: 'category',
+        items: [
+          {
+            label: 'Detalle Pago',
+            icon: 'remove',
+            route: PAGE_ROUTE.REPORT.PAYMENT_DETAIL,
+          },
+        ],
       },
       {
-        label: 'Detalle Delivery',
-        icon: 'remove',
-        route: PAGE_ROUTE.REPORT.DELIVERY_DETAIL,
-      },
-      {
-        label: 'Horas Trabajadas',
-        icon: 'remove',
-        route: PAGE_ROUTE.REPORT.HOURS_WORKED,
-      },
-      {
-        label: 'Ordenes Recibidas',
-        icon: 'remove',
-        route: PAGE_ROUTE.REPORT.ORDERS_RECEIVED,
+        label: 'Logistico',
+        icon: 'motorcycle',
+        items: [
+          {
+            label: 'Detalle Delivery',
+            icon: 'remove',
+            route: PAGE_ROUTE.REPORT.DELIVERY_DETAIL,
+          },
+          {
+            label: 'Horas Trabajadas',
+            icon: 'remove',
+            route: PAGE_ROUTE.REPORT.HOURS_WORKED,
+          },
+          {
+            label: 'Ordenes Recibidas',
+            icon: 'remove',
+            route: PAGE_ROUTE.REPORT.ORDERS_RECEIVED,
+          },
+        ],
       },
     ],
   },
