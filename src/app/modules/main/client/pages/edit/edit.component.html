@@ -1,0 +1,22 @@
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
+<app-title-bar [title]="breadcrumbs[1].title">
+  <button mat-raised-button color="accent" (click)="goBack()">Volver</button>
+</app-title-bar>
+<app-simple-card class="mb-3">
+  <form
+    [formGroup]="form"
+    markAllSubmit
+    (validSubmit)="save()"
+    fxLayout="row wrap"
+    fxLayoutGap="16px grid"
+  >
+    <app-text-field
+      *ngFor="let value of clientEditSchema"
+      [textFieldValue]="value"
+      [form]="form"
+      [fxFlex.xs]="value.xs"
+      [fxFlex.sm]="value.sm"
+      [fxFlex]="value.df"
+    ></app-text-field>
+  </form>
+</app-simple-card>

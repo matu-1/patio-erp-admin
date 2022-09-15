@@ -46,4 +46,9 @@ export const API = {
     GENERATE_PAYMENTS: `${API_URL}/payment-driver`,
     PAY: `${API_URL}/payment-driver/pay/:id`,
   },
+  CLIENT: {
+    GET_PAGINATED: `${API_URL}/client/paginated`,
+    GET_BY_ID: `${API_URL}/client/:id`,
+    UPDATE: `${API_URL}/client/:id`,
+  },
 };
