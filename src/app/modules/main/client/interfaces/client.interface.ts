@@ -26,3 +26,9 @@ export interface Client {
   banco: null | string;
   nro_cuenta: null | string;
 }
+
+export interface CreateClientDto
+  extends Omit<
+    Client,
+    'codigo_referido' | 'contacto_verificado' | 'estado' | 'id'
+  > {}

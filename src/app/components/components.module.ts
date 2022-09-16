@@ -19,6 +19,7 @@ import { AlertComponent } from './alert/alert.component';
 import { LoadingComponent } from './loading/loading.component';
 import { CenterComponent } from './center/center.component';
 import { ConfirmDialog } from './confirm/confirm.dialog';
+import { ButtonBarComponent } from './button-bar/button-bar.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ConfirmDialog } from './confirm/confirm.dialog';
     LoadingComponent,
     CenterComponent,
     ConfirmDialog,
+    ButtonBarComponent,
   ],
   imports: [
     CommonModule,
@@ -60,6 +62,7 @@ import { ConfirmDialog } from './confirm/confirm.dialog';
     LoadingComponent,
     CenterComponent,
     ConfirmDialog,
+    ButtonBarComponent
   ],
 })
 export class ComponentsModule {}

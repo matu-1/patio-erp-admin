@@ -49,6 +49,7 @@ export const API = {
   CLIENT: {
     GET_PAGINATED: `${API_URL}/client/paginated`,
     GET_BY_ID: `${API_URL}/client/:id`,
+    CREATE: `${API_URL}/client`,
     UPDATE: `${API_URL}/client/:id`,
   },
 };

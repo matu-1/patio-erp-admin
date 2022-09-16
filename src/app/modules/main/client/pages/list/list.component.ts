@@ -74,6 +74,10 @@ export class ListComponent implements OnInit {
     this.router.navigateByUrl(routeParams(PAGE_ROUTE.CLIENT.EDIT, { id }));
   }
 
+  goCreate(){
+    this.router.navigateByUrl(PAGE_ROUTE.CLIENT.CREATE);
+  }
+
   activate(client: Client) {}
 
   unlock(client: Client) {}

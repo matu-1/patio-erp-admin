@@ -59,12 +59,16 @@ export const PAGE_ROUTE = {
   CLIENT: {
     ROOT: 'client',
     LIST_ROOT: '',
+    CREATE_ROOT: 'create',
     EDIT_ROOT: 'edit/:id',
     get LIST() {
       return `/${this.ROOT}/${this.LIST_ROOT}`;
     },
     get EDIT() {
       return `/${this.ROOT}/${this.EDIT_ROOT}`;
+    },
+    get CREATE() {
+      return `/${this.ROOT}/${this.CREATE_ROOT}`;
     },
   },
 };

@@ -1,0 +1,13 @@
+:host ::ng-deep {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  & > * {
+    margin-right: 0.5rem !important;
+    &:last-child {
+      margin-right: 0 !important;
+    }
+  }
+}

@@ -53,7 +53,7 @@ export class ReportService {
     return this.http.get<Response<OrderReceived[]>>(
       API.REPORT.GET_ORDERS_RECEIVED,
       {
-        params,
+        params: params as any,
         ...PATIO_STORE_CONFIG_HTTP,
       }
     );

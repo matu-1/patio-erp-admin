@@ -8,11 +8,13 @@ import { DirectivesModule } from 'src/app/directives/directives.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditComponent } from './pages/edit/edit.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CreateComponent } from './pages/create/create.component';
 
 @NgModule({
   declarations: [
     ListComponent,
-    EditComponent
+    EditComponent,
+    CreateComponent
   ],
   imports: [
     CommonModule,

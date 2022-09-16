@@ -117,3 +117,7 @@ button:not(.mat-button-disabled) .action-icon {
   color: rgba(0, 0, 0, 0.54);
   font-size: 1.35rem;
 }
+.search-input {
+  max-width: 350px !important;
+  width: 80% !important;
+}

@@ -1,10 +1,12 @@
 <app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
 <app-title-bar [title]="title">
+  <button mat-button (click)="goCreate()">Crear</button>
   <button mat-button (click)="download()">Exportar</button>
 </app-title-bar>
 <app-simple-card class="mb-3">
   <form [formGroup]="form" markAllSubmit (validSubmit)="filter()">
     <app-text-field
+      class="search-input"
       *ngFor="let value of clientFilterSchema"
       [form]="form"
       [textFieldValue]="value"
@@ -16,6 +18,7 @@
   [showPagination]="false"
   [rows]="clients"
   [columns]="clientColumns"
+  (refresh)="filter()"
 >
   <ng-template customColumn="nombre" let-value="value">
     {{ value.nombre }}

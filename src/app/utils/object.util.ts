@@ -2,7 +2,7 @@ export abstract class ObjectUtils {
   /**
    * Clear values: null, undefined, '' and empty array
    */
-  static clear(obj: Record<string, any>) {
+  static clear<T extends Record<string, any> = any>(obj: T) {
     const newObj = { ...obj };
     Object.keys(newObj).forEach((key) => {
       if (

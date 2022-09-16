@@ -1,10 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Breadcrumbs } from 'src/app/components/breadcrumbs/breadcrumbs.interface';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
-import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
+import { handleRequestPg } from 'src/app/utils/handle-request';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import {
   clientEditRep2Schema,
@@ -14,13 +13,13 @@ import {
 import { ClientService } from '../../services/client.service';
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
+  selector: 'app-create',
+  templateUrl: './create.component.html',
 })
-export class EditComponent implements OnInit {
+export class CreateComponent implements OnInit {
   breadcrumbs: Breadcrumbs = [
-    { path: PAGE_ROUTE.CLIENT.LIST, title: 'Clientes' },
-    { path: '', title: 'Editar' },
+    { title: 'Clientes', path: PAGE_ROUTE.CLIENT.LIST },
+    { title: 'Crear', path: '' },
   ];
   clientEditSchema = clientEditSchema;
   clientEditRep2Schema = clientEditRep2Schema;
@@ -32,39 +31,20 @@ export class EditComponent implements OnInit {
   ]);
 
   constructor(
-    private location: Location,
     private clientService: ClientService,
-    private activatedRoute: ActivatedRoute
+    private location: Location
   ) {}
 
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe(({ id }) => this.getClient(id));
-  }
-
-  async getClient(id: number) {
-    const res = await handleRequest(() => this.clientService.getById(id));
-    if (res)
-      this.form.patchValue({
-        ...res.data,
-        fecha_inicio: res.data.fecha_inicio
-          ? new Date(res.data.fecha_inicio + ' ')
-          : null,
-      });
-  }
+  ngOnInit(): void {}
 
   goBack() {
     this.location.back();
   }
 
-  get isLoading() {
-    return this.clientService.isLoading;
-  }
-
   async save() {
     const value = ObjectUtils.clear(this.form.value);
-    const { id } = this.activatedRoute.snapshot.params;
     const res = await handleRequestPg(
-      () => this.clientService.update(id, value),
+      () => this.clientService.create(value),
       true
     );
     if (res) this.goBack();
