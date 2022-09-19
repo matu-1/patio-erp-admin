@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export type ConfirmData = {
-  title: string;
+  title?: string;
   message: string;
 };
 
@@ -11,5 +11,7 @@ export type ConfirmData = {
   templateUrl: './confirm.dialog.html',
 })
 export class ConfirmDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ConfirmData) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ConfirmData) {
+    data.title = data.title ?? 'Confirmar';
+  }
 }

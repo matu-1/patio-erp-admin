@@ -5,7 +5,11 @@ import { API } from 'src/app/constants/api.constant';
 import { PaginationDto } from 'src/app/utils/pagination.dto';
 import { Response, ResponsePagination } from 'src/app/utils/response';
 import { routeParams } from 'src/app/utils/route-params';
-import { Client, CreateClientDto } from '../interfaces/client.interface';
+import {
+  ChangeStatusClientDto,
+  Client,
+  CreateClientDto,
+} from '../interfaces/client.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +42,13 @@ export class ClientService {
   update(id: number, dto: Partial<Client>) {
     return this.http.put<Response<Client>>(
       routeParams(API.CLIENT.UPDATE, { id }),
+      dto
+    );
+  }
+
+  changeStatus(id: number, dto: ChangeStatusClientDto) {
+    return this.http.put<Response<Client>>(
+      routeParams(API.CLIENT.CHANGE_STATUS, { id }),
       dto
     );
   }

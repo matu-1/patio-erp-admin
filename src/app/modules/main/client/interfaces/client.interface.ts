@@ -32,3 +32,8 @@ export interface CreateClientDto
     Client,
     'codigo_referido' | 'contacto_verificado' | 'estado' | 'id'
   > {}
+
+  export interface ChangeStatusClientDto{
+    estado: string;
+    retirado: number;
+  }

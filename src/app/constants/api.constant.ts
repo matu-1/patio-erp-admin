@@ -51,5 +51,6 @@ export const API = {
     GET_BY_ID: `${API_URL}/client/:id`,
     CREATE: `${API_URL}/client`,
     UPDATE: `${API_URL}/client/:id`,
+    CHANGE_STATUS: `${API_URL}/client/change-status/:id`,
   },
 };
