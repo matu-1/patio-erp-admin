@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { buildform } from 'src/app/components/text-field/text-field.util';
+import { DIALOG_CONFIG_SM } from 'src/app/constants/dialog.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest } from 'src/app/utils/handle-request';
+import { DetailDialog } from '../../components/detail/detail.dialog';
 import { hoursWorkedFilterSchema } from '../../configs/form-schema';
 import { hoursWorkedColumns } from '../../configs/table-columns';
 import { HoursWorkedDriver } from '../../interface/hours-worked-driver.interface';
@@ -12,7 +15,6 @@ import { ReportService } from '../../services/report.service';
 @Component({
   selector: 'app-hours-worked',
   templateUrl: './hours-worked.component.html',
-  styleUrls: ['./hours-worked.component.scss'],
 })
 export class HoursWorkedComponent implements OnInit {
   hoursWorkedFilterSchema = hoursWorkedFilterSchema;
@@ -20,7 +22,10 @@ export class HoursWorkedComponent implements OnInit {
   hoursWorkedColumns = hoursWorkedColumns;
   hoursWorkedDrivers?: HoursWorkedDriver[];
 
-  constructor(private reportService: ReportService) {}
+  constructor(
+    private reportService: ReportService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getHoursWorkedDriver();
@@ -44,5 +49,12 @@ export class HoursWorkedComponent implements OnInit {
       parseByColumns(this.hoursWorkedDrivers!, hoursWorkedColumns),
       'Hours worked drivers'
     );
+  }
+
+  showDetails(value: HoursWorkedDriver) {
+    this.dialog.open(DetailDialog, {
+      ...DIALOG_CONFIG_SM,
+      data: value,
+    });
   }
 }

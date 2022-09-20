@@ -10,9 +10,10 @@ import { DirectivesModule } from 'src/app/directives/directives.module';
 import { DeliveryDetailComponent } from './pages/delivery-detail/delivery-detail.component';
 import { HoursWorkedComponent } from './pages/hours-worked/hours-worked.component';
 import { OrdersReceivedComponent } from './pages/orders-received/orders-received.component';
+import { DetailDialog } from './components/detail/detail.dialog';
 
 @NgModule({
-  declarations: [PaymentDetailComponent, DeliveryDetailComponent, HoursWorkedComponent, OrdersReceivedComponent],
+  declarations: [PaymentDetailComponent, DeliveryDetailComponent, HoursWorkedComponent, OrdersReceivedComponent, DetailDialog],
   imports: [
     CommonModule,
     ReportRoutingModule,

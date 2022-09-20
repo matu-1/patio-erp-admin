@@ -2,7 +2,11 @@ import { formatDate, formatNumber } from '@angular/common';
 import { TableColumns } from 'src/app/components/data-table/data-table.interface';
 import { DateUtils } from 'src/app/utils/date.util';
 import { DeliveryDetail } from '../interface/delivery-detail.interface';
-import { HoursWorkedDriver } from '../interface/hours-worked-driver.interface';
+import {
+  HoursWorkedDriver,
+  OrderDto,
+  TimingDto,
+} from '../interface/hours-worked-driver.interface';
 import { OrderReceived } from '../interface/order-received.interface';
 import { PaymentDetail } from '../interface/payment-detail.interface';
 
@@ -150,6 +154,16 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     headerName: 'Total',
     valueFormatter: ({ total }) => formatNumber(total, 'es'),
   },
+  {
+    field: 'average',
+    headerName: 'Promedio',
+    valueFormatter: ({ quantity, hoursWorked }) =>
+      formatNumber(quantity / hoursWorked, 'es', '.0-2'),
+  },
+  {
+    field: 'actions',
+    headerName: 'Acciones',
+  },
 ];
 
 export const ordersReceivedColumns: TableColumns<OrderReceived> = [
@@ -189,5 +203,69 @@ export const ordersReceivedColumns: TableColumns<OrderReceived> = [
     headerName: 'Money To Return',
     valueFormatter: ({ moneyToReturn }) =>
       formatNumber(moneyToReturn, 'es', '.2-2'),
+  },
+];
+
+export const ordersColumns: TableColumns<OrderDto> = [
+  {
+    field: 'id',
+    headerName: 'Id',
+  },
+  {
+    field: 'client',
+    headerName: 'Cliente',
+  },
+  {
+    field: 'to_address',
+    headerName: 'Direccion',
+  },
+  {
+    field: 'tip',
+    headerName: 'Propina',
+    valueFormatter: ({ tip }) => formatNumber(tip, 'es', '.2-2'),
+  },
+];
+export const timingsColumns: TableColumns<TimingDto> = [
+  {
+    field: 'timing_id',
+    headerName: 'id',
+  },
+  {
+    field: 'arrived_at',
+    headerName: 'Llegada',
+    valueFormatter: ({ arrived_at }) =>
+      formatDate(arrived_at, 'dd/MM/yyyy HH:mm:ss', 'es'),
+  },
+  {
+    field: 'deserted_at',
+    headerName: 'Abandono',
+    valueFormatter: ({ deserted_at }) =>
+      deserted_at
+        ? formatDate(deserted_at, 'dd/MM/yyyy HH:mm:ss', 'es')
+        : '---',
+  },
+  {
+    field: 'end_timing',
+    headerName: 'Hora Salida',
+    valueFormatter: ({ end_timing }) =>
+      formatDate(end_timing, 'dd/MM/yyyy HH:mm:ss', 'es'),
+  },
+  {
+    field: 'lastOrderAt',
+    headerName: 'Ultima Order',
+    valueFormatter: ({ lastOrderAt }) =>
+      formatDate(lastOrderAt, 'dd/MM/yyyy HH:mm:ss', 'es'),
+  },
+  {
+    field: 'endFinal',
+    headerName: 'Fecha Final',
+    valueFormatter: ({ endFinal }) =>
+      formatDate(endFinal, 'dd/MM/yyyy HH:mm:ss', 'es'),
+  },
+  {
+    field: 'hours',
+    headerName: 'Horas',
+    valueFormatter: ({ arrived_at, endFinal }) =>
+      DateUtils.formatToTimer(DateUtils.diff(endFinal, arrived_at, 'h')),
   },
 ];

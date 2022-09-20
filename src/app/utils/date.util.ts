@@ -27,4 +27,20 @@ export abstract class DateUtils {
     const seconds = (minutes * 60) % 60;
     return `${Math.floor(hour)}:${Math.floor(minutes)}:${Math.round(seconds)}`;
   }
+
+  static diff(
+    end: Date | string,
+    start: Date | string,
+    type: 's' | 'm' | 'h' = 's'
+  ) {
+    const endDate = new Date(end).getTime();
+    const startDate = new Date(start).getTime();
+    const time = endDate - startDate;
+    const res = {
+      s: time / 1000,
+      m: time / (1000 * 60),
+      h: time / (1000 * 60 * 60),
+    };
+    return res[type];
+  }
 }

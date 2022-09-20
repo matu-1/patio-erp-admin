@@ -1,0 +1,26 @@
+<mat-dialog-content>
+  <div class="driver">
+    <h3>{{data.name}}</h3>
+    <span>{{data.id}}</span>
+  </div>
+  <hr />
+  <h3>Ordenes</h3>
+  <app-data-table
+    class="dt-unstyle mb-3"
+    [rows]="data.orders"
+    [columns]="ordersColumns"
+    [showSearcher]="false"
+    [showPagination]="false"
+  ></app-data-table>
+  <h3>Horarios</h3>
+  <app-data-table
+    class="dt-unstyle"
+    [rows]="data.timings"
+    [columns]="timingsColumns"
+    [showSearcher]="false"
+    [showPagination]="false"
+  ></app-data-table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

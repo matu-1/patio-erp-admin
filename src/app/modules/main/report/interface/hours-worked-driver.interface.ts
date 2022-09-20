@@ -14,4 +14,25 @@ export interface HoursWorkedDriver {
   total: number;
   totalEarning: number;
   quantity: number;
+  orders: OrderDto[];
+  timings: TimingDto[];
+}
+
+export interface OrderDto {
+  id: number;
+  client: string;
+  tip: number;
+  createdAt: Date;
+  updatedAt: Date;
+  to_address: string;
+}
+
+export interface TimingDto {
+  start_timing: Date;
+  arrived_at: Date;
+  deserted_at?: Date;
+  end_timing: Date;
+  lastOrderAt: Date;
+  endFinal: Date;
+  timing_id: number;
 }
