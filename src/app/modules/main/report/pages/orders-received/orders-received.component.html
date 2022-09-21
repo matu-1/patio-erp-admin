@@ -4,12 +4,12 @@
     Exportar
   </button>
   <button
-  mat-button
-  (click)="openGenerateConfirmDlg()"
-  [disabled]="!ordersReceived"
->
-  Generar Pago
-</button>
+    mat-button
+    (click)="openGenerateConfirmDlg()"
+    [disabled]="!ordersReceived"
+  >
+    Generar Pago
+  </button>
 </app-title-bar>
 <app-simple-card class="mb-3">
   <form
@@ -36,4 +36,5 @@
   [rows]="ordersReceived"
   [columns]="ordersReceivedColumns"
   (refresh)="filter()"
+  [filter]="driver"
 ></app-data-table>

@@ -115,10 +115,16 @@ export const hoursWorkedFilterSchema: TextFieldSchema = [
     ],
     df: '20%',
   },
+  {
+    name: 'cityId',
+    label: 'Ciudad',
+    fieldType: TextFieldType.Dropdown,
+    df: '30%'
+  }
 ];
 
 export const ordersReceivedFilterSchema: TextFieldSchema = [
-  ...hoursWorkedFilterSchema,
+  ...hoursWorkedFilterSchema.slice(0, 2),
   {
     name: 'paymentModeId',
     label: 'Método Pago',

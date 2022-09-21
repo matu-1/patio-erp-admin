@@ -44,6 +44,11 @@ export const MENU: MenuItem[] = [
         route: PAGE_ROUTE.HOME,
       },
       {
+        label: 'Cobros Driver',
+        icon: 'remove',
+        route: PAGE_ROUTE.COLLECT_DRIVER.LIST,
+      },
+      {
         label: 'Pagos Driver',
         icon: 'remove',
         route: PAGE_ROUTE.PAYMENT_DRIVER.LIST,

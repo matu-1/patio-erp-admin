@@ -37,5 +37,5 @@ export interface PaymentDriverDto {
 export interface CreatePaymentDriverDto {
   startDate: Date;
   endDate: Date;
-  drivers: PaymentDriverDto[];
+  type: number;
 }

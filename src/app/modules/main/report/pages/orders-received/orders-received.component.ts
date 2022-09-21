@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
@@ -24,14 +25,26 @@ export class OrdersReceivedComponent implements OnInit {
   form = buildform(ordersReceivedFilterSchema);
   ordersReceivedColumns = ordersReceivedColumns;
   ordersReceived?: OrderReceived[];
+  driver = '';
 
   constructor(
     private reportService: ReportService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.parseForm();
     this.getOrdersReveived();
+  }
+
+  parseForm() {
+    const query = this.activatedRoute.snapshot.queryParams;
+    this.driver = query.driver ?? '';
+    const value = this.form.value;
+    const start = query.start ? new Date(query.start) : value.start;
+    const end = query.end ? new Date(query.end) : value.end;
+    this.form.patchValue({ start, end });
   }
 
   async getOrdersReveived() {
@@ -70,18 +83,10 @@ export class OrdersReceivedComponent implements OnInit {
   }
 
   async generatePaymentDrivers() {
-    const dataByDriver = ArrayUtils.group(this.ordersReceived!, 'driver_id');
-    const parseDrivers = Object.values(dataByDriver).map((values) => {
-      return {
-        driverId: values[0].driver_id,
-        name: values[0].driver,
-        amount: values.reduce((acc, cur) => acc + cur.moneyToReturn, 0),
-      };
-    });
     const body: CreatePaymentDriverDto = {
       startDate: this.form.value.start,
-      endDate: this.form.value.end,
-      drivers: parseDrivers,
+      endDate: DateUtils.getMaxHour(this.form.value.end),
+      type: 0,
     };
     await handleRequestPg(
       () => this.reportService.generatePayments(body),

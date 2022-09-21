@@ -204,6 +204,12 @@ export const ordersReceivedColumns: TableColumns<OrderReceived> = [
     valueFormatter: ({ moneyToReturn }) =>
       formatNumber(moneyToReturn, 'es', '.2-2'),
   },
+  {
+    field: 'createdAt',
+    headerName: 'Creado el',
+    valueFormatter: ({ createdAt }) =>
+      formatDate(createdAt, 'dd/MM/yyyy HH:mm', 'es'),
+  },
 ];
 
 export const ordersColumns: TableColumns<OrderDto> = [
@@ -252,7 +258,7 @@ export const timingsColumns: TableColumns<TimingDto> = [
   },
   {
     field: 'lastOrderAt',
-    headerName: 'Ultima Order',
+    headerName: 'Ultima Orden',
     valueFormatter: ({ lastOrderAt }) =>
       formatDate(lastOrderAt, 'dd/MM/yyyy HH:mm:ss', 'es'),
   },

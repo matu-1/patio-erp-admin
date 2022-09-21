@@ -6,7 +6,7 @@
     Exportar
   </button>
 </app-title-bar>
-<app-simple-card class="mb-3">
+<app-simple-card class="mb-3" [isLoading]="isLoadingFilter">
   <form
     [formGroup]="form"
     markAllSubmit

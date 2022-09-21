@@ -15,10 +15,7 @@ export class PaymentDriverService {
   constructor(private http: HttpClient) {}
 
   getPaymentsDriver() {
-    return this.http.get<Response<PaymentDriver[]>>(
-      API.PAYMENT_DRIVER.GET_ALL,
-      { params: { type: 1 } }
-    );
+    return this.http.get<Response<PaymentDriver[]>>(API.PAYMENT_DRIVER.GET_ALL);
   }
 
   pay(id: number, dto: PayDriverDto) {

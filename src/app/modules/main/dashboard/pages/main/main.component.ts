@@ -30,8 +30,8 @@ export class MainComponent implements OnInit {
     const value = ObjectUtils.clear(this.form.value);
     const res = await handleRequest(() =>
       this.dashboardService.getAverageStatus({
-        end: DateUtils.getMaxHour(value.end),
         ...(value as any),
+        end: DateUtils.getMaxHour(value.end),
       })
     );
     if (res) this.averagesStatus = parseAverageStatus(res.data);

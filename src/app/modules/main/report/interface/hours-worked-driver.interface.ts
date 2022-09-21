@@ -36,3 +36,9 @@ export interface TimingDto {
   endFinal: Date;
   timing_id: number;
 }
+
+export interface HoursWorkedDto {
+  start: Date;
+  end: Date;
+  cityId?: number;
+}

@@ -37,6 +37,13 @@ const routes: Routes = [
           import('./client/client.module').then((m) => m.ClientModule),
       },
       {
+        path: PAGE_ROUTE.COLLECT_DRIVER.ROOT,
+        loadChildren: () =>
+          import('./collect-driver/collect-driver.module').then(
+            (m) => m.CollectDriverModule
+          ),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',

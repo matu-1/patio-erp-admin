@@ -56,6 +56,17 @@ export const PAGE_ROUTE = {
       return `/${this.ROOT}/${this.CREATE_ROOT}`;
     },
   },
+  COLLECT_DRIVER: {
+    ROOT: 'collet-driver',
+    LIST_ROOT: '',
+    CREATE_ROOT: 'create',
+    get LIST() {
+      return `/${this.ROOT}/${this.LIST_ROOT}`;
+    },
+    get CREATE() {
+      return `/${this.ROOT}/${this.CREATE_ROOT}`;
+    },
+  },
   CLIENT: {
     ROOT: 'client',
     LIST_ROOT: '',

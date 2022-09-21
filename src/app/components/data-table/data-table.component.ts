@@ -36,6 +36,7 @@ export class DataTableComponent implements AfterViewInit, OnInit {
   @Input() showPagination = true;
   @Input() class: string = '';
   @Input() showSearcher = true;
+  @Input() filter = '';
 
   get rows() {
     return this._rows;
@@ -43,7 +44,10 @@ export class DataTableComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.displayedColumns = this.columns.map((column) => column.field);
-    if (!this._rows) this.dataSource.data = Array(5).fill(0);
+    if (!this._rows) {
+      this.dataSource.data = Array(5).fill(0);
+      this.dataSource.filter = this.filter;
+    }
   }
 
   ngAfterViewInit() {

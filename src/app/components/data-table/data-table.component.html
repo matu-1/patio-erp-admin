@@ -9,6 +9,7 @@
         matInput
         (keyup)="applyFilter($event)"
         placeholder="Buscar..."
+        [value]="filter"
         #input
       />
       <mat-icon matPrefix>search</mat-icon>

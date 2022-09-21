@@ -6,11 +6,12 @@ import { skipToken } from 'src/app/interceptors/token.interceptor';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import { Response } from 'src/app/utils/response';
 import { environment } from 'src/environments/environment';
+import { City } from '../../dashboard/interfaces/city.interface';
 import {
   DeliveryDetail,
   GetDeliveryDetailDto,
 } from '../interface/delivery-detail.interface';
-import { HoursWorkedDriver } from '../interface/hours-worked-driver.interface';
+import { HoursWorkedDriver, HoursWorkedDto } from '../interface/hours-worked-driver.interface';
 import { OrderReceived } from '../interface/order-received.interface';
 import {
   CreatePaymentDriverDto,
@@ -38,11 +39,11 @@ export class ReportService {
     );
   }
 
-  getHoursWorkedDrives(start: Date, end: Date) {
+  getHoursWorkedDrives(dto: HoursWorkedDto) {
     return this.http.get<Response<HoursWorkedDriver[]>>(
       API.REPORT.GET_HOURS_WORKED_DRIVERS,
       {
-        params: { start, end } as any,
+        params: dto as any,
         ...PATIO_STORE_CONFIG_HTTP,
       }
     );
@@ -64,5 +65,9 @@ export class ReportService {
       API.PAYMENT_DRIVER.GENERATE_PAYMENTS,
       dto
     );
+  }
+
+  getCities() {
+    return this.http.get<Response<City[]>>(API.CITY.GET_CITIES);
   }
 }
