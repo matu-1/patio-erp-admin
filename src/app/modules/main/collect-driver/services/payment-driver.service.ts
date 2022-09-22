@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API } from 'src/app/constants/api.constant';
+import { PATIO_STORE_CONFIG_HTTP } from 'src/app/constants/http-header.constant';
 import { Response } from 'src/app/utils/response';
 import { routeParams } from 'src/app/utils/route-params';
 import {
@@ -22,6 +23,18 @@ export class PaymentDriverService {
     return this.http.put<Response<PaymentDriver>>(
       routeParams(API.PAYMENT_DRIVER.PAY, { id }),
       dto
+    );
+  }
+
+  blockDriver(id: number) {
+    return this.http.put<Response<any>>(
+      routeParams(API.DRIVER.CHANGE_STATUS, { id }),
+      {
+        status: 'disabled',
+      },
+      {
+        ...PATIO_STORE_CONFIG_HTTP,
+      }
     );
   }
 }

@@ -11,7 +11,7 @@ export type ConfirmData = {
   templateUrl: './confirm.dialog.html',
 })
 export class ConfirmDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ConfirmData) {
-    data.title = data.title ?? 'Confirmar';
+  constructor(@Inject(MAT_DIALOG_DATA) public data?: ConfirmData) {
+    if (data) data.title = data.title ?? 'Confirmar';
   }
 }

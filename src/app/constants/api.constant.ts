@@ -53,4 +53,7 @@ export const API = {
     UPDATE: `${API_URL}/client/:id`,
     CHANGE_STATUS: `${API_URL}/client/change-status/:id`,
   },
+  DRIVER: {
+    CHANGE_STATUS: `${PATIO_STORE_API_URL}/drivers/change-status/:id`
+  }
 };

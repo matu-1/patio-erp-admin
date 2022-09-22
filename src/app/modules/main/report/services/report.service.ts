@@ -2,16 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API } from 'src/app/constants/api.constant';
 import { PATIO_STORE_CONFIG_HTTP } from 'src/app/constants/http-header.constant';
-import { skipToken } from 'src/app/interceptors/token.interceptor';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import { Response } from 'src/app/utils/response';
-import { environment } from 'src/environments/environment';
 import { City } from '../../dashboard/interfaces/city.interface';
 import {
   DeliveryDetail,
   GetDeliveryDetailDto,
 } from '../interface/delivery-detail.interface';
-import { HoursWorkedDriver, HoursWorkedDto } from '../interface/hours-worked-driver.interface';
+import {
+  HoursWorkedDriver,
+  HoursWorkedDto,
+} from '../interface/hours-worked-driver.interface';
 import { OrderReceived } from '../interface/order-received.interface';
 import {
   CreatePaymentDriverDto,

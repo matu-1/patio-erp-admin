@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { DateUtils } from 'src/app/utils/date.util';
@@ -68,5 +69,25 @@ export class ListComponent implements OnInit {
         data.endDate + ' '
       ).toISOString()}&driver=${data.name}`
     );
+  }
+
+  async block(data: PaymentDriver) {
+    const res = await handleRequestPg(
+      () => this.paymentDriverService.blockDriver(data.driverId),
+      true
+    );
+    if (res) this.getPaymentsDriver();
+  }
+
+  openConfirmBlockDlg(data: PaymentDriver) {
+    const dialogRef = this.dialog.open(ConfirmDialog, {
+      ...DIALOG_CONFIG_XS,
+      data: {
+        message: `Esta seguro de bloquear a "${data.name}"?`,
+      },
+    });
+    dialogRef.afterClosed().subscribe((ok) => {
+      if (ok) this.block(data);
+    });
   }
 }
