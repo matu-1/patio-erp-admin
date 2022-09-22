@@ -24,7 +24,10 @@ export class DataTableComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource<any>();
   @Input() set rows(value: any) {
     this._rows = value;
-    if (value) this.dataSource.data = value;
+    if (value) {
+      this.dataSource.data = value;
+      this.dataSource.filter = this.filter;
+    }
   }
   @Input() columns!: TableColumns;
   @Output() refresh = new EventEmitter<void>();
@@ -44,10 +47,7 @@ export class DataTableComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.displayedColumns = this.columns.map((column) => column.field);
-    if (!this._rows) {
-      this.dataSource.data = Array(5).fill(0);
-      this.dataSource.filter = this.filter;
-    }
+    if (!this._rows) this.dataSource.data = Array(5).fill(0);
   }
 
   ngAfterViewInit() {

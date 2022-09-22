@@ -30,6 +30,7 @@
   [columns]="hoursWorkedColumns"
   [rows]="hoursWorkedDrivers"
   (refresh)="filter()"
+  [filter]="driver"
 >
   <ng-template customColumn="actions" let-value="value">
     <button mat-button (click)="showDetails(value)">Ver detalle</button>

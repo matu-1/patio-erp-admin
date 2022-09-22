@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
+import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
+import { DateUtils } from 'src/app/utils/date.util';
 import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 import { PayDialog } from '../../components/pay/pay.dialog';
 import { paymentsDriverColumns } from '../../configs/table-columns';
@@ -23,6 +26,7 @@ export class ListComponent implements OnInit {
 
   constructor(
     private paymentDriverService: PaymentDriverService,
+    private router: Router,
     private dialog: MatDialog
   ) {}
 
@@ -53,5 +57,15 @@ export class ListComponent implements OnInit {
       this.paymentDriverService.pay(id, data)
     );
     if (res) this.getPaymentsDriver();
+  }
+
+  goDetail(data: PaymentDriver) {
+    this.router.navigateByUrl(
+      `${PAGE_ROUTE.REPORT.HOURS_WORKED}?start=${DateUtils.getMinHour(
+        data.startDate + ' '
+      ).toISOString()}&end=${DateUtils.getMaxHour(
+        data.endDate + ' '
+      ).toISOString()}&driver=${data.name}`
+    );
   }
 }

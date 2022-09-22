@@ -17,7 +17,6 @@ import { ReportService } from '../../services/report.service';
 @Component({
   selector: 'app-orders-received',
   templateUrl: './orders-received.component.html',
-  styleUrls: ['./orders-received.component.scss'],
 })
 export class OrdersReceivedComponent implements OnInit {
   title = 'Ordenes Recibidas';
@@ -34,17 +33,18 @@ export class OrdersReceivedComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.parseForm();
+    this.parseFormFromQuery();
     this.getOrdersReveived();
   }
 
-  parseForm() {
+  parseFormFromQuery() {
     const query = this.activatedRoute.snapshot.queryParams;
-    this.driver = query.driver ?? '';
     const value = this.form.value;
+    this.driver = query.driver ?? '';
     const start = query.start ? new Date(query.start) : value.start;
     const end = query.end ? new Date(query.end) : value.end;
-    this.form.patchValue({ start, end });
+    const paymentModeId = query.start ? undefined : value.paymentModeId;
+    this.form.patchValue({ start, end, paymentModeId });
   }
 
   async getOrdersReveived() {

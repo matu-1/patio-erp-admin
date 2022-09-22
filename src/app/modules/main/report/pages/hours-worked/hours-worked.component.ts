@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DIALOG_CONFIG_SM } from 'src/app/constants/dialog.constant';
@@ -22,15 +23,27 @@ export class HoursWorkedComponent implements OnInit {
   form = buildform(hoursWorkedFilterSchema);
   hoursWorkedColumns = hoursWorkedColumns;
   hoursWorkedDrivers?: HoursWorkedDriver[];
+  driver = '';
 
   constructor(
     private reportService: ReportService,
+    private activatedRoute: ActivatedRoute,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
+    this.parseFormFromQuery();
     this.getHoursWorkedDriver();
     this.getCities();
+  }
+
+  parseFormFromQuery() {
+    const query = this.activatedRoute.snapshot.queryParams;
+    const value = this.form.value;
+    this.driver = query.driver ?? '';
+    const start = query.start ? new Date(query.start) : value.start;
+    const end = query.end ? new Date(query.end) : value.end;
+    this.form.patchValue({ start, end });
   }
 
   async getHoursWorkedDriver() {

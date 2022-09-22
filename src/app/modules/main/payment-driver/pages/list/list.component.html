@@ -6,9 +6,11 @@
   (refresh)="getPaymentsDriver()"
 >
   <ng-template customColumn="paymentMethod" let-value="value">
-    <app-chip variant="accent" *ngIf="value.paymentMethod != null; else noPaid">{{
-      paymentMethod[value.paymentMethod]
-    }}</app-chip>
+    <app-chip
+      variant="accent"
+      *ngIf="value.paymentMethod != null; else noPaid"
+      >{{ paymentMethod[value.paymentMethod] }}</app-chip
+    >
     <ng-template #noPaid>---</ng-template>
   </ng-template>
   <ng-template customColumn="actions" let-value="value">
@@ -19,6 +21,9 @@
       [disabled]="value.paidAt"
     >
       <mat-icon class="action-icon">payment</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Ver Detalle" (click)="goDetail(value)">
+      <mat-icon class="action-icon">info</mat-icon>
     </button>
   </ng-template>
 </app-data-table>
