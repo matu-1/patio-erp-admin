@@ -41,7 +41,7 @@ export const MENU: MenuItem[] = [
       {
         label: 'Pagos QR',
         icon: 'remove',
-        route: PAGE_ROUTE.HOME,
+        route: PAGE_ROUTE.PAYMENT_QR.LIST,
       },
       {
         label: 'Cobros Driver',

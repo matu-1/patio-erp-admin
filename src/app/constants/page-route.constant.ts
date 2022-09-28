@@ -82,4 +82,11 @@ export const PAGE_ROUTE = {
       return `/${this.ROOT}/${this.CREATE_ROOT}`;
     },
   },
+  PAYMENT_QR: {
+    ROOT: 'payment-qr',
+    LIST_ROOT: '',
+    get LIST() {
+      return `${this.ROOT}/${this.LIST_ROOT}`;
+    },
+  },
 };

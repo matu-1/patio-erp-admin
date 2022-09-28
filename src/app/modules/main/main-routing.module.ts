@@ -44,6 +44,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: PAGE_ROUTE.PAYMENT_QR.ROOT,
+        loadChildren: () =>
+          import('./payment-qr/payment-qr.module').then(
+            (m) => m.PaymentQrModule
+          ),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',
