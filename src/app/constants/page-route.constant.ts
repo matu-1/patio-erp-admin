@@ -22,6 +22,7 @@ export const PAGE_ROUTE = {
   PUBLIC: {
     ROOT: 'public',
     INVOICE_DETAIL_ROOT: 'invoice/:code',
+    ORDER_TRACKING_ROOT: 'order-tracking',
     get INVOICE_DETAIL() {
       return `/${this.ROOT}/${this.INVOICE_DETAIL_ROOT}`;
     },

@@ -1,0 +1,42 @@
+@import "theme-variables";
+
+.map {
+  width: 100%;
+  height: 100%;
+}
+.order-status-root {
+  position: absolute;
+  z-index: 3;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  .order-status {
+    position: relative;
+    width: 95%;
+    max-width: 1000px;
+    padding: 0 1.5rem;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    background-color: $background-card;
+    text-align: center;
+    box-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.2);
+    .status-text {
+      margin: 0;
+    }
+    .loading {
+      font-size: 20px;
+    }
+    mat-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+}
