@@ -6,12 +6,15 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Loader } from '@googlemaps/js-api-loader';
 import { handleRequest } from 'src/app/utils/handle-request';
 import { OrderDto } from '../../interfaces/order.interface';
 import { PublicService } from '../../services/public.service';
+import { MAP_STYLES } from './order-tracking.constants';
 
-const TIME = 3000;
+const TIME = 10000;
+const DRIVER_ICON = 'assets/images/icons/repartidor.png';
 
 @Component({
   selector: 'app-order-tracking',
@@ -27,30 +30,16 @@ export class OrderTrackingComponent
   });
   @ViewChild('map') mapDiv!: ElementRef<HTMLDivElement>;
   map?: google.maps.Map;
-  center: google.maps.LatLngLiteral = {
-    lat: 40.72662762338239,
-    lng: -73.9849855033782,
-  };
+  // center = {lat: 40.72662762338239,lng: -73.9849855033782,}; 1965
   order?: OrderDto;
   driverIntervalTimer?: NodeJS.Timer;
   orderIntervalTimer?: NodeJS.Timeout;
   previusPositionDriver!: google.maps.LatLngLiteral;
-  positions: google.maps.LatLngLiteral[] = [
-    { lat: 40.739258, lng: -73.999147 },
-    { lat: 40.740485, lng: -73.998321 },
-    { lat: 40.739282, lng: -73.99551 },
-    { lat: 40.741083, lng: -73.994233 },
-    { lat: 40.739693, lng: -73.991031 },
-    { lat: 40.74029, lng: -73.990567 },
-    { lat: 40.738933, lng: -73.987389 },
-    { lat: 40.737799, lng: -73.98825 },
-    { lat: 40.737193, lng: -73.988671 },
-    { lat: 40.737829, lng: -73.990178 },
-    { lat: 40.73713, lng: -73.990331 },
-    { lat: 40.736573, lng: -73.989065 },
-  ].reverse(); //40.736415, -73.998834
 
-  constructor(private publicService: PublicService) {}
+  constructor(
+    private publicService: PublicService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.orderIntervalTimer = setInterval(() => this.getOrder(), TIME);
@@ -66,37 +55,49 @@ export class OrderTrackingComponent
   }
 
   loadMap() {
+    const query = this.activatedRoute.snapshot.queryParams;
+    const lat = query.lat ? Number(query.lat) : 0;
+    const lng = query.lng ? Number(query.lng) : 0;
     this.loader.load().then(() => {
       this.map = new google.maps.Map(this.mapDiv.nativeElement, {
-        center: this.center,
+        center: { lat, lng },
         zoom: 15,
+        styles: MAP_STYLES.ULTRA_LIGHT_LABELS_MAP_STYLE,
       });
       this.loadMarkers();
     });
   }
 
+  get hasError() {
+    return this.publicService.hasError;
+  }
+
   async getOrder() {
     if (
-      this.order &&
-      (this.order.status == 'complete' || this.order.status == 'canceled')
+      (this.order &&
+        (this.order.status == 'complete' || this.order.status == 'canceled')) ||
+      this.hasError.getOrder
     )
       return clearInterval(this.orderIntervalTimer);
-    const res = await handleRequest(() => this.publicService.getOrder(1965));
+    const id = this.activatedRoute.snapshot.params.id;
+    const res = await handleRequest(() => this.publicService.getOrder(id));
     if (res) this.order = res.data;
   }
 
   async loadMarkers() {
     await this.getOrder();
     if (!this.order) return;
+    const latLngBounds = new google.maps.LatLngBounds();
     //merchant
     const merchantInfo = new google.maps.InfoWindow({
       content: `${this.order.merchant.name}`,
     });
+    const merchantPosition = {
+      lat: this.order.from_latitude,
+      lng: this.order.from_longitude,
+    };
     const merchant = new google.maps.Marker({
-      position: {
-        lat: this.order.from_latitude,
-        lng: this.order.from_longitude,
-      },
+      position: merchantPosition,
       map: this.map,
       icon: 'assets/images/icons/tiendas.png',
       title: 'dfdfs',
@@ -112,11 +113,12 @@ export class OrderTrackingComponent
     const clientInfo = new google.maps.InfoWindow({
       content: `${this.order.name_user} - ${this.order.phone_user}`,
     });
+    const clientPosition = {
+      lat: this.order.to_latitude,
+      lng: this.order.to_longitude,
+    };
     const client = new google.maps.Marker({
-      position: {
-        lat: this.order.to_latitude,
-        lng: this.order.to_longitude,
-      },
+      position: clientPosition,
       map: this.map,
       icon: 'assets/images/icons/casa.png',
     });
@@ -133,16 +135,14 @@ export class OrderTrackingComponent
         content: `${this.order.assignedDrivers[0].id} - ${this.order.assignedDrivers[0].name}`,
       });
       this.previusPositionDriver = {
-        // { lat: 40.737851, lng: -74.000209 },
-        lat: 40.737851,
-        lng: -74.000209,
+        lat: this.order.assignedDrivers[0].latitude,
+        lng: this.order.assignedDrivers[0].longitude,
       };
       const driver = new google.maps.Marker({
         position: this.previusPositionDriver,
         map: this.map,
-        icon: 'assets/images/icons/repartidor.png',
+        icon: DRIVER_ICON,
       });
-      console.log(driver);
       driver.addListener('click', () =>
         driverInfo.open({
           anchor: driver,
@@ -155,27 +155,35 @@ export class OrderTrackingComponent
           this.updatePositionDriver(this.order!.assignedDrivers![0].id, driver),
         TIME
       );
+      latLngBounds.extend(this.previusPositionDriver);
     }
+    //Limit by coordinates
+    latLngBounds.extend(clientPosition);
+    latLngBounds.extend(merchantPosition);
+    this.map?.fitBounds(latLngBounds);
   }
 
   async updatePositionDriver(id: number, marker: google.maps.Marker) {
     const res = await handleRequest(() => this.publicService.getDriver(id));
     if (res) {
-      const { lat, lng } = this.positions.pop()!;
+      const lat = Number(res.data.last_latitude);
+      const lng = Number(res.data.last_longitude);
       marker.setPosition({
         lat: lat,
         lng: lng,
       });
       const markerImg = document.querySelector<HTMLImageElement>(
-        'img[src="assets/images/icons/repartidor.png"]'
+        `img[src="${DRIVER_ICON}"]`
       );
-      console.log(markerImg);
-      markerImg!.style.transform = `rotate(${-this.angle(
+      const angle = -this.angle(
         this.previusPositionDriver.lng,
         this.previusPositionDriver.lat,
         lng,
         lat
-      )}deg)`; //rotateY(180deg)
+      );
+      markerImg!.style.transform = `rotate(${angle}deg) ${
+        Math.abs(angle) > 90 ? 'rotateX(180deg)' : ''
+      }`;
       this.previusPositionDriver = { lat, lng };
     }
   }
@@ -186,7 +194,6 @@ export class OrderTrackingComponent
     var theta = Math.atan2(dy, dx); // range (-PI, PI]
     theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
     //if (theta < 0) theta = 360 + theta; // range [0, 360)
-    console.log(theta);
     return theta;
   }
 }
