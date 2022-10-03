@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API } from 'src/app/constants/api.constant';
 import { PATIO_STORE_CONFIG_HTTP } from 'src/app/constants/http-header.constant';
+import { Driver } from 'src/app/modules/public/interfaces/driver.interface';
 import { Response } from 'src/app/utils/response';
 import { routeParams } from 'src/app/utils/route-params';
 import {
@@ -12,7 +13,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class PaymentDriverService {
+export class CollectDriverService {
   constructor(private http: HttpClient) {}
 
   getPaymentsDriver() {
@@ -35,6 +36,13 @@ export class PaymentDriverService {
       {
         ...PATIO_STORE_CONFIG_HTTP,
       }
+    );
+  }
+
+  getDriver(id: number) {
+    return this.http.get<Response<Driver>>(
+      routeParams(API.DRIVER.GET_BY_ID, { id }),
+      { ...PATIO_STORE_CONFIG_HTTP }
     );
   }
 }

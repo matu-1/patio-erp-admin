@@ -26,6 +26,13 @@
       <mat-icon class="action-icon">info</mat-icon>
     </button>
     <button
+      mat-icon-button
+      matTooltip="Driver Info"
+      (click)="openDriverInfoDlg(value)"
+    >
+      <mat-icon class="action-icon">face_6</mat-icon>
+    </button>
+    <button
       *ngIf="!value.paidAt"
       mat-icon-button
       matTooltip="Bloquear"

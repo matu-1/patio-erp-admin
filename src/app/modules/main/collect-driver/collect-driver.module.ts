@@ -9,9 +9,10 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PayDialog } from './components/pay/pay.dialog';
+import { DriverInfoDialog } from './components/driver-info/driver-info.dialog';
 
 @NgModule({
-  declarations: [ListComponent,PayDialog],
+  declarations: [ListComponent,PayDialog, DriverInfoDialog],
   imports: [
     CommonModule,
     CollectDriverRoutingModule,
