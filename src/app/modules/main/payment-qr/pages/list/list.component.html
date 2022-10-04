@@ -1,8 +1,8 @@
 <app-breadcrumbs [breadcrumbs]="[{title, path: ''}]"></app-breadcrumbs>
 <app-title-bar [title]="title">
-    <button mat-button (click)="download()">Exportar</button>
+  <button mat-button (click)="download()">Exportar</button>
 </app-title-bar>
-<app-simple-card>
+<app-simple-card class="mb-3">
   <form
     fxLayout="row wrap"
     fxLayoutGap="16px 8px grid"
@@ -25,3 +25,8 @@
     </div>
   </form>
 </app-simple-card>
+<app-data-table
+  [rows]="paymentsQR"
+  [columns]="paymentQrColumns"
+  [showPagination]="false"
+></app-data-table>
