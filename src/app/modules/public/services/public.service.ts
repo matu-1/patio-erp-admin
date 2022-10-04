@@ -5,7 +5,8 @@ import { API } from 'src/app/constants/api.constant';
 import { PATIO_STORE_CONFIG_HTTP } from 'src/app/constants/http-header.constant';
 import { Response } from 'src/app/utils/response';
 import { routeParams } from 'src/app/utils/route-params';
-import { Driver, OrderDto } from '../interfaces/order.interface';
+import { Driver } from '../interfaces/driver.interface';
+import { OrderDto } from '../interfaces/order.interface';
 
 @Injectable({
   providedIn: 'root',

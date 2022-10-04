@@ -6,6 +6,7 @@ import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
+import { DriverInfoDialog } from '../../components/driver-info/driver-info.dialog';
 import { PayDialog } from '../../components/pay/pay.dialog';
 import { paymentsDriverColumns } from '../../configs/table-columns';
 import { paymentMethod } from '../../constants/payment-method';
@@ -13,7 +14,7 @@ import {
   PayDriverDto,
   PaymentDriver,
 } from '../../interfaces/payment-driver.interface';
-import { PaymentDriverService } from '../../services/payment-driver.service';
+import { CollectDriverService } from '../../services/collect-driver.service';
 
 @Component({
   selector: 'app-list',
@@ -26,7 +27,7 @@ export class ListComponent implements OnInit {
   paymentMethod = paymentMethod;
 
   constructor(
-    private paymentDriverService: PaymentDriverService,
+    private collectDriverService: CollectDriverService,
     private dialog: MatDialog,
     private router: Router
   ) {}
@@ -38,7 +39,7 @@ export class ListComponent implements OnInit {
   async getPaymentsDriver() {
     this.paymentsDriver = undefined;
     const res = await handleRequest(() =>
-      this.paymentDriverService.getPaymentsDriver()
+      this.collectDriverService.getPaymentsDriver()
     );
     if (res) this.paymentsDriver = res.data;
   }
@@ -56,7 +57,7 @@ export class ListComponent implements OnInit {
   async pay(id: number, data: PayDriverDto) {
     data.amount = -data.amount;
     const res = await handleRequestPg(() =>
-      this.paymentDriverService.pay(id, data)
+      this.collectDriverService.pay(id, data)
     );
     if (res) this.getPaymentsDriver();
   }
@@ -73,7 +74,7 @@ export class ListComponent implements OnInit {
 
   async block(data: PaymentDriver) {
     const res = await handleRequestPg(
-      () => this.paymentDriverService.blockDriver(data.driverId),
+      () => this.collectDriverService.blockDriver(data.driverId),
       true
     );
     if (res) this.getPaymentsDriver();
@@ -88,6 +89,13 @@ export class ListComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((ok) => {
       if (ok) this.block(data);
+    });
+  }
+
+  openDriverInfoDlg(data: PaymentDriver) {
+    const dialogRef = this.dialog.open(DriverInfoDialog, {
+      ...DIALOG_CONFIG_XS,
+      data,
     });
   }
 }

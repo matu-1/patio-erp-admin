@@ -1,0 +1,29 @@
+<app-progress-bar-dialog [isLoading]="!driver"></app-progress-bar-dialog>
+<h2 mat-dialog-title>Driver</h2>
+<mat-dialog-content *ngIf="driver">
+  <div class="box-text">
+    <span class="title">Nombre</span>
+    <span class="value">{{driver.name}}</span>
+  </div>
+  <div class="box-text">
+    <span class="title">Telefono</span>
+    <span class="value">{{driver.phone}}</span>
+  </div>
+  <div class="box-text">
+    <span class="title">Email</span>
+    <span class="value">{{driver.email}}</span>
+  </div>
+  <div class="box-text">
+    <span class="title">Ciudad</span>
+    <span class="value">{{driver.city.name}}</span>
+  </div>
+  <div class="box-text">
+    <span class="title">Estado</span>
+    <span class="value">
+      <app-chip variant="primary">{{driver.status}}</app-chip></span
+    >
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>
