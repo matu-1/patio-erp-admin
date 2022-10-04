@@ -33,6 +33,7 @@ export interface TimingDto {
   deserted_at?: Date;
   end_timing: Date;
   lastOrderAt: Date;
+  lastOrderId: number;
   endFinal: Date;
   timing_id: number;
 }

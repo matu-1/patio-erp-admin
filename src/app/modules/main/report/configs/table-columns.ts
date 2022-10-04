@@ -237,6 +237,12 @@ export const timingsColumns: TableColumns<TimingDto> = [
     headerName: 'id',
   },
   {
+    field: 'start_timing',
+    headerName: 'Hora Entrada',
+    valueFormatter: ({ start_timing }) =>
+      formatDate(start_timing, 'dd/MM/yyyy HH:mm:ss', 'es'),
+  },
+  {
     field: 'arrived_at',
     headerName: 'Llegada',
     valueFormatter: ({ arrived_at }) =>
@@ -261,6 +267,10 @@ export const timingsColumns: TableColumns<TimingDto> = [
     headerName: 'Ultima Orden',
     valueFormatter: ({ lastOrderAt }) =>
       formatDate(lastOrderAt, 'dd/MM/yyyy HH:mm:ss', 'es'),
+  },
+  {
+    field: 'lastOrderId',
+    headerName: 'OrderId',
   },
   {
     field: 'endFinal',
