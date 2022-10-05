@@ -4,6 +4,7 @@ import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { DeliveryDetailComponent } from './pages/delivery-detail/delivery-detail.component';
 import { HoursWorkedComponent } from './pages/hours-worked/hours-worked.component';
 import { OrdersReceivedComponent } from './pages/orders-received/orders-received.component';
+import { OrdersComponent } from './pages/orders/orders.component';
 import { PaymentDetailComponent } from './pages/payment-detail/payment-detail.component';
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: PAGE_ROUTE.REPORT.ORDERS_RECEIVED_ROOT,
     component: OrdersReceivedComponent,
+  },
+  {
+    path: PAGE_ROUTE.REPORT.ORDERS_ROOT,
+    component: OrdersComponent,
   },
   {
     path: '**',

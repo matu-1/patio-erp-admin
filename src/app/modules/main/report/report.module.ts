@@ -11,9 +11,10 @@ import { DeliveryDetailComponent } from './pages/delivery-detail/delivery-detail
 import { HoursWorkedComponent } from './pages/hours-worked/hours-worked.component';
 import { OrdersReceivedComponent } from './pages/orders-received/orders-received.component';
 import { DetailDialog } from './components/detail/detail.dialog';
+import { OrdersComponent } from './pages/orders/orders.component';
 
 @NgModule({
-  declarations: [PaymentDetailComponent, DeliveryDetailComponent, HoursWorkedComponent, OrdersReceivedComponent, DetailDialog],
+  declarations: [PaymentDetailComponent, DeliveryDetailComponent, HoursWorkedComponent, OrdersReceivedComponent, DetailDialog, OrdersComponent],
   imports: [
     CommonModule,
     ReportRoutingModule,

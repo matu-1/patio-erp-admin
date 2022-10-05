@@ -1,0 +1,27 @@
+<form
+  [formGroup]="form"
+  markAllSubmit
+  (validSubmit)="onSubmit()"
+  fxLayout="row wrap"
+  fxLayoutGap="16px 8px grid"
+>
+  <app-text-field
+    *ngFor="let value of schema"
+    [form]="form"
+    [textFieldValue]="value"
+    [fxFlex.xs]="value.xs ?? '100%'"
+    [fxFlex.sm]="value.sm"
+    [fxFlex.md]="value.md"
+    [fxFlex]="value.df"
+  ></app-text-field>
+  <div fxFlex.xs="100%" fxFlex="10%">
+    <button *ngIf="showBtnIcon; else btnSimple" mat-icon-button type="submit">
+      <mat-icon>search</mat-icon>
+    </button>
+    <ng-template #btnSimple>
+      <button mat-raised-button color="accent">
+        <ng-content></ng-content>
+      </button>
+    </ng-template>
+  </div>
+</form>

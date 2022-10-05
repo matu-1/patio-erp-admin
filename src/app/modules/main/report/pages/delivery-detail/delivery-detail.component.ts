@@ -5,7 +5,7 @@ import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest } from 'src/app/utils/handle-request';
 import { deliveryDetailSchema } from '../../configs/form-schema';
 import { deliveryDetailColumns } from '../../configs/table-columns';
-import { DeliveryDetail } from '../../interface/delivery-detail.interface';
+import { DeliveryDetail } from '../../interfaces/delivery-detail.interface';
 import { ReportService } from '../../services/report.service';
 
 @Component({

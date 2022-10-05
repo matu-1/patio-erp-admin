@@ -119,8 +119,8 @@ export const hoursWorkedFilterSchema: TextFieldSchema = [
     name: 'cityId',
     label: 'Ciudad',
     fieldType: TextFieldType.Dropdown,
-    df: '30%'
-  }
+    df: '30%',
+  },
 ];
 
 export const ordersReceivedFilterSchema: TextFieldSchema = [
@@ -136,5 +136,52 @@ export const ordersReceivedFilterSchema: TextFieldSchema = [
       { label: 'Online', value: 2 },
     ],
     df: '15%',
+  },
+];
+
+export const ordersFilterSchema: TextFieldSchema = [
+  {
+    name: 'startDate',
+    label: 'Fecha Inicial',
+    fieldType: TextFieldType.DatePicker,
+    value: DateUtils.getMinHour(),
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '12%',
+    sm: '25%',
+  },
+  {
+    name: 'endDate',
+    label: 'Fecha Final',
+    fieldType: TextFieldType.DatePicker,
+    value: DateUtils.getMaxHour(),
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '12%',
+    sm: '25%',
+  },
+  {
+    name: 'cityId',
+    label: 'Ciudad',
+    fieldType: TextFieldType.Dropdown,
+    df: '15%',
+    sm: '30%',
+  },
+  {
+    name: 'merchantId',
+    label: 'Comercio',
+    fieldType: TextFieldType.Dropdown,
+    df: '17%',
+    sm: '30%',
   },
 ];

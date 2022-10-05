@@ -8,17 +8,18 @@ import { City } from '../../dashboard/interfaces/city.interface';
 import {
   DeliveryDetail,
   GetDeliveryDetailDto,
-} from '../interface/delivery-detail.interface';
+} from '../interfaces/delivery-detail.interface';
 import {
   HoursWorkedDriver,
   HoursWorkedDto,
-} from '../interface/hours-worked-driver.interface';
-import { OrderReceived } from '../interface/order-received.interface';
+} from '../interfaces/hours-worked-driver.interface';
+import { OrderReceived } from '../interfaces/order-received.interface';
+import { FilterOrder, Order } from '../interfaces/order.interface';
 import {
   CreatePaymentDriverDto,
   GetPaymentDetailDto,
   PaymentDetail,
-} from '../interface/payment-detail.interface';
+} from '../interfaces/payment-detail.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -70,5 +71,14 @@ export class ReportService {
 
   getCities() {
     return this.http.get<Response<City[]>>(API.CITY.GET_CITIES);
+  }
+
+  getOrders(dto: FilterOrder) {
+    dto.driverStatus = 'assigned,complete'
+    dto = ObjectUtils.clear(dto);
+    return this.http.get<Response<Order[]>>(API.ORDER.GET_ALL, {
+      ...PATIO_STORE_CONFIG_HTTP,
+      params: dto as any,
+    });
   }
 }

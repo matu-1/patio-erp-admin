@@ -89,6 +89,11 @@ export const MENU: MenuItem[] = [
             icon: 'remove',
             route: PAGE_ROUTE.REPORT.ORDERS_RECEIVED,
           },
+          {
+            label: 'Ordenes',
+            icon: 'remove',
+            route: PAGE_ROUTE.REPORT.ORDERS,
+          },
         ],
       },
     ],

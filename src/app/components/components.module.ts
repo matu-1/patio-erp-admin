@@ -20,6 +20,8 @@ import { LoadingComponent } from './loading/loading.component';
 import { CenterComponent } from './center/center.component';
 import { ConfirmDialog } from './confirm/confirm.dialog';
 import { ButtonBarComponent } from './button-bar/button-bar.component';
+import { FormBuilderComponent } from './form-builder/form-builder.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { ButtonBarComponent } from './button-bar/button-bar.component';
     CenterComponent,
     ConfirmDialog,
     ButtonBarComponent,
+    FormBuilderComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +49,7 @@ import { ButtonBarComponent } from './button-bar/button-bar.component';
     DirectivesModule,
     RouterModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
   ],
   exports: [
     DataTableComponent,
@@ -62,7 +66,8 @@ import { ButtonBarComponent } from './button-bar/button-bar.component';
     LoadingComponent,
     CenterComponent,
     ConfirmDialog,
-    ButtonBarComponent
+    ButtonBarComponent,
+    FormBuilderComponent,
   ],
 })
 export class ComponentsModule {}

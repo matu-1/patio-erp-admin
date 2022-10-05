@@ -4,7 +4,7 @@ import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest } from 'src/app/utils/handle-request';
 import { paymentDetailSchema } from '../../configs/form-schema';
 import { paymentDetailColumns } from '../../configs/table-columns';
-import { PaymentDetail } from '../../interface/payment-detail.interface';
+import { PaymentDetail } from '../../interfaces/payment-detail.interface';
 import { ReportService } from '../../services/report.service';
 
 @Component({

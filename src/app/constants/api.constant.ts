@@ -59,5 +59,6 @@ export const API = {
   },
   ORDER: {
     GET_BY_ID: `${PATIO_STORE_API_URL}/orders/:id`,
-  }
+    GET_ALL: `${PATIO_STORE_API_URL}/orders`,
+  },
 };

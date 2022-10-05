@@ -3,11 +3,13 @@ import { Injectable } from '@angular/core';
 import { API } from 'src/app/constants/api.constant';
 import { PATIO_STORE_CONFIG_HTTP } from 'src/app/constants/http-header.constant';
 import { Driver } from 'src/app/modules/public/interfaces/driver.interface';
+import { ObjectUtils } from 'src/app/utils/object.util';
 import { Response } from 'src/app/utils/response';
 import { routeParams } from 'src/app/utils/route-params';
 import {
   PaymentDriver,
   PayDriverDto,
+  CollectFilterDto,
 } from '../interfaces/payment-driver.interface';
 
 @Injectable({
@@ -16,8 +18,14 @@ import {
 export class CollectDriverService {
   constructor(private http: HttpClient) {}
 
-  getPaymentsDriver() {
-    return this.http.get<Response<PaymentDriver[]>>(API.PAYMENT_DRIVER.GET_ALL);
+  getPaymentsDriver(dto: CollectFilterDto) {
+    dto = ObjectUtils.clear(dto);
+    return this.http.get<Response<PaymentDriver[]>>(
+      API.PAYMENT_DRIVER.GET_ALL,
+      {
+        params: dto as any,
+      }
+    );
   }
 
   pay(id: number, dto: PayDriverDto) {

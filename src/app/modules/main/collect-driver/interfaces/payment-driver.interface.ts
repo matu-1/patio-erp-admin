@@ -18,3 +18,9 @@ export interface PayDriverDto {
   amount: number;
   paymentMethod: number;
 }
+
+export interface CollectFilterDto {
+  start: Date;
+  end: Date;
+  isPayment?: number;
+}

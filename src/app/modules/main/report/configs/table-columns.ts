@@ -1,14 +1,16 @@
 import { formatDate, formatNumber } from '@angular/common';
 import { TableColumns } from 'src/app/components/data-table/data-table.interface';
+import { FORMAT_DATE } from 'src/app/constants/format-date';
 import { DateUtils } from 'src/app/utils/date.util';
-import { DeliveryDetail } from '../interface/delivery-detail.interface';
+import { DeliveryDetail } from '../interfaces/delivery-detail.interface';
 import {
   HoursWorkedDriver,
   OrderDto,
   TimingDto,
-} from '../interface/hours-worked-driver.interface';
-import { OrderReceived } from '../interface/order-received.interface';
-import { PaymentDetail } from '../interface/payment-detail.interface';
+} from '../interfaces/hours-worked-driver.interface';
+import { OrderReceived } from '../interfaces/order-received.interface';
+import { Order } from '../interfaces/order.interface';
+import { PaymentDetail } from '../interfaces/payment-detail.interface';
 
 export const paymentDetailColumns: TableColumns<PaymentDetail> = [
   {
@@ -283,5 +285,64 @@ export const timingsColumns: TableColumns<TimingDto> = [
     headerName: 'Horas',
     valueFormatter: ({ arrived_at, endFinal }) =>
       DateUtils.formatToTimer(DateUtils.diff(endFinal, arrived_at, 'h')),
+  },
+];
+
+export const orderColumns: TableColumns<Order> = [
+  {
+    field: 'id',
+    headerName: 'Id',
+  },
+  {
+    field: 'to_address',
+    headerName: 'Dirección',
+  },
+  {
+    field: 'name_user',
+    headerName: 'Cliente',
+    valueFormatter: ({ name_user, phone_user }) =>
+      `${name_user} - ${phone_user}`,
+  },
+  {
+    field: 'merchant',
+    headerName: 'Comercio',
+    valueFormatter: ({ merchant }) => (merchant ? merchant.name : '---'),
+  },
+  {
+    field: 'assignedDrivers',
+    headerName: 'Driver',
+    valueFormatter: ({ assignedDrivers }) =>
+      assignedDrivers
+        ? `${assignedDrivers[0].id} - ${assignedDrivers[0].name}`
+        : '---',
+  },
+  {
+    field: 'total',
+    headerName: 'Total',
+    valueFormatter: ({ total }) => formatNumber(total, 'es', '.2-2'),
+  },
+  {
+    field: 'status',
+    headerName: 'Estado',
+  },
+  {
+    field: 'createdAt',
+    headerName: 'Creado el',
+    valueFormatter: ({ createdAt }) => formatDate(createdAt, FORMAT_DATE, 'es'),
+  },
+  {
+    field: 'extra_status',
+    headerName: 'Estados Adicionales',
+    valueFormatter: ({ orderstatus }) =>
+      orderstatus
+        ? orderstatus
+            .map(
+              (status) =>
+                ` ${formatDate(status.createdAt, FORMAT_DATE, 'es')} (${
+                  status.status
+                })`
+            )
+            .join(' - ')
+        : '--',
   },
 ];

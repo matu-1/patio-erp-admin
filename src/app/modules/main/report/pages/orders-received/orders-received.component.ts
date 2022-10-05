@@ -10,8 +10,8 @@ import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 import { ordersReceivedFilterSchema } from '../../configs/form-schema';
 import { ordersReceivedColumns } from '../../configs/table-columns';
-import { OrderReceived } from '../../interface/order-received.interface';
-import { CreatePaymentDriverDto } from '../../interface/payment-detail.interface';
+import { OrderReceived } from '../../interfaces/order-received.interface';
+import { CreatePaymentDriverDto } from '../../interfaces/payment-detail.interface';
 import { ReportService } from '../../services/report.service';
 
 @Component({

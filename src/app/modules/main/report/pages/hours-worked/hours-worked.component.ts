@@ -11,7 +11,7 @@ import { ObjectUtils } from 'src/app/utils/object.util';
 import { DetailDialog } from '../../components/detail/detail.dialog';
 import { hoursWorkedFilterSchema } from '../../configs/form-schema';
 import { hoursWorkedColumns } from '../../configs/table-columns';
-import { HoursWorkedDriver } from '../../interface/hours-worked-driver.interface';
+import { HoursWorkedDriver } from '../../interfaces/hours-worked-driver.interface';
 import { ReportService } from '../../services/report.service';
 
 @Component({

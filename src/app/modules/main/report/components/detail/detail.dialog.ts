@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ordersColumns, timingsColumns } from '../../configs/table-columns';
-import { HoursWorkedDriver } from '../../interface/hours-worked-driver.interface';
+import { HoursWorkedDriver } from '../../interfaces/hours-worked-driver.interface';
 
 @Component({
   selector: 'app-detail',
