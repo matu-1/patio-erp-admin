@@ -1,3 +1,5 @@
+import { CollectFilterDto } from '../../collect-driver/interfaces/payment-driver.interface';
+
 export interface PaymentDriver {
   id: number;
   userCreation: string;
@@ -18,3 +20,5 @@ export interface PayDriverDto {
   amount: number;
   paymentMethod: number;
 }
+
+export interface PaymentFilterDto extends CollectFilterDto {}

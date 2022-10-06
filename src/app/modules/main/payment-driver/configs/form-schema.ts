@@ -4,6 +4,7 @@ import {
   TextFieldType,
 } from 'src/app/components/text-field/text-field.interface';
 import { CustomValidators } from 'src/app/utils/validators';
+import { collectFilterSchema } from '../../collect-driver/configs/form-schema';
 
 export const paySchema: TextFieldSchema = [
   {
@@ -39,3 +40,5 @@ export const paySchema: TextFieldSchema = [
     ],
   },
 ];
+
+export const paymentFilterSchema = [...collectFilterSchema];

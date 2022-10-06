@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 import { PayDialog } from '../../components/pay/pay.dialog';
+import { paymentFilterSchema } from '../../configs/form-schema';
 import { paymentsDriverColumns } from '../../configs/table-columns';
 import { paymentMethod } from '../../constants/payment-method';
 import {
@@ -23,6 +25,8 @@ export class ListComponent implements OnInit {
   paymentsDriver?: PaymentDriver[];
   paymentsDriverColumns = paymentsDriverColumns;
   paymentMethod = paymentMethod;
+  form = buildform(paymentFilterSchema);
+  paymentFilterSchema = paymentFilterSchema;
 
   constructor(
     private paymentDriverService: PaymentDriverService,
@@ -36,8 +40,12 @@ export class ListComponent implements OnInit {
 
   async getPaymentsDriver() {
     this.paymentsDriver = undefined;
+    const value = this.form.value;
     const res = await handleRequest(() =>
-      this.paymentDriverService.getPaymentsDriver()
+      this.paymentDriverService.getPaymentsDriver({
+        ...value,
+        end: DateUtils.getMaxHour(value.end),
+      })
     );
     if (res) this.paymentsDriver = res.data;
   }
@@ -67,5 +75,9 @@ export class ListComponent implements OnInit {
         data.endDate + ' '
       ).toISOString()}&driver=${data.name}`
     );
+  }
+
+  filter() {
+    this.getPaymentsDriver();
   }
 }

@@ -23,4 +23,5 @@ export interface CollectFilterDto {
   start: Date;
   end: Date;
   isPayment?: number;
+  type?: number;
 }

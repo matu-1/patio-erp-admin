@@ -1,5 +1,12 @@
 <app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
 <app-title-bar [title]="title"></app-title-bar>
+<app-simple-card class="mb-3">
+  <app-form-builder
+    [form]="form"
+    [schema]="paymentFilterSchema"
+    (frmSubmit)="filter()"
+  ></app-form-builder>
+</app-simple-card>
 <app-data-table
   [rows]="paymentsDriver"
   [columns]="paymentsDriverColumns"
