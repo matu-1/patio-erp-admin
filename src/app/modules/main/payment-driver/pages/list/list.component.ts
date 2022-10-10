@@ -5,6 +5,7 @@ import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { DateUtils } from 'src/app/utils/date.util';
+import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 import { PayDialog } from '../../components/pay/pay.dialog';
 import { paymentFilterSchema } from '../../configs/form-schema';
@@ -79,5 +80,9 @@ export class ListComponent implements OnInit {
 
   filter() {
     this.getPaymentsDriver();
+  }
+
+  download() {
+    ExcelUtils.download(this.paymentsDriver!, 'payment driver');
   }
 }

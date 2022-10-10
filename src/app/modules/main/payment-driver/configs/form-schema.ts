@@ -30,6 +30,7 @@ export const paySchema: TextFieldSchema = [
     options: [
       { value: 0, label: 'Efectivo' },
       { value: 1, label: 'Wallet' },
+      { value: 2, label: 'Cuenta Bancaria' },
     ],
     validators: [
       {

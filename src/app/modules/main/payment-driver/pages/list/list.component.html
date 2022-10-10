@@ -1,5 +1,9 @@
 <app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
-<app-title-bar [title]="title"></app-title-bar>
+<app-title-bar [title]="title">
+  <button mat-button (click)="download()" [disabled]="!paymentsDriver">
+    Exportar
+  </button>
+</app-title-bar>
 <app-simple-card class="mb-3">
   <app-form-builder
     [form]="form"
