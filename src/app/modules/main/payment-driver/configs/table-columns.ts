@@ -18,16 +18,10 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
     valueFormatter: ({ amount }) => formatNumber(amount, 'es', '.2-2'),
   },
   {
-    field: 'amountPaid',
-    headerName: 'Monto Pagado',
-    valueFormatter: ({ amountPaid }) =>
-      amountPaid ? formatNumber(amountPaid, 'es', '.2-2') : '---',
-  },
-  {
-    field: 'paymentMethod',
-    headerName: 'Método Pago',
-    valueFormatter: ({ paymentMethod: value }) =>
-      value != null ? paymentMethod[value] : '---',
+    field: 'balance',
+    headerName: 'Saldo',
+    valueFormatter: ({ balance }) =>
+    balance ? formatNumber(balance, 'es', '.2-2') : '---',
   },
   {
     field: 'paidAt',

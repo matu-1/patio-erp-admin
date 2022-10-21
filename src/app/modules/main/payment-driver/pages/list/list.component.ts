@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
@@ -85,4 +86,20 @@ export class ListComponent implements OnInit {
   download() {
     ExcelUtils.download(this.paymentsDriver!, 'payment driver');
   }
+
+  openRevertConfirmDlg(data: PaymentDriver) {
+    const dialogRef = this.dialog.open(ConfirmDialog, {
+      ...DIALOG_CONFIG_XS,
+      data: {
+        title: 'Confirmar',
+        message: `¿Esta seguro de revertir el ultimo pago de ${data.name}?`,
+      },
+    });
+    dialogRef.afterClosed().subscribe((isOk) => {
+      if (isOk) {
+      }
+    });
+  }
+
+  openPaymentsDlg(data: PaymentDriver) {}
 }

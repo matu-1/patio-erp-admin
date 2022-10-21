@@ -14,6 +14,7 @@ export interface PaymentDriver {
   paidAt?: Date;
   startDate: Date;
   endDate: Date;
+  balance: number;
 }
 
 export interface PayDriverDto {

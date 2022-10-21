@@ -16,7 +16,7 @@ export class PayDialog {
     @Inject(MAT_DIALOG_DATA) data: PaymentDriver,
     private dialogRef: MatDialogRef<PayDialog>
   ) {
-    this.form.patchValue({ amount: data.amount });
+    this.form.patchValue({ amount: data.balance });
   }
 
   save() {
