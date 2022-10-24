@@ -27,7 +27,7 @@
   <ng-template customColumn="actions" let-value="value">
     <button
       mat-icon-button
-      matTooltip="Pagar"
+      matTooltip="Cobrar"
       (click)="openPaymentDlg(value)"
       [disabled]="value.paidAt"
     >
@@ -50,6 +50,23 @@
       (click)="openConfirmBlockDlg(value)"
     >
       <mat-icon class="action-icon">lock</mat-icon>
+    </button>
+    <button
+      *ngIf="!value.paidAt"
+      mat-icon-button
+      [disabled]="value.amount == value.balance"
+      matTooltip="Revertir ultimo pago"
+      (click)="openRevertConfirmDlg(value)"
+    >
+      <mat-icon class="action-icon">undo</mat-icon>
+    </button>
+    <button
+      *ngIf="value.amount != value.balance"
+      mat-icon-button
+      matTooltip="Pagos"
+      (click)="openPaymentsDlg(value)"
+    >
+      <mat-icon class="action-icon">payments</mat-icon>
     </button>
   </ng-template>
 </app-data-table>

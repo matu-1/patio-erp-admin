@@ -8,6 +8,7 @@ import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
+import { PaymentDetailDialog } from '../../../payment-driver/components/payment-detail/payment-detail.dialog';
 import { DriverInfoDialog } from '../../components/driver-info/driver-info.dialog';
 import { PayDialog } from '../../components/pay/pay.dialog';
 import { collectFilterSchema } from '../../configs/form-schema';
@@ -114,5 +115,33 @@ export class ListComponent implements OnInit {
 
   filter() {
     this.getPaymentsDriver();
+  }
+
+  openRevertConfirmDlg(data: PaymentDriver) {
+    const dialogRef = this.dialog.open(ConfirmDialog, {
+      ...DIALOG_CONFIG_XS,
+      data: {
+        title: 'Confirmar',
+        message: `¿Esta seguro de revertir el ultimo pago de ${data.name}?`,
+      },
+    });
+    dialogRef.afterClosed().subscribe((isOk) => {
+      if (isOk) this.revert(data.id);
+    });
+  }
+
+  async revert(id: number) {
+    const res = await handleRequestPg(
+      () => this.collectDriverService.revert(id),
+      true
+    );
+    if (res) this.getPaymentsDriver();
+  }
+
+  openPaymentsDlg(data: PaymentDriver) {
+    this.dialog.open(PaymentDetailDialog, {
+      ...DIALOG_CONFIG_XS,
+      data,
+    });
   }
 }

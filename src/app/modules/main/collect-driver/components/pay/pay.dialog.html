@@ -1,5 +1,10 @@
 <form [formGroup]="form" markAllSubmit (validSubmit)="save()">
-  <h2>Pagar</h2>
+  <div class="driver-dlg ">
+    <h3>{{data.name}}</h3>
+    <span>{{data.driverId}}</span>
+  </div>
+  <hr />
+  <h3 class="title-dlg">Cobrar</h3>
   <mat-dialog-content>
     <div class="of-h">
       <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">

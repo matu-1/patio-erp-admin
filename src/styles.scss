@@ -121,3 +121,17 @@ button:not(.mat-button-disabled) .action-icon {
   max-width: 350px !important;
   width: 80% !important;
 }
+.title-dlg {
+  margin-bottom: 0.5rem !important;
+  font-weight: bold !important;
+}
+.driver-dlg {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+}

@@ -46,6 +46,8 @@ export const API = {
     GET_BY_RANGE: `${API_URL}/payment-driver/range`,
     GENERATE_PAYMENTS: `${API_URL}/payment-driver`,
     PAY: `${API_URL}/payment-driver/pay/:id`,
+    REVERT: `${API_URL}/payment-driver/revert/:id`,
+    PAYMENTS: `${API_URL}/payment/payment-driver/:id`,
   },
   CLIENT: {
     GET_PAGINATED: `${API_URL}/client/paginated`,

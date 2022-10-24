@@ -9,6 +9,7 @@ import {
   PayDriverDto,
   PaymentFilterDto,
 } from '../interfaces/payment-driver.interface';
+import { Payment } from '../interfaces/payment.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,19 @@ export class PaymentDriverService {
     return this.http.put<Response<PaymentDriver>>(
       routeParams(API.PAYMENT_DRIVER.PAY, { id }),
       dto
+    );
+  }
+
+  revert(id: number) {
+    return this.http.put<Response<PaymentDriver>>(
+      routeParams(API.PAYMENT_DRIVER.REVERT, { id }),
+      {}
+    );
+  }
+
+  getPayments(id: number) {
+    return this.http.get<Response<Payment[]>>(
+      routeParams(API.PAYMENT_DRIVER.PAYMENTS, { id })
     );
   }
 }

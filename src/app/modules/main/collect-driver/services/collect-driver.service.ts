@@ -54,4 +54,11 @@ export class CollectDriverService {
       { ...PATIO_STORE_CONFIG_HTTP }
     );
   }
+
+  revert(id: number) {
+    return this.http.put<Response<PaymentDriver>>(
+      routeParams(API.PAYMENT_DRIVER.REVERT, { id }),
+      {}
+    );
+  }
 }

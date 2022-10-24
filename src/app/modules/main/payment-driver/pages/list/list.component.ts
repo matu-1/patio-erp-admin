@@ -17,6 +17,7 @@ import {
   PaymentDriver,
 } from '../../interfaces/payment-driver.interface';
 import { PaymentDriverService } from '../../services/payment-driver.service';
+import { PaymentDetailDialog } from '../../components/payment-detail/payment-detail.dialog';
 
 @Component({
   selector: 'app-list',
@@ -96,10 +97,22 @@ export class ListComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((isOk) => {
-      if (isOk) {
-      }
+      if (isOk) this.revert(data.id);
     });
   }
 
-  openPaymentsDlg(data: PaymentDriver) {}
+  async revert(id: number) {
+    const res = await handleRequestPg(
+      () => this.paymentDriverService.revert(id),
+      true
+    );
+    if (res) this.getPaymentsDriver();
+  }
+
+  openPaymentsDlg(data: PaymentDriver) {
+    this.dialog.open(PaymentDetailDialog, {
+      ...DIALOG_CONFIG_XS,
+      data,
+    });
+  }
 }

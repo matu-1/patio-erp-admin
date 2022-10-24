@@ -2,6 +2,7 @@ import { formatDate, formatNumber } from '@angular/common';
 import { TableColumns } from 'src/app/components/data-table/data-table.interface';
 import { paymentMethod } from '../constants/payment-method';
 import { PaymentDriver } from '../interfaces/payment-driver.interface';
+import { Payment } from '../interfaces/payment.interface';
 
 export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
   {
@@ -21,7 +22,7 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
     field: 'balance',
     headerName: 'Saldo',
     valueFormatter: ({ balance }) =>
-    balance ? formatNumber(balance, 'es', '.2-2') : '---',
+      balance ? formatNumber(balance, 'es', '.2-2') : '---',
   },
   {
     field: 'paidAt',
@@ -46,5 +47,28 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
   {
     field: 'actions',
     headerName: 'Acciones',
+  },
+];
+
+export const paymentsColumns: TableColumns<Payment> = [
+  {
+    field: 'id',
+    headerName: 'Id',
+  },
+  {
+    field: 'amount',
+    headerName: 'Monto',
+    valueFormatter: ({ amount }) => formatNumber(Number(amount), 'es', '.2-2'),
+  },
+  {
+    field: 'paymentMethod',
+    headerName: 'Método Pago',
+    valueFormatter: (value) => paymentMethod[value.paymentMethod],
+  },
+  {
+    field: 'createdAt',
+    headerName: 'Creado el',
+    valueFormatter: ({ createdAt }) =>
+      formatDate(createdAt, 'dd/MM/yyyy HH:mm', 'es'),
   },
 ];

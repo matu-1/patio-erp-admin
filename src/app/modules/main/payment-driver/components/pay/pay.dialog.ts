@@ -13,7 +13,7 @@ export class PayDialog {
   paySchema = paySchema;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) data: PaymentDriver,
+    @Inject(MAT_DIALOG_DATA) public data: PaymentDriver,
     private dialogRef: MatDialogRef<PayDialog>
   ) {
     this.form.patchValue({ amount: data.balance });
