@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -6,6 +7,7 @@ import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DIALOG_CONFIG_SM } from 'src/app/constants/dialog.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
+import { FormatDate } from 'src/app/utils/format.date.util';
 import { handleRequest } from 'src/app/utils/handle-request';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import { DetailDialog } from '../../components/detail/detail.dialog';
@@ -63,9 +65,14 @@ export class HoursWorkedComponent implements OnInit {
   }
 
   download() {
+    const { start, end } = ObjectUtils.clear(this.form.value);
     ExcelUtils.download(
       parseByColumns(this.hoursWorkedDrivers!, hoursWorkedColumns),
-      'Hours worked drivers'
+      `hours ${formatDate(start, 'dd-MM-yyyy', 'es')} al ${formatDate(
+        end,
+        'dd-MM-yyyy',
+        'es'
+      )}`
     );
   }
 

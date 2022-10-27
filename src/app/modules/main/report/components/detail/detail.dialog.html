@@ -4,7 +4,10 @@
     <span>{{data.id}}</span>
   </div>
   <hr />
-  <h3>Ordenes</h3>
+  <div class="subtitle-root">
+    <h3>Ordenes</h3>
+    <button mat-button (click)="ordersDownload()">Exportar</button>
+  </div>
   <app-data-table
     class="dt-unstyle mb-3"
     [rows]="data.orders"
@@ -12,7 +15,10 @@
     [showSearcher]="false"
     [showPagination]="false"
   ></app-data-table>
-  <h3>Horarios</h3>
+  <div class="subtitle-root">
+    <h3>Horarios</h3>
+    <button mat-button (click)="timingsDownload()">Exportar</button>
+  </div>
   <app-data-table
     class="dt-unstyle"
     [rows]="data.timings"
