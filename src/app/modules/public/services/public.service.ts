@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
+import { catchError, throwError, tap, map } from 'rxjs';
 import { API } from 'src/app/constants/api.constant';
 import { PATIO_STORE_CONFIG_HTTP } from 'src/app/constants/http-header.constant';
 import { Response } from 'src/app/utils/response';
@@ -23,6 +23,10 @@ export class PublicService {
         ...PATIO_STORE_CONFIG_HTTP,
       })
       .pipe(
+        map((data) => {
+          data.data.products = JSON.parse(data.data.details);
+          return data;
+        }),
         catchError((err) => {
           this.hasError.getOrder = true;
           return throwError(() => err);

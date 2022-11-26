@@ -2,7 +2,38 @@
 <div class="order-status-root">
   <div class="order-status">
     <mat-progress-bar *ngIf="!order" mode="indeterminate"></mat-progress-bar>
-    <h2 *ngIf="order; else loading" class="status-text">{{ order.status }}</h2>
+    <h2 *ngIf="order; else loading" class="status-text">
+      {{ order.status | uppercase }}
+    </h2>
     <ng-template #loading><span class="loading">loading...</span></ng-template>
+    <div *ngIf="order" class="order-info">
+      <h2 class="subtitle">Yo soy tu conductor</h2>
+    </div>
+    <hr *ngIf="order" />
+    <div *ngIf="order" class="order-info">
+      <h2 class="subtitle">Detalle del pedido</h2>
+      <div class="text-box">
+        <span>Dirección</span>
+        <p>{{ order.to_address }}</p>
+      </div>
+      <div class="text-box">
+        <span>Servicio</span>
+        <p>Delivery / Estandar</p>
+      </div>
+    </div>
+    <hr *ngIf="order" />
+    <div *ngIf="order" class="order-info">
+      <h2 class="subtitle">Productos</h2>
+      <div class="product-box" *ngFor="let product of order.products">
+        <div class="product-header">
+          <div>
+            <div class="quantity">x{{ product.quantity }}</div>
+            {{ product.name }}
+          </div>
+          <span>{{ product.price }}</span>
+        </div>
+        <p>{{ product.description }}</p>
+      </div>
+    </div>
   </div>
 </div>

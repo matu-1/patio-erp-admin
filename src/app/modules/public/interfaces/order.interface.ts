@@ -34,6 +34,7 @@ export interface OrderDto {
   paymentModeId: number;
   merchant: Merchant;
   assignedDrivers?: AssignedDriver[];
+  products?: Product[];
 }
 
 export interface AssignedDriver {
@@ -48,4 +49,12 @@ export interface AssignedDriver {
 
 export interface Merchant {
   name: string;
+}
+
+interface Product {
+  price: number;
+  quantity: number;
+  name: string;
+  description: string;
+  productId: number;
 }
