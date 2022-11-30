@@ -127,6 +127,11 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     valueFormatter: ({ tips }) => formatNumber(tips, 'es'),
   },
   {
+    field: 'hours',
+    headerName: 'Horas bruta',
+    valueFormatter: ({ hoursWorked }) =>  formatNumber(hoursWorked, 'es', '.0-6'),
+  },
+  {
     field: 'hoursWorked',
     headerName: 'Horas',
     valueFormatter: ({ hoursWorked }) => DateUtils.formatToTimer(hoursWorked),
