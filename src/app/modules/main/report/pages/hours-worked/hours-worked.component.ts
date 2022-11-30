@@ -2,8 +2,10 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment-timezone';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { buildform } from 'src/app/components/text-field/text-field.util';
+import { CONFIG } from 'src/app/constants/config.constant';
 import { DIALOG_CONFIG_SM } from 'src/app/constants/dialog.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
@@ -51,6 +53,7 @@ export class HoursWorkedComponent implements OnInit {
   async getHoursWorkedDriver() {
     this.hoursWorkedDrivers = undefined;
     const value = ObjectUtils.clear(this.form.value);
+    this.setTimeZone(value.cityId);
     const res = await handleRequest(() =>
       this.reportService.getHoursWorkedDrives({
         ...value,
@@ -62,6 +65,12 @@ export class HoursWorkedComponent implements OnInit {
 
   filter() {
     this.getHoursWorkedDriver();
+  }
+
+  setTimeZone(cityId?: number) {
+    const timeZone =
+      cityId == CONFIG.CITY_EEUU ? 'America/New_York' : 'America/La_Paz';
+    moment.tz.setDefault(timeZone);
   }
 
   download() {

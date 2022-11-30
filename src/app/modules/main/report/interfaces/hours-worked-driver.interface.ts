@@ -36,6 +36,7 @@ export interface TimingDto {
   lastOrderId: number;
   endFinal: Date;
   timing_id: number;
+  startFinal: Date;
 }
 
 export interface HoursWorkedDto {

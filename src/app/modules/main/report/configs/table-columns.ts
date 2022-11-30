@@ -2,6 +2,7 @@ import { formatDate, formatNumber } from '@angular/common';
 import { TableColumns } from 'src/app/components/data-table/data-table.interface';
 import { FORMAT_DATE } from 'src/app/constants/format-date';
 import { DateUtils } from 'src/app/utils/date.util';
+import { FormatDate } from 'src/app/utils/format.date.util';
 import { DeliveryDetail } from '../interfaces/delivery-detail.interface';
 import {
   HoursWorkedDriver,
@@ -129,7 +130,8 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
   {
     field: 'hours',
     headerName: 'Horas bruta',
-    valueFormatter: ({ hoursWorked }) =>  formatNumber(hoursWorked, 'es', '.0-6'),
+    valueFormatter: ({ hoursWorked }) =>
+      formatNumber(hoursWorked, 'es', '.0-6'),
   },
   {
     field: 'hoursWorked',
@@ -238,6 +240,7 @@ export const ordersColumns: TableColumns<OrderDto> = [
     valueFormatter: ({ tip }) => formatNumber(tip, 'es', '.2-2'),
   },
 ];
+
 export const timingsColumns: TableColumns<TimingDto> = [
   {
     field: 'timing_id',
@@ -246,34 +249,28 @@ export const timingsColumns: TableColumns<TimingDto> = [
   {
     field: 'start_timing',
     headerName: 'Hora Entrada',
-    valueFormatter: ({ start_timing }) =>
-      formatDate(start_timing, 'dd/MM/yyyy HH:mm:ss', 'es'),
+    valueFormatter: ({ start_timing }) => FormatDate.dateMoment(start_timing),
   },
   {
     field: 'arrived_at',
     headerName: 'Llegada',
-    valueFormatter: ({ arrived_at }) =>
-      formatDate(arrived_at, 'dd/MM/yyyy HH:mm:ss', 'es'),
+    valueFormatter: ({ arrived_at }) => FormatDate.dateMoment(arrived_at),
   },
   {
     field: 'deserted_at',
     headerName: 'Abandono',
     valueFormatter: ({ deserted_at }) =>
-      deserted_at
-        ? formatDate(deserted_at, 'dd/MM/yyyy HH:mm:ss', 'es')
-        : '---',
+      deserted_at ? FormatDate.dateMoment(deserted_at) : '---',
   },
   {
     field: 'end_timing',
     headerName: 'Hora Salida',
-    valueFormatter: ({ end_timing }) =>
-      formatDate(end_timing, 'dd/MM/yyyy HH:mm:ss', 'es'),
+    valueFormatter: ({ end_timing }) => FormatDate.dateMoment(end_timing),
   },
   {
     field: 'lastOrderAt',
     headerName: 'Ultima Orden',
-    valueFormatter: ({ lastOrderAt }) =>
-      formatDate(lastOrderAt, 'dd/MM/yyyy HH:mm:ss', 'es'),
+    valueFormatter: ({ lastOrderAt }) => FormatDate.dateMoment(lastOrderAt),
   },
   {
     field: 'lastOrderId',
@@ -282,14 +279,13 @@ export const timingsColumns: TableColumns<TimingDto> = [
   {
     field: 'endFinal',
     headerName: 'Fecha Final',
-    valueFormatter: ({ endFinal }) =>
-      formatDate(endFinal, 'dd/MM/yyyy HH:mm:ss', 'es'),
+    valueFormatter: ({ endFinal }) => FormatDate.dateMoment(endFinal),
   },
   {
     field: 'hours',
     headerName: 'Horas',
-    valueFormatter: ({ arrived_at, endFinal }) =>
-      DateUtils.formatToTimer(DateUtils.diff(endFinal, arrived_at, 'h')),
+    valueFormatter: ({ startFinal, endFinal }) =>
+      DateUtils.formatToTimer(DateUtils.diff(endFinal, startFinal, 'h')),
   },
 ];
 
