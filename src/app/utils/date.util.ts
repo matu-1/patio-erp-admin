@@ -1,3 +1,5 @@
+import * as moment from 'moment-timezone';
+
 export abstract class DateUtils {
   static getMinHour(date: Date | string = new Date()) {
     const today = new Date(date);
@@ -42,5 +44,21 @@ export abstract class DateUtils {
       h: time / (1000 * 60 * 60),
     };
     return res[type];
+  }
+
+  static getMaxHourMoment(date: Date | string = new Date()) {
+    return moment(new Date(date))
+      .hours(23)
+      .minutes(59)
+      .seconds(59)
+      .milliseconds(999);
+  }
+
+  static getMinHourMoment(date: Date | string = new Date()) {
+    return moment(new Date(date))
+      .hours(0)
+      .minutes(0)
+      .seconds(0)
+      .milliseconds(0);
   }
 }

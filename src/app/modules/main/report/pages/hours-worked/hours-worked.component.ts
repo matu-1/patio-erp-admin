@@ -36,9 +36,11 @@ export class HoursWorkedComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setTimeZone(); //limpia si ya se tiene seteado la TZ
     this.parseFormFromQuery();
     this.getHoursWorkedDriver();
     this.getCities();
+    this.changeValues();
   }
 
   parseFormFromQuery() {
@@ -53,11 +55,11 @@ export class HoursWorkedComponent implements OnInit {
   async getHoursWorkedDriver() {
     this.hoursWorkedDrivers = undefined;
     const value = ObjectUtils.clear(this.form.value);
-    this.setTimeZone(value.cityId);
     const res = await handleRequest(() =>
       this.reportService.getHoursWorkedDrives({
         ...value,
-        end: DateUtils.getMaxHour(value.end),
+        start: DateUtils.getMinHourMoment(DateUtils.getMaxHour(value.start)),
+        end: DateUtils.getMaxHourMoment(DateUtils.getMaxHour(value.end)),
       })
     );
     if (res) this.hoursWorkedDrivers = res.data;
@@ -71,6 +73,12 @@ export class HoursWorkedComponent implements OnInit {
     const timeZone =
       cityId == CONFIG.CITY_EEUU ? 'America/New_York' : 'America/La_Paz';
     moment.tz.setDefault(timeZone);
+  }
+
+  changeValues() {
+    this.form.get('cityId')?.valueChanges.subscribe((value) => {
+      this.setTimeZone(value);
+    });
   }
 
   download() {
