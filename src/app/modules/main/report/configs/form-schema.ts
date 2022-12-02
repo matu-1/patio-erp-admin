@@ -91,7 +91,7 @@ export const hoursWorkedFilterSchema: TextFieldSchema = [
     name: 'start',
     label: 'Fecha Inicial',
     fieldType: TextFieldType.DatePicker,
-    value: DateUtils.getMaxHour(),
+    value: DateUtils.getMinHour(),
     validators: [
       {
         name: 'required',

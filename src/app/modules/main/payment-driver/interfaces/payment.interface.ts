@@ -7,5 +7,6 @@ export interface Payment {
   amount: string;
   paymentMethod: number;
   reason: null;
+  paidAt: Date;
   paymentDriverId: number;
 }

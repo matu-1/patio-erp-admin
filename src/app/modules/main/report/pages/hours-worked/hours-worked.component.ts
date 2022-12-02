@@ -9,7 +9,6 @@ import { CONFIG } from 'src/app/constants/config.constant';
 import { DIALOG_CONFIG_SM } from 'src/app/constants/dialog.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
-import { FormatDate } from 'src/app/utils/format.date.util';
 import { handleRequest } from 'src/app/utils/handle-request';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import { DetailDialog } from '../../components/detail/detail.dialog';

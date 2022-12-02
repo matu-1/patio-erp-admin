@@ -31,7 +31,21 @@ export const paySchema: TextFieldSchema = [
       { value: 0, label: 'Efectivo' },
       { value: 1, label: 'Wallet' },
       { value: 2, label: 'Cuenta Bancaria' },
+      { value: 2, label: 'Soli' },
     ],
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+  },
+  {
+    name: 'paidAt',
+    label: 'Pagado el',
+    value: new Date(),
+    fieldType: TextFieldType.DatePicker,
     validators: [
       {
         name: 'required',

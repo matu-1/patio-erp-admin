@@ -37,7 +37,6 @@
       <mat-icon class="action-icon">info</mat-icon>
     </button>
     <button
-      *ngIf="!value.paidAt"
       mat-icon-button
       [disabled]="value.amount == value.balance"
       matTooltip="Revertir ultimo pago"
