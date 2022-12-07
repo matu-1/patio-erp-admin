@@ -190,6 +190,10 @@ export const ordersReceivedColumns: TableColumns<OrderReceived> = [
     headerName: 'Driver',
   },
   {
+    field: 'phone',
+    headerName: 'Telefono',
+  },
+  {
     field: 'order_id',
     headerName: 'Id Order',
   },
