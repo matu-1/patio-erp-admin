@@ -12,6 +12,10 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
     headerName: 'Nombre',
   },
   {
+    field: 'phoneNumber',
+    headerName: 'Telefono',
+  },
+  {
     field: 'amount',
     headerName: 'Monto',
     valueFormatter: ({ amount }) => formatNumber(amount, 'es', '.2-2'),

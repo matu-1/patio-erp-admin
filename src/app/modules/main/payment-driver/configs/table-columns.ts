@@ -4,51 +4,10 @@ import { FormatDate } from 'src/app/utils/format.date.util';
 import { paymentMethod } from '../constants/payment-method';
 import { PaymentDriver } from '../interfaces/payment-driver.interface';
 import { Payment } from '../interfaces/payment.interface';
+import { paymentsDriverColumns as paymentsCollectDriverColumns } from '../../collect-driver/configs/table-columns';
 
 export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
-  {
-    field: 'driverId',
-    headerName: 'Id Driver',
-  },
-  {
-    field: 'name',
-    headerName: 'Nombre',
-  },
-  {
-    field: 'amount',
-    headerName: 'Monto',
-    valueFormatter: ({ amount }) => formatNumber(amount, 'es', '.2-2'),
-  },
-  {
-    field: 'balance',
-    headerName: 'Saldo',
-    valueFormatter: ({ balance }) =>
-      balance ? formatNumber(balance, 'es', '.2-2') : '---',
-  },
-  {
-    field: 'paidAt',
-    headerName: 'Pagado el',
-    valueFormatter: ({ paidAt }) =>
-      paidAt ? formatDate(paidAt, 'dd/MM/yyyy HH:mm', 'es') : '---',
-  },
-  {
-    field: 'startDate',
-    headerName: 'Fechas',
-    valueFormatter: ({ startDate, endDate }) =>
-      formatDate(startDate, 'dd/MM/yyyy', 'es') +
-      ' - ' +
-      formatDate(endDate, 'dd/MM/yyyy', 'es'),
-  },
-  {
-    field: 'createdAt',
-    headerName: 'Creado el',
-    valueFormatter: ({ createdAt }) =>
-      formatDate(createdAt, 'dd/MM/yyyy HH:mm', 'es'),
-  },
-  {
-    field: 'actions',
-    headerName: 'Acciones',
-  },
+  ...paymentsCollectDriverColumns,
 ];
 
 export const paymentsColumns: TableColumns<Payment> = [
