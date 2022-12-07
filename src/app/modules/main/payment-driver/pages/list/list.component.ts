@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
@@ -18,6 +17,7 @@ import {
 } from '../../interfaces/payment-driver.interface';
 import { PaymentDriverService } from '../../services/payment-driver.service';
 import { PaymentDetailDialog } from '../../components/payment-detail/payment-detail.dialog';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-list',
@@ -33,8 +33,8 @@ export class ListComponent implements OnInit {
 
   constructor(
     private paymentDriverService: PaymentDriverService,
-    private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -71,13 +71,14 @@ export class ListComponent implements OnInit {
   }
 
   goDetail(data: PaymentDriver) {
-    this.router.navigateByUrl(
+    const url = this.location.prepareExternalUrl(
       `${PAGE_ROUTE.REPORT.HOURS_WORKED}?start=${DateUtils.getMinHour(
         data.startDate + ' '
       ).toISOString()}&end=${DateUtils.getMaxHour(
         data.endDate + ' '
       ).toISOString()}&driver=${data.name}`
     );
+    window.open(url, '_blank');
   }
 
   filter() {

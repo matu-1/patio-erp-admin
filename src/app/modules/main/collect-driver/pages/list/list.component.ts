@@ -1,6 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
@@ -35,7 +35,7 @@ export class ListComponent implements OnInit {
   constructor(
     private collectDriverService: CollectDriverService,
     private dialog: MatDialog,
-    private router: Router
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -73,13 +73,14 @@ export class ListComponent implements OnInit {
   }
 
   goDetail(data: PaymentDriver) {
-    this.router.navigateByUrl(
+    const url = this.location.prepareExternalUrl(
       `${PAGE_ROUTE.REPORT.ORDERS_RECEIVED}?start=${DateUtils.getMinHour(
         data.startDate + ' '
       ).toISOString()}&end=${DateUtils.getMaxHour(
         data.endDate + ' '
       ).toISOString()}&driver=${data.name}`
     );
+    window.open(url, '_blank');
   }
 
   async block(data: PaymentDriver) {
