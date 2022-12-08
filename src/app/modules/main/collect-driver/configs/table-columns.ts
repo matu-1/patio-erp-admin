@@ -1,8 +1,9 @@
 import { formatDate, formatNumber } from '@angular/common';
 import { TableColumns } from 'src/app/components/data-table/data-table.interface';
-import { PaymentDriver } from '../interfaces/payment-driver.interface';
+import { categoryText } from '../constants/payment-method';
+import { CollectDriver } from '../interfaces/payment-driver.interface';
 
-export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
+export const paymentsDriverColumns: TableColumns<CollectDriver> = [
   {
     field: 'driverId',
     headerName: 'Id Driver',
@@ -45,6 +46,16 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
     headerName: 'Creado el',
     valueFormatter: ({ createdAt }) =>
       formatDate(createdAt, 'dd/MM/yyyy HH:mm', 'es'),
+  },
+  {
+    field: 'category',
+    headerName: 'Categoría',
+    valueFormatter: ({ category }) => categoryText[category as any],
+  },
+  {
+    field: 'reason',
+    headerName: 'Razón',
+    valueFormatter: ({ reason }) => reason ?? '---',
   },
   {
     field: 'actions',

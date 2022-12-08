@@ -100,3 +100,97 @@ export const collectFilterSchema: TextFieldSchema = [
     df: '12%',
   },
 ];
+
+export const createCollectDriverSchema: TextFieldSchema = [
+  {
+    name: 'driverId',
+    label: 'Driver',
+    fieldType: TextFieldType.Dropdown,
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    xs: '100%',
+    df: '50%',
+  },
+  {
+    name: 'amount',
+    label: 'Monto',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'number',
+        message: 'Must be a number',
+        validatorFn: CustomValidators.number,
+      },
+      {
+        name: 'min',
+        message: 'Minimum 0',
+        validatorFn: Validators.min(0),
+      },
+    ],
+    xs: '100%',
+    df: '50%',
+  },
+  {
+    name: 'category',
+    label: 'Categoría',
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      { value: 0, label: 'Delivery' },
+      { value: 1, label: 'Deuda' },
+      { value: 2, label: 'Otro' },
+    ],
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    xs: '100%',
+    df: '50%',
+  },
+  {
+    name: 'date',
+    label: 'Fecha',
+    value: new Date(),
+    fieldType: TextFieldType.DatePicker,
+    minRows: 3,
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    xs: '100%',
+    df: '50%',
+  },
+  {
+    name: 'reason',
+    label: 'Razón',
+    fieldType: TextFieldType.Textarea,
+    minRows: 3,
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'minlength',
+        message: 'Minimum 3 characteres',
+        validatorFn: Validators.minLength(3),
+      },
+    ],
+    df: '100%',
+  },
+];

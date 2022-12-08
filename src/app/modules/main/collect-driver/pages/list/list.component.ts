@@ -16,7 +16,7 @@ import { paymentsDriverColumns } from '../../configs/table-columns';
 import { paymentMethod } from '../../constants/payment-method';
 import {
   PayDriverDto,
-  PaymentDriver,
+  CollectDriver,
 } from '../../interfaces/payment-driver.interface';
 import { CollectDriverService } from '../../services/collect-driver.service';
 
@@ -26,11 +26,12 @@ import { CollectDriverService } from '../../services/collect-driver.service';
 })
 export class ListComponent implements OnInit {
   title = 'Cobros Driver';
-  paymentsDriver?: PaymentDriver[];
+  paymentsDriver?: CollectDriver[];
   paymentsDriverColumns = paymentsDriverColumns;
   paymentMethod = paymentMethod;
   collectFilterSchema = collectFilterSchema;
   form = buildform(collectFilterSchema);
+  PAGE_ROUTE = PAGE_ROUTE;
 
   constructor(
     private collectDriverService: CollectDriverService,
@@ -54,7 +55,7 @@ export class ListComponent implements OnInit {
     if (res) this.paymentsDriver = res.data;
   }
 
-  openPaymentDlg(data: PaymentDriver) {
+  openPaymentDlg(data: CollectDriver) {
     const dialogRef = this.dialog.open(PayDialog, {
       ...DIALOG_CONFIG_XS,
       data,
@@ -72,7 +73,7 @@ export class ListComponent implements OnInit {
     if (res) this.getPaymentsDriver();
   }
 
-  goDetail(data: PaymentDriver) {
+  goDetail(data: CollectDriver) {
     const url = this.location.prepareExternalUrl(
       `${PAGE_ROUTE.REPORT.ORDERS_RECEIVED}?start=${DateUtils.getMinHour(
         data.startDate + ' '
@@ -83,7 +84,7 @@ export class ListComponent implements OnInit {
     window.open(url, '_blank');
   }
 
-  async block(data: PaymentDriver) {
+  async block(data: CollectDriver) {
     const res = await handleRequestPg(
       () => this.collectDriverService.blockDriver(data.driverId),
       true
@@ -91,7 +92,7 @@ export class ListComponent implements OnInit {
     if (res) this.getPaymentsDriver();
   }
 
-  openConfirmBlockDlg(data: PaymentDriver) {
+  openConfirmBlockDlg(data: CollectDriver) {
     const dialogRef = this.dialog.open(ConfirmDialog, {
       ...DIALOG_CONFIG_XS,
       data: {
@@ -103,7 +104,7 @@ export class ListComponent implements OnInit {
     });
   }
 
-  openDriverInfoDlg(data: PaymentDriver) {
+  openDriverInfoDlg(data: CollectDriver) {
     this.dialog.open(DriverInfoDialog, {
       ...DIALOG_CONFIG_XS,
       data,
@@ -118,7 +119,7 @@ export class ListComponent implements OnInit {
     this.getPaymentsDriver();
   }
 
-  openRevertConfirmDlg(data: PaymentDriver) {
+  openRevertConfirmDlg(data: CollectDriver) {
     const dialogRef = this.dialog.open(ConfirmDialog, {
       ...DIALOG_CONFIG_XS,
       data: {
@@ -139,7 +140,7 @@ export class ListComponent implements OnInit {
     if (res) this.getPaymentsDriver();
   }
 
-  openPaymentsDlg(data: PaymentDriver) {
+  openPaymentsDlg(data: CollectDriver) {
     this.dialog.open(PaymentDetailDialog, {
       ...DIALOG_CONFIG_XS,
       data,

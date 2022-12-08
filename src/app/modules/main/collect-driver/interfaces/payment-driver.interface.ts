@@ -1,4 +1,4 @@
-export interface PaymentDriver {
+export interface CollectDriver {
   id: number;
   userCreation: string;
   createdAt: Date;
@@ -13,6 +13,8 @@ export interface PaymentDriver {
   startDate: Date;
   endDate: Date;
   balance: number;
+  reason?: string;
+  category: string
 }
 
 export interface PayDriverDto {

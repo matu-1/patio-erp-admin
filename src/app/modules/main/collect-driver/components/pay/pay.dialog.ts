@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { paySchema } from '../../configs/form-schema';
-import { PaymentDriver } from '../../interfaces/payment-driver.interface';
+import { CollectDriver } from '../../interfaces/payment-driver.interface';
 
 @Component({
   selector: 'app-pay',
@@ -13,7 +13,7 @@ export class PayDialog {
   paySchema = paySchema;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: PaymentDriver,
+    @Inject(MAT_DIALOG_DATA) public data: CollectDriver,
     private dialogRef: MatDialogRef<PayDialog>
   ) {
     this.form.patchValue({ amount: data.balance });

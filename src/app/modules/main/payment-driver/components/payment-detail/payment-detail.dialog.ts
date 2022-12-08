@@ -4,7 +4,7 @@ import { paymentsColumns } from '../../configs/table-columns';
 import { Payment } from '../../interfaces/payment.interface';
 import { PaymentDriverService } from '../../services/payment-driver.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PaymentDriver } from '../../../collect-driver/interfaces/payment-driver.interface';
+import { CollectDriver } from '../../../collect-driver/interfaces/payment-driver.interface';
 
 @Component({
   selector: 'app-payment-detail',
@@ -17,7 +17,7 @@ export class PaymentDetailDialog implements OnInit {
 
   constructor(
     private paymentDriverService: PaymentDriverService,
-    @Inject(MAT_DIALOG_DATA) public data: PaymentDriver
+    @Inject(MAT_DIALOG_DATA) public data: CollectDriver
   ) {}
 
   ngOnInit(): void {

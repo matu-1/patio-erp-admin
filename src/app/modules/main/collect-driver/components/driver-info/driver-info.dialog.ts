@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Driver } from 'src/app/modules/public/interfaces/driver.interface';
 import { handleRequest } from 'src/app/utils/handle-request';
-import { PaymentDriver } from '../../interfaces/payment-driver.interface';
+import { CollectDriver } from '../../interfaces/payment-driver.interface';
 import { CollectDriverService } from '../../services/collect-driver.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { CollectDriverService } from '../../services/collect-driver.service';
 export class DriverInfoDialog implements OnInit {
   driver?: Driver;
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: PaymentDriver,
+    @Inject(MAT_DIALOG_DATA) private data: CollectDriver,
     private collectDriverService: CollectDriverService
   ) {}
 

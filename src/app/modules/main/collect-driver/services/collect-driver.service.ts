@@ -7,7 +7,7 @@ import { ObjectUtils } from 'src/app/utils/object.util';
 import { Response } from 'src/app/utils/response';
 import { routeParams } from 'src/app/utils/route-params';
 import {
-  PaymentDriver,
+  CollectDriver,
   PayDriverDto,
   CollectFilterDto,
 } from '../interfaces/payment-driver.interface';
@@ -21,7 +21,7 @@ export class CollectDriverService {
   getPaymentsDriver(dto: CollectFilterDto) {
     dto = ObjectUtils.clear(dto);
     dto.type = 0;
-    return this.http.get<Response<PaymentDriver[]>>(
+    return this.http.get<Response<CollectDriver[]>>(
       API.PAYMENT_DRIVER.GET_BY_RANGE,
       {
         params: dto as any,
@@ -30,7 +30,7 @@ export class CollectDriverService {
   }
 
   pay(id: number, dto: PayDriverDto) {
-    return this.http.put<Response<PaymentDriver>>(
+    return this.http.put<Response<CollectDriver>>(
       routeParams(API.PAYMENT_DRIVER.PAY, { id }),
       dto
     );
@@ -56,9 +56,15 @@ export class CollectDriverService {
   }
 
   revert(id: number) {
-    return this.http.put<Response<PaymentDriver>>(
+    return this.http.put<Response<CollectDriver>>(
       routeParams(API.PAYMENT_DRIVER.REVERT, { id }),
       {}
     );
+  }
+
+  getDrivers() {
+    return this.http.get<Response<Driver[]>>(API.DRIVER.GET_ALL, {
+      ...PATIO_STORE_CONFIG_HTTP,
+    });
   }
 }
