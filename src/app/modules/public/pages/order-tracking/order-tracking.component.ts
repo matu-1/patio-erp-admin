@@ -35,6 +35,8 @@ export class OrderTrackingComponent
   driverIntervalTimer?: NodeJS.Timer;
   orderIntervalTimer?: NodeJS.Timeout;
   previusPositionDriver!: google.maps.LatLngLiteral;
+  photoUrl =
+    'https://static.vecteezy.com/system/resources/previews/008/420/425/original/cute-penguin-wearing-earmuff-cartoon-icon-illustration-animal-winter-icon-concept-isolated-premium-flat-cartoon-style-vector.jpg';
 
   constructor(
     private publicService: PublicService,
@@ -73,15 +75,18 @@ export class OrderTrackingComponent
   }
 
   async getOrder() {
-    if (
-      (this.order &&
-        (this.order.status == 'complete' || this.order.status == 'canceled')) ||
-      this.hasError.getOrder
-    )
-      return clearInterval(this.orderIntervalTimer);
+    if (this.hasClear()) return clearInterval(this.orderIntervalTimer);
     const id = this.activatedRoute.snapshot.params.id;
     const res = await handleRequest(() => this.publicService.getOrder(id));
     if (res) this.order = res.data;
+  }
+
+  hasClear() {
+    return (
+      (this.order &&
+        (this.order.status == 'complete' || this.order.status == 'canceled')) ||
+      this.hasError.getOrder
+    );
   }
 
   async loadMarkers() {
@@ -164,6 +169,7 @@ export class OrderTrackingComponent
   }
 
   async updatePositionDriver(id: number, marker: google.maps.Marker) {
+    if (this.hasClear()) return clearInterval(this.driverIntervalTimer);
     const res = await handleRequest(() => this.publicService.getDriver(id));
     if (res) {
       const lat = Number(res.data.last_latitude);
@@ -195,5 +201,18 @@ export class OrderTrackingComponent
     theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
     //if (theta < 0) theta = 360 + theta; // range [0, 360)
     return theta;
+  }
+
+  toggle(orderStatusEle: HTMLDivElement) {
+    if (orderStatusEle.classList.contains('order-close'))
+      orderStatusEle.classList.remove('order-close');
+    else orderStatusEle.classList.add('order-close');
+  }
+
+  sendMessage(order: OrderDto) {
+    const link = `http://api.whatsapp.com/send?phone=${
+      order.assignedDrivers![0].phoneNumber
+    }&text=Holaa`;
+    window.open(link, '_blank');
   }
 }

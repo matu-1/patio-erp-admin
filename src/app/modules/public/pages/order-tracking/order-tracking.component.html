@@ -1,16 +1,30 @@
 <div class="map" #map></div>
-<div class="order-status-root">
+<div class="order-status-root" #orderStatus>
   <div class="order-status">
     <mat-progress-bar *ngIf="!order" mode="indeterminate"></mat-progress-bar>
-    <h2 *ngIf="order; else loading" class="status-text">
+    <h1 *ngIf="order; else loading" class="status-text">
       {{ order.status | uppercase }}
-    </h2>
+    </h1>
     <ng-template #loading><span class="loading">loading...</span></ng-template>
-    <div *ngIf="order" class="order-info">
+    <div *ngIf="order && order.assignedDrivers" class="order-section">
       <h2 class="subtitle">Yo soy tu conductor</h2>
+      <div class="driver-container">
+        <img [src]="photoUrl" alt="profile" class="profile" />
+        <div class="driver-info">
+          <p>{{ order.assignedDrivers[0].name | titlecase }}</p>
+          <p>Comunicate con {{ order.assignedDrivers[0].name | titlecase }}</p>
+        </div>
+        <button
+          mat-icon-button
+          matTooltip="Enviar Mensaje"
+          (click)="sendMessage(order)"
+        >
+          <mat-icon>chat</mat-icon>
+        </button>
+      </div>
     </div>
     <hr *ngIf="order" />
-    <div *ngIf="order" class="order-info">
+    <div *ngIf="order" class="order-section">
       <h2 class="subtitle">Detalle del pedido</h2>
       <div class="text-box">
         <span>Dirección</span>
@@ -22,7 +36,7 @@
       </div>
     </div>
     <hr *ngIf="order" />
-    <div *ngIf="order" class="order-info">
+    <div *ngIf="order" class="order-section">
       <h2 class="subtitle">Productos</h2>
       <div class="product-box" *ngFor="let product of order.products">
         <div class="product-header">
@@ -35,5 +49,13 @@
         <p>{{ product.description }}</p>
       </div>
     </div>
+    <button
+      mat-mini-fab
+      color="primary"
+      class="toggle"
+      (click)="toggle(orderStatus)"
+    >
+      <mat-icon>expand_more</mat-icon>
+    </button>
   </div>
 </div>

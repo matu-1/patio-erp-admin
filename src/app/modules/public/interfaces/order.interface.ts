@@ -45,6 +45,7 @@ export interface AssignedDriver {
   fare_company_delivery: number;
   latitude: number;
   longitude: number;
+  phoneNumber: string;
 }
 
 export interface Merchant {

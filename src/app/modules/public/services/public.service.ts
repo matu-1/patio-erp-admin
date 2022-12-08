@@ -21,6 +21,9 @@ export class PublicService {
     return this.http
       .get<Response<OrderDto>>(routeParams(API.ORDER.GET_BY_ID, { id }), {
         ...PATIO_STORE_CONFIG_HTTP,
+        params: {
+          driverStatus: 'assigned,complete',
+        },
       })
       .pipe(
         map((data) => {
