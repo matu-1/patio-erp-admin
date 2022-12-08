@@ -37,6 +37,7 @@ export class OrderTrackingComponent
   previusPositionDriver!: google.maps.LatLngLiteral;
   photoUrl =
     'https://static.vecteezy.com/system/resources/previews/008/420/425/original/cute-penguin-wearing-earmuff-cartoon-icon-illustration-animal-winter-icon-concept-isolated-premium-flat-cartoon-style-vector.jpg';
+  iconToggle = 'expand_more'; //expand_less
 
   constructor(
     private publicService: PublicService,
@@ -204,9 +205,13 @@ export class OrderTrackingComponent
   }
 
   toggle(orderStatusEle: HTMLDivElement) {
-    if (orderStatusEle.classList.contains('order-close'))
+    if (orderStatusEle.classList.contains('order-close')) {
       orderStatusEle.classList.remove('order-close');
-    else orderStatusEle.classList.add('order-close');
+      this.iconToggle = 'expand_more';
+    } else {
+      orderStatusEle.classList.add('order-close');
+      this.iconToggle = 'expand_less';
+    }
   }
 
   sendMessage(order: OrderDto) {
