@@ -4,8 +4,14 @@ export const paymentMethod: Record<number, string> = {
   2: 'Cuenta Bancaria',
 };
 
+export const categoryValue = {
+  delivery: 0,
+  debt: 1,
+  other: 2,
+};
+
 export const categoryText: Record<number, string> = {
-  0: 'Delivery',
-  1: 'Deuda',
-  2: 'Otros',
+  [categoryValue.delivery]: 'Delivery',
+  [categoryValue.debt]: 'Deuda',
+  [categoryValue.other]: 'Otros',
 };

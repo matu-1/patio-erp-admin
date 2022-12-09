@@ -6,15 +6,13 @@ export interface CollectDriver {
   deletedAt?: Date;
   driverId: number;
   name: string;
-  paymentMethod?: number;
   amount: number;
-  amountPaid?: number;
   paidAt?: Date;
   startDate: Date;
   endDate: Date;
   balance: number;
   reason?: string;
-  category: string
+  category: string;
 }
 
 export interface PayDriverDto {
@@ -28,3 +26,16 @@ export interface CollectFilterDto {
   isPayment?: number;
   type?: number;
 }
+
+export interface CreateCollectDriver
+  extends Omit<
+    CollectDriver,
+    | 'id'
+    | 'userCreation'
+    | 'createdAt'
+    | 'updatedAt'
+    | 'deletedAt'
+    | 'paidAt'
+    | 'startDate'
+    | 'endDate'
+  > {}

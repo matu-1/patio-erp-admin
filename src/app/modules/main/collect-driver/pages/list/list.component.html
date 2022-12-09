@@ -40,7 +40,12 @@
     >
       <mat-icon class="action-icon">payment</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Ver Detalle" (click)="goDetail(value)">
+    <button
+      mat-icon-button
+      matTooltip="Ver Detalle"
+      (click)="goDetail(value)"
+      *ngIf="value.category == categoryValue.delivery"
+    >
       <mat-icon class="action-icon">info</mat-icon>
     </button>
     <button

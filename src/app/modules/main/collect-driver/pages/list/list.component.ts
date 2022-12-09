@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
+import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
@@ -13,7 +14,7 @@ import { DriverInfoDialog } from '../../components/driver-info/driver-info.dialo
 import { PayDialog } from '../../components/pay/pay.dialog';
 import { collectFilterSchema } from '../../configs/form-schema';
 import { paymentsDriverColumns } from '../../configs/table-columns';
-import { paymentMethod } from '../../constants/payment-method';
+import { categoryValue, paymentMethod } from '../../constants/payment-method';
 import {
   PayDriverDto,
   CollectDriver,
@@ -32,6 +33,7 @@ export class ListComponent implements OnInit {
   collectFilterSchema = collectFilterSchema;
   form = buildform(collectFilterSchema);
   PAGE_ROUTE = PAGE_ROUTE;
+  categoryValue = categoryValue;
 
   constructor(
     private collectDriverService: CollectDriverService,
@@ -112,7 +114,10 @@ export class ListComponent implements OnInit {
   }
 
   download() {
-    ExcelUtils.download(this.paymentsDriver!, 'collect driver');
+    ExcelUtils.download(
+      parseByColumns(this.paymentsDriver!, paymentsDriverColumns),
+      'collect driver'
+    );
   }
 
   filter() {

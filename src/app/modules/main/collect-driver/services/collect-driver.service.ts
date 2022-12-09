@@ -10,6 +10,7 @@ import {
   CollectDriver,
   PayDriverDto,
   CollectFilterDto,
+  CreateCollectDriver,
 } from '../interfaces/payment-driver.interface';
 
 @Injectable({
@@ -66,5 +67,12 @@ export class CollectDriverService {
     return this.http.get<Response<Driver[]>>(API.DRIVER.GET_ALL, {
       ...PATIO_STORE_CONFIG_HTTP,
     });
+  }
+
+  create(dto: CreateCollectDriver) {
+    return this.http.post<Response<CollectDriver>>(
+      API.PAYMENT_DRIVER.CREATE,
+      dto
+    );
   }
 }

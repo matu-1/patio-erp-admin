@@ -4,10 +4,10 @@ import { FormatDate } from 'src/app/utils/format.date.util';
 import { paymentMethod } from '../constants/payment-method';
 import { PaymentDriver } from '../interfaces/payment-driver.interface';
 import { Payment } from '../interfaces/payment.interface';
-import { paymentsDriverColumns as paymentsCollectDriverColumns } from '../../collect-driver/configs/table-columns';
+import { paymentsDriverColumns as collectsDriverColumns } from '../../collect-driver/configs/table-columns';
 
 export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
-  ...paymentsCollectDriverColumns,
+  ...collectsDriverColumns,
 ];
 paymentsDriverColumns.splice(8, 2)
 

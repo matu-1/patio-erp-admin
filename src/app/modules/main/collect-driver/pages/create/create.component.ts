@@ -2,7 +2,8 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
-import { handleRequest } from 'src/app/utils/handle-request';
+import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
+import { PaymentDriverType } from '../../../payment-driver/constants/payment-driver-type';
 import { createCollectDriverSchema } from '../../configs/form-schema';
 import { CollectDriverService } from '../../services/collect-driver.service';
 
@@ -33,7 +34,7 @@ export class CreateComponent implements OnInit {
     if (res)
       createCollectDriverSchema[0].options = res.data.map(({ id, name }) => ({
         value: id,
-        label: name,
+        label: `${id} - ${name}`,
       }));
   }
 
@@ -45,11 +46,14 @@ export class CreateComponent implements OnInit {
     this.location.back();
   }
 
-  save() {
-    console.log('values', this.form.value);
-    //TODO: format values
+  async save() {
     const body = {
       ...this.form.value,
+      type: PaymentDriverType.Cobro,
     };
+    const res = await handleRequestPg(() =>
+      this.collectDriverService.create(body)
+    );
+    if (res) this.goBack();
   }
 }

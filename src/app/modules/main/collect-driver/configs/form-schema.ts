@@ -31,7 +31,8 @@ export const paySchema: TextFieldSchema = [
       { value: 0, label: 'Efectivo' },
       { value: 1, label: 'Wallet' },
       { value: 2, label: 'Cuenta Bancaria' },
-      { value: 2, label: 'Soli' },
+      { value: 3, label: 'Soli' },
+      { value: 4, label: 'Conciliación sin ingreso' },
     ],
     validators: [
       {
@@ -133,7 +134,7 @@ export const createCollectDriverSchema: TextFieldSchema = [
       {
         name: 'min',
         message: 'Minimum 0',
-        validatorFn: Validators.min(0),
+        validatorFn: Validators.min(1),
       },
     ],
     xs: '100%',
@@ -144,7 +145,6 @@ export const createCollectDriverSchema: TextFieldSchema = [
     label: 'Categoría',
     fieldType: TextFieldType.Dropdown,
     options: [
-      { value: 0, label: 'Delivery' },
       { value: 1, label: 'Deuda' },
       { value: 2, label: 'Otro' },
     ],
