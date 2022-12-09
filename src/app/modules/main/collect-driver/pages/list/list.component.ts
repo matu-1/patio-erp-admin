@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { buildform } from 'src/app/components/text-field/text-field.util';
@@ -38,11 +39,17 @@ export class ListComponent implements OnInit {
   constructor(
     private collectDriverService: CollectDriverService,
     private dialog: MatDialog,
-    private location: Location
+    private location: Location,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.getPaymentsDriver();
+  }
+
+  parseFormFromQuery() {
+    const query = this.activatedRoute.snapshot.queryParams;
+    console.log('query', query);
   }
 
   async getPaymentsDriver() {

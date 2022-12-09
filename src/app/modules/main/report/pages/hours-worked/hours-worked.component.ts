@@ -1,4 +1,4 @@
-import { formatDate } from '@angular/common';
+import { formatDate, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -7,6 +7,7 @@ import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { CONFIG } from 'src/app/constants/config.constant';
 import { DIALOG_CONFIG_SM } from 'src/app/constants/dialog.constant';
+import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest } from 'src/app/utils/handle-request';
@@ -31,7 +32,8 @@ export class HoursWorkedComponent implements OnInit {
   constructor(
     private reportService: ReportService,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -113,5 +115,13 @@ export class HoursWorkedComponent implements OnInit {
 
   get isLoadingFilter() {
     return !Boolean(this.hoursWorkedFilterSchema[2].options);
+  }
+
+  goDiscounts(value: HoursWorkedDriver) {
+    //TODO: Redirect to collect driver
+    const url = this.location.prepareExternalUrl(
+      `${PAGE_ROUTE.COLLECT_DRIVER.LIST}?isPayment=0&driver=${value.name}`
+    );
+    window.open(url, '_bank');
   }
 }
