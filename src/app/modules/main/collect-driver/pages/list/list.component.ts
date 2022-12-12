@@ -35,6 +35,7 @@ export class ListComponent implements OnInit {
   form = buildform(collectFilterSchema);
   PAGE_ROUTE = PAGE_ROUTE;
   categoryValue = categoryValue;
+  driver = '';
 
   constructor(
     private collectDriverService: CollectDriverService,
@@ -44,12 +45,17 @@ export class ListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.parseFormFromQuery();
     this.getPaymentsDriver();
   }
 
   parseFormFromQuery() {
-    const query = this.activatedRoute.snapshot.queryParams;
-    console.log('query', query);
+    const { isPayment, driver } = this.activatedRoute.snapshot.queryParams;
+    this.driver = driver
+    this.form.patchValue({
+      isPayment: Number(isPayment),
+      start: new Date(2022, 11, 1),
+    });
   }
 
   async getPaymentsDriver() {

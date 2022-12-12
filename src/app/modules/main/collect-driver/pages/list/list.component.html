@@ -20,6 +20,7 @@
 </app-simple-card>
 <app-data-table
   [rows]="paymentsDriver"
+  [filter]="driver"
   [columns]="paymentsDriverColumns"
   (refresh)="getPaymentsDriver()"
 >
