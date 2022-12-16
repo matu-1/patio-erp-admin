@@ -47,8 +47,11 @@ export class CreateComponent implements OnInit {
   }
 
   async save() {
+    const value = this.form.value;
     const body = {
-      ...this.form.value,
+      ...value,
+      startDate: value.date,
+      endDate: value.date,
       type: PaymentDriverType.Cobro,
     };
     const res = await handleRequestPg(() =>

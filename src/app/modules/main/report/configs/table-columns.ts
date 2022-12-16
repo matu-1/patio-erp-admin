@@ -248,6 +248,11 @@ export const ordersColumns: TableColumns<OrderDto> = [
     headerName: 'Propina',
     valueFormatter: ({ tip }) => formatNumber(tip, 'es', '.2-2'),
   },
+  {
+    field: 'createdAt',
+    headerName: 'Creado el',
+    valueFormatter: ({ createdAt }) => FormatDate.dateMoment(createdAt),
+  },
 ];
 
 export const timingsColumns: TableColumns<TimingDto> = [
