@@ -7,16 +7,16 @@
     </h1>
     <ng-template #loading><span class="loading">loading...</span></ng-template>
     <div *ngIf="order && order.assignedDrivers" class="order-section">
-      <h2 class="subtitle">Yo soy tu conductor</h2>
+      <h2 class="subtitle">I am your driver</h2>
       <div class="driver-container">
         <img [src]="photoUrl" alt="profile" class="profile" />
         <div class="driver-info">
           <p>{{ order.assignedDrivers[0].name | titlecase }}</p>
-          <p>Comunicate con {{ order.assignedDrivers[0].name | titlecase }}</p>
+          <p>Contact {{ order.assignedDrivers[0].name | titlecase }}</p>
         </div>
         <button
           mat-icon-button
-          matTooltip="Enviar Mensaje"
+          matTooltip="Send Message"
           (click)="sendMessage(order)"
         >
           <mat-icon>chat</mat-icon>
@@ -25,19 +25,19 @@
     </div>
     <hr *ngIf="order" />
     <div *ngIf="order" class="order-section">
-      <h2 class="subtitle">Detalle del pedido</h2>
+      <h2 class="subtitle">Order detail</h2>
       <div class="text-box">
-        <span>Dirección</span>
+        <span>Address</span>
         <p>{{ order.to_address }}</p>
       </div>
       <div class="text-box">
-        <span>Servicio</span>
-        <p>Delivery / Estandar</p>
+        <span>Service</span>
+        <p>Delivery / Standard</p>
       </div>
     </div>
     <hr *ngIf="order" />
     <div *ngIf="order" class="order-section">
-      <h2 class="subtitle">Productos</h2>
+      <h2 class="subtitle">Products</h2>
       <div class="product-box" *ngFor="let product of order.products">
         <div class="product-header">
           <div>
