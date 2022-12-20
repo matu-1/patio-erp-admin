@@ -1,3 +1,5 @@
+import { Moment } from 'moment-timezone';
+
 export interface GetPaymentDetailDto {
   month: number;
   management: number;
@@ -38,4 +40,11 @@ export interface CreatePaymentDriverDto {
   startDate: Date;
   endDate: Date;
   type: number;
+}
+
+export interface RefreshPaymentDto {
+  startDate: Date | Moment;
+  endDate: Date | Moment;
+  type: number;
+  driverId: number;
 }

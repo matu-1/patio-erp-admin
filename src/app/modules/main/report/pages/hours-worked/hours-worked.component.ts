@@ -10,7 +10,7 @@ import { DIALOG_CONFIG_SM } from 'src/app/constants/dialog.constant';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
-import { handleRequest } from 'src/app/utils/handle-request';
+import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import { DetailDialog } from '../../components/detail/detail.dialog';
 import { hoursWorkedFilterSchema } from '../../configs/form-schema';
@@ -123,5 +123,20 @@ export class HoursWorkedComponent implements OnInit {
       `${PAGE_ROUTE.COLLECT_DRIVER.LIST}?isPayment=0&driver=${value.name}`
     );
     window.open(url, '_bank');
+  }
+
+  async refresh(value: HoursWorkedDriver) {
+    const { start, end } = this.form.value;
+    const res = await handleRequestPg(
+      () =>
+        this.reportService.refresh({
+          driverId: value.id,
+          type: 1,
+          startDate: DateUtils.getMinHourMoment(DateUtils.getMaxHour(start)),
+          endDate: DateUtils.getMaxHourMoment(DateUtils.getMaxHour(end)),
+        }),
+      true
+    );
+    if (res) this.filter();
   }
 }

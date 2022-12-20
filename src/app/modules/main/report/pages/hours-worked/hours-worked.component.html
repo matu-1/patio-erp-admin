@@ -33,7 +33,22 @@
   [filter]="driver"
 >
   <ng-template customColumn="actions" let-value="value">
-    <button mat-button (click)="showDetails(value)">Ver detalle</button>
-    <button mat-button (click)="goDiscounts(value)">Descuentos</button>
+    <button
+      mat-icon-button
+      (click)="showDetails(value)"
+      matTooltip="Ver detalle"
+    >
+      <mat-icon class="action-icon">info</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      (click)="goDiscounts(value)"
+      matTooltip="Descuentos"
+    >
+      <mat-icon class="action-icon">money_off</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Refrescar" (click)="refresh(value)">
+      <mat-icon class="action-icon">refresh</mat-icon>
+    </button>
   </ng-template>
 </app-data-table>

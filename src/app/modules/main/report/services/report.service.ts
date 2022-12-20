@@ -19,6 +19,7 @@ import {
   CreatePaymentDriverDto,
   GetPaymentDetailDto,
   PaymentDetail,
+  RefreshPaymentDto,
 } from '../interfaces/payment-detail.interface';
 
 @Injectable({
@@ -74,11 +75,15 @@ export class ReportService {
   }
 
   getOrders(dto: FilterOrder) {
-    dto.driverStatus = 'assigned,complete'
+    dto.driverStatus = 'assigned,complete';
     dto = ObjectUtils.clear(dto);
     return this.http.get<Response<Order[]>>(API.ORDER.GET_ALL, {
       ...PATIO_STORE_CONFIG_HTTP,
       params: dto as any,
     });
+  }
+
+  refresh(dto: RefreshPaymentDto) {
+    return this.http.post<Response<any>>(API.PAYMENT_DRIVER.REFRESH, dto);
   }
 }
