@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment-timezone';
+import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { CONFIG } from 'src/app/constants/config.constant';
@@ -94,7 +95,7 @@ export class HoursWorkedComponent implements OnInit {
     );
   }
 
-  showDetails(value: HoursWorkedDriver) {
+  showDetailsDlg(value: HoursWorkedDriver) {
     this.dialog.open(DetailDialog, {
       ...DIALOG_CONFIG_SM,
       data: value,
@@ -123,6 +124,17 @@ export class HoursWorkedComponent implements OnInit {
       `${PAGE_ROUTE.COLLECT_DRIVER.LIST}?isPayment=0&driver=${value.name}`
     );
     window.open(url, '_bank');
+  }
+
+  showConfirmRefreshDlg(value: HoursWorkedDriver) {
+    const dialogRef = this.dialog.open(ConfirmDialog, {
+      data: {
+        message: '¿Está seguro? si no existe el pago se creara!',
+      },
+    });
+    dialogRef.afterClosed().subscribe((ok) => {
+      if (ok) this.refresh(value);
+    });
   }
 
   async refresh(value: HoursWorkedDriver) {

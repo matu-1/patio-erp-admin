@@ -35,7 +35,7 @@
   <ng-template customColumn="actions" let-value="value">
     <button
       mat-icon-button
-      (click)="showDetails(value)"
+      (click)="showDetailsDlg(value)"
       matTooltip="Ver detalle"
     >
       <mat-icon class="action-icon">info</mat-icon>
@@ -47,7 +47,11 @@
     >
       <mat-icon class="action-icon">money_off</mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Refrescar" (click)="refresh(value)">
+    <button
+      mat-icon-button
+      matTooltip="Refrescar"
+      (click)="showConfirmRefreshDlg(value)"
+    >
       <mat-icon class="action-icon">refresh</mat-icon>
     </button>
   </ng-template>
