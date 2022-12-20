@@ -93,4 +93,24 @@ export class OrdersReceivedComponent implements OnInit {
       true
     );
   }
+
+  showConfirmRefreshDlg(value: OrderReceived) {
+    const dialogRef = this.dialog.open(ConfirmDialog, {
+      data: { message: '¿Está seguro? si no existe el pago se creara!' },
+    });
+    dialogRef.afterClosed().subscribe((ok) => ok && this.refresh(value));
+  }
+
+  async refresh(value: OrderReceived) {
+    const { start, end } = this.form.value;
+    const res = await handleRequestPg(() =>
+      this.reportService.refresh({
+        driverId: value.driver_id,
+        type: 0,
+        startDate: start,
+        endDate: DateUtils.getMaxHour(end),
+      })
+    );
+    if (res) this.filter();
+  }
 }

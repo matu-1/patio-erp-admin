@@ -228,6 +228,10 @@ export const ordersReceivedColumns: TableColumns<OrderReceived> = [
     valueFormatter: ({ createdAt }) =>
       formatDate(createdAt, 'dd/MM/yyyy HH:mm', 'es'),
   },
+  {
+    field: 'actions',
+    headerName: 'Acciones',
+  },
 ];
 
 export const ordersColumns: TableColumns<OrderDto> = [

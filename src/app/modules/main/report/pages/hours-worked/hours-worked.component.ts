@@ -132,9 +132,7 @@ export class HoursWorkedComponent implements OnInit {
         message: '¿Está seguro? si no existe el pago se creara!',
       },
     });
-    dialogRef.afterClosed().subscribe((ok) => {
-      if (ok) this.refresh(value);
-    });
+    dialogRef.afterClosed().subscribe((ok) => ok && this.refresh(value));
   }
 
   async refresh(value: HoursWorkedDriver) {

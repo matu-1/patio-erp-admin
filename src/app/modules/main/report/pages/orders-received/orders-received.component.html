@@ -37,4 +37,10 @@
   [columns]="ordersReceivedColumns"
   (refresh)="filter()"
   [filter]="driver"
-></app-data-table>
+>
+  <ng-template customColumn="actions" let-value="value">
+    <button mat-icon-button matTooltip="Refrescar" (click)="showConfirmRefreshDlg(value)">
+      <mat-icon class="action-icon" >refresh</mat-icon>
+    </button>
+  </ng-template>
+</app-data-table>
