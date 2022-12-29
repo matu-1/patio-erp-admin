@@ -11,8 +11,9 @@ export const paymentDetailSchema: TextFieldSchema = [
   {
     name: 'month',
     label: 'Mes',
-    value: new Date().getMonth() + 1,
+    value: [new Date().getMonth() + 1],
     fieldType: TextFieldType.Dropdown,
+    multiple: true,
     options: months.map((month, i) => ({ value: i + 1, label: month })),
     validators: [
       {

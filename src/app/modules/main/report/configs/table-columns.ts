@@ -31,13 +31,16 @@ export const paymentDetailColumns: TableColumns<PaymentDetail> = [
     headerName: 'Cobrador',
   },
   {
-    field: 'monto',
-    headerName: 'Monto',
-    valueFormatter: ({ monto }) => formatNumber(Number(monto), 'es', '.2-2'),
+    field: 'TOTAL COBRADO',
+    headerName: 'Total',
+    valueFormatter: (value) =>
+      formatNumber(Number(value['TOTAL COBRADO']), 'es', '.2-2'),
   },
   {
-    field: 'caja',
-    headerName: 'Caja',
+    field: 'SALDO POR COBRAR',
+    headerName: 'Saldo',
+    valueFormatter: (value) =>
+      formatNumber(Number(value['SALDO POR COBRAR']), 'es', '.2-2'),
   },
   {
     field: 'ingreso',
@@ -51,8 +54,8 @@ export const paymentDetailColumns: TableColumns<PaymentDetail> = [
     valueFormatter: ({ egreso }) => formatNumber(Number(egreso), 'es', '.2-2'),
   },
   {
-    field: 'metodo_pago',
-    headerName: 'Metodo Pago',
+    field: 'METODO DE COBRO',
+    headerName: 'Metodo Cobro',
   },
   {
     field: 'fecha_pago',

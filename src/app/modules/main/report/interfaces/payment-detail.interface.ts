@@ -1,7 +1,7 @@
 import { Moment } from 'moment-timezone';
 
 export interface GetPaymentDetailDto {
-  month: number;
+  month: number[];
   management: number;
 }
 
@@ -15,16 +15,16 @@ export interface PaymentDetail {
   gestion: string;
   cobrador: string;
   monto_conciliado: string;
-  monto: string;
+  'TOTAL COBRADO': string;
   monto_incobrable: string;
-  caja: string;
+  'SALDO POR COBRAR': string;
   ingreso: null | string;
   egreso: string;
   saldo: null | string;
   pagado: string;
   fecha_transaccion: Date | null;
   fecha_pago: Date | null;
-  metodo_pago: string | null;
+  'METODO DE COBRO': string | null;
   detalle: null | string;
   glosa: null | string;
   usuario: string | null;

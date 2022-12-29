@@ -31,7 +31,7 @@ interface Validator {
 
 export interface TextFieldValue {
   name: string;
-  value?: string | number | Date;
+  value?: string | number | Date | string[] | number[];
   label: string;
   fieldType?: TextFieldType;
   type?: Type;

@@ -10,7 +10,6 @@ import { ReportService } from '../../services/report.service';
 @Component({
   selector: 'app-payment-detail',
   templateUrl: './payment-detail.component.html',
-  styleUrls: ['./payment-detail.component.scss'],
 })
 export class PaymentDetailComponent implements OnInit {
   paymentDetailSchema = paymentDetailSchema;
@@ -39,5 +38,4 @@ export class PaymentDetailComponent implements OnInit {
   download() {
     ExcelUtils.download(this.paymentDetailList!, 'payment-detail');
   }
-
 }
