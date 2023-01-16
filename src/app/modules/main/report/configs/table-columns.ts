@@ -1,6 +1,7 @@
 import { formatDate, formatNumber } from '@angular/common';
 import { TableColumns } from 'src/app/components/data-table/data-table.interface';
 import { FORMAT_DATE } from 'src/app/constants/format-date';
+import { MODALITY } from 'src/app/constants/modality.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { FormatDate } from 'src/app/utils/format.date.util';
 import { DeliveryDetail } from '../interfaces/delivery-detail.interface';
@@ -131,6 +132,11 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     valueFormatter: ({ tips }) => formatNumber(tips, 'es'),
   },
   {
+    field: 'totalDistance',
+    headerName: 'Distancia (mts)',
+    valueFormatter: ({ totalDistance }) => formatNumber(totalDistance, 'es'),
+  },
+  {
     field: 'amountHour',
     headerName: 'Monto Hora',
     valueFormatter: ({ amountHour }) => formatNumber(amountHour, 'es'),
@@ -248,12 +254,33 @@ export const ordersColumns: TableColumns<OrderDto> = [
   },
   {
     field: 'to_address',
-    headerName: 'Direccion',
+    headerName: 'Dirección',
   },
   {
     field: 'tip',
     headerName: 'Propina',
     valueFormatter: ({ tip }) => formatNumber(tip, 'es', '.2-2'),
+  },
+  {
+    field: 'distance',
+    headerName: 'Distancia (mts)',
+    valueFormatter: ({ distance }) => formatNumber(distance, 'es', '.2-2'),
+  },
+  {
+    field: 'earning',
+    headerName: 'Ganancia',
+    valueFormatter: ({ earningBase, modalityId }) =>
+      MODALITY.BASE_WITH_TIP == modalityId
+        ? formatNumber(earningBase.earning, 'es', '.2-2')
+        : '---',
+  },
+  {
+    field: 'totalEarning',
+    headerName: 'Total',
+    valueFormatter: ({ earningBase, modalityId }) =>
+      modalityId == MODALITY.BASE_WITH_TIP
+        ? formatNumber(earningBase.totalEarning, 'es', '.2-2')
+        : '---',
   },
   {
     field: 'createdAt',

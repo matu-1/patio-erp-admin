@@ -16,6 +16,7 @@ export interface HoursWorkedDriver {
   quantity: number;
   orders: OrderDto[];
   timings: TimingDto[];
+  totalDistance: number;
 }
 
 export interface OrderDto {
@@ -25,6 +26,18 @@ export interface OrderDto {
   createdAt: Date;
   updatedAt: Date;
   to_address: string;
+  distance: number;
+  modalityId: number;
+  earningBase: EarningBase;
+}
+
+interface EarningBase {
+  minutes: number;
+  amountHour: number;
+  earning: number;
+  tipFinal: number;
+  discounts: number;
+  totalEarning: number;
 }
 
 export interface TimingDto {

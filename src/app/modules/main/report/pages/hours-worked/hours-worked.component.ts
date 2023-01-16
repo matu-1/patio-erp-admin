@@ -7,7 +7,7 @@ import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { CONFIG } from 'src/app/constants/config.constant';
-import { DIALOG_CONFIG_SM } from 'src/app/constants/dialog.constant';
+import { DIALOG_CONFIG_MD } from 'src/app/constants/dialog.constant';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
@@ -97,7 +97,7 @@ export class HoursWorkedComponent implements OnInit {
 
   showDetailsDlg(value: HoursWorkedDriver) {
     this.dialog.open(DetailDialog, {
-      ...DIALOG_CONFIG_SM,
+      ...DIALOG_CONFIG_MD,
       data: value,
     });
   }
