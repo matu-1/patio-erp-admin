@@ -4,6 +4,7 @@ import { FORMAT_DATE } from 'src/app/constants/format-date';
 import { MODALITY } from 'src/app/constants/modality.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { FormatDate } from 'src/app/utils/format.date.util';
+import { meterToMile } from 'src/app/utils/utils';
 import { DeliveryDetail } from '../interfaces/delivery-detail.interface';
 import {
   HoursWorkedDriver,
@@ -134,7 +135,7 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
   {
     field: 'totalDistance',
     headerName: 'Distancia (mi)',
-    valueFormatter: ({ totalDistance }) => formatNumber(totalDistance, 'es'),
+    valueFormatter: ({ totalDistance }) => meterToMile(totalDistance),
   },
   {
     field: 'amountHour',
@@ -263,8 +264,8 @@ export const ordersColumns: TableColumns<OrderDto> = [
   },
   {
     field: 'distance',
-    headerName: 'Distancia (mts)',
-    valueFormatter: ({ distance }) => formatNumber(distance, 'es', '.2-2'),
+    headerName: 'Distancia (mi)',
+    valueFormatter: ({ distance }) => meterToMile(distance),
   },
   {
     field: 'earning',
