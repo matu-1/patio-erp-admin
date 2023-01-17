@@ -133,7 +133,7 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
   },
   {
     field: 'totalDistance',
-    headerName: 'Distancia (mts)',
+    headerName: 'Distancia (mi)',
     valueFormatter: ({ totalDistance }) => formatNumber(totalDistance, 'es'),
   },
   {
