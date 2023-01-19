@@ -24,6 +24,16 @@
     <div fxFlex="20%" fxFlex.xs="100%">
       <button mat-raised-button color="accent">Filtrar</button>
     </div>
+    <div
+      fxFlex="20%"
+      fxFlex.xs="100%"
+      style="align-self: center; text-align: end"
+    >
+      <h2 *ngIf="totalHours != undefined; else loadingTotal" class="mb-0">
+        {{ totalHours | number }} horas
+      </h2>
+      <ng-template #loadingTotal><h3 class="mb-0">Loading...</h3></ng-template>
+    </div>
   </form>
 </app-simple-card>
 <app-data-table

@@ -4,6 +4,7 @@ export interface HoursWorkedDriver {
   phoneNumber: string;
   amountHour: number;
   modality: string;
+  modalityId: number;
   hoursWorked: number;
   orderQuantity: number;
   discounts: number;

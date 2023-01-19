@@ -14,6 +14,7 @@ import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import { DetailDialog } from '../../components/detail/detail.dialog';
+import { hoursWorkedColumnsExport } from '../../configs/export-columns';
 import { hoursWorkedFilterSchema } from '../../configs/form-schema';
 import { hoursWorkedColumns } from '../../configs/table-columns';
 import { HoursWorkedDriver } from '../../interfaces/hours-worked-driver.interface';
@@ -67,6 +68,13 @@ export class HoursWorkedComponent implements OnInit {
     if (res) this.hoursWorkedDrivers = res.data;
   }
 
+  get totalHours() {
+    return this.hoursWorkedDrivers?.reduce(
+      (acc, curr) => acc + curr.hoursWorked,
+      0
+    );
+  }
+
   filter() {
     this.getHoursWorkedDriver();
   }
@@ -86,7 +94,7 @@ export class HoursWorkedComponent implements OnInit {
   download() {
     const { start, end } = ObjectUtils.clear(this.form.value);
     ExcelUtils.download(
-      parseByColumns(this.hoursWorkedDrivers!, hoursWorkedColumns),
+      parseByColumns(this.hoursWorkedDrivers!, hoursWorkedColumnsExport),
       `hours ${formatDate(start, 'dd-MM-yyyy', 'es')} al ${formatDate(
         end,
         'dd-MM-yyyy',

@@ -4,6 +4,7 @@ import { ordersColumns, timingsColumns } from '../../configs/table-columns';
 import { HoursWorkedDriver } from '../../interfaces/hours-worked-driver.interface';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
+import { ordersColumnsExport } from '../../configs/export-columns';
 
 @Component({
   selector: 'app-detail',
@@ -20,7 +21,7 @@ export class DetailDialog implements OnInit {
 
   ordersDownload() {
     ExcelUtils.download(
-      parseByColumns(this.data.orders, ordersColumns),
+      parseByColumns(this.data.orders, ordersColumnsExport),
       `orders`
     );
   }

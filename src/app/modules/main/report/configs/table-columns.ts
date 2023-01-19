@@ -135,7 +135,8 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
   {
     field: 'totalDistance',
     headerName: 'Distancia (mi)',
-    valueFormatter: ({ totalDistance }) => meterToMile(totalDistance),
+    valueFormatter: ({ totalDistance }) =>
+      formatNumber(meterToMile(totalDistance), 'es'),
   },
   {
     field: 'amountHour',
@@ -155,8 +156,19 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
   },
   {
     field: 'totalEarning',
-    headerName: 'Ganancia',
-    valueFormatter: ({ totalEarning }) => formatNumber(totalEarning, 'es'),
+    headerName: 'Ganancia por Hora',
+    valueFormatter: ({ totalEarning, modalityId }) =>
+      MODALITY.BASE_WITH_TIP != modalityId
+        ? formatNumber(totalEarning, 'es')
+        : '---',
+  },
+  {
+    field: 'totalEarning1',
+    headerName: 'Ganancia Tarifa Base',
+    valueFormatter: ({ totalEarning, modalityId }) =>
+      MODALITY.BASE_WITH_TIP == modalityId
+        ? formatNumber(totalEarning, 'es')
+        : '---',
   },
   {
     field: 'fees',
@@ -265,11 +277,11 @@ export const ordersColumns: TableColumns<OrderDto> = [
   {
     field: 'distance',
     headerName: 'Distancia (mi)',
-    valueFormatter: ({ distance }) => meterToMile(distance),
+    valueFormatter: ({ distance }) => formatNumber(meterToMile(distance), 'es'),
   },
   {
     field: 'earning',
-    headerName: 'Ganancia',
+    headerName: 'Tarifa Base',
     valueFormatter: ({ earningBase, modalityId }) =>
       MODALITY.BASE_WITH_TIP == modalityId
         ? formatNumber(earningBase.earning, 'es', '.2-2')
