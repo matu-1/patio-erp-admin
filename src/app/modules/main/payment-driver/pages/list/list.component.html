@@ -1,5 +1,12 @@
 <app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
 <app-title-bar [title]="title">
+  <button
+    mat-raised-button
+    color="primary"
+    [routerLink]="PAGE_ROUTE.PAYMENT_DRIVER.CREATE"
+  >
+    Nuevo
+  </button>
   <button mat-button (click)="download()" [disabled]="!paymentsDriver">
     Exportar
   </button>

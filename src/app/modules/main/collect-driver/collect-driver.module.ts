@@ -11,9 +11,16 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { PayDialog } from './components/pay/pay.dialog';
 import { DriverInfoDialog } from './components/driver-info/driver-info.dialog';
 import { CreateComponent } from './pages/create/create.component';
+import { NewPaymentComponent } from './components/new-payment/new-payment,.component';
 
 @NgModule({
-  declarations: [ListComponent,PayDialog, DriverInfoDialog, CreateComponent],
+  declarations: [
+    ListComponent,
+    PayDialog,
+    DriverInfoDialog,
+    CreateComponent,
+    NewPaymentComponent,
+  ],
   imports: [
     CommonModule,
     CollectDriverRoutingModule,
@@ -21,7 +28,8 @@ import { CreateComponent } from './pages/create/create.component';
     MaterialModule,
     ComponentsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
+  exports: [NewPaymentComponent],
 })
 export class CollectDriverModule {}

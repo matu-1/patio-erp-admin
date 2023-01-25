@@ -10,9 +10,11 @@ import { PayDialog } from './components/pay/pay.dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PaymentDetailDialog } from './components/payment-detail/payment-detail.dialog';
+import { CreateComponent } from './pages/create/create.component';
+import { CollectDriverModule } from '../collect-driver/collect-driver.module';
 
 @NgModule({
-  declarations: [ListComponent, PayDialog, PaymentDetailDialog],
+  declarations: [ListComponent, PayDialog, PaymentDetailDialog, CreateComponent],
   imports: [
     CommonModule,
     PaymentDriverRoutingModule,
@@ -21,6 +23,7 @@ import { PaymentDetailDialog } from './components/payment-detail/payment-detail.
     DirectivesModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    CollectDriverModule,
   ],
 })
 export class PaymentDriverModule {}

@@ -30,6 +30,7 @@ export class ListComponent implements OnInit {
   paymentMethod = paymentMethod;
   form = buildform(paymentFilterSchema);
   paymentFilterSchema = paymentFilterSchema;
+  PAGE_ROUTE= PAGE_ROUTE
 
   constructor(
     private paymentDriverService: PaymentDriverService,
