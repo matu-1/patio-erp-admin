@@ -26,6 +26,14 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
     headerName: 'Tipo Acuerdo',
   },
   {
+    field: 'bankAccount',
+    headerName: 'Cuenta Bancaria',
+    valueFormatter: ({ bankAccount }) =>
+      bankAccount
+        ? `${bankAccount.accountNumber} - ${bankAccount.bankName} - ${bankAccount.accountType} - ${bankAccount.identityNumber}`
+        : '---',
+  },
+  {
     field: 'quantity',
     headerName: 'Cant. Pedidos',
   },

@@ -20,8 +20,15 @@ export interface HoursWorkedDriver {
   totalDistance: number;
   totalBonus: number;
   extraEarning: number;
+  bankAccount: BankAccount;
 }
 
+export interface BankAccount {
+  accountNumber: string;
+  bankName: string;
+  identityNumber: string;
+  accountType: string;
+}
 export interface OrderDto {
   id: number;
   client: string;

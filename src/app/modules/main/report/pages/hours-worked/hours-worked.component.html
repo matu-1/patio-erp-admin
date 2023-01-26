@@ -42,6 +42,15 @@
   (refresh)="filter()"
   [filter]="driver"
 >
+  <ng-template customColumn="bankAccount" let-value="value">
+    <ng-container *ngIf="value.bankAccount; else noBankAccount">
+      {{ value.bankAccount.accountNumber }} <br />
+      <strong>{{ value.bankAccount.bankName }}</strong> <br />
+      {{ value.bankAccount.accountType }} <br />
+      {{ value.bankAccount.identityNumber }} <br />
+    </ng-container>
+    <ng-template #noBankAccount> --- </ng-template>
+  </ng-template>
   <ng-template customColumn="actions" let-value="value">
     <button
       mat-icon-button

@@ -124,6 +124,11 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     headerName: 'Tipo Acuerdo',
   },
   {
+    field: 'bankAccount',
+    headerName: 'Cuenta Bancaria',
+    valueFormatter: ({ bankAccount }) => bankAccount
+  },
+  {
     field: 'quantity',
     headerName: 'Cant. Pedidos',
   },
