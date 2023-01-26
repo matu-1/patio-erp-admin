@@ -18,6 +18,8 @@ export interface HoursWorkedDriver {
   orders: OrderDto[];
   timings: TimingDto[];
   totalDistance: number;
+  totalBonus: number;
+  extraEarning: number;
 }
 
 export interface OrderDto {

@@ -86,6 +86,16 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
     valueFormatter: ({ discounts }) => formatToNumber(discounts),
   },
   {
+    field: 'extraEarning',
+    headerName: 'Ganancia Extra',
+    valueFormatter: ({ extraEarning }) => formatToNumber(extraEarning),
+  },
+  {
+    field: 'totalBonus',
+    headerName: 'Bonos',
+    valueFormatter: ({ totalBonus }) => formatToNumber(totalBonus),
+  },
+  {
     field: 'total',
     headerName: 'Total',
     valueFormatter: ({ total }) => formatToNumber(total),
