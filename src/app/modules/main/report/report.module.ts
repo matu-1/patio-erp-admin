@@ -12,9 +12,18 @@ import { HoursWorkedComponent } from './pages/hours-worked/hours-worked.componen
 import { OrdersReceivedComponent } from './pages/orders-received/orders-received.component';
 import { DetailDialog } from './components/detail/detail.dialog';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { EditBankAccountDialog } from './components/edit-bank-account/edit-bank-account.dialog';
 
 @NgModule({
-  declarations: [PaymentDetailComponent, DeliveryDetailComponent, HoursWorkedComponent, OrdersReceivedComponent, DetailDialog, OrdersComponent],
+  declarations: [
+    PaymentDetailComponent,
+    DeliveryDetailComponent,
+    HoursWorkedComponent,
+    OrdersReceivedComponent,
+    DetailDialog,
+    OrdersComponent,
+    EditBankAccountDialog,
+  ],
   imports: [
     CommonModule,
     ReportRoutingModule,
@@ -22,7 +31,7 @@ import { OrdersComponent } from './pages/orders/orders.component';
     MaterialModule,
     FlexModule,
     ReactiveFormsModule,
-    DirectivesModule
+    DirectivesModule,
   ],
 })
 export class ReportModule {}

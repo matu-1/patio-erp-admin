@@ -6,6 +6,7 @@ import {
 import { months } from 'src/app/constants/months.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { generateYears } from 'src/app/utils/utils';
+import { CustomValidators } from 'src/app/utils/validators';
 
 export const paymentDetailSchema: TextFieldSchema = [
   {
@@ -184,5 +185,66 @@ export const ordersFilterSchema: TextFieldSchema = [
     fieldType: TextFieldType.Dropdown,
     df: '17%',
     sm: '30%',
+  },
+];
+
+export const editBankAccountSchema: TextFieldSchema = [
+  {
+    label: 'Número de Cuenta',
+    name: 'accountNumber',
+    validators: [
+      {
+        message: 'Is required',
+        name: 'required',
+        validatorFn: Validators.required,
+      },
+      {
+        message: 'Is Number',
+        name: 'int',
+        validatorFn: CustomValidators.int,
+      },
+    ],
+    df: '50%',
+  },
+  {
+    label: 'Nombre del banco',
+    name: 'bankName',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'minlength',
+        message: 'Minimum 3 characters',
+        validatorFn: Validators.minLength(3),
+      },
+    ],
+    df: '50%',
+  },
+  {
+    label: 'Tipo de Cuenta',
+    name: 'accountType',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '50%',
+  },
+  {
+    label: 'Número de Identidad',
+    name: 'identityNumber',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '50%',
   },
 ];

@@ -24,11 +24,13 @@ export interface HoursWorkedDriver {
 }
 
 export interface BankAccount {
+  id: number;
   accountNumber: string;
   bankName: string;
   identityNumber: string;
   accountType: string;
 }
+
 export interface OrderDto {
   id: number;
   client: string;

@@ -7,17 +7,25 @@ import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { CONFIG } from 'src/app/constants/config.constant';
-import { DIALOG_CONFIG_MD } from 'src/app/constants/dialog.constant';
+import {
+  DIALOG_CONFIG_MD,
+  DIALOG_CONFIG_XS,
+} from 'src/app/constants/dialog.constant';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import { DetailDialog } from '../../components/detail/detail.dialog';
+import { EditBankAccountDialog } from '../../components/edit-bank-account/edit-bank-account.dialog';
 import { hoursWorkedColumnsExport } from '../../configs/export-columns';
 import { hoursWorkedFilterSchema } from '../../configs/form-schema';
 import { hoursWorkedColumns } from '../../configs/table-columns';
-import { HoursWorkedDriver } from '../../interfaces/hours-worked-driver.interface';
+import {
+  BankAccount,
+  HoursWorkedDriver,
+} from '../../interfaces/hours-worked-driver.interface';
+import { UpdateBankAccount } from '../../interfaces/payment-detail.interface';
 import { ReportService } from '../../services/report.service';
 
 @Component({
@@ -153,6 +161,24 @@ export class HoursWorkedComponent implements OnInit {
           startDate: DateUtils.getMinHourMoment(DateUtils.getMaxHour(start)),
           endDate: DateUtils.getMaxHourMoment(DateUtils.getMaxHour(end)),
         }),
+      true
+    );
+    if (res) this.filter();
+  }
+
+  showEditBankAccountDlg(value: BankAccount) {
+    const dialogRef = this.dialog.open(EditBankAccountDialog, {
+      ...DIALOG_CONFIG_XS,
+      data: value,
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe((data) => data && this.updateBankAccount(value.id, data));
+  }
+
+  async updateBankAccount(id: number, dto: UpdateBankAccount) {
+    const res = await handleRequestPg(
+      () => this.reportService.updateBankAccount(id, dto),
       true
     );
     if (res) this.filter();

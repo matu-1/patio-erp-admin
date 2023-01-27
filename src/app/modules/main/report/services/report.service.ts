@@ -4,6 +4,7 @@ import { API } from 'src/app/constants/api.constant';
 import { PATIO_STORE_CONFIG_HTTP } from 'src/app/constants/http-header.constant';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import { Response } from 'src/app/utils/response';
+import { routeParams } from 'src/app/utils/route-params';
 import { City } from '../../dashboard/interfaces/city.interface';
 import {
   DeliveryDetail,
@@ -20,6 +21,7 @@ import {
   GetPaymentDetailDto,
   PaymentDetail,
   RefreshPaymentDto,
+  UpdateBankAccount,
 } from '../interfaces/payment-detail.interface';
 
 @Injectable({
@@ -85,5 +87,13 @@ export class ReportService {
 
   refresh(dto: RefreshPaymentDto) {
     return this.http.post<Response<any>>(API.PAYMENT_DRIVER.REFRESH, dto);
+  }
+
+  updateBankAccount(id: number, dto: UpdateBankAccount) {
+    return this.http.put<Response<any>>(
+      routeParams(API.BANK_ACCOUNT.UPDATE, { id }),
+      dto,
+      { ...PATIO_STORE_CONFIG_HTTP }
+    );
   }
 }

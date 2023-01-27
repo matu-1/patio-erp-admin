@@ -67,4 +67,7 @@ export const API = {
     GET_BY_ID: `${PATIO_STORE_API_URL}/orders/:id`,
     GET_ALL: `${PATIO_STORE_API_URL}/orders`,
   },
+  BANK_ACCOUNT: {
+    UPDATE: `${PATIO_STORE_API_URL}/bank-account/:id`
+  }
 };

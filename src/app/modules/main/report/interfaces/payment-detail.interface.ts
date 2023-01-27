@@ -48,3 +48,11 @@ export interface RefreshPaymentDto {
   type: number;
   driverId: number;
 }
+
+export interface UpdateBankAccount {
+  accountNumber: string;
+  bankName: string;
+  accountType: string;
+  identityNumber: string;
+  driverId: number;
+}
