@@ -6,6 +6,11 @@ import { ObjectUtils } from 'src/app/utils/object.util';
 import { Response } from 'src/app/utils/response';
 import { routeParams } from 'src/app/utils/route-params';
 import { City } from '../../dashboard/interfaces/city.interface';
+import { Merchant } from '../../dashboard/interfaces/merchant.interface';
+import {
+  CollectMerchantDto,
+  CollectMerchantParams,
+} from '../interfaces/collect-merchant.interface';
 import {
   DeliveryDetail,
   GetDeliveryDetailDto,
@@ -95,5 +100,19 @@ export class ReportService {
       dto,
       { ...PATIO_STORE_CONFIG_HTTP }
     );
+  }
+
+  getCollectMerchants(params: CollectMerchantParams) {
+    const urlParams = new URLSearchParams(params as any);
+    return this.http.get<Response<CollectMerchantDto[]>>(
+      `${API.ORDER.GET_COLLECT_MERCHANT}?${urlParams}`,
+      { ...PATIO_STORE_CONFIG_HTTP }
+    );
+  }
+
+  getMerchants() {
+    return this.http.get<Response<Merchant[]>>(API.MERCHANT.GET_MERCHANTS, {
+      ...PATIO_STORE_CONFIG_HTTP,
+    });
   }
 }

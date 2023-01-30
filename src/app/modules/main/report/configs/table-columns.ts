@@ -5,6 +5,7 @@ import { MODALITY } from 'src/app/constants/modality.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { FormatDate } from 'src/app/utils/format.date.util';
 import { meterToMile } from 'src/app/utils/utils';
+import { CollectMerchantDto } from '../interfaces/collect-merchant.interface';
 import { DeliveryDetail } from '../interfaces/delivery-detail.interface';
 import {
   HoursWorkedDriver,
@@ -126,7 +127,7 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
   {
     field: 'bankAccount',
     headerName: 'Cuenta Bancaria',
-    valueFormatter: ({ bankAccount }) => bankAccount
+    valueFormatter: ({ bankAccount }) => bankAccount,
   },
   {
     field: 'quantity',
@@ -421,5 +422,42 @@ export const orderColumns: TableColumns<Order> = [
             )
             .join(' - ')
         : '--',
+  },
+];
+
+export const collectMerchantColumns: TableColumns<CollectMerchantDto> = [
+  {
+    field: '#',
+    headerName: 'Id',
+  },
+  {
+    field: 'RESTAURANT NAME',
+    headerName: 'Restaurant Name',
+  },
+  {
+    field: 'STORE NAME',
+    headerName: 'Store Name',
+  },
+  {
+    field: 'USER NAME',
+    headerName: 'User Name',
+  },
+  {
+    field: 'DRIVER NAME',
+    headerName: 'Driver Name',
+    valueFormatter: (value) => value['DRIVER NAME'] ?? '---',
+  },
+  {
+    field: 'TIP',
+    headerName: 'Tip',
+  },
+  { field: 'PREPARATION TIME', headerName: 'Preparation Time' },
+  { field: 'DELIVERY TIME', headerName: 'Delivery Time' },
+  { field: 'DISTANCE MILES', headerName: 'Distance Miles' },
+  { field: 'SUBTOTAL', headerName: 'Subtotal' },
+  {
+    field: 'DATE',
+    headerName: 'Date',
+    valueFormatter: ({ DATE }) => FormatDate.dateMoment(DATE),
   },
 ];

@@ -13,6 +13,7 @@ import { OrdersReceivedComponent } from './pages/orders-received/orders-received
 import { DetailDialog } from './components/detail/detail.dialog';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { EditBankAccountDialog } from './components/edit-bank-account/edit-bank-account.dialog';
+import { CollectMerchantComponent } from './pages/collect-merchant/collect-merchant.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { EditBankAccountDialog } from './components/edit-bank-account/edit-bank-
     DetailDialog,
     OrdersComponent,
     EditBankAccountDialog,
+    CollectMerchantComponent,
   ],
   imports: [
     CommonModule,

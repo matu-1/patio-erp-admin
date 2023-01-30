@@ -49,7 +49,7 @@ export const API = {
     REVERT: `${API_URL}/payment-driver/revert/:id`,
     PAYMENTS: `${API_URL}/payment/payment-driver/:id`,
     CREATE: `${API_URL}/payment-driver/create`,
-    REFRESH: `${API_URL}/payment-driver/refresh`
+    REFRESH: `${API_URL}/payment-driver/refresh`,
   },
   CLIENT: {
     GET_PAGINATED: `${API_URL}/client/paginated`,
@@ -66,8 +66,9 @@ export const API = {
   ORDER: {
     GET_BY_ID: `${PATIO_STORE_API_URL}/orders/:id`,
     GET_ALL: `${PATIO_STORE_API_URL}/orders`,
+    GET_COLLECT_MERCHANT: `${PATIO_STORE_API_URL}/orders/report/merchants`,
   },
   BANK_ACCOUNT: {
-    UPDATE: `${PATIO_STORE_API_URL}/bank-account/:id`
-  }
+    UPDATE: `${PATIO_STORE_API_URL}/bank-account/:id`,
+  },
 };

@@ -248,3 +248,21 @@ export const editBankAccountSchema: TextFieldSchema = [
     df: '50%',
   },
 ];
+
+export const collectMerchantSchema: TextFieldSchema = [
+  ...hoursWorkedFilterSchema.slice(0, 2),
+  {
+    label: 'Merchants',
+    name: 'merchants',
+    fieldType: TextFieldType.Dropdown,
+    multiple: true,
+    df: '25%',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+  },
+];

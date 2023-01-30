@@ -68,6 +68,11 @@ export const MENU: MenuItem[] = [
             icon: 'remove',
             route: PAGE_ROUTE.REPORT.PAYMENT_DETAIL,
           },
+          {
+            label: 'Cobro Comercio',
+            icon: 'remove',
+            route: PAGE_ROUTE.REPORT.COLLECT_MERCHANT,
+          },
         ],
       },
       {
