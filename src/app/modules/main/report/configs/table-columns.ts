@@ -435,8 +435,8 @@ export const collectMerchantColumns: TableColumns<CollectMerchantDto> = [
     headerName: 'Restaurant Name',
   },
   {
-    field: 'STORE NAME',
-    headerName: 'Store Name',
+    field: 'status',
+    headerName: 'Status',
   },
   {
     field: 'USER NAME',

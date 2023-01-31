@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DateUtils } from 'src/app/utils/date.util';
+import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest } from 'src/app/utils/handle-request';
 import { collectMerchantSchema } from '../../configs/form-schema';
 import { collectMerchantColumns } from '../../configs/table-columns';
@@ -15,7 +16,7 @@ export class CollectMerchantComponent implements OnInit {
   title = 'Cobro Comercio';
   form = buildform(collectMerchantSchema);
   collectMerchantSchema = collectMerchantSchema;
-  collectMerchants: CollectMerchantDto[] = [];
+  collectMerchants?: CollectMerchantDto[] = [];
   collectMerchantColumns = collectMerchantColumns;
 
   constructor(private reportService: ReportService) {}
@@ -25,8 +26,8 @@ export class CollectMerchantComponent implements OnInit {
   }
 
   async getCollectMerchants() {
+    this.collectMerchants = undefined;
     const value = this.form.value;
-    console.log('value', value);
     const res = await handleRequest(() =>
       this.reportService.getCollectMerchants({
         ...value,
@@ -51,5 +52,9 @@ export class CollectMerchantComponent implements OnInit {
 
   filter() {
     this.getCollectMerchants();
+  }
+
+  download() {
+    ExcelUtils.download(this.collectMerchants!, this.title);
   }
 }
