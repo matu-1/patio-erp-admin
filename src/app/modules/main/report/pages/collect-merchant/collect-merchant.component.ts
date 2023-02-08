@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest } from 'src/app/utils/handle-request';
 import { collectMerchantSchema } from '../../configs/form-schema';
-import { collectMerchantColumns } from '../../configs/table-columns';
+import {
+  collectMerchantColumns,
+  collectMerchantReportColumns,
+} from '../../configs/table-columns';
 import { CollectMerchantDto } from '../../interfaces/collect-merchant.interface';
 import { ReportService } from '../../services/report.service';
 
@@ -55,6 +59,9 @@ export class CollectMerchantComponent implements OnInit {
   }
 
   download() {
-    ExcelUtils.download(this.collectMerchants!, this.title);
+    ExcelUtils.download(
+      parseByColumns(this.collectMerchants!, collectMerchantReportColumns),
+      this.title
+    );
   }
 }
