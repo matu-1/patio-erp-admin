@@ -20,6 +20,7 @@ export class PaymentDriverService {
   getPaymentsDriver(dto: PaymentFilterDto) {
     dto = ObjectUtils.clear(dto);
     dto.type = 1;
+    dto.showDetails = 1;
     return this.http.get<Response<PaymentDriver[]>>(
       API.PAYMENT_DRIVER.GET_BY_RANGE,
       { params: dto as any }

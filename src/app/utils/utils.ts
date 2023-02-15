@@ -18,7 +18,7 @@ export function formatToNumber(num: string | number, decimals = 2) {
   return Number(Number(num).toFixed(decimals));
 }
 
-type WeekType = {
+export type WeekType = {
   start: Date;
   end: Date;
   name: string;

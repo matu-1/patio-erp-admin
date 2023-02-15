@@ -9,7 +9,7 @@ import { paymentsDriverColumns as collectsDriverColumns } from '../../collect-dr
 export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
   ...collectsDriverColumns,
 ];
-paymentsDriverColumns.splice(8, 2)
+// paymentsDriverColumns.splice(8, 2)
 
 export const paymentsColumns: TableColumns<Payment> = [
   {

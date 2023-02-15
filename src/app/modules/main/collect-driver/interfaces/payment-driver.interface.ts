@@ -25,6 +25,7 @@ export interface CollectFilterDto {
   end: Date;
   isPayment?: number;
   type?: number;
+  showDetails?: number
 }
 
 export interface CreateCollectDriver

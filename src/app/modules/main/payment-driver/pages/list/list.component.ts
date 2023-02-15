@@ -18,6 +18,7 @@ import {
 import { PaymentDriverService } from '../../services/payment-driver.service';
 import { PaymentDetailDialog } from '../../components/payment-detail/payment-detail.dialog';
 import { Location } from '@angular/common';
+import { WeekType } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-list',
@@ -30,7 +31,7 @@ export class ListComponent implements OnInit {
   paymentMethod = paymentMethod;
   form = buildform(paymentFilterSchema);
   paymentFilterSchema = paymentFilterSchema;
-  PAGE_ROUTE= PAGE_ROUTE
+  PAGE_ROUTE = PAGE_ROUTE;
 
   constructor(
     private paymentDriverService: PaymentDriverService,
@@ -39,7 +40,16 @@ export class ListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.resetForm();
     this.getPaymentsDriver();
+  }
+
+  resetForm() {
+    const { start, end } = this.form.value.week as WeekType;
+    this.form.patchValue({ start, end });
+    this.form.get('week')?.valueChanges.subscribe(({ start, end }) => {
+      this.form.patchValue({ start, end });
+    });
   }
 
   async getPaymentsDriver() {
@@ -48,6 +58,7 @@ export class ListComponent implements OnInit {
     const res = await handleRequest(() =>
       this.paymentDriverService.getPaymentsDriver({
         ...value,
+        start: DateUtils.getMinHour(value.start),
         end: DateUtils.getMaxHour(value.end),
       })
     );
