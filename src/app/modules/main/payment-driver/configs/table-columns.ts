@@ -5,9 +5,84 @@ import { paymentMethod } from '../constants/payment-method';
 import { PaymentDriver } from '../interfaces/payment-driver.interface';
 import { Payment } from '../interfaces/payment.interface';
 import { paymentsDriverColumns as collectsDriverColumns } from '../../collect-driver/configs/table-columns';
+import { meterToMile } from 'src/app/utils/utils';
+import { DateUtils } from 'src/app/utils/date.util';
 
 export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
-  ...collectsDriverColumns,
+  ...collectsDriverColumns.slice(0, collectsDriverColumns.length - 1),
+  {
+    field: 'modality',
+    headerName: 'Tipo Acuerdo',
+    valueFormatter: ({ detail }) => (detail ? detail.modality : '---'),
+  },
+  {
+    field: 'bankAccount',
+    headerName: 'Cuenta Bancaria',
+    valueFormatter: ({ detail }) => detail?.bankAccount,
+  },
+  {
+    field: 'quantity',
+    headerName: 'Cant. Pedidos',
+    valueFormatter: ({ detail }) => (detail ? detail.quantity : '---'),
+  },
+  {
+    field: 'tips',
+    headerName: 'Propina',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.tips, 'es') : '---',
+  },
+  {
+    field: 'totalDistance',
+    headerName: 'Distancia (mi)',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(meterToMile(detail.totalDistance), 'es') : '---',
+  },
+  {
+    field: 'amountHour',
+    headerName: 'Monto Hora',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.amountHour, 'es') : '---',
+  },
+  {
+    field: 'hours',
+    headerName: 'Horas bruta',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.hoursWorked, 'es', '.0-6') : '---',
+  },
+  {
+    field: 'hoursWorked',
+    headerName: 'Horas',
+    valueFormatter: ({ detail }) =>
+      detail ? DateUtils.formatToTimer(detail.hoursWorked) : '---',
+  },
+  {
+    field: 'discounts',
+    headerName: 'Descuento',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.discounts, 'es') : '---',
+  },
+  {
+    field: 'extraEarning',
+    headerName: 'Ganancia Extra',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.extraEarning, 'es') : '---',
+  },
+  {
+    field: 'totalBonus',
+    headerName: 'Bonos',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.totalBonus, 'es') : '---',
+  },
+  {
+    field: 'total',
+    headerName: 'Total',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.total, 'es') : '---',
+  },
+  {
+    field: 'actions',
+    headerName: 'Acciones',
+  },
 ];
 // paymentsDriverColumns.splice(8, 2)
 

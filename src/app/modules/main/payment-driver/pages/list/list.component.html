@@ -23,13 +23,14 @@
   [columns]="paymentsDriverColumns"
   (refresh)="getPaymentsDriver()"
 >
-  <ng-template customColumn="paymentMethod" let-value="value">
-    <app-chip
-      variant="accent"
-      *ngIf="value.paymentMethod != null; else noPaid"
-      >{{ paymentMethod[value.paymentMethod] }}</app-chip
-    >
-    <ng-template #noPaid>---</ng-template>
+  <ng-template customColumn="bankAccount" let-value="value">
+    <ng-container *ngIf="value.bankAccount; else noBankAccount">
+      {{ value.bankAccount.accountNumber }} <br />
+      <strong>{{ value.bankAccount.bankName }}</strong> <br />
+      {{ value.bankAccount.accountType }} <br />
+      {{ value.bankAccount.identityNumber }} <br />
+    </ng-container>
+    <ng-template #noBankAccount> --- </ng-template>
   </ng-template>
   <ng-template customColumn="actions" let-value="value">
     <button
@@ -58,6 +59,9 @@
       (click)="openPaymentsDlg(value)"
     >
       <mat-icon class="action-icon">payments</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Add Descuento" (click)="goPaymentDriver(value)">
+      <mat-icon class="action-icon">money_off</mat-icon>
     </button>
   </ng-template>
 </app-data-table>

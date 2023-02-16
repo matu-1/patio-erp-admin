@@ -19,6 +19,7 @@ import { PaymentDriverService } from '../../services/payment-driver.service';
 import { PaymentDetailDialog } from '../../components/payment-detail/payment-detail.dialog';
 import { Location } from '@angular/common';
 import { WeekType } from 'src/app/utils/utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -36,7 +37,8 @@ export class ListComponent implements OnInit {
   constructor(
     private paymentDriverService: PaymentDriverService,
     private dialog: MatDialog,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -126,6 +128,16 @@ export class ListComponent implements OnInit {
     this.dialog.open(PaymentDetailDialog, {
       ...DIALOG_CONFIG_XS,
       data,
+    });
+  }
+
+  goPaymentDriver(value: PaymentDriver) {
+    const date = new Date(value.startDate + ' ');
+    this.router.navigate([PAGE_ROUTE.COLLECT_DRIVER.CREATE], {
+      queryParams: {
+        driverId: value.driverId,
+        date: date.toISOString(),
+      },
     });
   }
 }

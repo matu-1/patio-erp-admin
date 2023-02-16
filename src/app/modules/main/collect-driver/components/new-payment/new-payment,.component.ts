@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Breadcrumbs } from 'src/app/components/breadcrumbs/breadcrumbs.interface';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
@@ -25,11 +26,19 @@ export class NewPaymentComponent implements OnInit {
 
   constructor(
     private location: Location,
-    private collectDriverService: CollectDriverService
+    private collectDriverService: CollectDriverService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.setQueryParams();
     this.getDrivers();
+  }
+
+  setQueryParams() {
+    this.activatedRoute.queryParams.subscribe(({ date, driverId }) => {
+      this.form.reset({ driverId: Number(driverId), date: new Date(date) });
+    });
   }
 
   async getDrivers() {

@@ -1,3 +1,5 @@
+import { HoursWorkedDriver } from '../../report/interfaces/hours-worked-driver.interface';
+
 export interface CollectDriver {
   id: number;
   userCreation: string;
@@ -13,6 +15,7 @@ export interface CollectDriver {
   balance: number;
   reason?: string;
   category: string;
+  detail?: HoursWorkedDriver;
 }
 
 export interface PayDriverDto {
@@ -25,7 +28,7 @@ export interface CollectFilterDto {
   end: Date;
   isPayment?: number;
   type?: number;
-  showDetails?: number
+  showDetails?: number;
 }
 
 export interface CreateCollectDriver
