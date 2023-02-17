@@ -8,6 +8,20 @@ import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 import { PaymentDriverType } from '../../../payment-driver/constants/payment-driver-type';
 import { createCollectDriverSchema } from '../../configs/form-schema';
 import { CollectDriverService } from '../../services/collect-driver.service';
+import { ReportService } from '../../../report/services/report.service';
+import { DateUtils } from '../../../../../utils/date.util';
+import { FormControl } from '@angular/forms';
+import {
+  combineLatest,
+  combineLatestWith,
+  switchMap,
+  zip,
+  catchError,
+  of,
+} from 'rxjs';
+import { SnackBar } from '../../../../../utils/snackbar';
+import { Response } from '../../../../../utils/response';
+import { responseBank } from 'src/app/constants/config.constant';
 
 @Component({
   selector: 'app-new-payment',
@@ -27,7 +41,8 @@ export class NewPaymentComponent implements OnInit {
   constructor(
     private location: Location,
     private collectDriverService: CollectDriverService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private reportService: ReportService
   ) {}
 
   ngOnInit(): void {
@@ -36,8 +51,12 @@ export class NewPaymentComponent implements OnInit {
   }
 
   setQueryParams() {
-    this.activatedRoute.queryParams.subscribe(({ date, driverId }) => {
-      this.form.reset({ driverId: Number(driverId), date: new Date(date) });
+    this.activatedRoute.queryParams.subscribe(({ start, end, driverId }) => {
+      if (end) this.form.addControl('end', new FormControl(new Date(end)));
+      this.form.patchValue({
+        driverId: Number(driverId),
+        date: new Date(start),
+      });
     });
   }
 
@@ -60,6 +79,24 @@ export class NewPaymentComponent implements OnInit {
     this.location.back();
   }
 
+  refresh() {
+    const { driverId, date, end } = this.form.value;
+    if (!end) return of(responseBank);
+    return this.reportService
+      .refresh({
+        driverId,
+        type: PaymentDriverType.Pago, //xq refresco el pago
+        startDate: DateUtils.getMinHourMoment(DateUtils.getMaxHour(date)),
+        endDate: DateUtils.getMaxHourMoment(DateUtils.getMaxHour(end)),
+      })
+      .pipe(
+        catchError((error) => {
+          SnackBar.show(error.message, { variant: error.type });
+          return of(responseBank);
+        })
+      );
+  }
+
   async save() {
     const value = this.form.value;
     const body = {
@@ -68,9 +105,11 @@ export class NewPaymentComponent implements OnInit {
       endDate: value.date,
       type: this.type,
     };
-    const res = await handleRequestPg(() =>
-      this.collectDriverService.create(body)
-    );
+    const res = await handleRequestPg(() => {
+      return this.collectDriverService
+        .create(body)
+        .pipe(switchMap((_) => this.refresh()));
+    });
     if (res) this.goBack();
   }
 }

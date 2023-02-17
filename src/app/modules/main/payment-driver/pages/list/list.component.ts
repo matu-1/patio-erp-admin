@@ -20,6 +20,7 @@ import { PaymentDetailDialog } from '../../components/payment-detail/payment-det
 import { Location } from '@angular/common';
 import { WeekType } from 'src/app/utils/utils';
 import { Router } from '@angular/router';
+import { categoryValue } from '../../../collect-driver/constants/payment-method';
 
 @Component({
   selector: 'app-list',
@@ -33,6 +34,7 @@ export class ListComponent implements OnInit {
   form = buildform(paymentFilterSchema);
   paymentFilterSchema = paymentFilterSchema;
   PAGE_ROUTE = PAGE_ROUTE;
+  categoryValue = categoryValue
 
   constructor(
     private paymentDriverService: PaymentDriverService,
@@ -132,11 +134,13 @@ export class ListComponent implements OnInit {
   }
 
   goPaymentDriver(value: PaymentDriver) {
-    const date = new Date(value.startDate + ' ');
+    const start = new Date(value.startDate + ' ');
+    const end = new Date(value.endDate + ' ')
     this.router.navigate([PAGE_ROUTE.COLLECT_DRIVER.CREATE], {
       queryParams: {
         driverId: value.driverId,
-        date: date.toISOString(),
+        start: start.toISOString(),
+        end: end.toISOString()
       },
     });
   }
