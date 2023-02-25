@@ -86,8 +86,10 @@ export class NewPaymentComponent implements OnInit {
       .refresh({
         driverId,
         type: PaymentDriverType.Pago, //xq refresco el pago
-        startDate: DateUtils.getMinHourMoment(DateUtils.getMaxHour(date)),
-        endDate: DateUtils.getMaxHourMoment(DateUtils.getMaxHour(end)),
+        // startDate: DateUtils.getMinHourMoment(DateUtils.getMaxHour(date)),
+        startDate: new Date(date),
+        // endDate: DateUtils.getMaxHourMoment(DateUtils.getMaxHour(end)),
+        endDate: new Date(end),
       })
       .pipe(
         catchError((error) => {

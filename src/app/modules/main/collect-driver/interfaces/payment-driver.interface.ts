@@ -8,6 +8,7 @@ export interface CollectDriver {
   deletedAt?: Date;
   driverId: number;
   name: string;
+  cityId: number;
   amount: number;
   paidAt?: Date;
   startDate: Date;

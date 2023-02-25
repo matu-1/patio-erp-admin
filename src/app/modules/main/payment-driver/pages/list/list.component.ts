@@ -21,6 +21,7 @@ import { Location } from '@angular/common';
 import { WeekType } from 'src/app/utils/utils';
 import { Router } from '@angular/router';
 import { categoryValue } from '../../../collect-driver/constants/payment-method';
+import { CONFIG } from 'src/app/constants/config.constant';
 
 @Component({
   selector: 'app-list',
@@ -34,7 +35,7 @@ export class ListComponent implements OnInit {
   form = buildform(paymentFilterSchema);
   paymentFilterSchema = paymentFilterSchema;
   PAGE_ROUTE = PAGE_ROUTE;
-  categoryValue = categoryValue
+  categoryValue = categoryValue;
 
   constructor(
     private paymentDriverService: PaymentDriverService,
@@ -87,12 +88,18 @@ export class ListComponent implements OnInit {
   }
 
   goDetail(data: PaymentDriver) {
+    const start = new Date(data.startDate + ' 00:00:00');
+    const end = new Date(data.endDate + ' 23:59:59');
+    if (data.cityId == CONFIG.CITY_EEUU) {
+      start.setHours(start.getHours() + 1);
+      end.setHours(end.getHours() + 1);
+    }
     const url = this.location.prepareExternalUrl(
-      `${PAGE_ROUTE.REPORT.HOURS_WORKED}?start=${DateUtils.getMinHour(
-        data.startDate + ' '
-      ).toISOString()}&end=${DateUtils.getMaxHour(
-        data.endDate + ' '
-      ).toISOString()}&driver=${data.name}`
+      `${
+        PAGE_ROUTE.REPORT.HOURS_WORKED
+      }?start=${start.toISOString()}&end=${end.toISOString()}&driver=${
+        data.name
+      }`
     );
     window.open(url, '_blank');
   }
@@ -134,13 +141,17 @@ export class ListComponent implements OnInit {
   }
 
   goPaymentDriver(value: PaymentDriver) {
-    const start = new Date(value.startDate + ' ');
-    const end = new Date(value.endDate + ' ')
+    const start = new Date(value.startDate + ' 00:00:00');
+    const end = new Date(value.endDate + ' 23:59:59');
+    if (value.cityId == CONFIG.CITY_EEUU) {
+      start.setHours(start.getHours() + 1);
+      end.setHours(end.getHours() + 1);
+    }
     this.router.navigate([PAGE_ROUTE.COLLECT_DRIVER.CREATE], {
       queryParams: {
         driverId: value.driverId,
         start: start.toISOString(),
-        end: end.toISOString()
+        end: end.toISOString(),
       },
     });
   }
