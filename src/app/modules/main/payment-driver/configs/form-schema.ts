@@ -10,7 +10,7 @@ import {
 
 export const paySchema: TextFieldSchema = [...payCollectSchema];
 
-const weeksOptions = getWeeks().map((item) => ({
+export const weeksOptions = getWeeks().map((item) => ({
   label: item.name,
   value: item,
 }));

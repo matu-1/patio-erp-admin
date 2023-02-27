@@ -61,4 +61,10 @@ export abstract class DateUtils {
       .seconds(0)
       .milliseconds(0);
   }
+
+  static isTimezoneNewYork() {
+    const NEW_YORK_OFFSET = 300;
+    const offset = new Date().getTimezoneOffset(); //minutes
+    return offset == NEW_YORK_OFFSET;
+  }
 }

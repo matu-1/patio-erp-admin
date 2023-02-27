@@ -8,7 +8,7 @@ import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 import { PayDialog } from '../../components/pay/pay.dialog';
-import { paymentFilterSchema } from '../../configs/form-schema';
+import { paymentFilterSchema, weeksOptions } from '../../configs/form-schema';
 import { paymentsDriverColumns } from '../../configs/table-columns';
 import { paymentMethod } from '../../constants/payment-method';
 import {
@@ -19,7 +19,7 @@ import { PaymentDriverService } from '../../services/payment-driver.service';
 import { PaymentDetailDialog } from '../../components/payment-detail/payment-detail.dialog';
 import { Location } from '@angular/common';
 import { WeekType } from 'src/app/utils/utils';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { categoryValue } from '../../../collect-driver/constants/payment-method';
 import { CONFIG } from 'src/app/constants/config.constant';
 
@@ -41,10 +41,12 @@ export class ListComponent implements OnInit {
     private paymentDriverService: PaymentDriverService,
     private dialog: MatDialog,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.resetFromQuery();
     this.resetForm();
     this.getPaymentsDriver();
   }
@@ -55,6 +57,17 @@ export class ListComponent implements OnInit {
     this.form.get('week')?.valueChanges.subscribe(({ start, end }) => {
       this.form.patchValue({ start, end });
     });
+  }
+
+  resetFromQuery() {
+    const params = this.activatedRoute.snapshot.queryParams;
+    const week = weeksOptions.find((item) => item.label == params.week)?.value;
+    if (week)
+      this.form.patchValue({
+        week: week,
+        start: week.start,
+        end: week.end,
+      });
   }
 
   async getPaymentsDriver() {
@@ -68,6 +81,9 @@ export class ListComponent implements OnInit {
       })
     );
     if (res) this.paymentsDriver = res.data;
+    this.router.navigate([PAGE_ROUTE.PAYMENT_DRIVER.LIST], {
+      queryParams: { week: value.week.name },
+    });
   }
 
   openPaymentDlg(data: PaymentDriver) {
@@ -90,16 +106,16 @@ export class ListComponent implements OnInit {
   goDetail(data: PaymentDriver) {
     const start = new Date(data.startDate + ' 00:00:00');
     const end = new Date(data.endDate + ' 23:59:59');
-    if (data.cityId == CONFIG.CITY_EEUU) {
-      start.setHours(start.getHours() + 1);
-      end.setHours(end.getHours() + 1);
-    }
+    // if (data.cityId == CONFIG.CITY_EEUU) {
+    //   start.setHours(start.getHours() + 1);
+    //   end.setHours(end.getHours() + 1);
+    // }
     const url = this.location.prepareExternalUrl(
       `${
         PAGE_ROUTE.REPORT.HOURS_WORKED
       }?start=${start.toISOString()}&end=${end.toISOString()}&driver=${
         data.name
-      }`
+      }&cityId=${data.cityId}`
     );
     window.open(url, '_blank');
   }
@@ -143,7 +159,7 @@ export class ListComponent implements OnInit {
   goPaymentDriver(value: PaymentDriver) {
     const start = new Date(value.startDate + ' 00:00:00');
     const end = new Date(value.endDate + ' 23:59:59');
-    if (value.cityId == CONFIG.CITY_EEUU) {
+    if (!DateUtils.isTimezoneNewYork() && value.cityId == CONFIG.CITY_EEUU) {
       start.setHours(start.getHours() + 1);
       end.setHours(end.getHours() + 1);
     }
@@ -152,6 +168,7 @@ export class ListComponent implements OnInit {
         driverId: value.driverId,
         start: start.toISOString(),
         end: end.toISOString(),
+        date: value.detail?.timings[0].startFinal,
       },
     });
   }

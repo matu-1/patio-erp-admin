@@ -47,7 +47,6 @@ export class HoursWorkedComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.setTimeZone(); //limpia si ya se tiene seteado la TZ
     this.parseFormFromQuery();
     this.getHoursWorkedDriver();
     this.getCities();
@@ -60,12 +59,15 @@ export class HoursWorkedComponent implements OnInit {
     this.driver = query.driver ?? '';
     const start = query.start ? new Date(query.start) : value.start;
     const end = query.end ? new Date(query.end) : value.end;
-    this.form.patchValue({ start, end });
+    const cityId = query.cityId ? Number(query.cityId) : value.cityId;
+    this.form.patchValue({ start, end, cityId });
+    this.setTimeZone(cityId); //limpia si ya se tiene seteado la TZ
   }
 
   async getHoursWorkedDriver() {
     this.hoursWorkedDrivers = undefined;
     const value = ObjectUtils.clear(this.form.value);
+    console.log('value', this.form.value);
     const res = await handleRequest(() =>
       this.reportService.getHoursWorkedDrives({
         ...value,

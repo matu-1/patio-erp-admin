@@ -9,18 +9,9 @@ import { PaymentDriverType } from '../../../payment-driver/constants/payment-dri
 import { createCollectDriverSchema } from '../../configs/form-schema';
 import { CollectDriverService } from '../../services/collect-driver.service';
 import { ReportService } from '../../../report/services/report.service';
-import { DateUtils } from '../../../../../utils/date.util';
 import { FormControl } from '@angular/forms';
-import {
-  combineLatest,
-  combineLatestWith,
-  switchMap,
-  zip,
-  catchError,
-  of,
-} from 'rxjs';
+import { switchMap, catchError, of } from 'rxjs';
 import { SnackBar } from '../../../../../utils/snackbar';
-import { Response } from '../../../../../utils/response';
 import { responseBank } from 'src/app/constants/config.constant';
 
 @Component({
@@ -46,17 +37,20 @@ export class NewPaymentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.setQueryParams();
+    this.parseFormFromQuery();
     this.getDrivers();
   }
 
-  setQueryParams() {
-    this.activatedRoute.queryParams.subscribe(({ start, end, driverId }) => {
+  parseFormFromQuery() {
+    this.activatedRoute.queryParams.subscribe(({ start, end, driverId, date }) => {
       if (end) this.form.addControl('end', new FormControl(new Date(end)));
-      this.form.patchValue({
-        driverId: Number(driverId),
-        date: new Date(start),
-      });
+      if (start)
+        this.form.addControl('start', new FormControl(new Date(start)));
+      if (start && driverId)
+        this.form.patchValue({
+          driverId: Number(driverId),
+          date: new Date(date),
+        });
     });
   }
 
@@ -80,14 +74,14 @@ export class NewPaymentComponent implements OnInit {
   }
 
   refresh() {
-    const { driverId, date, end } = this.form.value;
+    const { driverId, start, end } = this.form.value;
     if (!end) return of(responseBank);
     return this.reportService
       .refresh({
         driverId,
         type: PaymentDriverType.Pago, //xq refresco el pago
         // startDate: DateUtils.getMinHourMoment(DateUtils.getMaxHour(date)),
-        startDate: new Date(date),
+        startDate: new Date(start),
         // endDate: DateUtils.getMaxHourMoment(DateUtils.getMaxHour(end)),
         endDate: new Date(end),
       })
