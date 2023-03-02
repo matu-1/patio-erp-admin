@@ -1,3 +1,5 @@
+import { EarningBase } from './hours-worked-driver.interface';
+
 export interface Order {
   id: number;
   from_address_geocoder: string;
@@ -14,6 +16,7 @@ export interface Order {
   name_user: string;
   status: string;
   tip: number;
+  tip_original: number;
   total: number;
   discount: number;
   merchant_id: number | null;
@@ -35,6 +38,8 @@ export interface Order {
   merchant: Merchant | null;
   assignedDrivers: AssignedDriver[] | null;
   orderstatus: Orderstatus[] | null;
+  earningBase: EarningBase;
+  bonus: number;
 }
 
 export interface Merchant {

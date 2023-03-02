@@ -43,13 +43,15 @@ export interface OrderDto {
   earningBase: EarningBase;
 }
 
-interface EarningBase {
+export interface EarningBase {
   minutes: number;
   amountHour: number;
   earning: number;
   tipFinal: number;
   discounts: number;
   totalEarning: number;
+  earningDistance: number;
+  earningWaiting: number;
 }
 
 export interface TimingDto {

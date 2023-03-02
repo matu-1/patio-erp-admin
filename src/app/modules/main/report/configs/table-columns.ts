@@ -4,7 +4,7 @@ import { FORMAT_DATE } from 'src/app/constants/format-date';
 import { MODALITY } from 'src/app/constants/modality.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { FormatDate } from 'src/app/utils/format.date.util';
-import { meterToMile } from 'src/app/utils/utils';
+import { formatToNumber, meterToMile } from 'src/app/utils/utils';
 import { CollectMerchantDto } from '../interfaces/collect-merchant.interface';
 import { DeliveryDetail } from '../interfaces/delivery-detail.interface';
 import {
@@ -422,6 +422,50 @@ export const orderColumns: TableColumns<Order> = [
             )
             .join(' - ')
         : '--',
+  },
+  {
+    field: 'meters_estimated_distance',
+    headerName: 'Distancia (mts)',
+  },
+  {
+    field: 'meters_estimated_distance_mi',
+    headerName: 'Distancia (mi)',
+    valueFormatter: ({ meters_estimated_distance }) =>
+      meterToMile(meters_estimated_distance),
+  },
+  {
+    field: 'tip_original',
+    headerName: 'Tip Original',
+  },
+  {
+    field: 'tip',
+    headerName: 'Tip Driver',
+  },
+  {
+    field: 'earning_waiting',
+    headerName: 'Ganancia Espera',
+    valueFormatter: ({ earningBase }) => earningBase.earningWaiting,
+  },
+  {
+    field: 'earning_distance',
+    headerName: 'Ganancia Distancia',
+    valueFormatter: ({ earningBase }) =>
+      formatToNumber(earningBase.earningDistance),
+  },
+  {
+    field: 'earning',
+    headerName: 'Total Ganancia Base',
+    valueFormatter: ({ earningBase }) => formatToNumber(earningBase.earning),
+  },
+  {
+    field: 'bonus',
+    headerName: 'Bonos',
+  },
+  {
+    field: 'totalEarning',
+    headerName: 'Total Ganancia',
+    valueFormatter: ({ tip, bonus, earningBase: { earning } }) =>
+      formatToNumber(tip + bonus + earning, 3),
   },
 ];
 
