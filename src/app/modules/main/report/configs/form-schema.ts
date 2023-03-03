@@ -3,6 +3,7 @@ import {
   TextFieldSchema,
   TextFieldType,
 } from 'src/app/components/text-field/text-field.interface';
+import { CONFIG } from 'src/app/constants/config.constant';
 import { months } from 'src/app/constants/months.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { generateYears } from 'src/app/utils/utils';
@@ -120,6 +121,7 @@ export const hoursWorkedFilterSchema: TextFieldSchema = [
   {
     name: 'cityId',
     label: 'Ciudad',
+    value: CONFIG.CITY_EEUU,
     fieldType: TextFieldType.Dropdown,
     df: '30%',
   },

@@ -104,6 +104,12 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
     valueFormatter: ({ totalBonus }) => formatToNumber(totalBonus),
   },
   {
+    field: 'timingExtraAmount',
+    headerName: 'Bono Horario',
+    valueFormatter: ({ timingExtraAmount }) =>
+      formatToNumber(timingExtraAmount),
+  },
+  {
     field: 'total',
     headerName: 'Total',
     valueFormatter: ({ total }) => formatToNumber(total),
@@ -136,8 +142,34 @@ export const ordersColumnsExport: TableColumns<OrderDto> = [
   },
   {
     field: 'distance',
+    headerName: 'Distancia (mts)',
+    valueFormatter: ({ distance }) => formatToNumber(distance),
+  },
+  {
+    field: 'distance',
     headerName: 'Distancia (mi)',
     valueFormatter: ({ distance }) => formatToNumber(meterToMile(distance)),
+  },
+  {
+    field: 'bonus',
+    headerName: 'Bonos',
+    valueFormatter: ({ bonus }) => formatToNumber(bonus),
+  },
+  {
+    field: 'earningWaiting',
+    headerName: 'Ganancia Espera',
+    valueFormatter: ({ earningBase, modalityId }) =>
+      modalityId == MODALITY.BASE_WITH_TIP
+        ? formatToNumber(earningBase.earningWaiting)
+        : '---',
+  },
+  {
+    field: 'earningDistance',
+    headerName: 'Ganancia Distancia',
+    valueFormatter: ({ earningBase, modalityId }) =>
+      modalityId == MODALITY.BASE_WITH_TIP
+        ? formatToNumber(earningBase.earningDistance)
+        : '---',
   },
   {
     field: 'earning',

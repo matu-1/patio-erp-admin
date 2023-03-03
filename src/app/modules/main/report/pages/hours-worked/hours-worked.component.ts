@@ -124,7 +124,7 @@ export class HoursWorkedComponent implements OnInit {
     const res = await handleRequest(() => this.reportService.getCities());
     if (res)
       this.hoursWorkedFilterSchema[2].options = [
-        { value: undefined, label: 'All' },
+        // { value: undefined, label: 'All' },
         ...res.data.map((item) => ({
           value: item.id,
           label: item.name,

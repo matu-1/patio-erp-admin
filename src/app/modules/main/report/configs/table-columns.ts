@@ -202,6 +202,12 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     valueFormatter: ({ totalBonus }) => formatNumber(totalBonus, 'es'),
   },
   {
+    field: 'timingExtraAmount',
+    headerName: 'Bono Horario',
+    valueFormatter: ({ timingExtraAmount }) =>
+      formatNumber(timingExtraAmount, 'es'),
+  },
+  {
     field: 'total',
     headerName: 'Total',
     valueFormatter: ({ total }) => formatNumber(total, 'es'),
@@ -291,9 +297,40 @@ export const ordersColumns: TableColumns<OrderDto> = [
     valueFormatter: ({ tip }) => formatNumber(tip, 'es', '.2-2'),
   },
   {
+    field: 'tip_original',
+    headerName: 'Tip Original',
+    valueFormatter: ({ tip }) => formatNumber(tip, 'es', '.2-2'),
+  },
+  {
     field: 'distance',
+    headerName: 'Distancia (mts)',
+    valueFormatter: ({ distance }) => formatNumber(distance, 'es'),
+  },
+  {
+    field: 'distanceMi',
     headerName: 'Distancia (mi)',
     valueFormatter: ({ distance }) => formatNumber(meterToMile(distance), 'es'),
+  },
+  {
+    field: 'bonus',
+    headerName: 'Bonos',
+    valueFormatter: ({ bonus }) => formatNumber(bonus, 'es'),
+  },
+  {
+    field: 'earningWaiting',
+    headerName: 'Ganancia Espera',
+    valueFormatter: ({ earningBase, modalityId }) =>
+      modalityId == MODALITY.BASE_WITH_TIP
+        ? formatNumber(earningBase.earningWaiting, 'es')
+        : '---',
+  },
+  {
+    field: 'earningDistance',
+    headerName: 'Ganancia Distancia',
+    valueFormatter: ({ earningBase, modalityId }) =>
+      modalityId == MODALITY.BASE_WITH_TIP
+        ? formatNumber(earningBase.earningDistance, 'es')
+        : '---',
   },
   {
     field: 'earning',
@@ -357,6 +394,10 @@ export const timingsColumns: TableColumns<TimingDto> = [
     field: 'endFinal',
     headerName: 'Fecha Final',
     valueFormatter: ({ endFinal }) => FormatDate.dateMoment(endFinal),
+  },
+  {
+    field: 'extraAmount',
+    headerName: 'Monto Extra',
   },
   {
     field: 'hours',

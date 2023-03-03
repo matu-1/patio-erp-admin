@@ -21,6 +21,7 @@ export interface HoursWorkedDriver {
   totalBonus: number;
   extraEarning: number;
   bankAccount: BankAccount;
+  timingExtraAmount: number;
 }
 
 export interface BankAccount {
@@ -41,6 +42,7 @@ export interface OrderDto {
   distance: number;
   modalityId: number;
   earningBase: EarningBase;
+  bonus: number;
 }
 
 export interface EarningBase {
