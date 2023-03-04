@@ -215,8 +215,8 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
   {
     field: 'average',
     headerName: 'Promedio',
-    valueFormatter: ({ quantity, hoursWorked }) =>
-      formatNumber(quantity / hoursWorked, 'es', '.0-2'),
+    valueFormatter: ({average }) =>
+      formatNumber(average, 'es', '.0-2'),
   },
   {
     field: 'actions',

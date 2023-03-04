@@ -22,6 +22,7 @@ export interface HoursWorkedDriver {
   extraEarning: number;
   bankAccount: BankAccount;
   timingExtraAmount: number;
+  average: number;
 }
 
 export interface BankAccount {
