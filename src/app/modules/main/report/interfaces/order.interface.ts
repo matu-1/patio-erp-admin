@@ -49,6 +49,7 @@ export interface Merchant {
 export interface AssignedDriver {
   id: number;
   name: string;
+  modality: string;
 }
 
 export interface Orderstatus {

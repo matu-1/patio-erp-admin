@@ -215,8 +215,7 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
   {
     field: 'average',
     headerName: 'Promedio',
-    valueFormatter: ({average }) =>
-      formatNumber(average, 'es', '.0-2'),
+    valueFormatter: ({ average }) => formatNumber(average, 'es', '.0-2'),
   },
   {
     field: 'actions',
@@ -434,6 +433,12 @@ export const orderColumns: TableColumns<Order> = [
       assignedDrivers
         ? `${assignedDrivers[0].id} - ${assignedDrivers[0].name}`
         : '---',
+  },
+  {
+    field: 'modality',
+    headerName: 'Modalidad',
+    valueFormatter: ({ assignedDrivers }) =>
+      assignedDrivers ? assignedDrivers[0].modality : '---',
   },
   {
     field: 'total',
