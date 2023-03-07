@@ -406,6 +406,8 @@ export const timingsColumns: TableColumns<TimingDto> = [
   },
 ];
 
+const BASE_WITH_TIP = 'Tarifa base + Propina';
+
 export const orderColumns: TableColumns<Order> = [
   {
     field: 'id',
@@ -486,32 +488,48 @@ export const orderColumns: TableColumns<Order> = [
   {
     field: 'tip',
     headerName: 'Tip Driver',
-  },
-  {
-    field: 'earning_waiting',
-    headerName: 'Ganancia Espera',
-    valueFormatter: ({ earningBase }) => earningBase.earningWaiting,
-  },
-  {
-    field: 'earning_distance',
-    headerName: 'Ganancia Distancia',
-    valueFormatter: ({ earningBase }) =>
-      formatToNumber(earningBase.earningDistance),
-  },
-  {
-    field: 'earning',
-    headerName: 'Total Ganancia Base',
-    valueFormatter: ({ earningBase }) => formatToNumber(earningBase.earning),
+    valueFormatter: ({ tip }) => formatToNumber(tip),
   },
   {
     field: 'bonus',
     headerName: 'Bonos',
   },
   {
+    field: 'earning_waiting',
+    headerName: 'Ganancia Espera',
+    valueFormatter: ({ earningBase, assignedDrivers }) =>
+      assignedDrivers?.[0]?.modality == BASE_WITH_TIP
+        ? earningBase.earningWaiting
+        : '---',
+  },
+  {
+    field: 'earning_distance',
+    headerName: 'Ganancia Distancia',
+    valueFormatter: ({ earningBase, assignedDrivers }) =>
+      assignedDrivers?.[0]?.modality == BASE_WITH_TIP
+        ? formatToNumber(earningBase.earningDistance)
+        : '---',
+  },
+  {
+    field: 'earning',
+    headerName: 'Total Ganancia Base',
+    valueFormatter: ({ earningBase, assignedDrivers }) =>
+      assignedDrivers?.[0]?.modality == BASE_WITH_TIP
+        ? formatToNumber(earningBase.earning)
+        : '---',
+  },
+  {
     field: 'totalEarning',
     headerName: 'Total Ganancia',
-    valueFormatter: ({ tip, bonus, earningBase: { earning } }) =>
-      formatToNumber(tip + bonus + earning, 3),
+    valueFormatter: ({
+      tip,
+      bonus,
+      earningBase: { earning },
+      assignedDrivers,
+    }) =>
+      assignedDrivers?.[0]?.modality == BASE_WITH_TIP
+        ? formatToNumber(tip + bonus + earning, 3)
+        : '---',
   },
 ];
 
