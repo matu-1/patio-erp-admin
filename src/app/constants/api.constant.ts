@@ -69,6 +69,8 @@ export const API = {
     GET_COLLECT_MERCHANT: `${PATIO_STORE_API_URL}/orders/report/merchants`,
   },
   BANK_ACCOUNT: {
+    GET_BY_ID: `${PATIO_STORE_API_URL}/bank-account/:id`,
+    CREATE: `${PATIO_STORE_API_URL}/bank-account`,
     UPDATE: `${PATIO_STORE_API_URL}/bank-account/:id`,
   },
 };

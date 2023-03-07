@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, switchMap, throwError } from 'rxjs';
 import { API } from 'src/app/constants/api.constant';
 import { PATIO_STORE_CONFIG_HTTP } from 'src/app/constants/http-header.constant';
 import { ObjectUtils } from 'src/app/utils/object.util';
@@ -22,6 +23,7 @@ import {
 import { OrderReceived } from '../interfaces/order-received.interface';
 import { FilterOrder, Order } from '../interfaces/order.interface';
 import {
+  BankAccount,
   CreatePaymentDriverDto,
   GetPaymentDetailDto,
   PaymentDetail,
@@ -95,11 +97,28 @@ export class ReportService {
   }
 
   updateBankAccount(id: number, dto: UpdateBankAccount) {
-    return this.http.put<Response<any>>(
+    return this.http.put<Response<BankAccount>>(
       routeParams(API.BANK_ACCOUNT.UPDATE, { id }),
       dto,
       { ...PATIO_STORE_CONFIG_HTTP }
     );
+  }
+
+  getBankAccount(id: number) {
+    return this.http.get<Response<BankAccount>>(
+      routeParams(API.BANK_ACCOUNT.GET_BY_ID, { id }),
+      { ...PATIO_STORE_CONFIG_HTTP }
+    );
+  }
+
+  createBankAccount(dto: UpdateBankAccount) {
+    return this.http.post<Response<BankAccount>>(API.BANK_ACCOUNT.CREATE, dto, {
+      ...PATIO_STORE_CONFIG_HTTP,
+    });
+  }
+
+  createOrUpdateBankAccount(dto: UpdateBankAccount, id?: number) {
+    return id ? this.updateBankAccount(id, dto) : this.createBankAccount(dto);
   }
 
   getCollectMerchants(params: CollectMerchantParams) {

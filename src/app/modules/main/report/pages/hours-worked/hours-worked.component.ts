@@ -168,19 +168,23 @@ export class HoursWorkedComponent implements OnInit {
     if (res) this.filter();
   }
 
-  showEditBankAccountDlg(value: BankAccount) {
+  showEditBankAccountDlg(driverId: number, value: BankAccount) {
     const dialogRef = this.dialog.open(EditBankAccountDialog, {
       ...DIALOG_CONFIG_XS,
       data: value,
     });
     dialogRef
       .afterClosed()
-      .subscribe((data) => data && this.updateBankAccount(value.id, data));
+      .subscribe(
+        (data) =>
+          data &&
+          this.createOrUpdateBankAccount({ ...data, driverId }, value?.id)
+      );
   }
 
-  async updateBankAccount(id: number, dto: UpdateBankAccount) {
+  async createOrUpdateBankAccount(dto: UpdateBankAccount, id: number) {
     const res = await handleRequestPg(
-      () => this.reportService.updateBankAccount(id, dto),
+      () => this.reportService.createOrUpdateBankAccount(dto, id),
       true
     );
     if (res) this.filter();

@@ -74,10 +74,9 @@
       <mat-icon class="action-icon">refresh</mat-icon>
     </button>
     <button
-      *ngIf="value.bankAccount"
       mat-icon-button
       matTooltip="Editar Cuenta Bancaria"
-      (click)="showEditBankAccountDlg(value.bankAccount)"
+      (click)="showEditBankAccountDlg(value.id, value.bankAccount)"
     >
       <mat-icon class="action-icon">account_balance</mat-icon>
     </button>

@@ -205,6 +205,11 @@ export const editBankAccountSchema: TextFieldSchema = [
         name: 'int',
         validatorFn: CustomValidators.int,
       },
+      {
+        name: 'minlength',
+        message: 'Minimum 3 characters',
+        validatorFn: Validators.minLength(3),
+      },
     ],
     df: '50%',
   },
@@ -240,6 +245,29 @@ export const editBankAccountSchema: TextFieldSchema = [
   {
     label: 'Número de Identidad',
     name: 'identityNumber',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'minlength',
+        message: 'Minimum 6 characters',
+        validatorFn: Validators.minLength(6),
+      },
+    ],
+    df: '50%',
+  },
+  {
+    label: 'Verificado',
+    name: 'verified',
+    value: 0,
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      { value: 0, label: 'No' },
+      { value: 1, label: 'Si' },
+    ],
     validators: [
       {
         name: 'required',

@@ -31,6 +31,7 @@ export interface BankAccount {
   bankName: string;
   identityNumber: string;
   accountType: string;
+  verified: number;
 }
 
 export interface OrderDto {

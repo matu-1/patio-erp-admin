@@ -49,7 +49,17 @@ export interface RefreshPaymentDto {
   driverId: number;
 }
 
-export interface UpdateBankAccount {
+export interface BankAccount {
+  id: number;
+  accountNumber: string;
+  bankName: string;
+  accountType: string;
+  identityNumber: string;
+  driverId: number;
+  verified: number;
+}
+
+export interface UpdateBankAccount extends Omit<BankAccount, 'id'> {
   accountNumber: string;
   bankName: string;
   accountType: string;
