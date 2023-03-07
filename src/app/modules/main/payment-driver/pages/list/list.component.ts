@@ -201,4 +201,8 @@ export class ListComponent implements OnInit {
     );
     if (res) this.filter();
   }
+
+  onSelect(item: any){
+    console.log('select', item)
+  }
 }

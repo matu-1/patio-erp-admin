@@ -22,6 +22,7 @@
   [rows]="paymentsDriver"
   [columns]="paymentsDriverColumns"
   (refresh)="getPaymentsDriver()"
+  (rowClick)="onSelect($event)"
 >
   <ng-template customColumn="bankAccount" let-value="value">
     <ng-container *ngIf="value.detail?.bankAccount; else noBankAccount">

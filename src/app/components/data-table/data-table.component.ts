@@ -40,6 +40,7 @@ export class DataTableComponent implements AfterViewInit, OnInit {
   @Input() class: string = '';
   @Input() showSearcher = true;
   @Input() filter = '';
+  @Output() rowClick = new EventEmitter()
 
   get rows() {
     return this._rows;
@@ -74,5 +75,9 @@ export class DataTableComponent implements AfterViewInit, OnInit {
       (item) => item.field == column.field
     );
     return customColumn?.templateRef;
+  }
+
+  onRowClick(row: any ){
+    this.rowClick.emit(row);
   }
 }
