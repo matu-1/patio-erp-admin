@@ -24,11 +24,11 @@
   (refresh)="getPaymentsDriver()"
 >
   <ng-template customColumn="bankAccount" let-value="value">
-    <ng-container *ngIf="value.bankAccount; else noBankAccount">
-      {{ value.bankAccount.accountNumber }} <br />
-      <strong>{{ value.bankAccount.bankName }}</strong> <br />
-      {{ value.bankAccount.accountType }} <br />
-      {{ value.bankAccount.identityNumber }} <br />
+    <ng-container *ngIf="value.detail?.bankAccount; else noBankAccount">
+      {{ value.detail.bankAccount.accountNumber }} <br />
+      <strong>{{ value.detail.bankAccount.bankName }}</strong> <br />
+      {{ value.detail.bankAccount.accountType }} <br />
+      {{ value.detail.bankAccount.identityNumber }} <br />
     </ng-container>
     <ng-template #noBankAccount> --- </ng-template>
   </ng-template>
@@ -72,6 +72,15 @@
       (click)="goPaymentDriver(value)"
     >
       <mat-icon class="action-icon">money_off</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      matTooltip="Editar Cuenta Bancaria"
+      (click)="
+        showEditBankAccountDlg(value.driverId, value.detail?.bankAccount)
+      "
+    >
+      <mat-icon class="action-icon">account_balance</mat-icon>
     </button>
   </ng-template>
 </app-data-table>

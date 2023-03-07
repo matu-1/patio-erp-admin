@@ -22,6 +22,12 @@ import { WeekType } from 'src/app/utils/utils';
 import { ActivatedRoute, Router } from '@angular/router';
 import { categoryValue } from '../../../collect-driver/constants/payment-method';
 import { CONFIG } from 'src/app/constants/config.constant';
+import {
+  BankAccount,
+  UpdateBankAccount,
+} from '../../../report/interfaces/payment-detail.interface';
+import { EditBankAccountDialog } from '../../../report/components/edit-bank-account/edit-bank-account.dialog';
+import { ReportService } from '../../../report/services/report.service';
 
 @Component({
   selector: 'app-list',
@@ -42,7 +48,8 @@ export class ListComponent implements OnInit {
     private dialog: MatDialog,
     private location: Location,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private reportService: ReportService
   ) {}
 
   ngOnInit(): void {
@@ -171,5 +178,27 @@ export class ListComponent implements OnInit {
         date: value.detail?.timings[0].startFinal,
       },
     });
+  }
+
+  showEditBankAccountDlg(driverId: number, value: BankAccount) {
+    const dialogRef = this.dialog.open(EditBankAccountDialog, {
+      ...DIALOG_CONFIG_XS,
+      data: value,
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe(
+        (data) =>
+          data &&
+          this.createOrUpdateBankAccount({ ...data, driverId }, value?.id)
+      );
+  }
+
+  async createOrUpdateBankAccount(dto: UpdateBankAccount, id: number) {
+    const res = await handleRequestPg(
+      () => this.reportService.createOrUpdateBankAccount(dto, id),
+      true
+    );
+    if (res) this.filter();
   }
 }
