@@ -10,6 +10,9 @@
   <button mat-button (click)="download()" [disabled]="!paymentsDriver">
     Exportar
   </button>
+  <button mat-button (click)="showPayMultipleDlg()">
+    Pago Multiple ({{ selectedPayment.size }})
+  </button>
 </app-title-bar>
 <app-simple-card class="mb-3">
   <app-form-builder
@@ -23,6 +26,7 @@
   [columns]="paymentsDriverColumns"
   (refresh)="getPaymentsDriver()"
   (rowClick)="onSelect($event)"
+  [rowClass]="getRowClass.bind(this)"
 >
   <ng-template customColumn="bankAccount" let-value="value">
     <ng-container *ngIf="value.detail?.bankAccount; else noBankAccount">
@@ -37,6 +41,7 @@
     <button
       mat-icon-button
       matTooltip="Pagar"
+      stopPropagation
       (click)="openPaymentDlg(value)"
       [disabled]="value.paidAt"
     >
@@ -46,6 +51,7 @@
       *ngIf="value.category == categoryValue.delivery"
       mat-icon-button
       matTooltip="Ver Detalle"
+      stopPropagation
       (click)="goDetail(value)"
     >
       <mat-icon class="action-icon">info</mat-icon>
@@ -54,6 +60,7 @@
       mat-icon-button
       [disabled]="value.amount == value.balance"
       matTooltip="Revertir ultimo pago"
+      stopPropagation
       (click)="openRevertConfirmDlg(value)"
     >
       <mat-icon class="action-icon">undo</mat-icon>
@@ -62,6 +69,7 @@
       *ngIf="value.amount != value.balance"
       mat-icon-button
       matTooltip="Pagos"
+      stopPropagation
       (click)="openPaymentsDlg(value)"
     >
       <mat-icon class="action-icon">payments</mat-icon>
@@ -70,6 +78,7 @@
       *ngIf="value.category == categoryValue.delivery"
       mat-icon-button
       matTooltip="Add Descuento"
+      stopPropagation
       (click)="goPaymentDriver(value)"
     >
       <mat-icon class="action-icon">money_off</mat-icon>
@@ -77,6 +86,7 @@
     <button
       mat-icon-button
       matTooltip="Editar Cuenta Bancaria"
+      stopPropagation
       (click)="
         showEditBankAccountDlg(value.driverId, value.detail?.bankAccount)
       "

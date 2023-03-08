@@ -135,3 +135,9 @@ button:not(.mat-button-disabled) .action-icon {
     margin-bottom: 0;
   }
 }
+.bg-selected,
+.bg-selected td {
+  color: #ececec !important; //#999999
+  background-color: #778beb !important; //#e1e1e1
+  transition: background-color 0.2s ease-in, color 0.2s ease-in;;
+}

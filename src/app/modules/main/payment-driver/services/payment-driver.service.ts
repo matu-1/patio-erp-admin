@@ -8,6 +8,7 @@ import {
   PaymentDriver,
   PayDriverDto,
   PaymentFilterDto,
+  PayDriverMultipleDto,
 } from '../interfaces/payment-driver.interface';
 import { Payment } from '../interfaces/payment.interface';
 
@@ -45,5 +46,9 @@ export class PaymentDriverService {
     return this.http.get<Response<Payment[]>>(
       routeParams(API.PAYMENT_DRIVER.PAYMENTS, { id })
     );
+  }
+
+  payMultiple(dto: PayDriverMultipleDto) {
+    return this.http.post<Response<any>>(API.PAYMENT_DRIVER.PAY_MULTIPLE, dto);
   }
 }

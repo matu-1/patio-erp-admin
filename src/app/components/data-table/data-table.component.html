@@ -53,6 +53,7 @@
         *matRowDef="let row; columns: displayedColumns"
         [class]="rowClass && rowClass(row)"
         (click)="onRowClick(row)"
+        [class.cursor]="this.rowClick.observed"
       ></tr>
 
       <tr class="mat-row" *matNoDataRow>

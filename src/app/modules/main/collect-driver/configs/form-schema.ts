@@ -5,6 +5,7 @@ import {
 } from 'src/app/components/text-field/text-field.interface';
 import { DateUtils } from 'src/app/utils/date.util';
 import { CustomValidators } from 'src/app/utils/validators';
+import { paymentMethod } from '../constants/payment-method';
 
 export const paySchema: TextFieldSchema = [
   {
@@ -27,13 +28,10 @@ export const paySchema: TextFieldSchema = [
     name: 'paymentMethod',
     label: 'Método Pago',
     fieldType: TextFieldType.Dropdown,
-    options: [
-      { value: 0, label: 'Efectivo' },
-      { value: 1, label: 'Wallet' },
-      { value: 2, label: 'Cuenta Bancaria' },
-      { value: 3, label: 'Soli' },
-      { value: 4, label: 'Conciliación sin ingreso' },
-    ],
+    options: Object.keys(paymentMethod).map((id) => ({
+      value: Number(id),
+      label: paymentMethod[Number(id)],
+    })),
     validators: [
       {
         name: 'required',

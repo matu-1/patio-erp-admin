@@ -1,0 +1,24 @@
+<form [formGroup]="form" markAllSubmit (validSubmit)="save()">
+  <h2 matDialogTitle>Pago Multiple</h2>
+  <mat-dialog-content>
+    <div class="of-h">
+      <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">
+        <app-text-field
+          *ngFor="let value of payMultipleSchema"
+          [textFieldValue]="value"
+          [form]="form"
+          fxFlex.xs="100%"
+          fxFlex="50%"
+        >
+        </app-text-field>
+      </div>
+      <mat-chip-list>
+        <mat-chip *ngFor="let payment of data">{{payment.name}}</mat-chip>
+      </mat-chip-list>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button type="submit" cdkFocusInitial>Aceptar</button>
+  </mat-dialog-actions>
+</form>

@@ -28,6 +28,8 @@ import {
 } from '../../../report/interfaces/payment-detail.interface';
 import { EditBankAccountDialog } from '../../../report/components/edit-bank-account/edit-bank-account.dialog';
 import { ReportService } from '../../../report/services/report.service';
+import { SnackBar } from 'src/app/utils/snackbar';
+import { PayMultipleDialog } from '../../components/pay-multiple/pay-multiple.dialog';
 
 @Component({
   selector: 'app-list',
@@ -42,6 +44,7 @@ export class ListComponent implements OnInit {
   paymentFilterSchema = paymentFilterSchema;
   PAGE_ROUTE = PAGE_ROUTE;
   categoryValue = categoryValue;
+  selectedPayment = new Set<PaymentDriver>();
 
   constructor(
     private paymentDriverService: PaymentDriverService,
@@ -78,6 +81,7 @@ export class ListComponent implements OnInit {
   }
 
   async getPaymentsDriver() {
+    this.selectedPayment.clear();
     this.paymentsDriver = undefined;
     const value = this.form.value;
     const res = await handleRequest(() =>
@@ -202,7 +206,37 @@ export class ListComponent implements OnInit {
     if (res) this.filter();
   }
 
-  onSelect(item: any){
-    console.log('select', item)
+  getRowClass(item: any) {
+    return this.selectedPayment?.has(item) ? 'bg-selected' : '';
+  }
+
+  onSelect(item: any) {
+    if (item == 0) return;
+    if (this.selectedPayment.has(item)) this.selectedPayment.delete(item);
+    else this.selectedPayment.add(item);
+  }
+
+  showPayMultipleDlg() {
+    if (this.selectedPayment.size < 2)
+      return SnackBar.show('Debe seleccionar al menos 2 items');
+    const dialogRef = this.dialog.open(PayMultipleDialog, {
+      ...DIALOG_CONFIG_XS,
+      data: Array.from(this.selectedPayment),
+    });
+    dialogRef.afterClosed().subscribe((data) => data && this.payMultiple(data));
+  }
+
+  async payMultiple(data: any) {
+    const paymentAmounts = [...this.selectedPayment].map((item) => ({
+      id: item.id,
+      amount: item.balance,
+    }));
+    const res = await handleRequestPg(() =>
+      this.paymentDriverService.payMultiple({ ...data, paymentAmounts })
+    );
+    if (res) {
+      this.filter();
+      this.selectedPayment.clear();
+    }
   }
 }

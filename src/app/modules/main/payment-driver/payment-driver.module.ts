@@ -12,9 +12,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { PaymentDetailDialog } from './components/payment-detail/payment-detail.dialog';
 import { CreateComponent } from './pages/create/create.component';
 import { CollectDriverModule } from '../collect-driver/collect-driver.module';
+import { PayMultipleDialog } from './components/pay-multiple/pay-multiple.dialog';
 
 @NgModule({
-  declarations: [ListComponent, PayDialog, PaymentDetailDialog, CreateComponent],
+  declarations: [ListComponent, PayDialog, PaymentDetailDialog, CreateComponent, PayMultipleDialog],
   imports: [
     CommonModule,
     PaymentDriverRoutingModule,

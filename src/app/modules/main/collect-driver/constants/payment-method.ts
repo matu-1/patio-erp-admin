@@ -4,6 +4,9 @@ export const paymentMethod: Record<number, string> = {
   2: 'Cuenta Bancaria',
   3: 'Soli',
   4: 'Conciliación sin ingreso',
+  5: 'Cuenta Citibank',
+  6: 'Cuenta Jp Bank of America',
+  7: 'Cuenta Angela Bank of America',
 };
 
 export const categoryValue = {

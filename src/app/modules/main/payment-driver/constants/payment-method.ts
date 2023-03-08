@@ -1,5 +1,3 @@
-export const paymentMethod: Record<number, string> = {
-  0: 'Efectivo',
-  1: 'Wallet',
-  2: 'Cuenta Bancaria',
-};
+import { paymentMethod as paymentMethodCollect } from '../../collect-driver/constants/payment-method';
+
+export const paymentMethod = paymentMethodCollect;

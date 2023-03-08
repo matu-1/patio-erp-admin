@@ -25,3 +25,5 @@ export const paymentFilterSchema: TextFieldSchema = [
     options: weeksOptions,
   },
 ];
+
+export const payMultipleSchema: TextFieldSchema = [...payCollectSchema];
