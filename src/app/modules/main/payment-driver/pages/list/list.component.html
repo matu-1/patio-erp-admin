@@ -75,13 +75,22 @@
       <mat-icon class="action-icon">payments</mat-icon>
     </button>
     <button
-      *ngIf="value.category == categoryValue.delivery"
+      *ngIf="value.category == categoryValue.delivery && value.paidAt == null"
       mat-icon-button
       matTooltip="Add Descuento"
       stopPropagation
-      (click)="goPaymentDriver(value)"
+      (click)="goPaymentDriver(value, 0)"
     >
       <mat-icon class="action-icon">money_off</mat-icon>
+    </button>
+    <button
+      *ngIf="value.category == categoryValue.delivery && value.paidAt == null"
+      mat-icon-button
+      matTooltip="Add Bono"
+      stopPropagation
+      (click)="goPaymentDriver(value, 1)"
+    >
+      <mat-icon class="action-icon">attach_money</mat-icon>
     </button>
     <button
       mat-icon-button

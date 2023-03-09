@@ -30,6 +30,7 @@ import { EditBankAccountDialog } from '../../../report/components/edit-bank-acco
 import { ReportService } from '../../../report/services/report.service';
 import { SnackBar } from 'src/app/utils/snackbar';
 import { PayMultipleDialog } from '../../components/pay-multiple/pay-multiple.dialog';
+import { PaymentDriverType } from '../../constants/payment-driver-type';
 
 @Component({
   selector: 'app-list',
@@ -167,14 +168,18 @@ export class ListComponent implements OnInit {
     });
   }
 
-  goPaymentDriver(value: PaymentDriver) {
+  goPaymentDriver(value: PaymentDriver, type: PaymentDriverType) {
     const start = new Date(value.startDate + ' 00:00:00');
     const end = new Date(value.endDate + ' 23:59:59');
     if (!DateUtils.isTimezoneNewYork() && value.cityId == CONFIG.CITY_EEUU) {
       start.setHours(start.getHours() + 1);
       end.setHours(end.getHours() + 1);
     }
-    this.router.navigate([PAGE_ROUTE.COLLECT_DRIVER.CREATE], {
+    const routes = {
+      [PaymentDriverType.Cobro]:PAGE_ROUTE.COLLECT_DRIVER.CREATE,
+      [PaymentDriverType.Pago]: PAGE_ROUTE.PAYMENT_DRIVER.CREATE,
+    }
+    this.router.navigate([routes[type]], {
       queryParams: {
         driverId: value.driverId,
         start: start.toISOString(),
