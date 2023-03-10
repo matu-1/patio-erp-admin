@@ -1,7 +1,7 @@
 import { formatDate, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment-timezone';
 import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
@@ -27,6 +27,7 @@ import {
 } from '../../interfaces/hours-worked-driver.interface';
 import { UpdateBankAccount } from '../../interfaces/payment-detail.interface';
 import { ReportService } from '../../services/report.service';
+import { PaymentDriverType } from '../../../payment-driver/constants/payment-driver-type';
 
 @Component({
   selector: 'app-hours-worked',
@@ -43,7 +44,8 @@ export class HoursWorkedComponent implements OnInit {
     private reportService: ReportService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -138,8 +140,13 @@ export class HoursWorkedComponent implements OnInit {
 
   goDiscounts(value: HoursWorkedDriver) {
     //TODO: Redirect to collect driver
+    let { start, end } = this.form.value;
+    start = DateUtils.getMinHour(start);
+    end = DateUtils.getMaxHour(end);
     const url = this.location.prepareExternalUrl(
-      `${PAGE_ROUTE.COLLECT_DRIVER.LIST}?isPayment=0&driver=${value.name}`
+      `${PAGE_ROUTE.COLLECT_DRIVER.LIST}?isPayment=0&driver=${
+        value.name
+      }&start=${start.toISOString()}&end=${end.toISOString()}`
     );
     window.open(url, '_bank');
   }
@@ -188,5 +195,24 @@ export class HoursWorkedComponent implements OnInit {
       true
     );
     if (res) this.filter();
+  }
+
+  goPaymentDriver(item: HoursWorkedDriver, type: PaymentDriverType) {
+    const value = this.form.value;
+    const start = DateUtils.getMinHourMoment(DateUtils.getMaxHour(value.start));
+    const end = DateUtils.getMaxHourMoment(DateUtils.getMaxHour(value.end));
+    const routes = {
+      [PaymentDriverType.Cobro]: PAGE_ROUTE.COLLECT_DRIVER.CREATE,
+      [PaymentDriverType.Pago]: PAGE_ROUTE.PAYMENT_DRIVER.CREATE,
+    };
+    this.router.navigate([routes[type]], {
+      queryParams: {
+        driverId: item.id,
+        start: start.toISOString(),
+        end: end.toISOString(),
+        date: item.timings[0].startFinal,
+        isNotRefresh: 1,
+      },
+    });
   }
 }

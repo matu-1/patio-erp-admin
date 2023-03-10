@@ -80,5 +80,14 @@
     >
       <mat-icon class="action-icon">account_balance</mat-icon>
     </button>
+    <button
+      *ngIf="value.timings[0]"
+      mat-icon-button
+      matTooltip="Add Bono"
+      stopPropagation
+      (click)="goPaymentDriver(value, 1)"
+    >
+      <mat-icon class="action-icon">attach_money</mat-icon>
+    </button>
   </ng-template>
 </app-data-table>
