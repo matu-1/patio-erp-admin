@@ -172,8 +172,8 @@ export class ListComponent implements OnInit {
     const start = new Date(value.startDate + ' 00:00:00');
     const end = new Date(value.endDate + ' 23:59:59');
     if (!DateUtils.isTimezoneNewYork() && value.cityId == CONFIG.CITY_EEUU) {
-      start.setHours(start.getHours() + 1);
-      end.setHours(end.getHours() + 1);
+      // start.setHours(start.getHours() + 1);
+      // end.setHours(end.getHours() + 1);
     }
     const routes = {
       [PaymentDriverType.Cobro]:PAGE_ROUTE.COLLECT_DRIVER.CREATE,
