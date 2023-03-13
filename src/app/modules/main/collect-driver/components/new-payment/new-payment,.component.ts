@@ -28,6 +28,7 @@ export class NewPaymentComponent implements OnInit {
     { path: '', title: this.title },
   ];
   @Input() type: number = PaymentDriverType.Cobro;
+  isNotRefresh = 0;
 
   constructor(
     private location: Location,
@@ -42,16 +43,19 @@ export class NewPaymentComponent implements OnInit {
   }
 
   parseFormFromQuery() {
-    this.activatedRoute.queryParams.subscribe(({ start, end, driverId, date }) => {
-      if (end) this.form.addControl('end', new FormControl(new Date(end)));
-      if (start)
-        this.form.addControl('start', new FormControl(new Date(start)));
-      if (start && driverId)
-        this.form.patchValue({
-          driverId: Number(driverId),
-          date: new Date(date),
-        });
-    });
+    this.activatedRoute.queryParams.subscribe(
+      ({ start, end, driverId, date, isNotRefresh }) => {
+        if (isNotRefresh) this.isNotRefresh = Number(isNotRefresh);
+        if (end) this.form.addControl('end', new FormControl(new Date(end)));
+        if (start)
+          this.form.addControl('start', new FormControl(new Date(start)));
+        if (start && driverId)
+          this.form.patchValue({
+            driverId: Number(driverId),
+            date: new Date(date),
+          });
+      }
+    );
   }
 
   async getDrivers() {
@@ -75,7 +79,7 @@ export class NewPaymentComponent implements OnInit {
 
   refresh() {
     const { driverId, start, end } = this.form.value;
-    if (!end) return of(responseBank);
+    if (!end || this.isNotRefresh) return of(responseBank);
     return this.reportService
       .refresh({
         driverId,

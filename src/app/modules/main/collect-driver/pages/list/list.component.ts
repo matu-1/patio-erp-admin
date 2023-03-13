@@ -50,12 +50,14 @@ export class ListComponent implements OnInit {
   }
 
   parseFormFromQuery() {
-    const { isPayment, driver } = this.activatedRoute.snapshot.queryParams;
-    if (!isPayment || !driver) return;
+    const { isPayment, driver, start, end } =
+      this.activatedRoute.snapshot.queryParams;
+    if (!isPayment || !driver || !start || !end) return;
     this.driver = driver;
     this.form.patchValue({
       isPayment: Number(isPayment),
-      start: new Date(2022, 11, 1),
+      start: new Date(start),
+      end: new Date(end),
     });
   }
 
