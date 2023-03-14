@@ -3,6 +3,7 @@ import {
   TextFieldType,
 } from 'src/app/components/text-field/text-field.interface';
 import { getWeeks } from 'src/app/utils/utils';
+import { CONFIG } from '../../../../constants/config.constant';
 import {
   collectFilterSchema,
   paySchema as payCollectSchema,
@@ -23,6 +24,13 @@ export const paymentFilterSchema: TextFieldSchema = [
     value: weeksOptions[0].value as any,
     fieldType: TextFieldType.Dropdown,
     options: weeksOptions,
+  },
+  {
+    name: 'cityId',
+    label: 'Ciudad',
+    value: CONFIG.CITY_EEUU,
+    fieldType: TextFieldType.Dropdown,
+    df: '20%',
   },
 ];
 

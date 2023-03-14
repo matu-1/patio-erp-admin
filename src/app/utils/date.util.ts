@@ -1,4 +1,5 @@
 import * as moment from 'moment-timezone';
+import { CONFIG } from '../constants/config.constant';
 
 export abstract class DateUtils {
   static getMinHour(date: Date | string = new Date()) {
@@ -62,9 +63,10 @@ export abstract class DateUtils {
       .milliseconds(0);
   }
 
-  static isTimezoneNewYork() {
-    const NEW_YORK_OFFSET = 300;
-    const offset = new Date().getTimezoneOffset(); //minutes
-    return offset == NEW_YORK_OFFSET;
+  static getMoment(date: Date | string, city: number) {
+    return moment.tz(
+      date,
+      city == CONFIG.CITY_EEUU ? CONFIG.TZ.EE_UU : CONFIG.TZ.BOLIVIA
+    );
   }
 }

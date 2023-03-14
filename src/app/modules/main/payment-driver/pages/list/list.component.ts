@@ -31,6 +31,7 @@ import { ReportService } from '../../../report/services/report.service';
 import { SnackBar } from 'src/app/utils/snackbar';
 import { PayMultipleDialog } from '../../components/pay-multiple/pay-multiple.dialog';
 import { PaymentDriverType } from '../../constants/payment-driver-type';
+import * as moment from 'moment-timezone';
 
 @Component({
   selector: 'app-list',
@@ -60,6 +61,8 @@ export class ListComponent implements OnInit {
     this.resetFromQuery();
     this.resetForm();
     this.getPaymentsDriver();
+    this.getCities();
+    this.changeValues();
   }
 
   resetForm() {
@@ -68,6 +71,7 @@ export class ListComponent implements OnInit {
     this.form.get('week')?.valueChanges.subscribe(({ start, end }) => {
       this.form.patchValue({ start, end });
     });
+    this.setTimeZone(this.form.value.cityId);
   }
 
   resetFromQuery() {
@@ -81,6 +85,30 @@ export class ListComponent implements OnInit {
       });
   }
 
+  setTimeZone(cityId?: number) {
+    const timeZone =
+      cityId == CONFIG.CITY_EEUU ? 'America/New_York' : 'America/La_Paz';
+    moment.tz.setDefault(timeZone);
+  }
+
+  changeValues() {
+    this.form.get('cityId')?.valueChanges.subscribe((value) => {
+      this.setTimeZone(value);
+    });
+  }
+
+  async getCities() {
+    const res = await handleRequest(() => this.reportService.getCities());
+    if (res)
+      this.paymentFilterSchema[4].options = [
+        // { value: undefined, label: 'All' },
+        ...res.data.map((item) => ({
+          value: item.id,
+          label: item.name,
+        })),
+      ];
+  }
+
   async getPaymentsDriver() {
     this.selectedPayment.clear();
     this.paymentsDriver = undefined;
@@ -88,8 +116,10 @@ export class ListComponent implements OnInit {
     const res = await handleRequest(() =>
       this.paymentDriverService.getPaymentsDriver({
         ...value,
-        start: DateUtils.getMinHour(value.start),
-        end: DateUtils.getMaxHour(value.end),
+        // start: DateUtils.getMinHour(value.start),
+        // end: DateUtils.getMaxHour(value.end),
+        start: DateUtils.getMinHourMoment(DateUtils.getMaxHour(value.start)),
+        end: DateUtils.getMaxHourMoment(DateUtils.getMaxHour(value.end)),
       })
     );
     if (res) this.paymentsDriver = res.data;
@@ -169,16 +199,15 @@ export class ListComponent implements OnInit {
   }
 
   goPaymentDriver(value: PaymentDriver, type: PaymentDriverType) {
-    const start = new Date(value.startDate + ' 00:00:00');
-    const end = new Date(value.endDate + ' 23:59:59');
-    if (!DateUtils.isTimezoneNewYork() && value.cityId == CONFIG.CITY_EEUU) {
-      // start.setHours(start.getHours() + 1);
-      // end.setHours(end.getHours() + 1);
-    }
+    const start = DateUtils.getMoment(
+      value.startDate + ' 00:00:00',
+      value.cityId
+    );
+    const end = DateUtils.getMoment(value.endDate + ' 23:59:59', value.cityId);
     const routes = {
-      [PaymentDriverType.Cobro]:PAGE_ROUTE.COLLECT_DRIVER.CREATE,
+      [PaymentDriverType.Cobro]: PAGE_ROUTE.COLLECT_DRIVER.CREATE,
       [PaymentDriverType.Pago]: PAGE_ROUTE.PAYMENT_DRIVER.CREATE,
-    }
+    };
     this.router.navigate([routes[type]], {
       queryParams: {
         driverId: value.driverId,
