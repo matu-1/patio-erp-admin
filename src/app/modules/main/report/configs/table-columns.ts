@@ -298,7 +298,8 @@ export const ordersColumns: TableColumns<OrderDto> = [
   {
     field: 'tip_original',
     headerName: 'Tip Original',
-    valueFormatter: ({ tip }) => formatNumber(tip, 'es', '.2-2'),
+    valueFormatter: ({ tip_original }) =>
+      formatNumber(tip_original, 'es', '.2-2'),
   },
   {
     field: 'distance',
@@ -337,6 +338,14 @@ export const ordersColumns: TableColumns<OrderDto> = [
     valueFormatter: ({ earningBase, modalityId }) =>
       MODALITY.BASE_WITH_TIP == modalityId
         ? formatNumber(earningBase.earning, 'es', '.2-2')
+        : '---',
+  },
+  {
+    field: 'fee',
+    headerName: 'Fee',
+    valueFormatter: ({ earningBase, modalityId }) =>
+      MODALITY.BASE_WITH_TIP == modalityId
+        ? formatNumber(earningBase.discounts, 'es', '.2-2')
         : '---',
   },
   {
@@ -525,16 +534,19 @@ export const orderColumns: TableColumns<Order> = [
         : '---',
   },
   {
+    field: 'fee',
+    headerName: 'Fee',
+    valueFormatter: ({ earningBase, assignedDrivers }) =>
+      assignedDrivers?.[0]?.modality == BASE_WITH_TIP
+        ? formatToNumber(earningBase.discounts)
+        : '---',
+  },
+  {
     field: 'totalEarning',
     headerName: 'Total Ganancia',
-    valueFormatter: ({
-      tip,
-      bonus,
-      earningBase: { earning },
-      assignedDrivers,
-    }) =>
+    valueFormatter: ({ earningBase: { totalEarning }, assignedDrivers }) =>
       assignedDrivers?.[0]?.modality == BASE_WITH_TIP
-        ? formatToNumber(tip + bonus + earning, 3)
+        ? formatToNumber(totalEarning, 3)
         : '---',
   },
 ];

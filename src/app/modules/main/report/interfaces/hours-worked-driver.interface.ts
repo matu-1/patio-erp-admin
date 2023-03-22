@@ -45,6 +45,7 @@ export interface OrderDto {
   modalityId: number;
   earningBase: EarningBase;
   bonus: number;
+  tip_original: number;
 }
 
 export interface EarningBase {

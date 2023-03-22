@@ -56,7 +56,7 @@ export class MainComponent implements OnInit {
         { label: 'All', value: undefined },
         ...res.data.map((merchant) => ({
           value: merchant.id,
-          label: merchant.name,
+          label: `${merchant.id} - ${merchant.name}`,
         })),
       ];
   }

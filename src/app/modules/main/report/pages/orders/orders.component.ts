@@ -48,7 +48,7 @@ export class OrdersComponent implements OnInit {
       ordersFilterSchema[3].options = [
         { label: 'All', value: undefined },
         ...res.data.map((merchant) => ({
-          label: merchant.name,
+          label: `${merchant.id} - ${merchant.name}`,
           value: merchant.id,
         })),
       ];
