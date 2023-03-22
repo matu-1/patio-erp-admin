@@ -23,6 +23,7 @@ export interface Order {
   city_id: number;
   createdAt: Date;
   updatedAt: Date;
+  creation_date: Date;
   payment_mode_id: number;
   details: null | string;
   coverage_id: number;

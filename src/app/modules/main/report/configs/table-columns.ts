@@ -452,6 +452,12 @@ export const orderColumns: TableColumns<Order> = [
     headerName: 'Estado',
   },
   {
+    field: 'creation_date',
+    headerName: 'Es programada?',
+    valueFormatter: ({ createdAt, creation_date }) =>
+      createdAt != creation_date ? 'Si' : 'No',
+  },
+  {
     field: 'createdAt',
     headerName: 'Creado el',
     valueFormatter: ({ createdAt }) => formatDate(createdAt, FORMAT_DATE, 'es'),
