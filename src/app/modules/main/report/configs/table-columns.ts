@@ -474,9 +474,12 @@ export const orderColumns: TableColumns<Order> = [
   {
     field: 'extra_status',
     headerName: 'Estados Adicionales',
-    valueFormatter: ({ orderstatus }) =>
-      orderstatus
-        ? orderstatus
+    valueFormatter: ({ orderStatus }) =>
+      orderStatus
+        ? orderStatus
+            .filter(
+              (item) => item.status == 'assigned' || item.status == 'delivered'
+            )
             .map(
               (status) =>
                 ` ${formatDate(status.createdAt, FORMAT_DATE, 'es')} (${

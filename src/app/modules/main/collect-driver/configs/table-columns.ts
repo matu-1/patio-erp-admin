@@ -13,6 +13,10 @@ export const paymentsDriverColumns: TableColumns<CollectDriver> = [
     headerName: 'Nombre',
   },
   {
+    field: 'email',
+    headerName: 'Email',
+  },
+  {
     field: 'phoneNumber',
     headerName: 'Telefono',
   },

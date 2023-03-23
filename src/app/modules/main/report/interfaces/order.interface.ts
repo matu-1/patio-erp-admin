@@ -38,7 +38,7 @@ export interface Order {
   paymentModeId: number;
   merchant: Merchant | null;
   assignedDrivers: AssignedDriver[] | null;
-  orderstatus: Orderstatus[] | null;
+  orderStatus: OrderStatus[] | null;
   earningBase: EarningBase;
   bonus: number;
 }
@@ -53,7 +53,7 @@ export interface AssignedDriver {
   modality: string;
 }
 
-export interface Orderstatus {
+export interface OrderStatus {
   status: string;
   createdAt: Date;
   userId: number;
