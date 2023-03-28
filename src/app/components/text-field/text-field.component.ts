@@ -1,16 +1,15 @@
 import {
   Component,
+  DoCheck,
   Input,
   KeyValueChanges,
   KeyValueDiffer,
   KeyValueDiffers,
-  OnChanges,
   OnInit,
-  SimpleChanges,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { map, Observable, of, startWith } from 'rxjs';
+import { map, Observable, startWith } from 'rxjs';
 import { TextFieldValue, TextFieldType } from './text-field.interface';
 
 @Component({
@@ -18,7 +17,7 @@ import { TextFieldValue, TextFieldType } from './text-field.interface';
   templateUrl: './text-field.component.html',
   styleUrls: ['./text-field.component.scss'],
 })
-export class TextFieldComponent implements OnInit, OnChanges {
+export class TextFieldComponent implements OnInit, DoCheck {
   @Input()
   form!: FormGroup;
   @Input()
@@ -26,19 +25,14 @@ export class TextFieldComponent implements OnInit, OnChanges {
   @Input()
   class?: string;
   TextFieldType = TextFieldType;
-  filteredOptions?: Observable<any[]>;
+  filteredOptions?: Observable<any[]>; //filter autocomplete
   value = this.textFieldValue?.value;
   private textFieldValueDiffer!: KeyValueDiffer<string, any>;
 
   constructor(private differs: KeyValueDiffers) {}
 
   ngOnInit(): void {
-    this.changeValue();
     this.textFieldValueDiffer = this.differs.find(this.textFieldValue).create();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('ngOnChanges:changes', changes.textFieldValue.currentValue);
   }
 
   ngDoCheck(): void {
@@ -48,10 +42,9 @@ export class TextFieldComponent implements OnInit, OnChanges {
     }
   }
 
-  textFieldValueChanges(changes: KeyValueChanges<string, any>) {
-    console.log('textFieldValueChanges:changs', this.textFieldValue.options);
-    // if (this.textFieldValue.options)
-    //   this.filteredOptions = of(this.textFieldValue.options);
+  textFieldValueChanges(_: KeyValueChanges<string, any>) {
+    if (this.textFieldValue.options && !this.filteredOptions)
+      this.changeValueAutocomplete();
   }
 
   get control() {
@@ -64,12 +57,11 @@ export class TextFieldComponent implements OnInit, OnChanges {
       : '';
   }
 
-  private changeValue() {
-    console.log('===changeValue==')
+  private changeValueAutocomplete() {
     this.filteredOptions = this.control?.valueChanges.pipe(
       startWith(''),
       map((value) => {
-        console.log('changeValue:value', value);
+        // console.log('changeValue:value', value);
         const parsedValue =
           typeof value == 'string' ? value : this.getOptionLabel(value);
         return this.filter(parsedValue);
@@ -78,7 +70,7 @@ export class TextFieldComponent implements OnInit, OnChanges {
   }
 
   private filter(value: any) {
-    console.log('filter:value', value);
+    // console.log('filter:value', value);
     if (!this.textFieldValue.options) return [];
     return this.textFieldValue.options!.filter((option) => {
       return this.getOptionLabel(option)
@@ -94,5 +86,10 @@ export class TextFieldComponent implements OnInit, OnChanges {
   onClosed() {
     if (typeof this.control?.value == 'string')
       this.control.setValue(this.value);
+  }
+
+  clearAutocomplete() {
+    this.control?.setValue('');
+    this.value = '';
   }
 }

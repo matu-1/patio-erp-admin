@@ -286,7 +286,6 @@ export const collectMerchantSchema: TextFieldSchema = [
     name: 'merchants',
     fieldType: TextFieldType.Autocomplete,
     getOptionLabel: (value) => value?.label,
-    multiple: true,
     df: '25%',
     validators: [
       {

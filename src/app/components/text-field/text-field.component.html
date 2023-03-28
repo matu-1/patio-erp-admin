@@ -101,6 +101,14 @@
         {{ getOptionLabel(option) }}
       </mat-option>
     </mat-autocomplete>
+    <button
+      mat-icon-button
+      matSuffix
+      *ngIf="control?.value"
+      (click)="clearAutocomplete()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
   <mat-form-field
     *ngSwitchDefault
