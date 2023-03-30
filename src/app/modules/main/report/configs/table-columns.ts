@@ -164,7 +164,8 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     field: 'totalEarning',
     headerName: 'Ganancia por Hora',
     valueFormatter: ({ totalEarning, modalityId }) =>
-      MODALITY.BASE_WITH_TIP != modalityId
+      modalityId != MODALITY.BASE_WITH_TIP &&
+      modalityId != MODALITY.DISTANCE_WITH_TIP
         ? formatNumber(totalEarning, 'es')
         : '---',
   },
@@ -172,7 +173,15 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     field: 'totalEarning1',
     headerName: 'Ganancia Tarifa Base',
     valueFormatter: ({ totalEarning, modalityId }) =>
-      MODALITY.BASE_WITH_TIP == modalityId
+      modalityId == MODALITY.BASE_WITH_TIP
+        ? formatNumber(totalEarning, 'es')
+        : '---',
+  },
+  {
+    field: 'totalEarning2',
+    headerName: 'Ganancia por Distancia',
+    valueFormatter: ({ totalEarning, modalityId }) =>
+      modalityId == MODALITY.DISTANCE_WITH_TIP
         ? formatNumber(totalEarning, 'es')
         : '---',
   },
