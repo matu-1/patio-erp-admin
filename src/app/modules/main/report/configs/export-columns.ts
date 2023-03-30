@@ -119,6 +119,12 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
       formatToNumber(timingExtraAmount),
   },
   {
+    field: 'totalPrepaidAmount',
+    headerName: 'Pago Anticipado',
+    valueFormatter: ({ totalPrepaidAmount }) =>
+      formatToNumber(totalPrepaidAmount),
+  },
+  {
     field: 'total',
     headerName: 'Total',
     valueFormatter: ({ total }) => formatToNumber(total),
