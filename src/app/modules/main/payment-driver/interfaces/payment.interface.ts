@@ -9,4 +9,5 @@ export interface Payment {
   reason: null;
   paidAt: Date;
   paymentDriverId: number;
+  bankAccount?: any;
 }

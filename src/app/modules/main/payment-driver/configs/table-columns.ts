@@ -107,6 +107,16 @@ export const paymentsColumns: TableColumns<Payment> = [
     valueFormatter: ({ paidAt }) => FormatDate.short(paidAt),
   },
   {
+    field: 'bankAccount',
+    headerName: 'Cuenta Bancaria',
+    valueFormatter: ({ bankAccount }) => {
+      bankAccount = JSON.parse(bankAccount);
+      return bankAccount
+        ? `${bankAccount.accountNumber} - ${bankAccount.bankName}`
+        : '---';
+    },
+  },
+  {
     field: 'createdAt',
     headerName: 'Creado el',
     valueFormatter: ({ createdAt }) =>
