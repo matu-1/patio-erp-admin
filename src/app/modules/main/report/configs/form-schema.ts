@@ -284,8 +284,8 @@ export const collectMerchantSchema: TextFieldSchema = [
   {
     label: 'Merchants',
     name: 'merchants',
-    fieldType: TextFieldType.Dropdown,
-    multiple: true,
+    fieldType: TextFieldType.Autocomplete,
+    getOptionLabel: (value) => value?.label,
     df: '25%',
     validators: [
       {

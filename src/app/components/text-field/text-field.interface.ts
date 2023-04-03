@@ -38,7 +38,7 @@ export interface TextFieldValue {
   validators?: Validator[];
   multiple?: boolean; //select
   options?: Option[] | any[]; //select | autocomplete
-  getOptionLabel?: (value: any) => string; //autocomplete
+  getOptionLabel?: (value?: any) => string; //autocomplete
   minRows?: number;
   maxRows?: number;
   fullWidth?: boolean;

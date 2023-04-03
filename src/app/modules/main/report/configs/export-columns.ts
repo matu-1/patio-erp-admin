@@ -66,7 +66,8 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
     field: 'totalEarning',
     headerName: 'Ganancia por Hora',
     valueFormatter: ({ totalEarning, modalityId }) =>
-      MODALITY.BASE_WITH_TIP != modalityId
+      modalityId != MODALITY.BASE_WITH_TIP &&
+      modalityId != MODALITY.DISTANCE_WITH_TIP
         ? formatToNumber(totalEarning)
         : '---',
   },
@@ -74,7 +75,15 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
     field: 'totalEarning1',
     headerName: 'Ganancia Tarifa Base',
     valueFormatter: ({ totalEarning, modalityId }) =>
-      MODALITY.BASE_WITH_TIP == modalityId
+      modalityId == MODALITY.BASE_WITH_TIP
+        ? formatToNumber(totalEarning)
+        : '---',
+  },
+  {
+    field: 'totalEarning2',
+    headerName: 'Ganancia por Distancia',
+    valueFormatter: ({ totalEarning, modalityId }) =>
+      modalityId == MODALITY.DISTANCE_WITH_TIP
         ? formatToNumber(totalEarning)
         : '---',
   },
@@ -108,6 +117,12 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
     headerName: 'Bono Horario',
     valueFormatter: ({ timingExtraAmount }) =>
       formatToNumber(timingExtraAmount),
+  },
+  {
+    field: 'totalPrepaidAmount',
+    headerName: 'Pago Anticipado',
+    valueFormatter: ({ totalPrepaidAmount }) =>
+      formatToNumber(totalPrepaidAmount),
   },
   {
     field: 'total',
