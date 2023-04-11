@@ -597,6 +597,7 @@ export const collectMerchantColumns: TableColumns<CollectMerchantDto> = [
   },
   { field: 'PREPARATION TIME', headerName: 'Preparation Time' },
   { field: 'DELIVERY TIME', headerName: 'Delivery Time' },
+  { field: 'ARRIVED TIME', headerName: 'Arrived Time' },
   { field: 'DISTANCE MILES', headerName: 'Distance Miles' },
   { field: 'SUBTOTAL', headerName: 'Subtotal' },
   {
