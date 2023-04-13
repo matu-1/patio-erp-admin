@@ -473,6 +473,10 @@ export const orderColumns: TableColumns<Order> = [
       assignedDrivers ? assignedDrivers[0].fare_company_delivery : '---',
   },
   {
+    field: 'vehicleType',
+    headerName: 'Tipo Vehículo',
+  },
+  {
     field: 'total',
     headerName: 'Total',
     valueFormatter: ({ total }) => formatNumber(total, 'es', '.2-2'),
