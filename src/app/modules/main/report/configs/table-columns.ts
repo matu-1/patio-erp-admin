@@ -467,6 +467,12 @@ export const orderColumns: TableColumns<Order> = [
       assignedDrivers ? assignedDrivers[0].modality : '---',
   },
   {
+    field: 'basicFee',
+    headerName: 'Basic Fee',
+    valueFormatter: ({ assignedDrivers }) =>
+      assignedDrivers ? assignedDrivers[0].fare_company_delivery : '---',
+  },
+  {
     field: 'total',
     headerName: 'Total',
     valueFormatter: ({ total }) => formatNumber(total, 'es', '.2-2'),

@@ -51,6 +51,9 @@ export interface AssignedDriver {
   id: number;
   name: string;
   modality: string;
+  driverOrderId: number;
+  fare_company_delivery: number;
+  fare_customer_delivery: number;
 }
 
 export interface OrderStatus {
