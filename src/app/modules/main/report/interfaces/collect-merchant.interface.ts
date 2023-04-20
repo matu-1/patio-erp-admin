@@ -30,4 +30,6 @@ export interface CollectMerchantDto {
   ISSUE?: string;
   COMMENT: string;
   photo_delivery_url?: string;
+  'ARRIVED TIME': number;
+  observations?: string;
 }

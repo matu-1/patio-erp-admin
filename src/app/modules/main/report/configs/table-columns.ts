@@ -611,6 +611,11 @@ export const collectMerchantColumns: TableColumns<CollectMerchantDto> = [
   { field: 'DISTANCE MILES', headerName: 'Distance Miles' },
   { field: 'BASIC FEE', headerName: 'Basic Fee' },
   { field: 'vehicleType', headerName: 'Vehicle Type' },
+  {
+    field: 'observations',
+    headerName: 'Observations',
+    valueFormatter: ({ observations }) => observations ?? '---',
+  },
   { field: 'SUBTOTAL', headerName: 'Subtotal' },
   {
     field: 'DATE',
@@ -695,6 +700,11 @@ export const collectMerchantReportColumns: TableColumns<CollectMerchantDto> = [
   { field: 'ARRIVED TIME', headerName: 'Arrived Time' },
   { field: 'DISTANCE MILES', headerName: 'Distance Miles' },
   { field: 'vehicleType', headerName: 'Vehicle Type' },
+  {
+    field: 'observations',
+    headerName: 'Observations',
+    valueFormatter: ({ observations }) => observations ?? '---',
+  },
   { field: 'SUBTOTAL', headerName: 'Subtotal' },
   {
     field: 'DATE',
