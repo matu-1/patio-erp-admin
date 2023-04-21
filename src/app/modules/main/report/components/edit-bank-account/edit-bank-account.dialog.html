@@ -1,20 +1,49 @@
 <h2 mat-dialog-title>{{title}}</h2>
-<form [formGroup]="form" markAllSubmit (validSubmit)="save()">
-  <mat-dialog-content>
-    <div class="of-h">
-      <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">
-        <app-text-field
-          *ngFor="let value of editBankAccountSchema"
-          [form]="form"
-          [textFieldValue]="value"
-          fxFlex.xs="100%"
-          [fxFlex]="value.df"
-        ></app-text-field>
-      </div>
-    </div>
-  </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Close</button>
-    <button mat-button cdkFocusInitial>Save</button>
-  </mat-dialog-actions>
-</form>
+<mat-dialog-content>
+  <mat-tab-group mat-stretch-tabs [selectedIndex]="data?.type">
+    <mat-tab label="Cuenta Bancaria">
+      <form [formGroup]="form">
+        <!-- <form [formGroup]="form" markAllSubmit (validSubmit)="save()">   -->
+        <div class="of-h mt-2">
+          <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">
+            <app-text-field
+              *ngFor="let value of editBankAccountSchema"
+              [form]="form"
+              [textFieldValue]="value"
+              fxFlex.xs="100%"
+              [fxFlex]="value.df"
+            ></app-text-field>
+          </div>
+        </div>
+        <!-- <app-button-bar>
+          <button mat-button mat-dialog-close>Close</button>
+          <button mat-button cdkFocusInitial type="submit">Save</button>
+        </app-button-bar> -->
+      </form>
+    </mat-tab>
+    <mat-tab label="Zelle">
+      <form [formGroup]="formZelle">
+        <!-- <form [formGroup]="formZelle" markAllSubmit (validSubmit)="saveZelle()"> -->
+        <div class="of-h mt-2">
+          <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">
+            <app-text-field
+              *ngFor="let value of editBankAccountZelleSchema"
+              [form]="formZelle"
+              [textFieldValue]="value"
+              fxFlex.xs="100%"
+              [fxFlex]="value.df"
+            ></app-text-field>
+          </div>
+        </div>
+        <!-- <app-button-bar>
+          <button mat-button mat-dialog-close>Close</button>
+          <button mat-button cdkFocusInitial type="submit">Save</button>
+        </app-button-bar> -->
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button cdkFocusInitial (click)="save()">Save</button>
+</mat-dialog-actions>

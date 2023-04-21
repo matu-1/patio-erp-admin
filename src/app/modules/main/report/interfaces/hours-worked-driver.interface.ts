@@ -33,6 +33,14 @@ export interface BankAccount {
   identityNumber: string;
   accountType: string;
   verified: number;
+  driverId: number;
+  routingNumber?: string;
+  phone?: string;
+  name?: string;
+  address?: string;
+  socialSecurity?: string;
+  type: number;
+  paymentMethod?: string;
 }
 
 export interface OrderDto {

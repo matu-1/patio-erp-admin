@@ -1,4 +1,5 @@
 import { Moment } from 'moment-timezone';
+import { BankAccount } from './hours-worked-driver.interface';
 
 export interface GetPaymentDetailDto {
   month: number[];
@@ -49,17 +50,7 @@ export interface RefreshPaymentDto {
   driverId: number;
 }
 
-export interface BankAccount {
-  id: number;
-  accountNumber: string;
-  bankName: string;
-  accountType: string;
-  identityNumber: string;
-  driverId: number;
-  verified: number;
-}
-
-export interface UpdateBankAccount extends Omit<BankAccount, 'id'> {
+export interface UpdateBankAccount extends Omit<BankAccount, 'id' > {
   accountNumber: string;
   bankName: string;
   accountType: string;

@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, switchMap, throwError } from 'rxjs';
 import { API } from 'src/app/constants/api.constant';
 import { PATIO_STORE_CONFIG_HTTP } from 'src/app/constants/http-header.constant';
 import { ObjectUtils } from 'src/app/utils/object.util';
@@ -17,13 +16,13 @@ import {
   GetDeliveryDetailDto,
 } from '../interfaces/delivery-detail.interface';
 import {
+  BankAccount,
   HoursWorkedDriver,
   HoursWorkedDto,
 } from '../interfaces/hours-worked-driver.interface';
 import { OrderReceived } from '../interfaces/order-received.interface';
 import { FilterOrder, Order } from '../interfaces/order.interface';
 import {
-  BankAccount,
   CreatePaymentDriverDto,
   GetPaymentDetailDto,
   PaymentDetail,
@@ -118,6 +117,9 @@ export class ReportService {
   }
 
   createOrUpdateBankAccount(dto: UpdateBankAccount, id?: number) {
+    dto = ObjectUtils.clear(dto);
+    if (dto.paymentMethod)
+      dto.paymentMethod = (dto.paymentMethod as any).join(',');
     return id ? this.updateBankAccount(id, dto) : this.createBankAccount(dto);
   }
 

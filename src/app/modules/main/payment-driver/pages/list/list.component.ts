@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 import { buildform } from 'src/app/components/text-field/text-field.util';
-import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
+import { DIALOG_CONFIG_MD, DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
@@ -23,7 +23,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { categoryValue } from '../../../collect-driver/constants/payment-method';
 import { CONFIG } from 'src/app/constants/config.constant';
 import {
-  BankAccount,
   UpdateBankAccount,
 } from '../../../report/interfaces/payment-detail.interface';
 import { EditBankAccountDialog } from '../../../report/components/edit-bank-account/edit-bank-account.dialog';
@@ -32,6 +31,7 @@ import { SnackBar } from 'src/app/utils/snackbar';
 import { PayMultipleDialog } from '../../components/pay-multiple/pay-multiple.dialog';
 import { PaymentDriverType } from '../../constants/payment-driver-type';
 import * as moment from 'moment-timezone';
+import { BankAccount } from '../../../report/interfaces/hours-worked-driver.interface';
 
 @Component({
   selector: 'app-list',
@@ -193,7 +193,7 @@ export class ListComponent implements OnInit {
 
   openPaymentsDlg(data: PaymentDriver) {
     this.dialog.open(PaymentDetailDialog, {
-      ...DIALOG_CONFIG_XS,
+      ...DIALOG_CONFIG_MD,
       data,
     });
   }

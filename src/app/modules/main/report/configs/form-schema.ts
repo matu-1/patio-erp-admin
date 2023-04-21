@@ -214,8 +214,59 @@ export const editBankAccountSchema: TextFieldSchema = [
     df: '50%',
   },
   {
-    label: 'Nombre del banco',
-    name: 'bankName',
+    label: 'Tipo de Cuenta',
+    name: 'accountType',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '50%',
+  },
+  {
+    label: 'Routing Number',
+    name: 'routingNumber',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'int',
+        message: 'Must be integer',
+        validatorFn: CustomValidators.int,
+      },
+      {
+        name: 'minlength',
+        message: 'Minimum 3 characters',
+        validatorFn: Validators.minLength(3),
+      },
+    ],
+    df: '50%',
+  },
+  {
+    label: 'Celular',
+    name: 'phone',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'minlength',
+        message: 'Minimum 8 characters',
+        validatorFn: Validators.minLength(8),
+      },
+    ],
+    df: '50%',
+  },
+  {
+    label: 'Nombre completo',
+    name: 'name',
     validators: [
       {
         name: 'required',
@@ -231,8 +282,43 @@ export const editBankAccountSchema: TextFieldSchema = [
     df: '50%',
   },
   {
-    label: 'Tipo de Cuenta',
-    name: 'accountType',
+    label: 'Dirección',
+    name: 'address',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'minlength',
+        message: 'Minimum 5 characters',
+        validatorFn: Validators.minLength(5),
+      },
+    ],
+    df: '50%',
+  },
+  {
+    label: 'Social Security',
+    name: 'socialSecurity',
+    validators: [
+      {
+        name: 'minlength',
+        message: 'Minimum 3 characters',
+        validatorFn: Validators.minLength(3),
+      },
+    ],
+    df: '50%',
+  },
+  {
+    label: 'Método Pago',
+    name: 'paymentMethod',
+    multiple: true,
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      { label: 'DIRECT DEPOSIT', value: 'DIRECT DEPOSIT' },
+      { label: 'ZELLE', value: 'ZELLE' },
+    ],
     validators: [
       {
         name: 'required',
@@ -243,8 +329,29 @@ export const editBankAccountSchema: TextFieldSchema = [
     df: '50%',
   },
   {
-    label: 'Número de Identidad',
-    name: 'identityNumber',
+    label: 'Verificado',
+    name: 'verified',
+    value: 0,
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      { value: 0, label: 'No' },
+      { value: 1, label: 'Si' },
+    ],
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '50%',
+  },
+];
+
+export const editBankAccountZelleSchema: TextFieldSchema = [
+  {
+    label: 'Nombre completo',
+    name: 'name',
     validators: [
       {
         name: 'required',
@@ -253,8 +360,25 @@ export const editBankAccountSchema: TextFieldSchema = [
       },
       {
         name: 'minlength',
-        message: 'Minimum 6 characters',
-        validatorFn: Validators.minLength(6),
+        message: 'Minimum 3 characters',
+        validatorFn: Validators.minLength(3),
+      },
+    ],
+    df: '50%',
+  },
+  {
+    label: 'Celular o Correo',
+    name: 'phone',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'minlength',
+        message: 'Minimum 8 characters',
+        validatorFn: Validators.minLength(8),
       },
     ],
     df: '50%',
