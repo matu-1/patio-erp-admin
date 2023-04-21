@@ -43,6 +43,11 @@ export interface BankAccount {
   paymentMethod?: string;
 }
 
+export enum BankAccountType {
+  BankAccount,
+  Zelle,
+}
+
 export interface OrderDto {
   id: number;
   client: string;

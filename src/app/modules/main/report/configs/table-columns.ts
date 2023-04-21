@@ -126,7 +126,12 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
   },
   {
     field: 'bankAccount',
-    headerName: 'Cuenta Bancaria',
+    headerName: 'Cuenta Bancaria (AN,AT,RN,P,N,A,SS,PM)',
+    valueFormatter: ({ bankAccount }) => bankAccount,
+  },
+  {
+    field: 'zelle',
+    headerName: 'Zelle (N, P)',
     valueFormatter: ({ bankAccount }) => bankAccount,
   },
   {

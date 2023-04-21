@@ -4,6 +4,7 @@ import { DateUtils } from 'src/app/utils/date.util';
 import { FormatDate } from 'src/app/utils/format.date.util';
 import { formatToNumber, meterToMile } from 'src/app/utils/utils';
 import {
+  BankAccountType,
   HoursWorkedDriver,
   OrderDto,
 } from '../interfaces/hours-worked-driver.interface';
@@ -27,10 +28,18 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
   },
   {
     field: 'bankAccount',
-    headerName: 'Cuenta Bancaria',
+    headerName: 'Cuenta Bancaria (AN,AT,RN,P,N,A,SS,PM)',
     valueFormatter: ({ bankAccount }) =>
-      bankAccount
-        ? `${bankAccount.accountNumber} - ${bankAccount.bankName} - ${bankAccount.accountType} - ${bankAccount.identityNumber}`
+      bankAccount && bankAccount.type == BankAccountType.BankAccount
+        ? `${bankAccount.accountNumber} - ${bankAccount.accountType} - ${bankAccount.routingNumber} - ${bankAccount.phone} - ${bankAccount.name} - ${bankAccount.address} - ${bankAccount.socialSecurity} - ${bankAccount.paymentMethod}`
+        : '---',
+  },
+  {
+    field: 'zelle',
+    headerName: 'Zelle (N,P)',
+    valueFormatter: ({ bankAccount }) =>
+      bankAccount && bankAccount.type == BankAccountType.Zelle
+        ? `${bankAccount.name} - ${bankAccount.phone}`
         : '---',
   },
   {
