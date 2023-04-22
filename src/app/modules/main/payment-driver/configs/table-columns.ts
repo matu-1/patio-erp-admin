@@ -17,8 +17,13 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
   },
   {
     field: 'bankAccount',
-    headerName: 'Cuenta Bancaria',
-    valueFormatter: ({ detail }) => detail?.bankAccount,
+    headerName: 'Cuenta Bancaria (AN,AT,RN,P,N,A,SS,PM)',
+    valueFormatter: ({ detail }) =>  detail?.bankAccount,
+  },
+  {
+    field: 'zelle',
+    headerName: 'Zelle (N, P)',
+    valueFormatter: ({ detail }) =>  detail?.bankAccount,
   },
   {
     field: 'quantity',
