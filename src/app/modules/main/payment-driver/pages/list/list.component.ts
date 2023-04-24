@@ -277,7 +277,6 @@ export class ListComponent implements OnInit {
   }
 
   showEditDlg(value: PaymentDriver) {
-    console.log('value', value);
     const dialogRef = this.dialog.open(EditDialog, {
       data: value,
       ...DIALOG_CONFIG_XS,
@@ -288,7 +287,6 @@ export class ListComponent implements OnInit {
   }
 
   async edit(id: number, value: any) {
-    console.log('id', id, 'value', value);
     const res = await handleRequestPg(() =>
       this.paymentDriverService.update(id, value)
     );
