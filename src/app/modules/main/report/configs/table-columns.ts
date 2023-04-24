@@ -587,11 +587,15 @@ export const orderColumns: TableColumns<Order> = [
 export const collectMerchantColumns: TableColumns<CollectMerchantDto> = [
   {
     field: '#',
-    headerName: 'Id',
+    headerName: '#',
   },
   {
     field: 'RESTAURANT NAME',
     headerName: 'Restaurant Name',
+  },
+  {
+    field: 'STORE NAME',
+    headerName: 'Store Name',
   },
   {
     field: 'status',
@@ -637,7 +641,7 @@ export const collectMerchantColumns: TableColumns<CollectMerchantDto> = [
 export const collectMerchantReportColumns: TableColumns<CollectMerchantDto> = [
   {
     field: '#',
-    headerName: 'Id',
+    headerName: '#',
   },
   {
     field: 'RESTAURANT NAME',
