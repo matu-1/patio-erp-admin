@@ -1,3 +1,4 @@
+import { Validators } from '@angular/forms';
 import {
   TextFieldSchema,
   TextFieldType,
@@ -31,6 +32,21 @@ export const paymentFilterSchema: TextFieldSchema = [
     value: CONFIG.CITY_EEUU,
     fieldType: TextFieldType.Dropdown,
     df: '20%',
+  },
+];
+
+export const editPaymentDriverSchema: TextFieldSchema = [
+  {
+    label: 'Observación',
+    name: 'observation',
+    fieldType: TextFieldType.Textarea,
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
   },
 ];
 

@@ -16,6 +16,7 @@ export interface CollectDriver {
   balance: number;
   reason?: string;
   category: string;
+  observation?: string;
   detail?: HoursWorkedDriver;
 }
 

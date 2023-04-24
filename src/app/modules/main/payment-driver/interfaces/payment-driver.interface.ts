@@ -20,3 +20,6 @@ type PaymentAmountDto = {
 export interface PayDriverMultipleDto extends PayDriverDto {
   paymentAmounts: PaymentAmountDto[];
 }
+
+export interface UpdatePaymentDriverDto
+  extends Pick<PaymentDriver, 'observation'> {}

@@ -13,9 +13,17 @@ import { PaymentDetailDialog } from './components/payment-detail/payment-detail.
 import { CreateComponent } from './pages/create/create.component';
 import { CollectDriverModule } from '../collect-driver/collect-driver.module';
 import { PayMultipleDialog } from './components/pay-multiple/pay-multiple.dialog';
+import { EditDialog } from './components/edit/edit.dialog';
 
 @NgModule({
-  declarations: [ListComponent, PayDialog, PaymentDetailDialog, CreateComponent, PayMultipleDialog],
+  declarations: [
+    ListComponent,
+    PayDialog,
+    PaymentDetailDialog,
+    CreateComponent,
+    PayMultipleDialog,
+    EditDialog,
+  ],
   imports: [
     CommonModule,
     PaymentDriverRoutingModule,
