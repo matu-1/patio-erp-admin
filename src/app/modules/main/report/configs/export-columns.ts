@@ -143,6 +143,12 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
     headerName: 'Promedio',
     valueFormatter: ({ average }) => formatToNumber(average),
   },
+  {
+    field: 'averageCompleted',
+    headerName: 'Promedio Completado',
+    valueFormatter: ({ averageCompleted }) =>
+      DateUtils.formatToTimer(averageCompleted),
+  },
 ];
 
 export const ordersColumnsExport: TableColumns<OrderDto> = [

@@ -238,6 +238,12 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     valueFormatter: ({ average }) => formatNumber(average, 'es', '.0-2'),
   },
   {
+    field: 'averageCompleted',
+    headerName: 'Promedio Completado',
+    valueFormatter: ({ averageCompleted }) =>
+      DateUtils.formatToTimer(averageCompleted),
+  },
+  {
     field: 'actions',
     headerName: 'Acciones',
   },
