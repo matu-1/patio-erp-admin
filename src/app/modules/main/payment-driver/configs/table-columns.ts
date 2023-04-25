@@ -11,6 +11,12 @@ import { DateUtils } from 'src/app/utils/date.util';
 export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
   ...collectsDriverColumns.slice(0, collectsDriverColumns.length - 1),
   {
+    field: 'averageCompleted',
+    headerName: 'Promedio Completado',
+    valueFormatter: ({ averageCompleted }) =>
+      averageCompleted ? DateUtils.formatToTimer(averageCompleted) : '---',
+  },
+  {
     field: 'modality',
     headerName: 'Tipo Acuerdo',
     valueFormatter: ({ detail }) => (detail ? detail.modality : '---'),
@@ -18,12 +24,12 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
   {
     field: 'bankAccount',
     headerName: 'Cuenta Bancaria (AN,AT,RN,P,N,A,SS,PM)',
-    valueFormatter: ({ detail }) =>  detail?.bankAccount,
+    valueFormatter: ({ detail }) => detail?.bankAccount,
   },
   {
     field: 'zelle',
     headerName: 'Zelle (N, P)',
-    valueFormatter: ({ detail }) =>  detail?.bankAccount,
+    valueFormatter: ({ detail }) => detail?.bankAccount,
   },
   {
     field: 'quantity',

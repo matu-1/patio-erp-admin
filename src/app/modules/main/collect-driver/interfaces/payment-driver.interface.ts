@@ -17,6 +17,7 @@ export interface CollectDriver {
   reason?: string;
   category: string;
   observation?: string;
+  averageCompleted?: number;
   detail?: HoursWorkedDriver;
 }
 
