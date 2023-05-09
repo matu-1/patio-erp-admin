@@ -1,0 +1,21 @@
+.box-text {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem 0;
+  .title {
+    font-weight: 500;
+    padding-right: 1rem;
+    flex: 20%;
+    box-sizing: border-box;
+  }
+  .value {
+    flex: 80%;
+    color: #6c757d !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    flex: 100% !important;
+  }
+}

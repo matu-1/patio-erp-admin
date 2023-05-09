@@ -1,0 +1,130 @@
+<app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
+<app-title-bar [title]="title">
+  <button
+    mat-raised-button
+    color="primary"
+    [routerLink]="PAGE_ROUTE.PAYMENT_DRIVER.CREATE"
+  >
+    Nuevo
+  </button>
+  <button mat-button (click)="download()" [disabled]="!paymentsDriver">
+    Exportar
+  </button>
+  <button mat-button (click)="showPayMultipleDlg()">
+    Pago Multiple ({{ selectedPayment.size }})
+  </button>
+</app-title-bar>
+<app-simple-card class="mb-3">
+  <app-form-builder
+    [form]="form"
+    [schema]="paymentFilterSchema"
+    (frmSubmit)="filter()"
+  ></app-form-builder>
+</app-simple-card>
+<app-data-table
+  [rows]="paymentsDriver"
+  [columns]="paymentsDriverColumns"
+  (refresh)="getPaymentsDriver()"
+  (rowClick)="onSelect($event)"
+  [rowClass]="getRowClass.bind(this)"
+>
+  <ng-template customColumn="bankAccount" let-value="value">
+    <ng-container
+      *ngIf="
+        value.detail?.bankAccount && value.detail?.bankAccount.type == 0;
+        else noBankAccount
+      "
+    >
+      <strong> {{ value.detail.bankAccount.accountNumber }}</strong> <br />
+      {{ value.detail.bankAccount.accountType }} <br />
+      {{ value.detail.bankAccount.routingNumber }} <br />
+      {{ value.detail.bankAccount.phone }} <br />
+      <strong>{{ value.detail.bankAccount.name }}</strong> <br />
+      {{ value.detail.bankAccount.address }} <br />
+      {{ value.detail.bankAccount.socialSecurity ?? "---" }} <br />
+      <small>{{ value.detail.bankAccount.paymentMethod }}</small> <br />
+    </ng-container>
+    <ng-template #noBankAccount>---</ng-template>
+  </ng-template>
+  <ng-template customColumn="zelle" let-value="value">
+    <ng-container
+      *ngIf="
+        value.detail?.bankAccount && value.detail?.bankAccount.type == 1;
+        else noZelle
+      "
+    >
+      {{ value.detail.bankAccount.name }} <br />
+      <strong>{{ value.detail.bankAccount.phone }}</strong>
+    </ng-container>
+    <ng-template #noZelle>---</ng-template>
+  </ng-template>
+  <ng-template customColumn="actions" let-value="value">
+    <button
+      mat-icon-button
+      matTooltip="Pagar"
+      stopPropagation
+      (click)="openPaymentDlg(value)"
+      [disabled]="value.paidAt"
+    >
+      <mat-icon class="action-icon">payment</mat-icon>
+    </button>
+    <button
+      *ngIf="value.category == categoryValue.delivery"
+      mat-icon-button
+      matTooltip="Ver Detalle"
+      stopPropagation
+      (click)="goDetail(value)"
+    >
+      <mat-icon class="action-icon">info</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      [disabled]="value.amount == value.balance"
+      matTooltip="Revertir ultimo pago"
+      stopPropagation
+      (click)="openRevertConfirmDlg(value)"
+    >
+      <mat-icon class="action-icon">undo</mat-icon>
+    </button>
+    <button
+      *ngIf="value.amount != value.balance"
+      mat-icon-button
+      matTooltip="Pagos"
+      stopPropagation
+      (click)="openPaymentsDlg(value)"
+    >
+      <mat-icon class="action-icon">payments</mat-icon>
+    </button>
+    <button
+      *ngIf="value.category == categoryValue.delivery && value.paidAt == null"
+      mat-icon-button
+      matTooltip="Add Descuento"
+      stopPropagation
+      (click)="goPaymentDriver(value, 0)"
+    >
+      <mat-icon class="action-icon">money_off</mat-icon>
+    </button>
+    <button
+      *ngIf="value.category == categoryValue.delivery && value.paidAt == null"
+      mat-icon-button
+      matTooltip="Add Bono"
+      stopPropagation
+      (click)="goPaymentDriver(value, 1)"
+    >
+      <mat-icon class="action-icon">attach_money</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      matTooltip="Editar Cuenta Bancaria"
+      stopPropagation
+      (click)="
+        showEditBankAccountDlg(value.driverId, value.detail?.bankAccount)
+      "
+    >
+      <mat-icon class="action-icon">account_balance</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Editar" stopPropagation (click)="showEditDlg(value)">
+      <mat-icon class="action-icon">edit</mat-icon>
+    </button>
+  </ng-template>
+</app-data-table>

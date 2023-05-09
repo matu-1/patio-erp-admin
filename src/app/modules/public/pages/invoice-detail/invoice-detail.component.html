@@ -1,0 +1,174 @@
+<ng-container *ngIf="invoiceInfo">
+  <div class="toolbar">
+    <img src="assets/images/logo-ps.png" alt="logo" />
+    <span>{{ invoiceInfo.date }}</span>
+  </div>
+  <div class="root">
+    <h1 class="title">
+      Recibo <small class="text-secondary">#{{ invoiceInfo.id }}</small>
+    </h1>
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex.xs="100%" fxFlex="35%">
+        <h4 class="subtitle">De</h4>
+        <p class="text">Administración</p>
+        <p class="text">Teléfono: (+591) 77666780</p>
+        <p class="text">patioservicedelivery@gmail.com</p>
+      </div>
+      <div fxFlex.xs="100%" fxFlex="65%">
+        <h4 class="subtitle">A</h4>
+        <p class="text">
+          {{ invoiceInfo.nombre }}
+        </p>
+      </div>
+    </div>
+    <hr />
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex.xs="100%" fxFlex="50%">
+        <h3 class="subtitle">
+          Resumen {{ months[invoiceInfo.mes - 1] }} {{ invoiceInfo.gestion }}
+        </h3>
+        <div>
+          <p>
+            Total Pedidos:
+            <span class="text-bold">{{ invoiceInfo.pedidosSum | number }}</span>
+          </p>
+          <p>
+            Total de ventas realizadas:
+            <span class="text-bold">
+              {{ invoiceInfo.ordersSumAll | number: ".2-2" }} Bs.</span
+            >
+          </p>
+          <p>
+            Comisión:
+            <span class="text-bold"
+              >{{ invoiceInfo.montoNetoSum | number: ".2-2" }} Bs.</span
+            >
+          </p>
+        </div>
+        <div class="send-payment">
+          <p class="mb-0">Enviar comprobante de pago:</p>
+          <button
+            mat-icon-button
+            class="ml-auto"
+            color="primary"
+            (click)="sendMessage()"
+          >
+            <mat-icon>smartphone</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="sendEmail()">
+            <mat-icon>email</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div fxFlex.xs="100%" fxFlex="50%">
+        <div class="payment">
+          <ng-container *ngIf="!invoiceInfo.isPagado">
+            <h3 class="subtitle">Método de Pago</h3>
+            <mat-accordion displayMode="flat">
+              <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                  <mat-panel-title> Pago por transferencia </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>
+                  <strong
+                    >BANCO MERCANTIL SANTA CRUZ<br />
+                    CUENTA CTE M/N Bs Nro 4011053252<br />
+                    PATIOSERVICE S.R.L.<br />
+                    NIT 401053028<br />
+                    (*) GLOSA: {{ invoiceInfo.id }}<br
+                  /></strong>
+                  AGENCIA SANTA CRUZ<br />
+                  (*) por favor poner la glosa tal cual se describe para
+                  brindarle un mejor servicio
+                </p>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>Pago con Tarjeta</mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>
+                  <strong class="mr-2"
+                    >Multipago te permite pagar por diferentes medios</strong
+                  >
+                  <button mat-button (click)="loadMultipago()">
+                    <img src="assets/images/factura/multipago.png" />
+                  </button>
+                </p>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>Pago con QR</mat-panel-title>
+                </mat-expansion-panel-header>
+                <div
+                  class="qr-bg center"
+                  style="
+                    background-image: url(assets/images/factura/qrscananimation.gif);
+                  "
+                >
+                  <img
+                    [src]="
+                      'https://apipos.patio.com.bo/qrpayment?amount=' +
+                      invoiceInfo.montoNetoSum +
+                      '&orderid=' +
+                      invoiceInfo.id +
+                      '&sistema=erp-facturacion'
+                    "
+                  />
+                </div>
+                <img class="qr-step" src="assets/images/factura/pasos_qr.png" />
+              </mat-expansion-panel>
+            </mat-accordion>
+          </ng-container>
+          <div class="center" *ngIf="invoiceInfo.isPagado">
+            <img
+              class="paid-img"
+              src="assets/images/factura/pagado.png"
+              alt="paid"
+            />
+          </div>
+          <div *ngIf="invoiceInfo.programado" class="center mt-2">
+            <h3>Su pago se program&oacute; para</h3>
+            <h2>{{ invoiceInfo.programado }}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div>
+      <h3 class="subtitle">Servicios Adicionales</h3>
+      <app-data-table
+        class="dt-unstyle"
+        [rows]="getInvoiceDetails()"
+        [columns]="additionalServiceColumns"
+        [showPagination]="false"
+        [showSearcher]="false"
+      >
+        <ng-template customColumn="id" let-i="index">
+          {{ i + 1 }}
+        </ng-template>
+      </app-data-table>
+    </div>
+    <div class="mt-3">
+      <h3 class="subtitle">Ventas por el ERP</h3>
+      <app-data-table
+        class="dt-unstyle"
+        [rows]="getInvoiceDetails(false)"
+        [columns]="salesColumns"
+        [showPagination]="false"
+        [showSearcher]="false"
+      >
+        <ng-template customColumn="id" let-i="index">
+          {{ i + 1 }}
+        </ng-template>
+        <ng-template customColumn="actions" let-value="value">
+          <button mat-button color="primary" (click)="exportToExcel(value)">
+            EXCEL
+          </button>
+          <button mat-button color="warn" (click)="exportToPDF(value)">
+            PDF
+          </button>
+        </ng-template>
+      </app-data-table>
+    </div>
+  </div>
+</ng-container>

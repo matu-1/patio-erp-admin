@@ -1,0 +1,136 @@
+@import "theme-variables";
+:host {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.map {
+  width: 100%;
+  height: 100%;
+}
+.order-status-root {
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease;
+  .order-status {
+    position: relative;
+    flex-direction: column;
+    width: 95%;
+    max-width: 1000px;
+    padding: 1.5rem 0;
+    display: flex;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    background-color: $background-card;
+    text-align: center;
+    box-shadow: 1px 1px 2px rgba($color: #000000, $alpha: 0.2);
+    .status-text {
+      margin: 0;
+      font-weight: bold;
+      color: $accent-main;
+    }
+    .loading {
+      font-size: 20px;
+    }
+    mat-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+}
+.order-section {
+  width: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: start;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+  .subtitle {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+}
+.text-box {
+  display: flex;
+  margin-bottom: 0.5rem;
+  > * {
+    margin: 0;
+  }
+  span {
+    font-weight: 500;
+    margin-right: 0.5rem;
+  }
+  p {
+    color: rgba($color: #000000, $alpha: 0.6);
+  }
+}
+.product-box {
+  margin-bottom: 1rem;
+  .product-header {
+    display: flex;
+    font-weight: 500;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+    & > div {
+      display: flex;
+    }
+    .quantity {
+      background-color: black;
+      color: white;
+      padding: 0 0.5rem;
+      border-radius: 0.25rem;
+      margin-right: 0.75rem;
+    }
+  }
+  p {
+    color: rgba($color: #000000, $alpha: 0.6);
+    margin-bottom: 0;
+  }
+}
+.product-box:last-child {
+  margin-bottom: 0;
+}
+.driver-container {
+  display: flex;
+  align-items: center;
+  .profile {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    margin-right: 1rem;
+    background-color: rgba($color: #000000, $alpha: 0.1);
+  }
+  .driver-info {
+    color: rgba($color: #000000, $alpha: 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    p {
+      margin-bottom: 0;
+    }
+  }
+  button {
+    align-self: flex-end;
+    margin-left: auto;
+  }
+}
+.toggle {
+  position: absolute;
+  right: 50%;
+  top: -50px;
+  transform: translate(50%, -50%);
+}
+.order-close {
+  transform: translateY(100%);
+}

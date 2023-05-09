@@ -1,0 +1,132 @@
+<ng-container [ngSwitch]="textFieldValue.fieldType" [formGroup]="form">
+  <mat-form-field
+    *ngSwitchCase="TextFieldType.Dropdown"
+    appearance="legacy"
+    [class]="class!"
+    [ngClass]="{ 'full-width': textFieldValue.fullWidth ?? true }"
+  >
+    <mat-label>{{ textFieldValue.label }}</mat-label>
+    <mat-select
+      [formControlName]="textFieldValue.name"
+      [multiple]="textFieldValue.multiple"
+    >
+      <mat-option
+        *ngFor="let option of textFieldValue.options"
+        [value]="option.value"
+        >{{ option.label }}</mat-option
+      >
+    </mat-select>
+    <mat-error *ngFor="let error of textFieldValue.validators">
+      <ng-container *ngIf="control?.hasError(error.name)">
+        {{ error.message }}
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field
+    *ngSwitchCase="TextFieldType.Textarea"
+    appearance="legacy"
+    [class]="class!"
+    [ngClass]="{ 'full-width': textFieldValue.fullWidth ?? true }"
+  >
+    <mat-label>{{ textFieldValue.label }}</mat-label>
+    <textarea
+      [style.min-height.rem]="textFieldValue.minRows"
+      [style.max-height.rem]="textFieldValue.maxRows"
+      matInput
+      [type]="textFieldValue.type!"
+      [formControlName]="textFieldValue.name"
+      [readonly]="textFieldValue.readOnly"
+    ></textarea>
+    <mat-error *ngFor="let error of textFieldValue.validators">
+      <ng-container *ngIf="control?.hasError(error.name)">
+        {{ error.message }}
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field
+    *ngSwitchCase="TextFieldType.DatePicker"
+    appearance="legacy"
+    [class]="class!"
+    [ngClass]="{ 'full-width': textFieldValue.fullWidth ?? true }"
+  >
+    <mat-label>{{ textFieldValue.label }}</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [formControlName]="textFieldValue.name"
+      [readonly]="textFieldValue.readOnly"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="control?.hasError('matDatepickerParse'); else errors">
+      must be date
+    </mat-error>
+    <ng-template #errors>
+      <mat-error *ngFor="let error of textFieldValue.validators">
+        <ng-container *ngIf="control?.hasError(error.name)">
+          {{ error.message }}
+        </ng-container>
+      </mat-error>
+    </ng-template>
+  </mat-form-field>
+  <mat-form-field
+    *ngSwitchCase="TextFieldType.Autocomplete"
+    appearance="legacy"
+    [class]="class!"
+    [ngClass]="{ 'full-width': textFieldValue.fullWidth ?? true }"
+  >
+    <mat-label>{{ textFieldValue.label }}</mat-label>
+    <input
+      matInput
+      [formControlName]="textFieldValue.name"
+      [readonly]="textFieldValue.readOnly"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      [displayWith]="getOptionLabel.bind(this)"
+      (optionSelected)="onOptionSelected($event)"
+      (closed)="onClosed()"
+    >
+      <mat-option
+        [disabled]="true"
+        *ngIf="(filteredOptions | async)?.length == 0"
+      >
+        No data
+      </mat-option>
+      <mat-option
+        *ngFor="let option of filteredOptions | async"
+        [value]="option"
+      >
+        {{ getOptionLabel(option) }}
+      </mat-option>
+    </mat-autocomplete>
+    <button
+      mat-icon-button
+      matSuffix
+      *ngIf="control?.value"
+      (click)="clearAutocomplete()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field
+    *ngSwitchDefault
+    appearance="legacy"
+    [class]="class!"
+    [ngClass]="{ 'full-width': textFieldValue.fullWidth ?? true }"
+  >
+    <mat-label>{{ textFieldValue.label }}</mat-label>
+    <input
+      matInput
+      [type]="textFieldValue.type!"
+      [formControlName]="textFieldValue.name"
+      [readonly]="textFieldValue.readOnly"
+    />
+    <mat-error *ngFor="let error of textFieldValue.validators">
+      <ng-container *ngIf="control?.hasError(error.name)">
+        {{ error.message }}
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+</ng-container>

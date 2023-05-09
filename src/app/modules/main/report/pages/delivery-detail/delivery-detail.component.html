@@ -1,0 +1,36 @@
+<app-breadcrumbs
+  [breadcrumbs]="[{ path: '', title: 'Detalle Delivery' }]"
+></app-breadcrumbs>
+<app-title-bar title="Detalle Delivery">
+  <button mat-button [disabled]="!deliveryDetailList" (click)="downloadExcel()">
+    Exportar
+  </button>
+</app-title-bar>
+<app-alert color="info"
+  >Espere por favor, la carga de datos puede tardar mucho.</app-alert
+>
+<app-simple-card class="mb-3">
+  <form
+    [formGroup]="form"
+    markAllSubmit
+    (validSubmit)="filter()"
+    fxLayout="row wrap"
+    fxLayoutGap="16px 8px grid"
+  >
+    <app-text-field
+      *ngFor="let value of deliveryDetailSchema"
+      fxFlex.xs="100%"
+      [fxFlex]="value.df"
+      [textFieldValue]="value"
+      [form]="form"
+    ></app-text-field>
+    <div fxFlex.xs="100%" fxFlex="20%">
+      <button type="submit" mat-raised-button color="accent">Filtrar</button>
+    </div>
+  </form>
+</app-simple-card>
+<app-data-table
+  [rows]="deliveryDetailList"
+  [columns]="deliveryDetailColumns"
+  (refresh)="filter()"
+></app-data-table>

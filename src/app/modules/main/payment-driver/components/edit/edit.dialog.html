@@ -1,0 +1,22 @@
+<form [formGroup]="form" markAllSubmit (validSubmit)="save()">
+  <h2 matDialogTitle>
+    Editar <small>({{data.driverId}} - {{data.name}})</small>
+  </h2>
+  <mat-dialog-content>
+    <div class="of-h">
+      <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">
+        <app-text-field
+          *ngFor="let value of editPaymentDriverSchema"
+          [form]="form"
+          [textFieldValue]="value"
+          fxFlex="100%"
+        >
+        </app-text-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose>Close</button>
+    <button mat-button type="submit" cdkFocusInitial>Save</button>
+  </mat-dialog-actions>
+</form>

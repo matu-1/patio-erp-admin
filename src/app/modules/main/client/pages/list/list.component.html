@@ -1,0 +1,86 @@
+<app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
+<app-title-bar [title]="title">
+  <button mat-button (click)="goCreate()">Crear</button>
+  <button mat-button (click)="download()">Exportar</button>
+</app-title-bar>
+<app-simple-card class="mb-3">
+  <form [formGroup]="form" markAllSubmit (validSubmit)="filter()">
+    <app-text-field
+      class="search-input"
+      *ngFor="let value of clientFilterSchema"
+      [form]="form"
+      [textFieldValue]="value"
+    ></app-text-field>
+    <button type="submit" mat-icon-button><mat-icon>search</mat-icon></button>
+  </form>
+</app-simple-card>
+<app-data-table
+  [showPagination]="false"
+  [rows]="clients"
+  [columns]="clientColumns"
+  (refresh)="filter()"
+>
+  <ng-template customColumn="nombre" let-value="value">
+    {{ value.nombre }}
+    <ng-container *ngIf="value.representante"
+      ><br />
+      {{ value.representante }}</ng-container
+    >
+    <ng-container *ngIf="value.representante2"
+      ><br />
+      {{ value.representante2 }}</ng-container
+    >
+    <ng-container *ngIf="value.representante3"
+      ><br />
+      {{ value.representante3 }}</ng-container
+    >
+  </ng-template>
+  <ng-template customColumn="actions" let-value="value">
+    <button mat-icon-button matTooltip="Editar">
+      <mat-icon class="action-icon" (click)="goEdit(value)">edit</mat-icon>
+    </button>
+    <button
+      *ngIf="value.estado == status.retirado; else noRemove"
+      mat-button
+      matTooltip="El cliente está retirado"
+      (click)="activate(value)"
+    >
+      Reactivar
+    </button>
+    <ng-template #noRemove>
+      <ng-container *ngIf="value.estado == status.bloqueado; else noLock">
+        <button
+          mat-button
+          matTooltip="El cliente esta bloqueado"
+          (click)="unlock(value)"
+        >
+          desbloquear
+        </button>
+        <button
+          mat-button
+          matTooltip="El cliente no está retirado"
+          (click)="remove(value)"
+        >
+          Retirar
+        </button>
+      </ng-container>
+      <ng-template #noLock>
+        <button
+          mat-button
+          matTooltip="El cliente esta desbloqueado"
+          (click)="lock(value)"
+        >
+          bloquear
+        </button>
+      </ng-template>
+    </ng-template>
+  </ng-template>
+</app-data-table>
+<mat-paginator
+  [length]="query.length"
+  [pageSize]="query.limit"
+  [pageSizeOptions]="[5, 10, 20, 100]"
+  showFirstLastButtons
+  (page)="changePage($event)"
+  class="mat-elevation-z2"
+></mat-paginator>

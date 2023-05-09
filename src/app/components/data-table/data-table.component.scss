@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+}
+td,
+th {
+  padding-left: 0.5rem !important;
+}
+td:first-of-type,
+th:first-of-type {
+  padding-left: 24px !important;
+}
+mat-form-field {
+  width: 100%;
+  max-width: 450px;
+}
+.edge-end {
+  margin-right: -0.5rem;
+  margin-left: 0.25rem;
+}
+.toolbar-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cursor {
+  cursor: pointer;
+  transition: background-color 0.2s ease-in, color 0.2s ease-in;
+}

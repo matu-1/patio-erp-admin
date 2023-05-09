@@ -1,0 +1,8 @@
+export const MODALITY = {
+  HOUR_WITH_TIP: 1,
+  ONLY_HOUR: 2,
+  ONLY_ORDER: 3,
+  ORDER_WITH_TIP: 4,
+  BASE_WITH_TIP: 5,
+  DISTANCE_WITH_TIP: 6,
+};

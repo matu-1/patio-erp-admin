@@ -1,0 +1,34 @@
+<app-breadcrumbs
+  [breadcrumbs]="[{ path: '', title: 'Detalle Pago' }]"
+></app-breadcrumbs>
+<app-title-bar title="Detalle Pago">
+  <button mat-button [disabled]="!paymentDetailList" (click)="download()">
+    Exportar
+  </button>
+</app-title-bar>
+<app-simple-card class="mb-3">
+  <form
+    fxLayout="row wrap"
+    fxLayoutGap="16px 8px grid"
+    [formGroup]="form"
+    markAllSubmit
+    (validSubmit)="filter()"
+  >
+    <app-text-field
+      *ngFor="let value of paymentDetailSchema"
+      fxFlex.xs="100%"
+      fxFlex="20%"
+      [form]="form"
+      [textFieldValue]="value"
+    >
+    </app-text-field>
+    <div fxFlex.xs="100%" fxFlex="20%">
+      <button type="submit" mat-raised-button color="accent">Filtrar</button>
+    </div>
+  </form>
+</app-simple-card>
+<app-data-table
+  [rows]="paymentDetailList"
+  [columns]="paymentDetailColumns"
+  (refresh)="filter()"
+></app-data-table>

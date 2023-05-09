@@ -1,0 +1,84 @@
+<app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
+<app-title-bar [title]="title">
+  <button
+    mat-raised-button
+    color="primary"
+    [routerLink]="PAGE_ROUTE.COLLECT_DRIVER.CREATE"
+  >
+    Nuevo
+  </button>
+  <button mat-button [disabled]="!paymentsDriver" (click)="download()">
+    Exportar
+  </button>
+</app-title-bar>
+<app-simple-card class="mb-3">
+  <app-form-builder
+    [form]="form"
+    [schema]="collectFilterSchema"
+    (frmSubmit)="filter()"
+  ></app-form-builder>
+</app-simple-card>
+<app-data-table
+  [rows]="paymentsDriver"
+  [filter]="driver"
+  [columns]="paymentsDriverColumns"
+  (refresh)="getPaymentsDriver()"
+>
+  <ng-template customColumn="paymentMethod" let-value="value">
+    <app-chip
+      variant="accent"
+      *ngIf="value.paymentMethod != null; else noPaid"
+      >{{ paymentMethod[value.paymentMethod] }}</app-chip
+    >
+    <ng-template #noPaid>---</ng-template>
+  </ng-template>
+  <ng-template customColumn="actions" let-value="value">
+    <button
+      mat-icon-button
+      matTooltip="Cobrar"
+      (click)="openPaymentDlg(value)"
+      [disabled]="value.paidAt"
+    >
+      <mat-icon class="action-icon">payment</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      matTooltip="Ver Detalle"
+      (click)="goDetail(value)"
+      *ngIf="value.category == categoryValue.delivery"
+    >
+      <mat-icon class="action-icon">info</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      matTooltip="Driver Info"
+      (click)="openDriverInfoDlg(value)"
+    >
+      <mat-icon class="action-icon">face_6</mat-icon>
+    </button>
+    <button
+      *ngIf="!value.paidAt"
+      mat-icon-button
+      matTooltip="Bloquear"
+      (click)="openConfirmBlockDlg(value)"
+    >
+      <mat-icon class="action-icon">lock</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      [disabled]="value.amount == value.balance"
+      matTooltip="Revertir ultimo pago"
+      (click)="openRevertConfirmDlg(value)"
+    >
+      <mat-icon class="action-icon">undo</mat-icon>
+    </button>
+    <button
+      *ngIf="value.amount != value.balance"
+      mat-icon-button
+      matTooltip="Pagos"
+      (click)="openPaymentsDlg(value)"
+    >
+      <mat-icon class="action-icon">payments</mat-icon>
+    </button>
+  </ng-template>
+</app-data-table>

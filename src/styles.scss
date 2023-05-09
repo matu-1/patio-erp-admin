@@ -1,0 +1,143 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.container {
+  padding: 16px;
+}
+.active {
+  background-color: #f4f4f4;
+}
+.mt-2 {
+  margin-top: 1rem;
+}
+.mt-3 {
+  margin-top: 1.5rem;
+}
+.my-3 {
+  margin: 1.5rem 0;
+}
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.mb-1 {
+  margin-bottom: 0.5rem !important;
+}
+.mb-2 {
+  margin-bottom: 1rem !important;
+}
+.mb-3 {
+  margin-bottom: 1.5rem;
+}
+.ml-auto {
+  margin-left: auto !important;
+}
+.mr-2 {
+  margin-right: 1rem !important;
+}
+.form-field-pb-0 .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+//snackBar  bg
+.snackbar-bg {
+  color: white;
+}
+.snackbar-bg-success {
+  background-color: #43a047;
+}
+.snackbar-bg-warning {
+  background-color: #ff9800;
+}
+.snackbar-bg-error {
+  background-color: #d32f2f;
+}
+.snackbar-bg-info {
+  background-color: #2196f3;
+}
+// facturas bg
+.bg-pagado {
+  background-color: #3dc1d3 !important; // #00a65a
+}
+.bg-parcial {
+  background-color: #ff851b !important;
+}
+.bg-conciliado {
+  background-color: #0000ff !important;
+}
+.bg-incobrable {
+  background-color: #e15f41 !important; //#ff0000
+}
+.bg-en {
+  background-color: #d7eff0 !important;
+}
+.bg-cobrar {
+  background-color: #d0f1d0 !important;
+}
+.bg-cobro {
+  background-color: #f5cd79 !important; //#f4c8c6
+}
+.bg-bloqueado,
+.bg-bloqueado td {
+  color: #ececec !important; //#999999
+  background-color: #778beb !important; //#e1e1e1
+}
+.bg-retirado,
+.bg-retirado td {
+  color: #ececec !important; //#bcbcbc
+  background-color: #786fa6 !important; //#6d4a4a
+}
+// end facturas bg
+.of-h {
+  overflow: hidden;
+}
+.dt-dlg {
+  box-shadow: none !important;
+}
+.dt-unstyle {
+  box-shadow: none !important;
+  table {
+    background: none;
+  }
+}
+hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 1rem 0;
+}
+button:not(.mat-button-disabled) .action-icon {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 1.35rem;
+}
+.search-input {
+  max-width: 350px !important;
+  width: 80% !important;
+}
+.title-dlg {
+  margin-bottom: 0.5rem !important;
+  font-weight: bold !important;
+}
+.driver-dlg {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+}
+.bg-selected,
+.bg-selected td {
+  color: #ececec !important; //#999999
+  background-color: #778beb !important; //#e1e1e1
+  transition: background-color 0.2s ease-in, color 0.2s ease-in;;
+}

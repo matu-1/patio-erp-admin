@@ -1,0 +1,22 @@
+.title-bar ::ng-deep {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: -0.5rem;
+  margin-bottom: 1rem;
+  align-items: center;
+  & > div {
+    margin: 0 0.5rem;
+    & > * {
+      margin: 0.5rem 0;
+      margin-right: 0.5rem;
+    }
+    & > *:last-child {
+      margin-right: 0;
+    }
+  }
+}
+.title {
+  font-weight: bold;
+  margin: 0.5rem;
+}

@@ -1,0 +1,116 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav
+    #sidenav
+    [mode]="mobileQuery.matches ? 'over' : 'side'"
+    [opened]="!mobileQuery.matches"
+  >
+    <div class="logo">
+      <img src="assets/images/logo-ps.png" alt="logo" />
+    </div>
+    <mat-nav-list>
+      <ng-container *ngFor="let item of menu">
+        <ng-container *ngIf="item.items && item.items.length > 0; else unitems">
+          <mat-accordion displayMode="flat">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-icon class="nav-icon" *ngIf="item.icon">{{
+                    item.icon
+                  }}</mat-icon>
+                  <span class="text-nav">{{
+                    item.label
+                  }}</span></mat-panel-title
+                >
+              </mat-expansion-panel-header>
+              <mat-nav-list class="pt-0 nav-list">
+                <ng-container *ngFor="let child of item.items">
+                  <ng-container
+                    *ngIf="child.items && child.items.length > 0; else unitems"
+                  >
+                    <mat-accordion displayMode="flat">
+                      <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            <mat-icon class="nav-icon" *ngIf="child.icon">{{
+                              child.icon
+                            }}</mat-icon>
+                            <span class="text-nav">{{
+                              child.label
+                            }}</span></mat-panel-title
+                          >
+                        </mat-expansion-panel-header>
+                        <mat-nav-list class="pt-0 nav-list">
+                          <a
+                            mat-list-item
+                            *ngFor="let child2 of child.items"
+                            [routerLink]="child2.route"
+                            routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="closeIfIsMobile(sidenav)"
+                          >
+                            <mat-icon *ngIf="child2.icon" matListIcon>{{
+                              child2.icon
+                            }}</mat-icon>
+                            <span matLine> {{ child2.label }} </span>
+                          </a>
+                        </mat-nav-list>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </ng-container>
+                  <ng-template #unitems>
+                    <a
+                      mat-list-item
+                      [routerLink]="child.route"
+                      routerLinkActive="active"
+                      [routerLinkActiveOptions]="{ exact: true }"
+                      (click)="closeIfIsMobile(sidenav)"
+                    >
+                      <mat-icon matListIcon *ngIf="child.icon">{{
+                        child.icon
+                      }}</mat-icon>
+                      <span mat-line>{{ child.label }}</span>
+                    </a>
+                  </ng-template>
+                </ng-container>
+              </mat-nav-list>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </ng-container>
+        <ng-template #unitems>
+          <a
+            mat-list-item
+            [routerLink]="item.route"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="closeIfIsMobile(sidenav)"
+          >
+            <mat-icon matListIcon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+            <span mat-line>{{ item.label }}</span>
+          </a>
+        </ng-template>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <span class="user">{{ user?.usuario }}</span>
+      <div class="avatar" [matMenuTriggerFor]="menuOptions">
+        <img
+          src="https://i.pinimg.com/564x/77/a8/c0/77a8c06b4c278d029b45bc73cb6666af.jpg"
+          alt="matu"
+        />
+      </div>
+      <mat-menu #menuOptions="matMenu">
+        <button mat-menu-item>Profile</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </mat-toolbar>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

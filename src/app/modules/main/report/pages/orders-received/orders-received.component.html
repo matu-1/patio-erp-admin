@@ -1,0 +1,46 @@
+<app-breadcrumbs [breadcrumbs]="[{ path: '', title: title }]"></app-breadcrumbs>
+<app-title-bar [title]="title">
+  <button mat-button [disabled]="!ordersReceived" (click)="download()">
+    Exportar
+  </button>
+  <!-- <button
+    mat-button
+    (click)="openGenerateConfirmDlg()"
+    [disabled]="!ordersReceived"
+  >
+    Generar Pago
+  </button> -->
+</app-title-bar>
+<app-simple-card class="mb-3">
+  <form
+    [formGroup]="form"
+    markAllSubmit
+    (validSubmit)="filter()"
+    fxLayout="row wrap"
+    fxLayoutGap="16px 8px grid"
+  >
+    <app-text-field
+      *ngFor="let value of ordersReceivedFilterSchema"
+      [form]="form"
+      [textFieldValue]="value"
+      fxFlex.xs="100%"
+      fxFlex.sm="25%"
+      [fxFlex]="value.df"
+    ></app-text-field>
+    <div fxFlex.xs="100%">
+      <button mat-raised-button color="accent" type="submit">Filtrar</button>
+    </div>
+  </form>
+</app-simple-card>
+<app-data-table
+  [rows]="ordersReceived"
+  [columns]="ordersReceivedColumns"
+  (refresh)="filter()"
+  [filter]="driver"
+>
+  <ng-template customColumn="actions" let-value="value">
+    <button mat-icon-button matTooltip="Refrescar" (click)="showConfirmRefreshDlg(value)">
+      <mat-icon class="action-icon" >refresh</mat-icon>
+    </button>
+  </ng-template>
+</app-data-table>

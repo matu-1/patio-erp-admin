@@ -1,0 +1,29 @@
+<form [formGroup]="form" markAllSubmit (validSubmit)="save()">
+  <h2 mat-dialog-title>Editar Factura #{{data.id}}</h2>
+  <div mat-dialog-content>
+    <div class="of-h">
+      <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">
+        <app-text-field
+          *ngFor="let value of editSchema"
+          [form]="form"
+          [textFieldValue]="value"
+          [fxFlex]="value.df"
+          [fxFlex.xs]="value.xs"
+          [fxFlex.sm]="value.sm"
+        ></app-text-field>
+      </div>
+    </div>
+    <hr/>
+    <app-data-table
+      class="dt-dlg"
+      [rows]="invoiceDetails"
+      [columns]="invoiceDetailColumns"
+      [showPagination]="false"
+      [showSearcher]="false"
+    ></app-data-table>
+  </div>
+  <div mat-dialog-actions align="end" class="bg">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button cdkFocusInitial type="submit">Aceptar</button>
+  </div>
+</form>

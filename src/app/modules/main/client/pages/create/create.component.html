@@ -1,0 +1,47 @@
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
+<app-title-bar [title]="breadcrumbs[1].title"></app-title-bar>
+<form [formGroup]="form" markAllSubmit (validSubmit)="save()">
+  <app-simple-card class="mb-2">
+    <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">
+      <app-text-field
+        *ngFor="let value of clientEditSchema"
+        [textFieldValue]="value"
+        [form]="form"
+        [fxFlex.xs]="value.xs"
+        [fxFlex.sm]="value.sm"
+        [fxFlex]="value.df"
+      ></app-text-field>
+    </div>
+  </app-simple-card>
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <app-simple-card fxFlex.xs="100%" fxFlex="50%">
+      <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">
+        <app-text-field
+          *ngFor="let value of clientEditRep2Schema"
+          [textFieldValue]="value"
+          [form]="form"
+          [fxFlex.xs]="value.xs"
+          [fxFlex.sm]="value.sm"
+          [fxFlex]="value.df"
+        ></app-text-field>
+      </div>
+    </app-simple-card>
+    <app-simple-card fxFlex.xs="100%" fxFlex="50%">
+      <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">
+        <app-text-field
+          *ngFor="let value of clientEditRep2Schema"
+          [textFieldValue]="value"
+          [form]="form"
+          [fxFlex.xs]="value.xs"
+          [fxFlex.sm]="value.sm"
+          [fxFlex]="value.df"
+        ></app-text-field></div
+    ></app-simple-card>
+  </div>
+  <app-button-bar>
+    <button type="button" mat-raised-button color="accent" (click)="goBack()">
+      Volver
+    </button>
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
+  </app-button-bar>
+</form>

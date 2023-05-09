@@ -1,0 +1,32 @@
+<app-breadcrumbs [breadcrumbs]="[{title, path: ''}]"></app-breadcrumbs>
+<app-title-bar [title]="title">
+  <button mat-button (click)="download()">Exportar</button>
+</app-title-bar>
+<app-simple-card class="mb-3">
+  <form
+    fxLayout="row wrap"
+    fxLayoutGap="16px 8px grid"
+    [formGroup]="form"
+    markAllSubmit
+    (validSubmit)="filter()"
+  >
+    <app-text-field
+      *ngFor="let value of filterPaymentQRSchema"
+      fxFlex.xs="100%"
+      [fxFlex.sm]="value.sm"
+      [fxFlex]="value.df"
+      [textFieldValue]="value"
+      [form]="form"
+    ></app-text-field>
+    <div fxFlex.xs="100%" fxFlex="20%">
+      <button mat-icon-button type="submit">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </form>
+</app-simple-card>
+<app-data-table
+  [rows]="paymentsQR"
+  [columns]="paymentQrColumns"
+  [showPagination]="false"
+></app-data-table>

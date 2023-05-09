@@ -1,0 +1,26 @@
+.alert {
+  display: flex;
+  align-items: flex-start;
+  background-color: #f2f2f2;
+  border: 1px solid #e0e0e0;
+  padding: 0.75rem;
+  border-radius: 0.3rem;
+  margin-bottom: 1rem;
+  button {
+    margin: -0.75rem;
+    margin-left: auto;
+  }
+}
+.warning {
+  background-color: #fff3cd;
+  border: 1px solid #ffecb5;
+  color: #664d03;
+}
+.info {
+  background-color: #cff4fc;
+  border: 1px solid #b6effb;
+  color: #055160;
+}
+mat-icon {
+  font-size: 1.35rem;
+}
