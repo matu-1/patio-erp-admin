@@ -135,6 +135,10 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     valueFormatter: ({ bankAccount }) => bankAccount,
   },
   {
+    field: 'comments',
+    headerName: 'Comentarios',
+  },
+  {
     field: 'quantity',
     headerName: 'Cant. Pedidos',
   },

@@ -32,6 +32,10 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
     valueFormatter: ({ detail }) => detail?.bankAccount,
   },
   {
+    field: 'comments',
+    headerName: 'Comentarios',
+  },
+  {
     field: 'quantity',
     headerName: 'Cant. Pedidos',
     valueFormatter: ({ detail }) => (detail ? detail.quantity : '---'),
