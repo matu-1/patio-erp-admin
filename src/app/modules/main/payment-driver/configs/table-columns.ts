@@ -34,6 +34,7 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
   {
     field: 'comments',
     headerName: 'Comentarios',
+    valueFormatter: ({ comments }) => (comments ? comments : '---'),
   },
   {
     field: 'quantity',

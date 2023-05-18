@@ -45,6 +45,7 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
   {
     field: 'comments',
     headerName: 'Comentarios',
+    valueFormatter: ({ comments }) => (comments ? comments : '---'),
   },
   {
     field: 'quantity',

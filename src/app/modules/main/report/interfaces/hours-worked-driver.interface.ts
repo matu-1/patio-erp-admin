@@ -25,6 +25,7 @@ export interface HoursWorkedDriver {
   average: number;
   totalPrepaidAmount: number;
   averageCompleted: number;
+  comments?: string;
 }
 
 export interface BankAccount {
