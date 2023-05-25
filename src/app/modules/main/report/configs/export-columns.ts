@@ -27,19 +27,83 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
     headerName: 'Tipo Acuerdo',
   },
   {
-    field: 'bankAccount',
-    headerName: 'Cuenta Bancaria (AN,AT,RN,P,N,A,SS,PM)',
+    field: 'accountNumber',
+    headerName: 'Número Cuenta (BA)',
     valueFormatter: ({ bankAccount }) =>
       bankAccount && bankAccount.type == BankAccountType.BankAccount
-        ? `${bankAccount.accountNumber} - ${bankAccount.accountType} - ${bankAccount.routingNumber} - ${bankAccount.phone} - ${bankAccount.name} - ${bankAccount.address} - ${bankAccount.socialSecurity} - ${bankAccount.paymentMethod}`
+        ? bankAccount.accountNumber
         : '---',
   },
   {
-    field: 'zelle',
-    headerName: 'Zelle (N,P)',
+    field: 'accountType',
+    headerName: 'Tipo Cuenta (BA)',
+    valueFormatter: ({ bankAccount }) =>
+      bankAccount && bankAccount.type == BankAccountType.BankAccount
+        ? bankAccount.accountType
+        : '---',
+  },
+  {
+    field: 'routingNumber',
+    headerName: 'Routing Number (BA)',
+    valueFormatter: ({ bankAccount }) =>
+      bankAccount && bankAccount.type == BankAccountType.BankAccount
+        ? bankAccount.routingNumber
+        : '---',
+  },
+  {
+    field: 'phone',
+    headerName: 'Celular (BA)',
+    valueFormatter: ({ bankAccount }) =>
+      bankAccount && bankAccount.type == BankAccountType.BankAccount
+        ? bankAccount.phone
+        : '---',
+  },
+  {
+    field: 'fullName',
+    headerName: 'Nombre Completo (BA)',
+    valueFormatter: ({ bankAccount }) =>
+      bankAccount && bankAccount.type == BankAccountType.BankAccount
+        ? bankAccount.name
+        : '---',
+  },
+  {
+    field: 'address',
+    headerName: 'Dirección (BA)',
+    valueFormatter: ({ bankAccount }) =>
+      bankAccount && bankAccount.type == BankAccountType.BankAccount
+        ? bankAccount.address
+        : '---',
+  },
+  {
+    field: 'socialSecurity',
+    headerName: 'Social Security (BA)',
+    valueFormatter: ({ bankAccount }) =>
+      bankAccount && bankAccount.type == BankAccountType.BankAccount
+        ? bankAccount.socialSecurity
+        : '---',
+  },
+  {
+    field: 'paymentMethod',
+    headerName: 'Método Pago (BA)',
+    valueFormatter: ({ bankAccount }) =>
+      bankAccount && bankAccount.type == BankAccountType.BankAccount
+        ? bankAccount.paymentMethod
+        : '---',
+  },
+  {
+    field: 'fullNameZelle',
+    headerName: 'Nombre Completo (Z)',
     valueFormatter: ({ bankAccount }) =>
       bankAccount && bankAccount.type == BankAccountType.Zelle
-        ? `${bankAccount.name} - ${bankAccount.phone}`
+        ? bankAccount.name
+        : '---',
+  },
+  {
+    field: 'phoneZelle',
+    headerName: 'Celular o Correo (Z)',
+    valueFormatter: ({ bankAccount }) =>
+      bankAccount && bankAccount.type == BankAccountType.Zelle
+        ? bankAccount.phone
         : '---',
   },
   {

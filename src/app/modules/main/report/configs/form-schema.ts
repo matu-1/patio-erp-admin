@@ -265,7 +265,7 @@ export const editBankAccountSchema: TextFieldSchema = [
     df: '50%',
   },
   {
-    label: 'Nombre completo',
+    label: 'Nombre Completo',
     name: 'name',
     validators: [
       {
@@ -350,7 +350,7 @@ export const editBankAccountSchema: TextFieldSchema = [
 
 export const editBankAccountZelleSchema: TextFieldSchema = [
   {
-    label: 'Nombre completo',
+    label: 'Nombre Completo',
     name: 'name',
     validators: [
       {

@@ -42,33 +42,6 @@
   (refresh)="filter()"
   [filter]="driver"
 >
-  <ng-template customColumn="bankAccount" let-value="value">
-    <ng-container
-      *ngIf="
-        value.bankAccount && value.bankAccount.type == 0;
-        else noBankAccount
-      "
-    >
-      <strong> {{ value.bankAccount.accountNumber }}</strong> <br />
-      {{ value.bankAccount.accountType }} <br />
-      {{ value.bankAccount.routingNumber }} <br />
-      {{ value.bankAccount.phone }} <br />
-      <strong>{{ value.bankAccount.name }}</strong> <br />
-      {{ value.bankAccount.address }} <br />
-      {{ value.bankAccount.socialSecurity ?? "---" }} <br />
-      <small>{{ value.bankAccount.paymentMethod }}</small> <br />
-    </ng-container>
-    <ng-template #noBankAccount>---</ng-template>
-  </ng-template>
-  <ng-template customColumn="zelle" let-value="value">
-    <ng-container
-      *ngIf="value.bankAccount && value.bankAccount.type == 1; else noZelle"
-    >
-      {{ value.bankAccount.name }} <br />
-      <strong>{{ value.bankAccount.phone }}</strong>
-    </ng-container>
-    <ng-template #noZelle>---</ng-template>
-  </ng-template>
   <ng-template customColumn="actions" let-value="value">
     <button
       mat-icon-button
