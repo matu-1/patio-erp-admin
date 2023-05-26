@@ -34,6 +34,7 @@ import { PaymentDriverType } from '../../constants/payment-driver-type';
 import * as moment from 'moment-timezone';
 import { BankAccount } from '../../../report/interfaces/hours-worked-driver.interface';
 import { EditDialog } from '../../components/edit/edit.dialog';
+import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 
 @Component({
   selector: 'app-list',
@@ -169,7 +170,10 @@ export class ListComponent implements OnInit {
   }
 
   download() {
-    ExcelUtils.download(this.paymentsDriver!, 'payment driver');
+    ExcelUtils.download(
+      parseByColumns(this.paymentsDriver!, paymentsDriverColumns),
+      'payment driver'
+    );
   }
 
   openRevertConfirmDlg(data: PaymentDriver) {

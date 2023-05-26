@@ -28,36 +28,6 @@
   (rowClick)="onSelect($event)"
   [rowClass]="getRowClass.bind(this)"
 >
-  <ng-template customColumn="bankAccount" let-value="value">
-    <ng-container
-      *ngIf="
-        value.detail?.bankAccount && value.detail?.bankAccount.type == 0;
-        else noBankAccount
-      "
-    >
-      <strong> {{ value.detail.bankAccount.accountNumber }}</strong> <br />
-      {{ value.detail.bankAccount.accountType }} <br />
-      {{ value.detail.bankAccount.routingNumber }} <br />
-      {{ value.detail.bankAccount.phone }} <br />
-      <strong>{{ value.detail.bankAccount.name }}</strong> <br />
-      {{ value.detail.bankAccount.address }} <br />
-      {{ value.detail.bankAccount.socialSecurity ?? "---" }} <br />
-      <small>{{ value.detail.bankAccount.paymentMethod }}</small> <br />
-    </ng-container>
-    <ng-template #noBankAccount>---</ng-template>
-  </ng-template>
-  <ng-template customColumn="zelle" let-value="value">
-    <ng-container
-      *ngIf="
-        value.detail?.bankAccount && value.detail?.bankAccount.type == 1;
-        else noZelle
-      "
-    >
-      {{ value.detail.bankAccount.name }} <br />
-      <strong>{{ value.detail.bankAccount.phone }}</strong>
-    </ng-container>
-    <ng-template #noZelle>---</ng-template>
-  </ng-template>
   <ng-template customColumn="actions" let-value="value">
     <button
       mat-icon-button

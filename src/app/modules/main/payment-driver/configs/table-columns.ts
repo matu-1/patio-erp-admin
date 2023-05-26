@@ -7,6 +7,7 @@ import { Payment } from '../interfaces/payment.interface';
 import { paymentsDriverColumns as collectsDriverColumns } from '../../collect-driver/configs/table-columns';
 import { meterToMile } from 'src/app/utils/utils';
 import { DateUtils } from 'src/app/utils/date.util';
+import { BankAccountType } from '../../report/interfaces/hours-worked-driver.interface';
 
 export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
   ...collectsDriverColumns.slice(0, collectsDriverColumns.length - 1),
@@ -22,14 +23,92 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
     valueFormatter: ({ detail }) => (detail ? detail.modality : '---'),
   },
   {
-    field: 'bankAccount',
-    headerName: 'Cuenta Bancaria (AN,AT,RN,P,N,A,SS,PM)',
-    valueFormatter: ({ detail }) => detail?.bankAccount,
+    field: 'accountNumber',
+    headerName: 'Número Cuenta (BA)',
+    valueFormatter: ({ detail }) =>
+      detail?.bankAccount &&
+      detail.bankAccount.type == BankAccountType.BankAccount
+        ? detail.bankAccount.accountNumber
+        : '---',
   },
   {
-    field: 'zelle',
-    headerName: 'Zelle (N, P)',
-    valueFormatter: ({ detail }) => detail?.bankAccount,
+    field: 'accountType',
+    headerName: 'Tipo Cuenta (BA)',
+    valueFormatter: ({ detail }) =>
+      detail?.bankAccount &&
+      detail.bankAccount.type == BankAccountType.BankAccount
+        ? detail.bankAccount.accountType
+        : '---',
+  },
+  {
+    field: 'routingNumber',
+    headerName: 'Routing Number (BA)',
+    valueFormatter: ({ detail }) =>
+      detail?.bankAccount &&
+      detail.bankAccount.type == BankAccountType.BankAccount
+        ? detail.bankAccount.routingNumber
+        : '---',
+  },
+  {
+    field: 'phone',
+    headerName: 'Celular (BA)',
+    valueFormatter: ({ detail }) =>
+      detail?.bankAccount &&
+      detail.bankAccount.type == BankAccountType.BankAccount
+        ? detail.bankAccount.phone
+        : '---',
+  },
+  {
+    field: 'fullName',
+    headerName: 'Nombre Completo (BA)',
+    valueFormatter: ({ detail }) =>
+      detail?.bankAccount &&
+      detail.bankAccount.type == BankAccountType.BankAccount
+        ? detail.bankAccount.name
+        : '---',
+  },
+  {
+    field: 'address',
+    headerName: 'Dirección (BA)',
+    valueFormatter: ({ detail }) =>
+      detail?.bankAccount &&
+      detail.bankAccount.type == BankAccountType.BankAccount
+        ? detail.bankAccount.address
+        : '---',
+  },
+  {
+    field: 'socialSecurity',
+    headerName: 'Social Security (BA)',
+    valueFormatter: ({ detail }) =>
+      detail?.bankAccount &&
+      detail.bankAccount.type == BankAccountType.BankAccount
+        ? detail.bankAccount.socialSecurity
+        : '---',
+  },
+  {
+    field: 'paymentMethod',
+    headerName: 'Método Pago (BA)',
+    valueFormatter: ({ detail }) =>
+      detail?.bankAccount &&
+      detail.bankAccount.type == BankAccountType.BankAccount
+        ? detail.bankAccount.paymentMethod
+        : '---',
+  },
+  {
+    field: 'fullNameZelle',
+    headerName: 'Nombre Completo (Z)',
+    valueFormatter: ({ detail }) =>
+      detail?.bankAccount && detail.bankAccount.type == BankAccountType.Zelle
+        ? detail.bankAccount.name
+        : '---',
+  },
+  {
+    field: 'phoneZelle',
+    headerName: 'Celular o Correo (Z)',
+    valueFormatter: ({ detail }) =>
+      detail?.bankAccount && detail.bankAccount.type == BankAccountType.Zelle
+        ? detail.bankAccount.phone
+        : '---',
   },
   {
     field: 'comments',
