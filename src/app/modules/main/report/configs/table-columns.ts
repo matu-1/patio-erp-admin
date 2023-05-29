@@ -708,6 +708,7 @@ export const collectMerchantColumns: TableColumns<CollectMerchantDto> = [
     valueFormatter: ({ observations }) => observations ?? '---',
   },
   { field: 'SUBTOTAL', headerName: 'Subtotal' },
+  { field: 'type', headerName: 'Type' },
   {
     field: 'DATE',
     headerName: 'Date',
@@ -797,6 +798,7 @@ export const collectMerchantReportColumns: TableColumns<CollectMerchantDto> = [
     valueFormatter: ({ observations }) => observations ?? '---',
   },
   { field: 'SUBTOTAL', headerName: 'Subtotal' },
+  { field: 'type', headerName: 'Type' },
   {
     field: 'DATE',
     headerName: 'Date',
