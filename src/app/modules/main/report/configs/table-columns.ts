@@ -267,14 +267,14 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
         : '---',
   },
   {
-    field: 'fees',
+    field: 'totalFees',
     headerName: 'Fees',
-    valueFormatter: ({ fees }) => formatNumber(fees, 'es'),
+    valueFormatter: ({ totalFees }) => formatNumber(totalFees, 'es'),
   },
   {
-    field: 'extraFees',
-    headerName: 'Extra Fees',
-    valueFormatter: ({ extraFees }) => formatNumber(extraFees, 'es'),
+    field: 'feesTip',
+    headerName: 'Fees 2',
+    valueFormatter: ({ feesTip }) => formatNumber(feesTip, 'es'),
   },
   {
     field: 'discounts',

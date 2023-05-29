@@ -11,6 +11,7 @@ export interface HoursWorkedDriver {
   fees: number;
   extraFees: number;
   totalFees: number;
+  feesTip: number;
   tips: number;
   total: number;
   totalEarning: number;
