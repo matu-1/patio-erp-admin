@@ -1,16 +1,15 @@
-import { formatDate, formatNumber } from '@angular/common';
 import { TableColumns } from 'src/app/components/data-table/data-table.interface';
-import { FormatDate } from 'src/app/utils/format.date.util';
-import { paymentMethod } from '../constants/payment-method';
 import { PaymentDriver } from '../interfaces/payment-driver.interface';
-import { Payment } from '../interfaces/payment.interface';
-import { paymentsDriverColumns as collectsDriverColumns } from '../../collect-driver/configs/table-columns';
-import { meterToMile } from 'src/app/utils/utils';
+import { formatToNumber, meterToMile } from 'src/app/utils/utils';
 import { DateUtils } from 'src/app/utils/date.util';
 import { BankAccountType } from '../../report/interfaces/hours-worked-driver.interface';
+import { paymentsDriverColumnsExport } from '../../collect-driver/configs/export-columns';
 
-export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
-  ...collectsDriverColumns.slice(0, collectsDriverColumns.length - 1),
+export const paymentsDriverExportColumns: TableColumns<PaymentDriver> = [
+  ...paymentsDriverColumnsExport.slice(
+    0,
+    paymentsDriverColumnsExport.length - 1
+  ),
   {
     field: 'averageCompleted',
     headerName: 'Promedio Completado',
@@ -124,25 +123,25 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
     field: 'tips',
     headerName: 'Propina',
     valueFormatter: ({ detail }) =>
-      detail ? formatNumber(detail.tips, 'es') : '---',
+      detail ? formatToNumber(detail.tips) : '---',
   },
   {
     field: 'totalDistance',
     headerName: 'Distancia (mi)',
     valueFormatter: ({ detail }) =>
-      detail ? formatNumber(meterToMile(detail.totalDistance), 'es') : '---',
+      detail ? formatToNumber(meterToMile(detail.totalDistance)) : '---',
   },
   {
     field: 'amountHour',
     headerName: 'Monto Hora',
     valueFormatter: ({ detail }) =>
-      detail ? formatNumber(detail.amountHour, 'es') : '---',
+      detail ? formatToNumber(detail.amountHour) : '---',
   },
   {
     field: 'hours',
     headerName: 'Horas bruta',
     valueFormatter: ({ detail }) =>
-      detail ? formatNumber(detail.hoursWorked, 'es', '.0-6') : '---',
+      detail ? formatToNumber(detail.hoursWorked) : '---',
   },
   {
     field: 'hoursWorked',
@@ -154,82 +153,24 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
     field: 'discounts',
     headerName: 'Descuento',
     valueFormatter: ({ detail }) =>
-      detail ? formatNumber(detail.discounts, 'es') : '---',
+      detail ? formatToNumber(detail.discounts) : '---',
   },
   {
     field: 'extraEarning',
     headerName: 'Ganancia Extra',
     valueFormatter: ({ detail }) =>
-      detail ? formatNumber(detail.extraEarning, 'es') : '---',
+      detail ? formatToNumber(detail.extraEarning) : '---',
   },
   {
     field: 'totalBonus',
     headerName: 'Bonos',
     valueFormatter: ({ detail }) =>
-      detail ? formatNumber(detail.totalBonus, 'es') : '---',
+      detail ? formatToNumber(detail.totalBonus) : '---',
   },
   {
     field: 'total',
     headerName: 'Total',
     valueFormatter: ({ detail }) =>
-      detail ? formatNumber(detail.total, 'es') : '---',
+      detail ? formatToNumber(detail.total) : '---',
   },
-  {
-    field: 'actions',
-    headerName: 'Acciones',
-  },
-];
-// paymentsDriverColumns.splice(8, 2)
-
-export const paymentsColumns: TableColumns<Payment> = [
-  {
-    field: 'id',
-    headerName: 'Id',
-  },
-  {
-    field: 'amount',
-    headerName: 'Monto',
-    valueFormatter: ({ amount }) => formatNumber(Number(amount), 'es', '.2-2'),
-  },
-  {
-    field: 'paymentMethod',
-    headerName: 'Método Pago',
-    valueFormatter: (value) => paymentMethod[value.paymentMethod],
-  },
-  {
-    field: 'paidAt',
-    headerName: 'Pagado el',
-    valueFormatter: ({ paidAt }) => FormatDate.short(paidAt),
-  },
-  {
-    field: 'bankAccount',
-    headerName: 'Cuenta Bancaria',
-    valueFormatter: ({ bankAccount }) => {
-      bankAccount = JSON.parse(bankAccount);
-      return bankAccount
-        ? `${bankAccount.accountNumber} - ${bankAccount.bankName}`
-        : '---';
-    },
-  },
-  {
-    field: 'createdAt',
-    headerName: 'Creado el',
-    valueFormatter: ({ createdAt }) =>
-      formatDate(createdAt, 'dd/MM/yyyy HH:mm', 'es'),
-  },
-];
-
-export const driversPaymentsColumns: TableColumns = [
-  {
-    field: "driverId",
-    headerName: "Id"
-  },
-  {
-    field: "name",
-    headerName: "Name"
-  },
-  {
-    field: "balance",
-    headerName: "Monto"
-  }
 ];

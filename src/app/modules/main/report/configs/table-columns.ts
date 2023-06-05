@@ -710,6 +710,11 @@ export const collectMerchantColumns: TableColumns<CollectMerchantDto> = [
   { field: 'SUBTOTAL', headerName: 'Subtotal' },
   { field: 'type', headerName: 'Type' },
   {
+    field: 'info_leave_delivery',
+    headerName: 'Info Leave Delivery',
+    valueFormatter: ({ info_leave_delivery }) => info_leave_delivery ?? '---',
+  },
+  {
     field: 'DATE',
     headerName: 'Date',
     valueFormatter: ({ DATE }) => FormatDate.shortMoment(DATE),

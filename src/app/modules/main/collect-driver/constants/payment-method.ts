@@ -7,6 +7,8 @@ export const paymentMethod: Record<number, string> = {
   5: 'Cuenta Citibank',
   6: 'Cuenta Jp Bank of America',
   7: 'Cuenta Angela Bank of America',
+  8: 'Zelle',
+  9: 'quickbooks',
 };
 
 export const categoryValue = {

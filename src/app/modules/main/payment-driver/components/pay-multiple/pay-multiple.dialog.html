@@ -12,9 +12,12 @@
         >
         </app-text-field>
       </div>
-      <mat-chip-list>
-        <mat-chip *ngFor="let payment of data">{{payment.name}}</mat-chip>
-      </mat-chip-list>
+      <app-data-table
+        class="dt-dlg"
+        [rows]="data"
+        [columns]="driversPaymentsColumns"
+        [showSearcher]="false"
+      ></app-data-table>
     </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">

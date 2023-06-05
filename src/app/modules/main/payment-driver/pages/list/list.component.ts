@@ -35,6 +35,7 @@ import * as moment from 'moment-timezone';
 import { BankAccount } from '../../../report/interfaces/hours-worked-driver.interface';
 import { EditDialog } from '../../components/edit/edit.dialog';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
+import { paymentsDriverExportColumns } from '../../configs/export-columns';
 
 @Component({
   selector: 'app-list',
@@ -171,7 +172,7 @@ export class ListComponent implements OnInit {
 
   download() {
     ExcelUtils.download(
-      parseByColumns(this.paymentsDriver!, paymentsDriverColumns),
+      parseByColumns(this.paymentsDriver!, paymentsDriverExportColumns),
       'payment driver'
     );
   }
