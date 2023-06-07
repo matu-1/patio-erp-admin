@@ -43,6 +43,14 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
         : '---',
   },
   {
+    field: 'bankName',
+    headerName: 'Banco (BA)',
+    valueFormatter: ({ bankAccount }) =>
+      bankAccount && bankAccount.type == BankAccountType.BankAccount
+        ? bankAccount.bankName
+        : '---',
+  },
+  {
     field: 'routingNumber',
     headerName: 'Routing Number (BA)',
     valueFormatter: ({ bankAccount }) =>

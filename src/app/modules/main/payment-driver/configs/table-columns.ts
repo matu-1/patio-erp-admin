@@ -41,6 +41,15 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
         : '---',
   },
   {
+    field: 'bankName',
+    headerName: 'Banco (BA)',
+    valueFormatter: ({ detail }) =>
+      detail?.bankAccount &&
+      detail.bankAccount.type == BankAccountType.BankAccount
+        ? detail.bankAccount.bankName
+        : '---',
+  },
+  {
     field: 'routingNumber',
     headerName: 'Routing Number (BA)',
     valueFormatter: ({ detail }) =>

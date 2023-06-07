@@ -226,6 +226,18 @@ export const editBankAccountSchema: TextFieldSchema = [
     df: '50%',
   },
   {
+    label: 'Banco',
+    name: 'bankName',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '50%',
+  },
+  {
     label: 'Routing Number',
     name: 'routingNumber',
     validators: [
