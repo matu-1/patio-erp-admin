@@ -73,6 +73,11 @@ export const MENU: MenuItem[] = [
             icon: 'remove',
             route: PAGE_ROUTE.REPORT.COLLECT_MERCHANT,
           },
+          {
+            label: 'Facturas por año',
+            icon: 'remove',
+            route: PAGE_ROUTE.REPORT.INVOICES_BY_YEAR,
+          },
         ],
       },
       {

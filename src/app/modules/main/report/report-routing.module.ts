@@ -4,6 +4,7 @@ import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { CollectMerchantComponent } from './pages/collect-merchant/collect-merchant.component';
 import { DeliveryDetailComponent } from './pages/delivery-detail/delivery-detail.component';
 import { HoursWorkedComponent } from './pages/hours-worked/hours-worked.component';
+import { InvoiceYearComponent } from './pages/invoice-year/invoice-year.component';
 import { OrdersReceivedComponent } from './pages/orders-received/orders-received.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { PaymentDetailComponent } from './pages/payment-detail/payment-detail.component';
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: PAGE_ROUTE.REPORT.COLLECT_MERCHANT_ROOT,
     component: CollectMerchantComponent,
+  },
+  {
+    path: PAGE_ROUTE.REPORT.INVOICES_BY_YEAR_ROOT,
+    component: InvoiceYearComponent,
   },
   {
     path: '**',

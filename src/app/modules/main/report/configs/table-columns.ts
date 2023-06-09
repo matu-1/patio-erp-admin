@@ -16,6 +16,7 @@ import {
 import { OrderReceived } from '../interfaces/order-received.interface';
 import { Order } from '../interfaces/order.interface';
 import { PaymentDetail } from '../interfaces/payment-detail.interface';
+import { InvoiceByYear } from '../interfaces/invoice-by-year.interface';
 
 export const paymentDetailColumns: TableColumns<PaymentDetail> = [
   {
@@ -837,5 +838,36 @@ export const collectMerchantReportColumns: TableColumns<CollectMerchantDto> = [
   {
     field: 'photo_delivery_url',
     headerName: 'Photo Delivery Url',
+  },
+];
+
+export const invoiceByYearColumns: TableColumns<InvoiceByYear> = [
+  {
+    field: 'id_cliente',
+    headerName: 'Id',
+  },
+  {
+    field: 'nombre_cliente',
+    headerName: 'Cliente',
+  },
+  {
+    field: 'ciudad',
+    headerName: 'Ciudad',
+  },
+  {
+    field: 'telefono',
+    headerName: 'Telefono',
+  },
+  {
+    field: 'email',
+    headerName: 'Email',
+  },
+  {
+    field: 'comision',
+    headerName: 'Comision',
+  },
+  {
+    field: 'nombre_cobrador',
+    headerName: 'Cobrador',
   },
 ];

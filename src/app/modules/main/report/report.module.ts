@@ -14,6 +14,7 @@ import { DetailDialog } from './components/detail/detail.dialog';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { EditBankAccountDialog } from './components/edit-bank-account/edit-bank-account.dialog';
 import { CollectMerchantComponent } from './pages/collect-merchant/collect-merchant.component';
+import { InvoiceYearComponent } from './pages/invoice-year/invoice-year.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CollectMerchantComponent } from './pages/collect-merchant/collect-merch
     OrdersComponent,
     EditBankAccountDialog,
     CollectMerchantComponent,
+    InvoiceYearComponent,
   ],
   imports: [
     CommonModule,

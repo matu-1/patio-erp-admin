@@ -35,6 +35,7 @@ export const PAGE_ROUTE = {
     ORDERS_RECEIVED_ROOT: 'orders-received',
     ORDERS_ROOT: 'orders',
     COLLECT_MERCHANT_ROOT: 'collect-merchant',
+    INVOICES_BY_YEAR_ROOT: 'invoice-by-year',
     get PAYMENT_DETAIL() {
       return `/${this.ROOT}/${this.PAYMENT_DETAIL_ROOT}`;
     },
@@ -52,6 +53,9 @@ export const PAGE_ROUTE = {
     },
     get COLLECT_MERCHANT() {
       return `/${this.ROOT}/${this.COLLECT_MERCHANT_ROOT}`;
+    },
+    get INVOICES_BY_YEAR() {
+      return `/${this.ROOT}/${this.INVOICES_BY_YEAR_ROOT}`;
     },
   },
   PAYMENT_DRIVER: {

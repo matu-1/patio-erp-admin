@@ -432,3 +432,20 @@ export const collectMerchantSchema: TextFieldSchema = [
     ],
   },
 ];
+
+export const invoiceByYearSchema: TextFieldSchema = [
+  {
+    name: 'year',
+    label: 'Gestión',
+    value: new Date().getFullYear(),
+    fieldType: TextFieldType.Dropdown,
+    options: generateYears(2020).map((year) => ({ value: year, label: year })),
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+  },
+];

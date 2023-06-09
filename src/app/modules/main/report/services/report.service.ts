@@ -22,6 +22,7 @@ import {
 } from '../interfaces/hours-worked-driver.interface';
 import { OrderReceived } from '../interfaces/order-received.interface';
 import { FilterOrder, Order } from '../interfaces/order.interface';
+import { InvoiceByYear } from '../interfaces/invoice-by-year.interface';
 import {
   CreatePaymentDriverDto,
   GetPaymentDetailDto,
@@ -135,5 +136,11 @@ export class ReportService {
     return this.http.get<Response<Merchant[]>>(API.MERCHANT.GET_MERCHANTS, {
       ...PATIO_STORE_CONFIG_HTTP,
     });
+  }
+
+  getInvoicesByYear(year: number) {
+    return this.http.get<Response<InvoiceByYear[]>>(
+      routeParams(API.INVOICE.GET_BY_YEAR, { year })
+    );
   }
 }

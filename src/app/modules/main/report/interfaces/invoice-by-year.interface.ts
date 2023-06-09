@@ -1,0 +1,33 @@
+export interface InvoiceByYear {
+  id_cliente:      number;
+  nombre_cliente:  string;
+  ciudad:          string;
+  telefono:        string;
+  email:           null | string;
+  comision:        number | null;
+  "MES 1-2023":    string;
+  "MES 1-PAGADO":  string;
+  "MES 2-2023":    string;
+  "MES 2-PAGADO":  string;
+  "MES 3-2023":    string;
+  "MES 3-PAGADO":  string;
+  "MES 4-2023":    string;
+  "MES 4-PAGADO":  string;
+  "MES 5-2023":    string;
+  "MES 5-PAGADO":  string;
+  "MES 6-2023":    string;
+  "MES 6-PAGADO":  string;
+  "MES 7-2023":    string;
+  "MES 7-PAGADO":  string;
+  "MES 8-2023":    string;
+  "MES 8-PAGADO":  string;
+  "MES 9-2023":    string;
+  "MES 9-PAGADO":  string;
+  "MES 10-2023":   string;
+  "MES 10-PAGADO": string;
+  "MES 11-2023":   string;
+  "MES 11-PAGADO": string;
+  "MES 12-2023":   string;
+  "MES 12-PAGADO": string;
+  nombre_cobrador?: string;
+}
