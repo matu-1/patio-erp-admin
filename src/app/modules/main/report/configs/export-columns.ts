@@ -129,6 +129,11 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
     valueFormatter: ({ tips }) => formatToNumber(tips),
   },
   {
+    field: 'tipsOriginal',
+    headerName: 'Propina Original',
+    valueFormatter: ({ tipsOriginal }) => formatToNumber(tipsOriginal),
+  },
+  {
     field: 'totalDistance',
     headerName: 'Distancia (mi)',
     valueFormatter: ({ totalDistance }) => meterToMile(totalDistance),
