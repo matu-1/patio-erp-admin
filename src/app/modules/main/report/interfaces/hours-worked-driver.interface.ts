@@ -64,6 +64,8 @@ export interface OrderDto {
   earningBase: EarningBase;
   bonus: number;
   tip_original: number;
+  totalOrder: number;
+  paymentMode: string;
 }
 
 export interface EarningBase {

@@ -407,6 +407,15 @@ export const ordersColumns: TableColumns<OrderDto> = [
     headerName: 'Dirección',
   },
   {
+    field: 'paymentMode',
+    headerName: 'Payment Mode',
+  },
+  {
+    field: 'totalOrder',
+    headerName: 'Total Order',
+    valueFormatter: ({ totalOrder }) => formatNumber(totalOrder, 'es', '.2-2'),
+  },
+  {
     field: 'tip',
     headerName: 'Propina',
     valueFormatter: ({ tip }) => formatNumber(tip, 'es', '.2-2'),
