@@ -318,6 +318,11 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
       formatNumber(totalPrepaidAmount, 'es'),
   },
   {
+    field: 'timingBonus',
+    headerName: 'Bono por Horario',
+    valueFormatter: ({ timingBonus }) => formatNumber(timingBonus, 'es'),
+  },
+  {
     field: 'total',
     headerName: 'Total',
     valueFormatter: ({ total }) => formatNumber(total, 'es'),
