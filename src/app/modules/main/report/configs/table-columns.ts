@@ -538,6 +538,10 @@ export const timingsColumns: TableColumns<TimingDto> = [
     headerName: 'Monto Extra',
   },
   {
+    field: 'bonus',
+    headerName: 'Bono',
+  },
+  {
     field: 'hours',
     headerName: 'Horas',
     valueFormatter: ({ startFinal, endFinal }) =>
