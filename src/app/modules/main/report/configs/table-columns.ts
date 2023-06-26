@@ -596,6 +596,10 @@ export const orderColumns: TableColumns<Order> = [
     headerName: 'Tipo Vehículo',
   },
   {
+    field: 'paymentMode',
+    headerName: 'Payment Mode',
+  },
+  {
     field: 'total',
     headerName: 'Total',
     valueFormatter: ({ total }) => formatNumber(total, 'es', '.2-2'),
@@ -734,6 +738,7 @@ export const collectMerchantColumns: TableColumns<CollectMerchantDto> = [
   { field: 'DISTANCE MILES', headerName: 'Distance Miles' },
   { field: 'BASIC FEE', headerName: 'Basic Fee' },
   { field: 'vehicleType', headerName: 'Vehicle Type' },
+  { field: 'vehicleTypeDriver', headerName: 'Vehicle Type Driver' },
   {
     field: 'observations',
     headerName: 'Observations',
@@ -829,6 +834,7 @@ export const collectMerchantReportColumns: TableColumns<CollectMerchantDto> = [
   { field: 'ARRIVED TIME', headerName: 'Arrived Time' },
   { field: 'DISTANCE MILES', headerName: 'Distance Miles' },
   { field: 'vehicleType', headerName: 'Vehicle Type' },
+  { field: 'vehicleTypeDriver', headerName: 'Vehicle Type Driver' },
   {
     field: 'observations',
     headerName: 'Observations',
