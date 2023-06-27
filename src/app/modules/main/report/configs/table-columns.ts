@@ -868,6 +868,10 @@ export const collectMerchantReportColumns: TableColumns<CollectMerchantDto> = [
     field: 'photo_delivery_url',
     headerName: 'Photo Delivery Url',
   },
+  {
+    field: 'url_image_reference',
+    headerName: 'Image Reference',
+  },
 ];
 
 export const invoiceByYearColumns: TableColumns<InvoiceByYear> = [

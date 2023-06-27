@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { CreateComponent } from './pages/create/create.component';
+import { GeneratePrepaidComponent } from './pages/generate-prepaid/generate-prepaid.component';
 import { ListComponent } from './pages/list/list.component';
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: PAGE_ROUTE.COLLECT_DRIVER.CREATE_ROOT,
     component: CreateComponent,
+  },
+  {
+    path: PAGE_ROUTE.COLLECT_DRIVER.PREPAID_ROOT,
+    component: GeneratePrepaidComponent,
   },
   {
     path: '**',

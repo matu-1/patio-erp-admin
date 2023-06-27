@@ -10,6 +10,9 @@
   <button mat-button [disabled]="!paymentsDriver" (click)="download()">
     Exportar
   </button>
+  <button mat-button [routerLink]="PAGE_ROUTE.COLLECT_DRIVER.PREPAID">
+    Prepaid
+  </button>
 </app-title-bar>
 <app-simple-card class="mb-3">
   <app-form-builder

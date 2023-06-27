@@ -73,11 +73,15 @@ export const PAGE_ROUTE = {
     ROOT: 'collet-driver',
     LIST_ROOT: '',
     CREATE_ROOT: 'create',
+    PREPAID_ROOT: 'prepaid',
     get LIST() {
       return `/${this.ROOT}/${this.LIST_ROOT}`;
     },
     get CREATE() {
       return `/${this.ROOT}/${this.CREATE_ROOT}`;
+    },
+    get PREPAID() {
+      return `/${this.ROOT}/${this.PREPAID_ROOT}`;
     },
   },
   CLIENT: {
