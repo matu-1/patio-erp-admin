@@ -33,6 +33,7 @@ export interface CollectFilterDto {
   isPayment?: number;
   type?: number;
   showDetails?: number;
+  category?: number;
 }
 
 export interface CreateCollectDriver
@@ -47,3 +48,9 @@ export interface CreateCollectDriver
     | 'startDate'
     | 'endDate'
   > {}
+
+  export interface GeneratePrepaid {
+    ids: number[];
+    toStart: Date;
+    toEnd: Date;
+  }

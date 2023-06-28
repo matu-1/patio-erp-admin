@@ -27,14 +27,6 @@
   [columns]="paymentsDriverColumns"
   (refresh)="getPaymentsDriver()"
 >
-  <ng-template customColumn="paymentMethod" let-value="value">
-    <app-chip
-      variant="accent"
-      *ngIf="value.paymentMethod != null; else noPaid"
-      >{{ paymentMethod[value.paymentMethod] }}</app-chip
-    >
-    <ng-template #noPaid>---</ng-template>
-  </ng-template>
   <ng-template customColumn="actions" let-value="value">
     <button
       mat-icon-button

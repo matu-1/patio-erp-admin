@@ -15,7 +15,7 @@ import { DriverInfoDialog } from '../../components/driver-info/driver-info.dialo
 import { PayDialog } from '../../components/pay/pay.dialog';
 import { collectFilterSchema } from '../../configs/form-schema';
 import { paymentsDriverColumns } from '../../configs/table-columns';
-import { categoryValue, paymentMethod } from '../../constants/payment-method';
+import { categoryValue } from '../../constants/payment-method';
 import {
   PayDriverDto,
   CollectDriver,
@@ -30,7 +30,6 @@ export class ListComponent implements OnInit {
   title = 'Cobros Driver';
   paymentsDriver?: CollectDriver[];
   paymentsDriverColumns = paymentsDriverColumns;
-  paymentMethod = paymentMethod;
   collectFilterSchema = collectFilterSchema;
   form = buildform(collectFilterSchema);
   PAGE_ROUTE = PAGE_ROUTE;

@@ -1,4 +1,9 @@
 <mat-card [class]="class">
+  <ng-container *ngIf="title">
+    <mat-card-header>
+      <mat-card-title>{{ title }}</mat-card-title>
+    </mat-card-header>
+  </ng-container>
   <mat-card-content>
     <ng-content></ng-content>
   </mat-card-content>

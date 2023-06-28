@@ -4,6 +4,7 @@ import {
   TextFieldType,
 } from 'src/app/components/text-field/text-field.interface';
 import { DateUtils } from 'src/app/utils/date.util';
+import { getWeeks } from 'src/app/utils/utils';
 import { CustomValidators } from 'src/app/utils/validators';
 import { paymentMethod } from '../constants/payment-method';
 
@@ -192,3 +193,18 @@ export const createCollectDriverSchema: TextFieldSchema = [
     df: '100%',
   },
 ];
+
+const weeksOptions = getWeeks().map((item) => ({
+  label: item.name,
+  value: item,
+}));
+
+export const collectPrepaidFilterSchema: TextFieldSchema = [
+  {
+    label: 'Week',
+    name: 'week',
+    value: weeksOptions[0].value as any,
+    fieldType: TextFieldType.Dropdown,
+    options: weeksOptions,
+  },
+]

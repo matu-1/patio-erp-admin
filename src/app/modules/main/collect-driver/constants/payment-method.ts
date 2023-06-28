@@ -15,10 +15,12 @@ export const categoryValue = {
   delivery: 0,
   debt: 1,
   other: 2,
+  cash: 3,
 };
 
 export const categoryText: Record<number, string> = {
   [categoryValue.delivery]: 'Delivery',
   [categoryValue.debt]: 'Deuda',
   [categoryValue.other]: 'Otros',
+  [categoryValue.cash]: 'Cash',
 };

@@ -1,2 +1,30 @@
-<app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
-<app-title-bar [title]="title"></app-title-bar>
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
+<app-title-bar [title]="title">
+  <button mat-raised-button color="primary" (click)="goBack()">Volver</button>
+</app-title-bar>
+<div class="mb-3">
+  <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">
+    <app-simple-card title="From" fxFlex.xs="100%" fxFlex="50%">
+      <app-form-builder
+        [form]="form"
+        [schema]="collectPrepaidFilterSchema"
+        (frmSubmit)="filter()"
+      ></app-form-builder>
+    </app-simple-card>
+    <app-simple-card title="To" fxFlex.xs="100%" fxFlex="50%">
+      <app-form-builder
+        [form]="formPrepaid"
+        [schema]="collectPrepaidSchema"
+        (frmSubmit)="generateCollect()"
+        [showBtnIcon]="false"
+        >Generar</app-form-builder
+      >
+    </app-simple-card>
+  </div>
+</div>
+<app-data-table
+  [rows]="paymentsDriver"
+  [columns]="paymentsDriverColumns"
+  (refresh)="getPaymentsDriver()"
+>
+</app-data-table>

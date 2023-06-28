@@ -90,6 +90,7 @@ export interface TimingDto {
   endFinal: Date;
   timing_id: number;
   startFinal: Date;
+  bonus: Date;
 }
 
 export interface HoursWorkedDto {

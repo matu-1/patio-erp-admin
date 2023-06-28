@@ -53,6 +53,7 @@ export const API = {
     REFRESH: `${API_URL}/payment-driver/refresh`,
     PAY_MULTIPLE: `${API_URL}/payment-driver/pay-multiple`,
     UPDATE: `${API_URL}/payment-driver/:id`,
+    GENERATE_COLLECTION: `${API_URL}/payment-driver/generate-collection`,
   },
   CLIENT: {
     GET_PAGINATED: `${API_URL}/client/paginated`,
