@@ -25,98 +25,67 @@ export const paymentsDriverExportColumns: TableColumns<PaymentDriver> = [
     field: 'accountNumber',
     headerName: 'Número Cuenta (BA)',
     valueFormatter: ({ detail }) =>
-      detail?.bankAccount &&
-      detail.bankAccount.type == BankAccountType.BankAccount
-        ? detail.bankAccount.accountNumber
-        : '---',
+      detail?.bankAccount ? detail.bankAccount.accountNumber : '---',
   },
   {
     field: 'accountType',
     headerName: 'Tipo Cuenta (BA)',
     valueFormatter: ({ detail }) =>
-      detail?.bankAccount &&
-      detail.bankAccount.type == BankAccountType.BankAccount
-        ? detail.bankAccount.accountType
-        : '---',
+      detail?.bankAccount ? detail.bankAccount.accountType : '---',
   },
   {
     field: 'bankName',
     headerName: 'Banco (BA)',
     valueFormatter: ({ detail }) =>
-      detail?.bankAccount &&
-      detail.bankAccount.type == BankAccountType.BankAccount
-        ? detail.bankAccount.bankName
-        : '---',
+      detail?.bankAccount ? detail.bankAccount.bankName : '---',
   },
   {
     field: 'routingNumber',
     headerName: 'Routing Number (BA)',
     valueFormatter: ({ detail }) =>
-      detail?.bankAccount &&
-      detail.bankAccount.type == BankAccountType.BankAccount
-        ? detail.bankAccount.routingNumber
-        : '---',
+      detail?.bankAccount ? detail.bankAccount.routingNumber : '---',
   },
   {
     field: 'phone',
     headerName: 'Celular (BA)',
     valueFormatter: ({ detail }) =>
-      detail?.bankAccount &&
-      detail.bankAccount.type == BankAccountType.BankAccount
-        ? detail.bankAccount.phone
-        : '---',
+      detail?.bankAccount ? detail.bankAccount.phone : '---',
   },
   {
     field: 'fullName',
     headerName: 'Nombre Completo (BA)',
     valueFormatter: ({ detail }) =>
-      detail?.bankAccount &&
-      detail.bankAccount.type == BankAccountType.BankAccount
-        ? detail.bankAccount.name
-        : '---',
+      detail?.bankAccount ? detail.bankAccount.name : '---',
   },
   {
     field: 'address',
     headerName: 'Dirección (BA)',
     valueFormatter: ({ detail }) =>
-      detail?.bankAccount &&
-      detail.bankAccount.type == BankAccountType.BankAccount
-        ? detail.bankAccount.address
-        : '---',
+      detail?.bankAccount ? detail.bankAccount.address : '---',
   },
   {
     field: 'socialSecurity',
     headerName: 'Social Security (BA)',
     valueFormatter: ({ detail }) =>
-      detail?.bankAccount &&
-      detail.bankAccount.type == BankAccountType.BankAccount
-        ? detail.bankAccount.socialSecurity
-        : '---',
+      detail?.bankAccount ? detail.bankAccount.socialSecurity : '---',
   },
   {
     field: 'paymentMethod',
     headerName: 'Método Pago (BA)',
     valueFormatter: ({ detail }) =>
-      detail?.bankAccount &&
-      detail.bankAccount.type == BankAccountType.BankAccount
-        ? detail.bankAccount.paymentMethod
-        : '---',
+      detail?.bankAccount ? detail.bankAccount.paymentMethod : '---',
   },
   {
     field: 'fullNameZelle',
     headerName: 'Nombre Completo (Z)',
     valueFormatter: ({ detail }) =>
-      detail?.bankAccount && detail.bankAccount.type == BankAccountType.Zelle
-        ? detail.bankAccount.name
-        : '---',
+      detail?.bankAccount ? detail.bankAccount.nameZelle : '---',
   },
   {
     field: 'phoneZelle',
     headerName: 'Celular o Correo (Z)',
     valueFormatter: ({ detail }) =>
-      detail?.bankAccount && detail.bankAccount.type == BankAccountType.Zelle
-        ? detail.bankAccount.phone
-        : '---',
+      detail?.bankAccount ? detail.bankAccount.phoneZelle : '---',
   },
   {
     field: 'comments',

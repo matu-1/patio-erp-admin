@@ -363,7 +363,7 @@ export const editBankAccountSchema: TextFieldSchema = [
 export const editBankAccountZelleSchema: TextFieldSchema = [
   {
     label: 'Nombre Completo',
-    name: 'name',
+    name: 'nameZelle',
     validators: [
       {
         name: 'required',
@@ -380,7 +380,7 @@ export const editBankAccountZelleSchema: TextFieldSchema = [
   },
   {
     label: 'Celular o Correo',
-    name: 'phone',
+    name: 'phoneZelle',
     validators: [
       {
         name: 'required',

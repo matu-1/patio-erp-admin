@@ -28,8 +28,10 @@ export class EditBankAccountDialog {
     let dataCopy = { ...data };
     if (data?.paymentMethod)
       (dataCopy.paymentMethod as any) = dataCopy.paymentMethod?.split(',');
-    if (data?.type == 0) this.form.patchValue(dataCopy);
-    else this.formZelle.patchValue(dataCopy);
+    // if (data?.type == 0) this.form.patchValue(dataCopy);
+    // else this.formZelle.patchValue(dataCopy);
+    this.form.patchValue(dataCopy);
+    this.formZelle.patchValue(dataCopy);
   }
 
   save() {

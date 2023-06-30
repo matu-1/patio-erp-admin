@@ -46,6 +46,8 @@ export interface BankAccount {
   socialSecurity?: string;
   type: number;
   paymentMethod?: string;
+  nameZelle?: string;
+  phoneZelle?: string;
 }
 
 export enum BankAccountType {

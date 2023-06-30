@@ -51,9 +51,5 @@ export interface RefreshPaymentDto {
 }
 
 export interface UpdateBankAccount extends Omit<BankAccount, 'id' > {
-  accountNumber: string;
-  bankName: string;
-  accountType: string;
-  identityNumber: string;
   driverId: number;
 }

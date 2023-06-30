@@ -144,7 +144,7 @@ export const createCollectDriverSchema: TextFieldSchema = [
     label: 'Categoría',
     fieldType: TextFieldType.Dropdown,
     options: [
-      { value: 1, label: 'Deuda' },
+      // { value: 1, label: 'Deuda' },
       { value: 2, label: 'Otro' },
     ],
     validators: [
