@@ -10,6 +10,8 @@ import { categoryValue } from '../../constants/payment-method';
 import { Location } from '@angular/common';
 import { Breadcrumbs } from 'src/app/components/breadcrumbs/breadcrumbs.interface';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 
 @Component({
   selector: 'app-generate-prepaid',
@@ -30,8 +32,9 @@ export class GeneratePrepaidComponent implements OnInit {
 
   constructor(
     private collectDriverService: CollectDriverService,
-    private location: Location
-  ) {}
+    private location: Location,
+    private dialog: MatDialog,
+    ) {}
 
   ngOnInit(): void {
     this.getPaymentsDriver();
@@ -57,6 +60,15 @@ export class GeneratePrepaidComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  showConfirmGenerateDlg() {
+    const dialogRef = this.dialog.open(ConfirmDialog, {
+      data: {
+        message: '¿Está seguro de realizar esta acción?',
+      },
+    });
+    dialogRef.afterClosed().subscribe((ok) => ok && this.generateCollect());
   }
 
   async generateCollect() {
