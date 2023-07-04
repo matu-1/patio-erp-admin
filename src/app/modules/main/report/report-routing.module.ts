@@ -8,6 +8,7 @@ import { InvoiceYearComponent } from './pages/invoice-year/invoice-year.componen
 import { OrdersReceivedComponent } from './pages/orders-received/orders-received.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { PaymentDetailComponent } from './pages/payment-detail/payment-detail.component';
+import { DriversComponent } from './pages/drivers/drivers.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: PAGE_ROUTE.REPORT.INVOICES_BY_YEAR_ROOT,
     component: InvoiceYearComponent,
+  },
+  {
+    path: PAGE_ROUTE.REPORT.DRIVERS_ROOT,
+    component: DriversComponent,
   },
   {
     path: '**',

@@ -1,0 +1,8 @@
+<app-breadcrumbs [breadcrumbs]="[{title, path: ''}]"></app-breadcrumbs>
+<app-title-bar [title]="title"> </app-title-bar>
+<app-data-table
+  [rows]="drivers"
+  [columns]="driversColumns"
+  (refresh)="getAll()"
+>
+</app-data-table>

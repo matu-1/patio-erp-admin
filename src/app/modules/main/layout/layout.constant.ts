@@ -104,6 +104,11 @@ export const MENU: MenuItem[] = [
             icon: 'remove',
             route: PAGE_ROUTE.REPORT.ORDERS,
           },
+          {
+            label: 'Drivers',
+            icon: 'remove',
+            route: PAGE_ROUTE.REPORT.DRIVERS,
+          },
         ],
       },
     ],

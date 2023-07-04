@@ -17,6 +17,7 @@ import { OrderReceived } from '../interfaces/order-received.interface';
 import { Order } from '../interfaces/order.interface';
 import { PaymentDetail } from '../interfaces/payment-detail.interface';
 import { InvoiceByYear } from '../interfaces/invoice-by-year.interface';
+import { DriverDto } from '../interfaces/driver.interface';
 
 export const paymentDetailColumns: TableColumns<PaymentDetail> = [
   {
@@ -880,5 +881,37 @@ export const invoiceByYearColumns: TableColumns<InvoiceByYear> = [
   {
     field: 'nombre_cobrador',
     headerName: 'Cobrador',
+  },
+];
+
+export const driversColumns: TableColumns<DriverDto> = [
+  {
+    field: 'id',
+    headerName: 'Id',
+  },
+  {
+    field: 'nombre',
+    headerName: 'Nombre',
+  },
+  {
+    field: 'email',
+    headerName: 'Email',
+  },
+  {
+    field: 'phone',
+    headerName: 'Phone',
+  },
+  {
+    field: 'cityName',
+    headerName: 'Ciudad',
+  },
+  {
+    field: 'wallet',
+    headerName: 'Wallet',
+  },
+  {
+    field: 'createdAt',
+    headerName: 'Creado el',
+    valueFormatter: ({ createdAt }) => FormatDate.date(createdAt),
   },
 ];
