@@ -8,6 +8,7 @@ import { paymentsDriverColumns as collectsDriverColumns } from '../../collect-dr
 import { meterToMile } from 'src/app/utils/utils';
 import { DateUtils } from 'src/app/utils/date.util';
 import { BankAccountType } from '../../report/interfaces/hours-worked-driver.interface';
+import { MODALITY } from 'src/app/constants/modality.constant';
 
 export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
   ...collectsDriverColumns.slice(0, collectsDriverColumns.length - 1),
@@ -105,6 +106,12 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
       detail ? formatNumber(detail.tips, 'es') : '---',
   },
   {
+    field: 'tipsOriginal',
+    headerName: 'Propina Original',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.tipsOriginal, 'es') : '---',
+  },
+  {
     field: 'totalDistance',
     headerName: 'Distancia (mi)',
     valueFormatter: ({ detail }) =>
@@ -129,6 +136,44 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
       detail ? DateUtils.formatToTimer(detail.hoursWorked) : '---',
   },
   {
+    field: 'totalEarning',
+    headerName: 'Ganancia por Hora',
+    valueFormatter: ({ detail }) =>
+      detail &&
+      detail.modalityId != MODALITY.BASE_WITH_TIP &&
+      detail.modalityId != MODALITY.DISTANCE_WITH_TIP
+        ? formatNumber(detail.totalEarning, 'es')
+        : '---',
+  },
+  {
+    field: 'totalEarning1',
+    headerName: 'Ganancia Tarifa Base',
+    valueFormatter: ({ detail }) =>
+      detail && detail.modalityId == MODALITY.BASE_WITH_TIP
+        ? formatNumber(detail.totalEarning, 'es')
+        : '---',
+  },
+  {
+    field: 'totalEarning2',
+    headerName: 'Ganancia por Distancia',
+    valueFormatter: ({ detail }) =>
+      detail && detail.modalityId == MODALITY.DISTANCE_WITH_TIP
+        ? formatNumber(detail.totalEarning, 'es')
+        : '---',
+  },
+  {
+    field: 'totalFees',
+    headerName: 'Fees',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.totalFees, 'es') : '---',
+  },
+  {
+    field: 'feesTip',
+    headerName: 'Fees 2',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.feesTip, 'es') : '---',
+  },
+  {
     field: 'discounts',
     headerName: 'Descuento',
     valueFormatter: ({ detail }) =>
@@ -147,10 +192,34 @@ export const paymentsDriverColumns: TableColumns<PaymentDriver> = [
       detail ? formatNumber(detail.totalBonus, 'es') : '---',
   },
   {
+    field: 'timingExtraAmount',
+    headerName: 'Bono Horario',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.timingExtraAmount, 'es') : '---',
+  },
+  {
+    field: 'totalPrepaidAmount',
+    headerName: 'Pago Anticipado',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.totalPrepaidAmount, 'es') : '---',
+  },
+  {
+    field: 'timingBonus',
+    headerName: 'Bono por Horario',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.timingBonus, 'es') : '---',
+  },
+  {
     field: 'total',
     headerName: 'Total',
     valueFormatter: ({ detail }) =>
       detail ? formatNumber(detail.total, 'es') : '---',
+  },
+  {
+    field: 'average',
+    headerName: 'Promedio',
+    valueFormatter: ({ detail }) =>
+      detail ? formatNumber(detail.average, 'es', '.0-2') : '---',
   },
   {
     field: 'actions',
