@@ -141,3 +141,18 @@ button:not(.mat-button-disabled) .action-icon {
   background-color: #778beb !important; //#e1e1e1
   transition: background-color 0.2s ease-in, color 0.2s ease-in;;
 }
+// loading img
+.loading-animation {
+  animation: bgColor 1.5s ease-out infinite;
+}
+@keyframes bgColor {
+  0% {
+    background-color: #f2f2f2;
+  }
+  50% {
+    background-color: #dbdbdb;
+  }
+  100% {
+    background-color: #f2f2f2;
+  }
+}

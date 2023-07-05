@@ -1,0 +1,36 @@
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
+<app-title-bar [title]="title"> </app-title-bar>
+<app-simple-card class="mb-3">
+  <app-form-builder
+    [form]="formDriver"
+    [schema]="driverInfoSchema"
+    [showBtn]="false"
+  ></app-form-builder>
+</app-simple-card>
+<app-simple-card
+  title="Bank Account"
+  class="mb-3"
+  [actions]="[{ icon: 'edit', action: ngOnInit}]"
+>
+  <app-form-builder
+    [form]="formBankAccount"
+    [schema]="editBankAccountInfoSchema"
+    [showBtn]="false"
+  ></app-form-builder>
+</app-simple-card>
+<app-simple-card title="Documents" class="mb-3">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div
+      fxFlex.xs="100%"
+      fxFlex="50%"
+      *ngFor="let document of driver?.documents"
+    >
+      <app-document-box [document]="document"></app-document-box>
+    </div>
+  </div>
+</app-simple-card>
+<app-data-table
+  [rows]="driver?.paymentsDriver"
+  [columns]="paymentsDriverColumns"
+>
+</app-data-table>

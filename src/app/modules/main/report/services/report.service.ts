@@ -23,6 +23,7 @@ import {
 import { OrderReceived } from '../interfaces/order-received.interface';
 import { FilterOrder, Order } from '../interfaces/order.interface';
 import { InvoiceByYear } from '../interfaces/invoice-by-year.interface';
+import { DriverDto } from '../interfaces/driver.interface';
 import {
   CreatePaymentDriverDto,
   GetPaymentDetailDto,
@@ -141,6 +142,21 @@ export class ReportService {
   getInvoicesByYear(year: number) {
     return this.http.get<Response<InvoiceByYear[]>>(
       routeParams(API.INVOICE.GET_BY_YEAR, { year })
+    );
+  }
+
+  getDrivers() {
+    return this.http.get<Response<DriverDto[]>>(API.DRIVER.GET_ALL, {
+      ...PATIO_STORE_CONFIG_HTTP,
+    });
+  }
+
+  getDriverFullInfo(id: number) {
+    return this.http.get<Response<DriverDto>>(
+      routeParams(API.DRIVER.GET_FULL_INFO, { id }),
+      {
+        ...PATIO_STORE_CONFIG_HTTP,
+      }
     );
   }
 }

@@ -884,13 +884,13 @@ export const invoiceByYearColumns: TableColumns<InvoiceByYear> = [
   },
 ];
 
-export const driversColumns: TableColumns<DriverDto> = [
+export const driverColumns: TableColumns<DriverDto> = [
   {
     field: 'id',
     headerName: 'Id',
   },
   {
-    field: 'nombre',
+    field: 'name',
     headerName: 'Nombre',
   },
   {
@@ -902,8 +902,8 @@ export const driversColumns: TableColumns<DriverDto> = [
     headerName: 'Phone',
   },
   {
-    field: 'cityName',
-    headerName: 'Ciudad',
+    field: 'status',
+    headerName: 'Status',
   },
   {
     field: 'wallet',
@@ -913,5 +913,9 @@ export const driversColumns: TableColumns<DriverDto> = [
     field: 'createdAt',
     headerName: 'Creado el',
     valueFormatter: ({ createdAt }) => FormatDate.date(createdAt),
+  },
+  {
+    field: 'actions',
+    headerName: 'Actions',
   },
 ];

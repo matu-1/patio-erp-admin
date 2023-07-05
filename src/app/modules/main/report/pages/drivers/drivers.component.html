@@ -3,6 +3,11 @@
 <app-data-table
   [rows]="drivers"
   [columns]="driversColumns"
-  (refresh)="getAll()"
+  (refresh)="getDrivers()"
 >
+  <ng-template customColumn="actions" let-value="value">
+    <button mat-icon-button matTooltip="Ver detalle" (click)="goDetail(value)">
+      <mat-icon class="action-icon">info</mat-icon>
+    </button>
+  </ng-template>
 </app-data-table>

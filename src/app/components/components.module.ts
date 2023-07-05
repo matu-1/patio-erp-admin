@@ -22,6 +22,7 @@ import { ConfirmDialog } from './confirm/confirm.dialog';
 import { ButtonBarComponent } from './button-bar/button-bar.component';
 import { FormBuilderComponent } from './form-builder/form-builder.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ImgZoomComponent } from './img-zoom/img-zoom.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ConfirmDialog,
     ButtonBarComponent,
     FormBuilderComponent,
+    ImgZoomComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +70,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ConfirmDialog,
     ButtonBarComponent,
     FormBuilderComponent,
+    ImgZoomComponent
   ],
 })
 export class ComponentsModule {}

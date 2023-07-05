@@ -16,6 +16,8 @@ import { EditBankAccountDialog } from './components/edit-bank-account/edit-bank-
 import { CollectMerchantComponent } from './pages/collect-merchant/collect-merchant.component';
 import { InvoiceYearComponent } from './pages/invoice-year/invoice-year.component';
 import { DriversComponent } from './pages/drivers/drivers.component';
+import { DriverDetailComponent } from './pages/driver-detail/driver-detail.component';
+import { DocumentBoxComponent } from './components/document-box/document-box.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { DriversComponent } from './pages/drivers/drivers.component';
     CollectMerchantComponent,
     InvoiceYearComponent,
     DriversComponent,
+    DriverDetailComponent,
+    DocumentBoxComponent,
   ],
   imports: [
     CommonModule,

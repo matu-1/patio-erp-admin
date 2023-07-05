@@ -1,0 +1,8 @@
+<h3>{{ document.title }}</h3>
+<!-- <img [src]="document.photoUrl" [alt]="document.title" imgLoading /> -->
+<app-img-zoom
+  [height]="220"
+  [src]="document.photoUrl"
+  [alt]="document.title"
+></app-img-zoom>
+<p>{{ document.createdAt | date }}</p>

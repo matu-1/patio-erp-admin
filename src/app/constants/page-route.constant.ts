@@ -37,6 +37,7 @@ export const PAGE_ROUTE = {
     COLLECT_MERCHANT_ROOT: 'collect-merchant',
     INVOICES_BY_YEAR_ROOT: 'invoice-by-year',
     DRIVERS_ROOT: 'drivers',
+    DRIVER_DETAIL_ROOT: 'drivers/:id',
     get PAYMENT_DETAIL() {
       return `/${this.ROOT}/${this.PAYMENT_DETAIL_ROOT}`;
     },
@@ -60,6 +61,9 @@ export const PAGE_ROUTE = {
     },
     get DRIVERS() {
       return `/${this.ROOT}/${this.DRIVERS_ROOT}`;
+    },
+    get DRIVER_DETAIL() {
+      return `/${this.ROOT}/${this.DRIVER_DETAIL_ROOT}`;
     },
   },
   PAYMENT_DRIVER: {

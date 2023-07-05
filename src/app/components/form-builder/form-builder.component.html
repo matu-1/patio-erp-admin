@@ -14,7 +14,7 @@
     [fxFlex.md]="value.md"
     [fxFlex]="value.df"
   ></app-text-field>
-  <div fxFlex.xs="100%" fxFlex="10%">
+  <div fxFlex.xs="100%" fxFlex="10%" *ngIf="showBtn">
     <button *ngIf="showBtnIcon; else btnSimple" mat-icon-button type="submit">
       <mat-icon>search</mat-icon>
     </button>

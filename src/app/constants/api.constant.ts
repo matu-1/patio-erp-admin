@@ -66,6 +66,7 @@ export const API = {
     CHANGE_STATUS: `${PATIO_STORE_API_URL}/drivers/change-status/:id`,
     GET_BY_ID: `${PATIO_STORE_API_URL}/drivers/:id`,
     GET_ALL: `${PATIO_STORE_API_URL}/drivers`,
+    GET_FULL_INFO: `${PATIO_STORE_API_URL}/drivers/full-info/:id`,
   },
   ORDER: {
     GET_BY_ID: `${PATIO_STORE_API_URL}/orders/:id`,

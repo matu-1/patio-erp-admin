@@ -11,6 +11,7 @@ export class FormBuilderComponent {
   @Input() form!: FormGroup;
   @Output() frmSubmit = new EventEmitter();
   @Input() showBtnIcon = true;
+  @Input() showBtn = true;
 
   constructor() {}
 

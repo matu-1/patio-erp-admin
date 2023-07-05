@@ -56,7 +56,11 @@
       [formControlName]="textFieldValue.name"
       [readonly]="textFieldValue.readOnly"
     />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="picker"
+      [disabled]="textFieldValue.disabled || textFieldValue.readOnly"
+    ></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
     <mat-error *ngIf="control?.hasError('matDatepickerParse'); else errors">
       must be date

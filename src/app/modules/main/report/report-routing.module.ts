@@ -9,6 +9,7 @@ import { OrdersReceivedComponent } from './pages/orders-received/orders-received
 import { OrdersComponent } from './pages/orders/orders.component';
 import { PaymentDetailComponent } from './pages/payment-detail/payment-detail.component';
 import { DriversComponent } from './pages/drivers/drivers.component';
+import { DriverDetailComponent } from './pages/driver-detail/driver-detail.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     path: PAGE_ROUTE.REPORT.DRIVERS_ROOT,
     component: DriversComponent,
+  },
+  {
+    path: PAGE_ROUTE.REPORT.DRIVER_DETAIL_ROOT,
+    component: DriverDetailComponent,
   },
   {
     path: '**',
