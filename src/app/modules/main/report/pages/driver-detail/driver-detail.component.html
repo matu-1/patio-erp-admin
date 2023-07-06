@@ -10,7 +10,7 @@
 <app-simple-card
   title="Bank Account"
   class="mb-3"
-  [actions]="[{ icon: 'edit', action: ngOnInit}]"
+  [actions]="[{ icon: 'edit', action: showEditBankAccountDlg.bind(this) }]"
 >
   <app-form-builder
     [form]="formBankAccount"
@@ -33,4 +33,5 @@
   [rows]="driver?.paymentsDriver"
   [columns]="paymentsDriverColumns"
 >
+  <ng-template customColumn="actions">---</ng-template>
 </app-data-table>

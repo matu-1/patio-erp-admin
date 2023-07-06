@@ -12,6 +12,9 @@ import {
 } from '../../configs/form-schema';
 import { paymentsDriverColumns } from '../../../collect-driver/configs/table-columns';
 import { MatDialog } from '@angular/material/dialog';
+import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
+import { EditBankAccountDialog } from '../../components/edit-bank-account/edit-bank-account.dialog';
+import { UpdateBankAccount } from '../../interfaces/payment-detail.interface';
 
 @Component({
   selector: 'app-driver-detail',
@@ -50,5 +53,30 @@ export class DriverDetailComponent implements OnInit {
       this.formDriver.patchValue(res.data);
       this.formBankAccount.patchValue(res.data.bankAccount);
     }
+  }
+
+  showEditBankAccountDlg() {
+    const dialogRef = this.dialog.open(EditBankAccountDialog, {
+      ...DIALOG_CONFIG_XS,
+      data: this.driver?.bankAccount,
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe(
+        (data) =>
+          data &&
+          this.createOrUpdateBankAccount(
+            { ...data, driverId: this.driver?.id },
+            this.driver?.bankAccount?.id
+          )
+      );
+  }
+
+  async createOrUpdateBankAccount(dto: UpdateBankAccount, id?: number) {
+    const res = await handleRequestPg(
+      () => this.reportService.createOrUpdateBankAccount(dto, id),
+      true
+    );
+    if (res) this.getDriver(dto.driverId);
   }
 }
