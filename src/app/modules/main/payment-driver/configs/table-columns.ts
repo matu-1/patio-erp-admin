@@ -7,7 +7,6 @@ import { Payment } from '../interfaces/payment.interface';
 import { paymentsDriverColumns as collectsDriverColumns } from '../../collect-driver/configs/table-columns';
 import { meterToMile } from 'src/app/utils/utils';
 import { DateUtils } from 'src/app/utils/date.util';
-import { BankAccountType } from '../../report/interfaces/hours-worked-driver.interface';
 import { MODALITY } from 'src/app/constants/modality.constant';
 
 export const paymentsDriverColumns: TableColumns<PaymentDriver> = [

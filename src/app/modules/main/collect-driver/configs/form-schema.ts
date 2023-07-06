@@ -105,7 +105,8 @@ export const createCollectDriverSchema: TextFieldSchema = [
   {
     name: 'driverId',
     label: 'Driver',
-    fieldType: TextFieldType.Dropdown,
+    fieldType: TextFieldType.Autocomplete,
+    getOptionLabel: (value) => value?.label,
     validators: [
       {
         name: 'required',

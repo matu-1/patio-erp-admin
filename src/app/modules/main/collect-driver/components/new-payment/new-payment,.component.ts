@@ -101,6 +101,7 @@ export class NewPaymentComponent implements OnInit {
     const value = this.form.value;
     const body = {
       ...value,
+      driverId: value.driverId.value,
       startDate: value.date,
       endDate: value.date,
       type: this.type,
