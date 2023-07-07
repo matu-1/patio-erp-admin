@@ -18,6 +18,7 @@ import { InvoiceYearComponent } from './pages/invoice-year/invoice-year.componen
 import { DriversComponent } from './pages/drivers/drivers.component';
 import { DriverDetailComponent } from './pages/driver-detail/driver-detail.component';
 import { DocumentBoxComponent } from './components/document-box/document-box.component';
+import { OrdersCashComponent } from './pages/orders-cash/orders-cash.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { DocumentBoxComponent } from './components/document-box/document-box.com
     DriversComponent,
     DriverDetailComponent,
     DocumentBoxComponent,
+    OrdersCashComponent,
   ],
   imports: [
     CommonModule,

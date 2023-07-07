@@ -28,6 +28,8 @@ import {
 import { UpdateBankAccount } from '../../interfaces/payment-detail.interface';
 import { ReportService } from '../../services/report.service';
 import { PaymentDriverType } from '../../../payment-driver/constants/payment-driver-type';
+import { TimingDto } from '../../interfaces/hours-worked-driver.interface';
+import { categoryValue } from '../../../collect-driver/constants/payment-method';
 
 @Component({
   selector: 'app-hours-worked',
@@ -138,15 +140,21 @@ export class HoursWorkedComponent implements OnInit {
     return !Boolean(this.hoursWorkedFilterSchema[2].options);
   }
 
-  goDiscounts(value: HoursWorkedDriver) {
+  goDiscountsOrBonus(value: HoursWorkedDriver, type: PaymentDriverType = PaymentDriverType.Cobro) {
     //TODO: Redirect to collect driver
     let { start, end } = this.form.value;
     start = DateUtils.getMinHour(start);
     end = DateUtils.getMaxHour(end);
+    const routes = {
+      [PaymentDriverType.Cobro]: PAGE_ROUTE.COLLECT_DRIVER.LIST,
+      [PaymentDriverType.Pago]: PAGE_ROUTE.PAYMENT_DRIVER.LIST,
+    };
     const url = this.location.prepareExternalUrl(
-      `${PAGE_ROUTE.COLLECT_DRIVER.LIST}?isPayment=0&driver=${
+      `${routes[type]}?isPayment=0&driver=${
         value.name
-      }&start=${start.toISOString()}&end=${end.toISOString()}`
+      }&start=${start.toISOString()}&end=${end.toISOString()}&category=${
+        categoryValue.other
+      }`
     );
     window.open(url, '_bank');
   }
@@ -210,9 +218,15 @@ export class HoursWorkedComponent implements OnInit {
         driverId: item.id,
         start: start.toISOString(),
         end: end.toISOString(),
-        date: item.timings[0].startFinal,
+        date: this.getDateForCreate(item.timings[0], start),
         isNotRefresh: 1,
       },
     });
+  }
+
+  getDateForCreate(timing: TimingDto, start: Date | any) {
+    return new Date(timing.startFinal) < start
+      ? timing.endFinal
+      : timing.startFinal;
   }
 }

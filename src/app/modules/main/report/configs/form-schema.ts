@@ -650,3 +650,43 @@ export const editBankAccountInfoSchema: TextFieldSchema = [
     df: '20%',
   },
 ];
+
+export const ordersCashFilterSchema: TextFieldSchema = [
+  {
+    name: 'start',
+    label: 'Fecha Inicial',
+    fieldType: TextFieldType.DatePicker,
+    value: DateUtils.getMinHour(),
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '12%',
+    sm: '25%',
+  },
+  {
+    name: 'end',
+    label: 'Fecha Final',
+    fieldType: TextFieldType.DatePicker,
+    value: DateUtils.getMaxHour(),
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '12%',
+    sm: '25%',
+  },
+  {
+    name: 'cityId',
+    label: 'Ciudad',
+    fieldType: TextFieldType.Dropdown,
+    df: '15%',
+    sm: '30%',
+  },
+];

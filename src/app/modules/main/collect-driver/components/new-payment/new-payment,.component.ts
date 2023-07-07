@@ -13,6 +13,7 @@ import { FormControl } from '@angular/forms';
 import { switchMap, catchError, of } from 'rxjs';
 import { SnackBar } from '../../../../../utils/snackbar';
 import { responseBank } from 'src/app/constants/config.constant';
+import { categoryValue } from '../../constants/payment-method';
 
 @Component({
   selector: 'app-new-payment',
@@ -29,6 +30,7 @@ export class NewPaymentComponent implements OnInit {
   ];
   @Input() type: number = PaymentDriverType.Cobro;
   isNotRefresh = 0;
+  driverId?: number;
 
   constructor(
     private location: Location,
@@ -49,11 +51,14 @@ export class NewPaymentComponent implements OnInit {
         if (end) this.form.addControl('end', new FormControl(new Date(end)));
         if (start)
           this.form.addControl('start', new FormControl(new Date(start)));
-        if (start && driverId)
+        if (start && driverId) {
+          this.driverId = driverId;
           this.form.patchValue({
-            driverId: Number(driverId),
+            driverId: { value: Number(driverId) },
+            category: categoryValue.other,
             date: new Date(date),
           });
+        }
       }
     );
   }
@@ -62,11 +67,18 @@ export class NewPaymentComponent implements OnInit {
     const res = await handleRequest(() =>
       this.collectDriverService.getDrivers()
     );
-    if (res)
+    if (res) {
       createCollectDriverSchema[0].options = res.data.map(({ id, name }) => ({
         value: id,
         label: `${id} - ${name}`,
       }));
+      if (this.driverId)
+        this.form.patchValue({
+          driverId: createCollectDriverSchema[0].options.find(
+            (item) => item.value == this.driverId
+          ),
+        });
+    }
   }
 
   isLoading() {

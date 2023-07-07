@@ -38,6 +38,7 @@ export const PAGE_ROUTE = {
     INVOICES_BY_YEAR_ROOT: 'invoice-by-year',
     DRIVERS_ROOT: 'drivers',
     DRIVER_DETAIL_ROOT: 'drivers/:id',
+    ORDERS_CASH_ROOT: 'orders-cash',
     get PAYMENT_DETAIL() {
       return `/${this.ROOT}/${this.PAYMENT_DETAIL_ROOT}`;
     },
@@ -64,6 +65,9 @@ export const PAGE_ROUTE = {
     },
     get DRIVER_DETAIL() {
       return `/${this.ROOT}/${this.DRIVER_DETAIL_ROOT}`;
+    },
+    get ORDERS_CASH() {
+      return `/${this.ROOT}/${this.ORDERS_CASH_ROOT}`;
     },
   },
   PAYMENT_DRIVER: {

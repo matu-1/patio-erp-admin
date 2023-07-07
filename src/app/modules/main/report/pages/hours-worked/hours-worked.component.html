@@ -52,13 +52,6 @@
     </button>
     <button
       mat-icon-button
-      (click)="goDiscounts(value)"
-      matTooltip="Descuentos"
-    >
-      <mat-icon class="action-icon">money_off</mat-icon>
-    </button>
-    <button
-      mat-icon-button
       matTooltip="Refrescar"
       (click)="showConfirmRefreshDlg(value)"
     >
@@ -79,6 +72,27 @@
       (click)="goPaymentDriver(value, 1)"
     >
       <mat-icon class="action-icon">attach_money</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      (click)="goPaymentDriver(value, 0)"
+      matTooltip="Add Descuento"
+    >
+      <mat-icon class="action-icon">money_off</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      (click)="goDiscountsOrBonus(value)"
+      matTooltip="Ver descuentos"
+    >
+      <mat-icon class="action-icon">playlist_remove</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      (click)="goDiscountsOrBonus(value, 1)"
+      matTooltip="Ver bonos"
+    >
+      <mat-icon class="action-icon">playlist_add_check</mat-icon>
     </button>
   </ng-template>
 </app-data-table>

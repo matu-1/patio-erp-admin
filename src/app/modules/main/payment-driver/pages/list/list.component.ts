@@ -21,7 +21,6 @@ import {
 import { PaymentDriverService } from '../../services/payment-driver.service';
 import { PaymentDetailDialog } from '../../components/payment-detail/payment-detail.dialog';
 import { Location } from '@angular/common';
-import { WeekType } from 'src/app/utils/utils';
 import { ActivatedRoute, Router } from '@angular/router';
 import { categoryValue } from '../../../collect-driver/constants/payment-method';
 import { CONFIG } from 'src/app/constants/config.constant';
@@ -32,7 +31,10 @@ import { SnackBar } from 'src/app/utils/snackbar';
 import { PayMultipleDialog } from '../../components/pay-multiple/pay-multiple.dialog';
 import { PaymentDriverType } from '../../constants/payment-driver-type';
 import * as moment from 'moment-timezone';
-import { BankAccount } from '../../../report/interfaces/hours-worked-driver.interface';
+import {
+  BankAccount,
+  TimingDto,
+} from '../../../report/interfaces/hours-worked-driver.interface';
 import { EditDialog } from '../../components/edit/edit.dialog';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { paymentsDriverExportColumns } from '../../configs/export-columns';
@@ -51,6 +53,7 @@ export class ListComponent implements OnInit {
   PAGE_ROUTE = PAGE_ROUTE;
   categoryValue = categoryValue;
   selectedPayment = new Set<PaymentDriver>();
+  driver = '';
 
   constructor(
     private paymentDriverService: PaymentDriverService,
@@ -70,7 +73,8 @@ export class ListComponent implements OnInit {
   }
 
   resetForm() {
-    const { start, end } = this.form.value.week as WeekType;
+    // const { start, end } = this.form.value.week as WeekType;
+    const { start, end } = this.form.value;
     this.form.patchValue({ start, end });
     this.form.get('week')?.valueChanges.subscribe(({ start, end }) => {
       this.form.patchValue({ start, end });
@@ -79,6 +83,7 @@ export class ListComponent implements OnInit {
   }
 
   resetFromQuery() {
+    //si tiene query lo resetea
     const params = this.activatedRoute.snapshot.queryParams;
     const week = weeksOptions.find((item) => item.label == params.week)?.value;
     if (week)
@@ -87,6 +92,14 @@ export class ListComponent implements OnInit {
         start: week.start,
         end: week.end,
       });
+    if (params.start && params.end && params.driver) {
+      this.driver = params.driver;
+      this.form.patchValue({
+        start: params.start,
+        end: params.end,
+        category: params.category ? Number(params.category) : undefined,
+      });
+    }
   }
 
   setTimeZone(cityId?: number) {
@@ -104,7 +117,7 @@ export class ListComponent implements OnInit {
   async getCities() {
     const res = await handleRequest(() => this.reportService.getCities());
     if (res)
-      this.paymentFilterSchema[4].options = [
+      this.paymentFilterSchema[5].options = [
         // { value: undefined, label: 'All' },
         ...res.data.map((item) => ({
           value: item.id,
@@ -220,9 +233,15 @@ export class ListComponent implements OnInit {
         driverId: value.driverId,
         start: start.toISOString(),
         end: end.toISOString(),
-        date: value.detail?.timings[0].startFinal,
+        date: this.getDateForCreate(value.detail!.timings[0], start),
       },
     });
+  }
+
+  getDateForCreate(timing: TimingDto, start: Date | any) {
+    return new Date(timing.startFinal) < start
+      ? timing.endFinal
+      : timing.startFinal;
   }
 
   showEditBankAccountDlg(driverId: number, value: BankAccount) {

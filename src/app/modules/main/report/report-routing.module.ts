@@ -10,6 +10,7 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { PaymentDetailComponent } from './pages/payment-detail/payment-detail.component';
 import { DriversComponent } from './pages/drivers/drivers.component';
 import { DriverDetailComponent } from './pages/driver-detail/driver-detail.component';
+import { OrdersCashComponent } from './pages/orders-cash/orders-cash.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: PAGE_ROUTE.REPORT.DRIVER_DETAIL_ROOT,
     component: DriverDetailComponent,
+  },
+  {
+    path: PAGE_ROUTE.REPORT.ORDERS_CASH_ROOT,
+    component: OrdersCashComponent,
   },
   {
     path: '**',

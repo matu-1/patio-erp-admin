@@ -6,7 +6,7 @@ import {
 import { DateUtils } from 'src/app/utils/date.util';
 import { getWeeks } from 'src/app/utils/utils';
 import { CustomValidators } from 'src/app/utils/validators';
-import { paymentMethod } from '../constants/payment-method';
+import { paymentMethod, categoryText, categoryValue } from '../constants/payment-method';
 
 export const paySchema: TextFieldSchema = [
   {
@@ -95,6 +95,19 @@ export const collectFilterSchema: TextFieldSchema = [
       { label: 'All', value: undefined },
       { label: 'Si', value: 1 },
       { label: 'No', value: 0 },
+    ],
+    sm: '20%',
+    df: '12%',
+  },
+  {
+    label: 'Categoria',
+    name: 'category',
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      { label: 'All', value: undefined },
+      ...Object.values(categoryValue).map(value => ({
+        label: categoryText[value], value: Number(value)
+      }))
     ],
     sm: '20%',
     df: '12%',

@@ -919,3 +919,40 @@ export const driverColumns: TableColumns<DriverDto> = [
     headerName: 'Actions',
   },
 ];
+
+export const orderCashColumns: TableColumns<Order> = [
+  {
+    field: 'id',
+    headerName: 'Id',
+  },
+  {
+    field: 'driverId',
+    headerName: 'Driver Id',
+  },
+  {
+    field: 'driver',
+    headerName: 'Driver Name',
+  },
+  {
+    field: 'driverPhone',
+    headerName: 'Driver Phone',
+  },
+  {
+    field: 'client',
+    headerName: 'Client',
+  },
+  {
+    field: 'merchant',
+    headerName: 'Merchant',
+  },
+  {
+    field: 'total',
+    headerName: 'Total',
+    valueFormatter: ({ total }) => formatNumber(total, 'es', '.2-2'),
+  },
+  {
+    field: 'createdAt',
+    headerName: 'Creado el',
+    valueFormatter: ({ createdAt }) => FormatDate.date(createdAt),
+  },
+];

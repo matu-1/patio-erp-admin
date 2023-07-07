@@ -1,0 +1,17 @@
+<app-breadcrumbs [breadcrumbs]="[{title, path: ''}]"></app-breadcrumbs>
+<app-title-bar [title]="title">
+  <button mat-button [disabled]="!orders" (click)="download()">Exportar</button>
+</app-title-bar>
+<app-simple-card class="mb-3" [isLoading]="isLoadingFilter">
+  <app-form-builder
+    [form]="form"
+    [schema]="ordersCashFilterSchema"
+    (frmSubmit)="filter()"
+  ></app-form-builder>
+</app-simple-card>
+<app-data-table
+  [rows]="orders"
+  [columns]="orderCashColumns"
+  (refresh)="filter()"
+>
+</app-data-table>

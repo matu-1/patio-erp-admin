@@ -24,6 +24,7 @@ import { OrderReceived } from '../interfaces/order-received.interface';
 import { FilterOrder, Order } from '../interfaces/order.interface';
 import { InvoiceByYear } from '../interfaces/invoice-by-year.interface';
 import { DriverDto } from '../interfaces/driver.interface';
+import { FindCashOrderDto, OrderCashDto } from '../interfaces/orders-cash.interface';
 import {
   CreatePaymentDriverDto,
   GetPaymentDetailDto,
@@ -158,5 +159,11 @@ export class ReportService {
         ...PATIO_STORE_CONFIG_HTTP,
       }
     );
+  }
+
+  getOrdersCash(dto: FindCashOrderDto) {
+    return this.http.post<Response<OrderCashDto[]>>(API.ORDER.GET_CASH, dto, {
+      ...PATIO_STORE_CONFIG_HTTP,
+    });
   }
 }

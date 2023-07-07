@@ -49,7 +49,7 @@ export class ListComponent implements OnInit {
   }
 
   parseFormFromQuery() {
-    const { isPayment, driver, start, end } =
+    const { isPayment, driver, start, end, category } =
       this.activatedRoute.snapshot.queryParams;
     if (!isPayment || !driver || !start || !end) return;
     this.driver = driver;
@@ -57,6 +57,7 @@ export class ListComponent implements OnInit {
       isPayment: Number(isPayment),
       start: new Date(start),
       end: new Date(end),
+      category: category ? Number(category) : undefined,
     });
   }
 

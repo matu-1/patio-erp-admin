@@ -26,6 +26,7 @@ export class DriversComponent implements OnInit {
   }
 
   async getDrivers() {
+    this.drivers = undefined;
     const res = await handleRequest(() => this.reportService.getDrivers());
     if (res) this.drivers = res.data;
   }
@@ -36,5 +37,5 @@ export class DriversComponent implements OnInit {
     );
     window.open(url, '_bank');
   }
-  
+
 }

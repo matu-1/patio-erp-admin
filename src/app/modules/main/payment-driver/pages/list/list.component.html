@@ -27,6 +27,7 @@
   (refresh)="getPaymentsDriver()"
   (rowClick)="onSelect($event)"
   [rowClass]="getRowClass.bind(this)"
+  [filter]="driver"
 >
   <ng-template customColumn="actions" let-value="value">
     <button

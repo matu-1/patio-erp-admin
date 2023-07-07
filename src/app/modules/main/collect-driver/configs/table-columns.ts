@@ -5,6 +5,10 @@ import { CollectDriver } from '../interfaces/payment-driver.interface';
 
 export const paymentsDriverColumns: TableColumns<CollectDriver> = [
   {
+    field: 'id',
+    headerName: 'Id',
+  },
+  {
     field: 'driverId',
     headerName: 'Id Driver',
   },
