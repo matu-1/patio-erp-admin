@@ -72,6 +72,7 @@
         </ng-container>
       </mat-error>
     </ng-template>
+    <mat-hint *ngIf="textFieldValue.hint">{{ textFieldValue.hint }}</mat-hint>
   </mat-form-field>
   <mat-form-field
     *ngSwitchCase="TextFieldType.Autocomplete"

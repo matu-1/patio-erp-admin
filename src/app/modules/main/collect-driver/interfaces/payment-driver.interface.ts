@@ -15,7 +15,7 @@ export interface CollectDriver {
   endDate: Date;
   balance: number;
   reason?: string;
-  category: string;
+  category: number;
   observation?: string;
   averageCompleted?: number;
   comments?: string;

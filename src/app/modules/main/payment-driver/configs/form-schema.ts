@@ -100,12 +100,34 @@ export const editPaymentDriverSchema: TextFieldSchema = [
     name: 'observation',
     fieldType: TextFieldType.Textarea,
     validators: [
+      // {
+      //   name: 'required',
+      //   message: 'Is required',
+      //   validatorFn: Validators.required,
+      // },
+      {
+        message: 'Minimum 5 characters',
+        name: 'minlength',
+        validatorFn: Validators.minLength(5),
+      },
+    ],
+    df: '100%',
+  },
+  {
+    name: 'date',
+    label: 'Fecha',
+    // value: new Date(),
+    fieldType: TextFieldType.DatePicker,
+    minRows: 3,
+    validators: [
       {
         name: 'required',
         message: 'Is required',
         validatorFn: Validators.required,
       },
     ],
+    df: '100%',
+    hint: "Si se cambia y tiene pago generado debe refrescarlo"
   },
 ];
 

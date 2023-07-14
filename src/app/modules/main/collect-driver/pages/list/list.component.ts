@@ -21,6 +21,7 @@ import {
   CollectDriver,
 } from '../../interfaces/payment-driver.interface';
 import { CollectDriverService } from '../../services/collect-driver.service';
+import { EditDialog } from '../../../payment-driver/components/edit/edit.dialog';
 
 @Component({
   selector: 'app-list',
@@ -166,5 +167,22 @@ export class ListComponent implements OnInit {
       ...DIALOG_CONFIG_XS,
       data,
     });
+  }
+
+  showEditDlg(value: CollectDriver) {
+    const dialogRef = this.dialog.open(EditDialog, {
+      data: value,
+      ...DIALOG_CONFIG_XS,
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe((data) => data && this.edit(value.id, data));
+  }
+
+  async edit(id: number, value: any) {
+    const res = await handleRequestPg(() =>
+      this.collectDriverService.update(id, value)
+    );
+    if (res) this.filter();
   }
 }

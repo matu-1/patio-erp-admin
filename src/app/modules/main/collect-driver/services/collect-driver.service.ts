@@ -6,6 +6,7 @@ import { Driver } from 'src/app/modules/public/interfaces/driver.interface';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import { Response } from 'src/app/utils/response';
 import { routeParams } from 'src/app/utils/route-params';
+import { UpdatePaymentDriverDto } from '../../payment-driver/interfaces/payment-driver.interface';
 import { GeneratePrepaid } from '../interfaces/payment-driver.interface';
 import {
   CollectDriver,
@@ -80,6 +81,13 @@ export class CollectDriverService {
   generateCollection(dto: GeneratePrepaid) {
     return this.http.post<Response<CollectDriver[]>>(
       API.PAYMENT_DRIVER.GENERATE_COLLECTION,
+      dto
+    );
+  }
+
+  update(id: number, dto: UpdatePaymentDriverDto) {
+    return this.http.put<Response<CollectDriver>>(
+      routeParams(API.PAYMENT_DRIVER.UPDATE, { id }),
       dto
     );
   }
