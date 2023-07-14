@@ -38,7 +38,7 @@ export class OrdersCashComponent implements OnInit {
     const res = await handleRequest(() =>
       this.reportService.getOrdersCash({
         ...value,
-        end: DateUtils.getMaxHour(value.endDate),
+        end: DateUtils.getMaxHour(value.end),
       })
     );
     if (res) this.orders = res.data;
