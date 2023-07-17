@@ -316,4 +316,50 @@ export class ListComponent implements OnInit {
     );
     if (res) this.filter();
   }
+
+  goDiscountsOrBonus(
+    value: PaymentDriver,
+    type: PaymentDriverType = PaymentDriverType.Cobro
+  ) {
+    //TODO: Redirect to collect driver
+    let { start, end } = this.form.value;
+    start = DateUtils.getMinHour(start);
+    end = DateUtils.getMaxHour(end);
+    const routes = {
+      [PaymentDriverType.Cobro]: PAGE_ROUTE.COLLECT_DRIVER.LIST,
+      [PaymentDriverType.Pago]: PAGE_ROUTE.PAYMENT_DRIVER.LIST,
+    };
+    const url = this.location.prepareExternalUrl(
+      `${routes[type]}?isPayment=0&driver=${
+        value.name
+      }&start=${start.toISOString()}&end=${end.toISOString()}&category=${
+        categoryValue.other
+      }`
+    );
+    window.open(url, '_bank');
+  }
+
+  showConfirmRefreshDlg(value: PaymentDriver) {
+    const dialogRef = this.dialog.open(ConfirmDialog, {
+      data: {
+        message: '¿Está seguro de realizar esta acción?',
+      },
+    });
+    dialogRef.afterClosed().subscribe((ok) => ok && this.refresh(value));
+  }
+
+  async refresh(value: PaymentDriver) {
+    const { start, end } = this.form.value;
+    const res = await handleRequestPg(
+      () =>
+        this.reportService.refresh({
+          driverId: value.driverId,
+          type: 1,
+          startDate: DateUtils.getMinHourMoment(DateUtils.getMaxHour(start)),
+          endDate: DateUtils.getMaxHourMoment(DateUtils.getMaxHour(end)),
+        }),
+      true
+    );
+    if (res) this.filter();
+  }
 }
