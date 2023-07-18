@@ -91,4 +91,11 @@ export class CollectDriverService {
       dto
     );
   }
+
+  divide(id: number, dto: UpdatePaymentDriverDto) {
+    return this.http.put<Response<CollectDriver>>(
+      routeParams(API.PAYMENT_DRIVER.DIVIDE, { id }),
+      dto
+    );
+  }
 }

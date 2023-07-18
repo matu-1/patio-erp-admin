@@ -6,7 +6,11 @@ import {
 import { DateUtils } from 'src/app/utils/date.util';
 import { getWeeks } from 'src/app/utils/utils';
 import { CustomValidators } from 'src/app/utils/validators';
-import { paymentMethod, categoryText, categoryValue } from '../constants/payment-method';
+import {
+  paymentMethod,
+  categoryText,
+  categoryValue,
+} from '../constants/payment-method';
 
 export const paySchema: TextFieldSchema = [
   {
@@ -105,9 +109,10 @@ export const collectFilterSchema: TextFieldSchema = [
     fieldType: TextFieldType.Dropdown,
     options: [
       { label: 'All', value: undefined },
-      ...Object.values(categoryValue).map(value => ({
-        label: categoryText[value], value: Number(value)
-      }))
+      ...Object.values(categoryValue).map((value) => ({
+        label: categoryText[value],
+        value: Number(value),
+      })),
     ],
     sm: '20%',
     df: '12%',
@@ -146,7 +151,7 @@ export const createCollectDriverSchema: TextFieldSchema = [
       },
       {
         name: 'min',
-        message: 'Minimum 0',
+        message: 'Minimum 1',
         validatorFn: Validators.min(1),
       },
     ],
@@ -221,4 +226,82 @@ export const collectPrepaidFilterSchema: TextFieldSchema = [
     fieldType: TextFieldType.Dropdown,
     options: weeksOptions,
   },
-]
+];
+
+export const dividePaymentDriverSchema: TextFieldSchema = [
+  {
+    label: 'Monto 1',
+    name: 'fistAmount',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'number',
+        message: 'Must be a number',
+        validatorFn: CustomValidators.number,
+      },
+      {
+        name: 'min',
+        message: 'Minimum 0.1',
+        validatorFn: Validators.min(0.1),
+      },
+    ],
+    xs: '100%',
+    df: '30%',
+  },
+  {
+    name: 'fistDate',
+    label: 'Fecha 1',
+    fieldType: TextFieldType.DatePicker,
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    xs: '100%',
+    df: '70%',
+  },
+  {
+    label: 'Monto 2',
+    name: 'secondAmount',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'number',
+        message: 'Must be a number',
+        validatorFn: CustomValidators.number,
+      },
+      {
+        name: 'min',
+        message: 'Minimum 0.1',
+        validatorFn: Validators.min(0.1),
+      },
+    ],
+    xs: '100%',
+    df: '30%',
+  },
+  {
+    name: 'secondDate',
+    label: 'Fecha 2',
+    fieldType: TextFieldType.DatePicker,
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    xs: '100%',
+    df: '70%',
+    hint: 'Si se cambia y tiene pago generado debe refrescarlo',
+  },
+];

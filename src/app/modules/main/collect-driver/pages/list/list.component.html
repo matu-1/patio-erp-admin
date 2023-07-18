@@ -83,5 +83,13 @@
     >
       <mat-icon class="action-icon">edit</mat-icon>
     </button>
+    <button
+      mat-icon-button
+      matTooltip="Dividir"
+      stopPropagation
+      (click)="showDivideDlg(value)"
+    >
+      <mat-icon class="action-icon">content_cut</mat-icon>
+    </button>
   </ng-template>
 </app-data-table>

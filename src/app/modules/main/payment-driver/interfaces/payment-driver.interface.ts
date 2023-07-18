@@ -23,3 +23,10 @@ export interface PayDriverMultipleDto extends PayDriverDto {
 
 export interface UpdatePaymentDriverDto
   extends Pick<PaymentDriver, 'observation'> {}
+
+export interface DividePaymentDrivderDto {
+  fistDate: Date;
+  secondDate: Date;
+  fistAmount: number;
+  secondAmount: number;
+}

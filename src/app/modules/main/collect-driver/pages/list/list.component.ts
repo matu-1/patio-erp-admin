@@ -22,6 +22,7 @@ import {
 } from '../../interfaces/payment-driver.interface';
 import { CollectDriverService } from '../../services/collect-driver.service';
 import { EditDialog } from '../../../payment-driver/components/edit/edit.dialog';
+import { DivideDialog } from '../../components/divide/divide.dialog';
 
 @Component({
   selector: 'app-list',
@@ -182,6 +183,23 @@ export class ListComponent implements OnInit {
   async edit(id: number, value: any) {
     const res = await handleRequestPg(() =>
       this.collectDriverService.update(id, value)
+    );
+    if (res) this.filter();
+  }
+
+  showDivideDlg(value: CollectDriver) {
+    const dialogRef = this.dialog.open(DivideDialog, {
+      data: value,
+      ...DIALOG_CONFIG_XS,
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe((data) => data && this.divide(value.id, data));
+  }
+
+  async divide(id: number, value: any) {
+    const res = await handleRequestPg(() =>
+      this.collectDriverService.divide(id, value)
     );
     if (res) this.filter();
   }

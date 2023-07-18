@@ -13,6 +13,7 @@ import { DriverInfoDialog } from './components/driver-info/driver-info.dialog';
 import { CreateComponent } from './pages/create/create.component';
 import { NewPaymentComponent } from './components/new-payment/new-payment,.component';
 import { GeneratePrepaidComponent } from './pages/generate-prepaid/generate-prepaid.component';
+import { DivideDialog } from './components/divide/divide.dialog';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { GeneratePrepaidComponent } from './pages/generate-prepaid/generate-prep
     CreateComponent,
     NewPaymentComponent,
     GeneratePrepaidComponent,
+    DivideDialog,
   ],
   imports: [
     CommonModule,
