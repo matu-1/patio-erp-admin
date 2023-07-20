@@ -280,6 +280,12 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     valueFormatter: ({ extraEarning }) => formatNumber(extraEarning, 'es'),
   },
   {
+    field: 'extraEarningPoints',
+    headerName: 'Ganancia Puntos',
+    valueFormatter: ({ extraEarningPoints }) =>
+      formatNumber(extraEarningPoints, 'es'),
+  },
+  {
     field: 'totalBonus',
     headerName: 'Bonos',
     valueFormatter: ({ totalBonus }) => formatNumber(totalBonus, 'es'),

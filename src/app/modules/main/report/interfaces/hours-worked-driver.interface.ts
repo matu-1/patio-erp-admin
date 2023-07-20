@@ -22,6 +22,7 @@ export interface HoursWorkedDriver {
   totalDistance: number;
   totalBonus: number;
   extraEarning: number;
+  extraEarningPoints: number;
   bankAccount: BankAccount;
   timingExtraAmount: number;
   average: number;
