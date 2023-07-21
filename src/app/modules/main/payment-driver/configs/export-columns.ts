@@ -185,6 +185,12 @@ export const paymentsDriverExportColumns: TableColumns<PaymentDriver> = [
       detail ? formatToNumber(detail.extraEarning) : '---',
   },
   {
+    field: 'extraEarningPoints',
+    headerName: 'Ganancia Puntos',
+    valueFormatter: ({ detail }) =>
+      detail ? formatToNumber(detail.extraEarningPoints) : '---',
+  },
+  {
     field: 'totalBonus',
     headerName: 'Bonos',
     valueFormatter: ({ detail }) =>
