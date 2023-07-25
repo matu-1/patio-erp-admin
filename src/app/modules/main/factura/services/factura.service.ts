@@ -27,45 +27,45 @@ export class FacturaService {
   getAll(params: QueryInvoice) {
     const paramsUrl = new URLSearchParams(params as any);
     return this.http
-      .get<ResponsePagination<Factura[]>>(`${API.INVOICE.GET_ALL}?${paramsUrl}`)
+      .get<ResponsePagination<Factura[]>>(`${API.FACTURA.GET_ALL}?${paramsUrl}`)
       .pipe(delay(1000));
   }
 
   revertPayment(dto: RevertPaymentDto) {
-    return this.http.post<Response<Pago>>(API.INVOICE.REVERT_PAYMENT, dto);
+    return this.http.post<Response<Pago>>(API.FACTURA.REVERT_PAYMENT, dto);
   }
 
   pay(dto: PayInvoiceDto) {
-    return this.http.post<Response<Pago>>(API.INVOICE.PAY, dto);
+    return this.http.post<Response<Pago>>(API.FACTURA.PAY, dto);
   }
 
   schedulePayment(dto: SchedulePaymentDto) {
-    return this.http.post<Response<Pago>>(API.INVOICE.SCHEDULE_PAYMENT, dto);
+    return this.http.post<Response<Pago>>(API.FACTURA.SCHEDULE_PAYMENT, dto);
   }
 
   update(id: number, dto: UpdateInvoiceDto) {
     return this.http.put<Response<Factura>>(
-      routeParams(API.INVOICE.UPDATE, { id }),
+      routeParams(API.FACTURA.UPDATE, { id }),
       dto
     );
   }
 
   getInvoiceDetails(id: number) {
     return this.http.get<Response<InvoiceDetail[]>>(
-      routeParams(API.INVOICE_DETAIL.GET_BY_INVOICE, { id })
+      routeParams(API.FACTURA_DETAIL.GET_BY_INVOICE, { id })
     );
   }
 
   recalculateInvoice(id: number) {
     return this.http.put<Response<Factura>>(
-      routeParams(API.INVOICE.RECALCULATE_INVOICE, { id }),
+      routeParams(API.FACTURA.RECALCULATE_INVOICE, { id }),
       {}
     );
   }
 
   getInfo(id: number) {
     return this.http.get<Response<InvoiceInfo>>(
-      routeParams(API.INVOICE.INFO, { id })
+      routeParams(API.FACTURA.INFO, { id })
     );
   }
 }

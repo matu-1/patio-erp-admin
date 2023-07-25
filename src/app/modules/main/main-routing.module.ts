@@ -15,7 +15,7 @@ const routes: Routes = [
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
-        path: PAGE_ROUTE.INVOICE.ROOT,
+        path: PAGE_ROUTE.FACTURA.ROOT,
         loadChildren: () =>
           import('./factura/factura.module').then((m) => m.FacturaModule),
       },
@@ -49,6 +49,11 @@ const routes: Routes = [
           import('./payment-qr/payment-qr.module').then(
             (m) => m.PaymentQrModule
           ),
+      },
+      {
+        path: PAGE_ROUTE.INVOICE.ROOT,
+        loadChildren: () =>
+          import('./invoice/invoice.module').then((m) => m.InvoiceModule),
       },
       {
         path: '**',

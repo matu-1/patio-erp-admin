@@ -8,8 +8,8 @@ export const PAGE_ROUTE = {
       return `${this.ROOT}/${this.LOGIN_ROOT}`;
     },
   },
-  INVOICE: {
-    ROOT: 'invoice',
+  FACTURA: {
+    ROOT: 'factura',
     LIST_ROOT: '',
     CREATE_ROOT: 'create',
     get LIST() {
@@ -116,6 +116,17 @@ export const PAGE_ROUTE = {
     LIST_ROOT: '',
     get LIST() {
       return `${this.ROOT}/${this.LIST_ROOT}`;
+    },
+  },
+  INVOICE: {
+    ROOT: 'invoice',
+    LIST_ROOT: '',
+    CREATE_ROOT: 'create',
+    get LIST() {
+      return `/${this.ROOT}/${this.LIST_ROOT}`;
+    },
+    get CREATE() {
+      return `/${this.ROOT}/${this.CREATE_ROOT}`;
     },
   },
 };

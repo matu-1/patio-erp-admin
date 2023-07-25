@@ -1,0 +1,24 @@
+<app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
+<app-title-bar [title]="title">
+  <button
+    mat-raised-button
+    color="primary"
+    [routerLink]="PAGE_ROUTE.INVOICE.CREATE"
+  >
+    Nuevo
+  </button>
+  <button mat-button (click)="download()" [disabled]="!invoices">
+    Exportar
+  </button>
+</app-title-bar>
+<app-data-table
+  [rows]="invoices"
+  [columns]="invoiceColumns"
+  (refresh)="filter()"
+>
+  <ng-template customColumn="actions" let-value="value">
+    <button mat-icon-button matTooltip="Ver Detalle">
+      <mat-icon class="action-icon">info</mat-icon>
+    </button>
+  </ng-template>
+</app-data-table>

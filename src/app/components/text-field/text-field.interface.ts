@@ -21,6 +21,7 @@ type Type =
   | 'date'
   | 'email'
   | 'number'
+  | 'file'
   | 'datetime-local';
 
 interface Validator {

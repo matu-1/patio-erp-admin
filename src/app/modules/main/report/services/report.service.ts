@@ -142,7 +142,7 @@ export class ReportService {
 
   getInvoicesByYear(year: number) {
     return this.http.get<Response<InvoiceByYear[]>>(
-      routeParams(API.INVOICE.GET_BY_YEAR, { year })
+      routeParams(API.FACTURA.GET_BY_YEAR, { year })
     );
   }
 

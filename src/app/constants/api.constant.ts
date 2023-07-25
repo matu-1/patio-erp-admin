@@ -8,7 +8,7 @@ export const API = {
     LOGIN: `${API_URL}/auth/login`,
     RENEW: `${API_URL}/auth/renew`,
   },
-  INVOICE: {
+  FACTURA: {
     GET_ALL: `${API_URL}/factura`,
     UPDATE: `${API_URL}/factura/:id`,
     REVERT_PAYMENT: `${API_URL}/factura/revert-payment`,
@@ -18,7 +18,7 @@ export const API = {
     INFO: `${API_URL}/factura/info/:id`,
     GET_BY_YEAR: `${API_URL}/factura/invoice-by-year/:year`
   },
-  INVOICE_DETAIL: {
+  FACTURA_DETAIL: {
     GET_BY_INVOICE: `${API_URL}/detalle-factura/invoice/:id`,
   },
   CAJA: {
@@ -79,5 +79,11 @@ export const API = {
     GET_BY_ID: `${PATIO_STORE_API_URL}/bank-account/:id`,
     CREATE: `${PATIO_STORE_API_URL}/bank-account`,
     UPDATE: `${PATIO_STORE_API_URL}/bank-account/:id`,
+  },
+  INVOICE: {
+    GET_ALL: `${API_URL}/invoice`,
+    CREATE: `${API_URL}/invoice`,
+    UPDATE: `${API_URL}/invoice/:id`,
+    GET_BY_ID: `${API_URL}/invoice/:id`,
   },
 };

@@ -1,0 +1,58 @@
+import { Component, OnInit } from '@angular/core';
+import { Breadcrumbs } from 'src/app/components/breadcrumbs/breadcrumbs.interface';
+import { buildform } from 'src/app/components/text-field/text-field.util';
+import {
+  createInvoiceSchema,
+  createDiscountSchema,
+} from '../../configs/form-schema';
+import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
+import { Location } from '@angular/common';
+import { handleRequestPg } from 'src/app/utils/handle-request';
+import { InvoiceService } from '../../services/invoice.service';
+
+@Component({
+  selector: 'app-create',
+  templateUrl: './create.component.html',
+  styleUrls: ['./create.component.scss'],
+})
+export class CreateComponent implements OnInit {
+  title = 'Nuevo';
+  breadcrumbs: Breadcrumbs = [
+    { path: PAGE_ROUTE.INVOICE.LIST, title: 'Invoices' },
+    { path: '', title: this.title },
+  ];
+  createInvoiceSchema = createInvoiceSchema;
+  form = buildform(createInvoiceSchema);
+  createDiscountSchema = createDiscountSchema;
+
+  constructor(
+    private location: Location,
+    private invoiceService: InvoiceService
+  ) {}
+
+  ngOnInit(): void {
+    this.changeValues();
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  changeValues() {
+    this.form.valueChanges.subscribe((value) => {
+      const { amount, tips, fee } = value;
+      if (amount && tips && fee != undefined) {
+        const total = Number(amount) + Number(tips) + Number(fee);
+        if (!isNaN(total) && total != value.total)
+          this.form.get('total')?.setValue(total);
+      }
+    });
+  }
+
+  async save() {
+    const value = this.form.value;
+    console.log('value', value);
+    const res = await handleRequestPg(() => this.invoiceService.create(value));
+    if (res) this.goBack();
+  }
+}

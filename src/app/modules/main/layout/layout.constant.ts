@@ -20,7 +20,7 @@ export const MENU: MenuItem[] = [
       {
         label: 'Facturas',
         icon: 'remove',
-        route: PAGE_ROUTE.INVOICE.LIST,
+        route: PAGE_ROUTE.FACTURA.LIST,
       },
       {
         label: 'Clientes',
@@ -115,6 +115,17 @@ export const MENU: MenuItem[] = [
             route: PAGE_ROUTE.REPORT.ORDERS_CASH,
           },
         ],
+      },
+    ],
+  },
+  {
+    label: 'Ingresos',
+    icon: 'savings',
+    items: [
+      {
+        label: 'Invoices',
+        icon: 'remove',
+        route: PAGE_ROUTE.INVOICE.LIST,
       },
     ],
   },
