@@ -86,4 +86,7 @@ export const API = {
     UPDATE: `${API_URL}/invoice/:id`,
     GET_BY_ID: `${API_URL}/invoice/:id`,
   },
+  FILE: {
+    UPLOAD: `${PATIO_STORE_API_URL}/file/upload`,
+  }
 };

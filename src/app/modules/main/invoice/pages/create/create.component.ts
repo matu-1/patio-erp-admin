@@ -7,8 +7,10 @@ import {
 } from '../../configs/form-schema';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { Location } from '@angular/common';
-import { handleRequestPg } from 'src/app/utils/handle-request';
+import { handleRequestPg, handleRequest } from 'src/app/utils/handle-request';
 import { InvoiceService } from '../../services/invoice.service';
+import { FormArray, FormGroup, AbstractControl } from '@angular/forms';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-create',
@@ -32,6 +34,10 @@ export class CreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.changeValues();
+    this.form.addControl(
+      'discounts',
+      new FormArray([buildform(createDiscountSchema)])
+    );
   }
 
   goBack() {
@@ -49,10 +55,34 @@ export class CreateComponent implements OnInit {
     });
   }
 
+  get formDiscounts() {
+    return this.form.get('discounts') as FormArray;
+  }
+
+  getFormDiscount(control: AbstractControl) {
+    return control as FormGroup;
+  }
+
+  addDiscount() {
+    this.formDiscounts.push(buildform(createDiscountSchema));
+  }
+
+  removeDiscount(index: number) {
+    this.formDiscounts.removeAt(index);
+  }
+
   async save() {
     const value = this.form.value;
-    console.log('value', value);
-    const res = await handleRequestPg(() => this.invoiceService.create(value));
+    const res = await handleRequestPg(() => {
+      return this.invoiceService.uploadFile(value.backupFile[0]).pipe(
+        switchMap((res) =>
+          this.invoiceService.create({
+            ...value,
+            backupUrl: res.data,
+          })
+        )
+      );
+    }, true);
     if (res) this.goBack();
   }
 }

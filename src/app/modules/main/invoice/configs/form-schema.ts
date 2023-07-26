@@ -169,9 +169,18 @@ export const createInvoiceSchema: TextFieldSchema = [
   {
     name: 'backup',
     label: 'backup File',
-    type: "file",
+    fieldType: TextFieldType.File,
+    fileAccept:
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
     xs: '100%',
-    df: '20%',
+    df: '50%',
   },
   {
     name: 'total',
@@ -186,7 +195,6 @@ export const createDiscountSchema: TextFieldSchema = [
   {
     name: 'description',
     label: 'Description',
-    fieldType: TextFieldType.Textarea,
     validators: [
       {
         name: 'required',
@@ -199,8 +207,8 @@ export const createDiscountSchema: TextFieldSchema = [
         validatorFn: Validators.minLength(5),
       },
     ],
-    xs: '100%',
-    df: '100%',
+    xs: '50%',
+    df: '50%',
   },
   {
     name: 'amount',
@@ -222,7 +230,7 @@ export const createDiscountSchema: TextFieldSchema = [
         validatorFn: Validators.min(1),
       },
     ],
-    xs: '100%',
-    df: '20%',
+    xs: '30%',
+    df: '30%',
   },
 ];

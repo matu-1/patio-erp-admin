@@ -139,7 +139,7 @@ button:not(.mat-button-disabled) .action-icon {
 .bg-selected td {
   color: #ececec !important; //#999999
   background-color: #778beb !important; //#e1e1e1
-  transition: background-color 0.2s ease-in, color 0.2s ease-in;;
+  transition: background-color 0.2s ease-in, color 0.2s ease-in;
 }
 // loading img
 .loading-animation {
@@ -155,4 +155,10 @@ button:not(.mat-button-disabled) .action-icon {
   100% {
     background-color: #f2f2f2;
   }
+}
+.text-end {
+  text-align: end;
+}
+.text-center {
+  text-align: center;
 }

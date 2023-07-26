@@ -7,6 +7,7 @@ export enum TextFieldType {
   Autocomplete,
   Radio,
   DatePicker,
+  File
 }
 
 export interface Option {
@@ -46,6 +47,8 @@ export interface TextFieldValue {
   readOnly?: boolean;
   disabled?: boolean;
   hint?: string;
+  fileMultiple?: boolean;
+  fileAccept?: string;
   df?: number | string;
   xs?: number | string;
   sm?: number | string;

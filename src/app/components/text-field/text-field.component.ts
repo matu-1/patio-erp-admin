@@ -7,7 +7,7 @@ import {
   KeyValueDiffers,
   OnInit,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { map, Observable, startWith } from 'rxjs';
 import { TextFieldValue, TextFieldType } from './text-field.interface';
@@ -33,6 +33,11 @@ export class TextFieldComponent implements OnInit, DoCheck {
 
   ngOnInit(): void {
     this.textFieldValueDiffer = this.differs.find(this.textFieldValue).create();
+    if (this.textFieldValue.fieldType == TextFieldType.File)
+      this.form.addControl(
+        `${this.textFieldValue.name}File`,
+        new FormControl()
+      );
   }
 
   ngDoCheck(): void {
@@ -91,5 +96,16 @@ export class TextFieldComponent implements OnInit, DoCheck {
   clearAutocomplete() {
     this.control?.setValue('');
     this.value = '';
+  }
+
+  handleFileInputChange(files: FileList | null): void {
+    if (!files) return;
+    if (files.length) {
+      const count = files.length > 1 ? `(+${files.length - 1} files)` : '';
+      this.control?.setValue(`${files[0].name}${count}`);
+      this.form.get(`${this.textFieldValue.name}File`)?.setValue(files);
+    } else {
+      this.control?.setValue('');
+    }
   }
 }

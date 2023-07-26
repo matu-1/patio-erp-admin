@@ -116,6 +116,36 @@
     </button>
   </mat-form-field>
   <mat-form-field
+    *ngSwitchCase="TextFieldType.File"
+    appearance="legacy"
+    [class]="class!"
+    [ngClass]="{ 'full-width': textFieldValue.fullWidth ?? true }"
+  >
+    <mat-label>{{ textFieldValue.label }}</mat-label>
+    <button mat-icon-button matPrefix type="button" (click)="fileInput.click()">
+      <mat-icon>attach_file</mat-icon>
+    </button>
+    <input
+      type="text"
+      readonly
+      matInput
+      [formControlName]="textFieldValue.name"
+    />
+    <input
+      type="file"
+      [multiple]="textFieldValue.fileMultiple"
+      hidden
+      #fileInput
+      [accept]="textFieldValue.fileAccept"
+      (change)="handleFileInputChange(fileInput.files)"
+    />
+    <mat-error *ngFor="let error of textFieldValue.validators">
+      <ng-container *ngIf="control?.hasError(error.name)">
+        {{ error.message }}
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field
     *ngSwitchDefault
     appearance="legacy"
     [class]="class!"

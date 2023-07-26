@@ -7,6 +7,7 @@
           *ngFor="let action of actions"
           mat-icon-button
           (click)="action.action()"
+          type="button"
         >
           <mat-icon class="action-icon">{{ action.icon }}</mat-icon>
         </button>
