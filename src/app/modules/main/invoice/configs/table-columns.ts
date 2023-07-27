@@ -20,12 +20,24 @@ export const invoiceColumns: TableColumns<Invoice> = [
     headerName: 'Quantity',
   },
   {
+    field: 'fee',
+    headerName: 'Fee',
+  },
+  {
     field: 'amount',
     headerName: 'Amount',
   },
   {
     field: 'tips',
     headerName: 'Tips',
+  },
+  {
+    field: 'discounts',
+    headerName: 'Discounts',
+    valueFormatter: ({ discounts }) =>
+      discounts
+        .map((discount) => `${discount.description} (${discount.amount} )`)
+        .join(', '),
   },
   {
     field: 'total',
@@ -41,6 +53,10 @@ export const invoiceColumns: TableColumns<Invoice> = [
     field: 'createdAt',
     headerName: 'Created At',
     valueFormatter: ({ createdAt }) => FormatDate.dateMoment(createdAt),
+  },
+  {
+    field: 'backupUrl',
+    headerName: 'Backup',
   },
   {
     field: 'actions',

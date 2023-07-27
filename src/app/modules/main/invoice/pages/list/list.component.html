@@ -11,11 +11,21 @@
     Exportar
   </button>
 </app-title-bar>
+<app-simple-card class="mb-3">
+  <app-form-builder
+    [form]="form"
+    [schema]="invoiceFilterSchema"
+    (frmSubmit)="filter()"
+  ></app-form-builder>
+</app-simple-card>
 <app-data-table
   [rows]="invoices"
   [columns]="invoiceColumns"
   (refresh)="filter()"
 >
+  <ng-template customColumn="backupUrl" let-value="value">
+    <button mat-button (click)="goBackup(value.backupUrl)">show</button>
+  </ng-template>
   <ng-template customColumn="actions" let-value="value">
     <button mat-icon-button matTooltip="Ver Detalle">
       <mat-icon class="action-icon">info</mat-icon>

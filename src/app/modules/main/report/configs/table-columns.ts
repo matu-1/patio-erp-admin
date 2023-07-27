@@ -432,6 +432,10 @@ export const ordersColumns: TableColumns<OrderDto> = [
     valueFormatter: ({ bonus }) => formatNumber(bonus, 'es'),
   },
   {
+    field: 'points',
+    headerName: 'Puntos',
+  },
+  {
     field: 'earningWaiting',
     headerName: 'Ganancia Espera',
     valueFormatter: ({ earningBase, modalityId }) =>

@@ -82,6 +82,7 @@ export const API = {
   },
   INVOICE: {
     GET_ALL: `${API_URL}/invoice`,
+    GET_BY_RANGE: `${API_URL}/invoice/range`,
     CREATE: `${API_URL}/invoice`,
     UPDATE: `${API_URL}/invoice/:id`,
     GET_BY_ID: `${API_URL}/invoice/:id`,

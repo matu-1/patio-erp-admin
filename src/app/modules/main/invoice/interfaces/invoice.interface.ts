@@ -14,6 +14,17 @@ export interface Invoice {
   startDate: Date;
   endDate: Date;
   backupUrl: string;
+  discounts: Discount[];
+}
+
+export interface Discount {
+  description: string;
+  amount: string;
 }
 
 export interface CreateInvoiceDto extends Omit<Invoice, 'id' | 'createdAt'> {}
+
+export interface InvoiceFilterDto {
+  start: Date;
+  end: Date;
+}

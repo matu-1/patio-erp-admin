@@ -3,6 +3,7 @@ import {
   TextFieldSchema,
   TextFieldType,
 } from 'src/app/components/text-field/text-field.interface';
+import { DateUtils } from 'src/app/utils/date.util';
 import { CustomValidators } from 'src/app/utils/validators';
 
 export const createInvoiceSchema: TextFieldSchema = [
@@ -233,4 +234,37 @@ export const createDiscountSchema: TextFieldSchema = [
     xs: '30%',
     df: '30%',
   },
+];
+
+export const invoiceFilterSchema: TextFieldSchema = [
+  {
+    name: 'start',
+    label: 'Fecha Inicial',
+    value: DateUtils.getMinHour(),
+    fieldType: TextFieldType.DatePicker,
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    sm: '25%',
+    df: '14%',
+  },
+  {
+    name: 'end',
+    label: 'Fecha Final',
+    value: DateUtils.getMaxHour(),
+    fieldType: TextFieldType.DatePicker,
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    sm: '25%',
+    df: '14%',
+  }
 ];

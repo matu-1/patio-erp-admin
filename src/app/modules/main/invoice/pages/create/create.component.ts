@@ -46,9 +46,14 @@ export class CreateComponent implements OnInit {
 
   changeValues() {
     this.form.valueChanges.subscribe((value) => {
-      const { amount, tips, fee } = value;
+      const { amount, tips, fee, discounts } = value;
       if (amount && tips && fee != undefined) {
-        const total = Number(amount) + Number(tips) + Number(fee);
+        const totalDiscounts = discounts.reduce(
+          (acc: number, cur: any) => acc + Number(cur.amount),
+          0
+        );
+        const total =
+          Number(amount) + Number(tips) + Number(fee) - totalDiscounts;
         if (!isNaN(total) && total != value.total)
           this.form.get('total')?.setValue(total);
       }
