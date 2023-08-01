@@ -5,12 +5,10 @@ import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest } from 'src/app/utils/handle-request';
 import { collectMerchantSchema } from '../../configs/form-schema';
-import {
-  collectMerchantColumns,
-  collectMerchantReportColumns,
-} from '../../configs/table-columns';
+import { collectMerchantColumns } from '../../configs/table-columns';
 import { CollectMerchantDto } from '../../interfaces/collect-merchant.interface';
 import { ReportService } from '../../services/report.service';
+import { collectMerchantReportColumns } from '../../configs/export-columns';
 
 @Component({
   selector: 'app-collect-merchant',

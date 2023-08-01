@@ -3,6 +3,7 @@ import { MODALITY } from 'src/app/constants/modality.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { FormatDate } from 'src/app/utils/format.date.util';
 import { formatToNumber, meterToMile } from 'src/app/utils/utils';
+import { CollectMerchantDto } from '../interfaces/collect-merchant.interface';
 import {
   BankAccountType,
   HoursWorkedDriver,
@@ -291,5 +292,120 @@ export const ordersColumnsExport: TableColumns<OrderDto> = [
     field: 'createdAt',
     headerName: 'Creado el',
     valueFormatter: ({ createdAt }) => FormatDate.dateMoment(createdAt),
+  },
+];
+
+export const collectMerchantReportColumns: TableColumns<CollectMerchantDto> = [
+  {
+    field: '#',
+    headerName: '#',
+  },
+  {
+    field: 'RESTAURANT NAME',
+    headerName: 'Restaurant Name',
+  },
+  {
+    field: 'STORE NAME',
+    headerName: 'Store Name',
+  },
+  {
+    field: 'FROM ADDRESS',
+    headerName: 'From Address',
+  },
+  {
+    field: 'TO ADDRESS',
+    headerName: 'To Address',
+  },
+  {
+    field: 'LATITUDE',
+    headerName: 'Latitude',
+  },
+  {
+    field: 'LONGITUDE',
+    headerName: 'Longitude',
+  },
+  {
+    field: 'ID PROVIDER',
+    headerName: 'Id Provider',
+  },
+  {
+    field: 'ID TCC',
+    headerName: 'Id Tcc',
+  },
+  {
+    field: 'BASIC FEE',
+    headerName: 'Basic Fee Driver',
+  },
+  {
+    field: 'basicFeeOrder',
+    headerName: 'Basic Fee Order',
+  },
+  {
+    field: 'TIP ORIGINAL',
+    headerName: 'Tip Original',
+  },
+  {
+    field: 'TIP',
+    headerName: 'Tip',
+  },
+  {
+    field: 'USER NAME',
+    headerName: 'User Name',
+  },
+  {
+    field: 'USER PHONE',
+    headerName: 'User Phone',
+  },
+  {
+    field: 'ORDER PROVIDER',
+    headerName: 'Order Provider',
+  },
+  {
+    field: 'DRIVER NAME',
+    headerName: 'Driver Name',
+    valueFormatter: (value) => value['DRIVER NAME'] ?? '---',
+  },
+  { field: 'PREPARATION TIME', headerName: 'Preparation Time' },
+  { field: 'DELIVERY TIME', headerName: 'Delivery Time' },
+  { field: 'ARRIVED TIME', headerName: 'Arrived Time' },
+  { field: 'DISTANCE MILES', headerName: 'Distance Miles' },
+  { field: 'vehicleType', headerName: 'Vehicle Type' },
+  { field: 'vehicleTypeDriver', headerName: 'Vehicle Type Driver' },
+  {
+    field: 'observations',
+    headerName: 'Observations',
+    valueFormatter: ({ observations }) => observations ?? '---',
+  },
+  { field: 'SUBTOTAL', headerName: 'Subtotal' },
+  { field: 'type', headerName: 'Type' },
+  {
+    field: 'DATE',
+    headerName: 'Date',
+    valueFormatter: ({ DATE }) => FormatDate.shortMoment(DATE),
+  },
+  {
+    field: 'HOUR',
+    headerName: 'Hour',
+    valueFormatter: ({ DATE }) => FormatDate.hourMoment(DATE),
+  },
+  {
+    field: 'status',
+    headerName: 'Status',
+  },
+  {
+    field: 'ISSUE',
+    headerName: 'Issue',
+  },
+  {
+    field: 'COMMENT',
+    headerName: 'Comment',
+  },
+  {
+    field: 'photo_delivery_url',
+    headerName: 'Photo Delivery Url',
+  },
+  {
+    field: 'url_image_reference',
+    headerName: 'Image Reference',
   },
 ];
