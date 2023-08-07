@@ -333,6 +333,10 @@ export const collectMerchantReportColumns: TableColumns<CollectMerchantDto> = [
     headerName: 'Id Tcc',
   },
   {
+    field: 'PAYMENT MODE',
+    headerName: 'Payment Mode',
+  },
+  {
     field: 'BASIC FEE',
     headerName: 'Basic Fee Driver',
   },
