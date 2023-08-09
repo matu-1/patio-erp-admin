@@ -237,9 +237,23 @@ export const ordersColumnsExport: TableColumns<OrderDto> = [
     headerName: 'Dirección',
   },
   {
+    field: 'paymentMode',
+    headerName: 'Payment Mode',
+  },
+  {
+    field: 'totalOrder',
+    headerName: 'Total Order',
+    valueFormatter: ({ totalOrder }) => formatToNumber(totalOrder),
+  },
+  {
     field: 'tip',
     headerName: 'Propina',
     valueFormatter: ({ tip }) => formatToNumber(tip),
+  },
+  {
+    field: 'tip_original',
+    headerName: 'Tip Original',
+    valueFormatter: ({ tip_original }) => formatToNumber(tip_original),
   },
   {
     field: 'distance',
@@ -247,7 +261,7 @@ export const ordersColumnsExport: TableColumns<OrderDto> = [
     valueFormatter: ({ distance }) => formatToNumber(distance),
   },
   {
-    field: 'distance',
+    field: 'distanceMi',
     headerName: 'Distancia (mi)',
     valueFormatter: ({ distance }) => formatToNumber(meterToMile(distance)),
   },
@@ -255,6 +269,10 @@ export const ordersColumnsExport: TableColumns<OrderDto> = [
     field: 'bonus',
     headerName: 'Bonos',
     valueFormatter: ({ bonus }) => formatToNumber(bonus),
+  },
+  {
+    field: 'points',
+    headerName: 'Puntos',
   },
   {
     field: 'earningWaiting',
@@ -278,6 +296,14 @@ export const ordersColumnsExport: TableColumns<OrderDto> = [
     valueFormatter: ({ earningBase, modalityId }) =>
       MODALITY.BASE_WITH_TIP == modalityId
         ? formatToNumber(earningBase.earning)
+        : '---',
+  },
+  {
+    field: 'fee',
+    headerName: 'Fee',
+    valueFormatter: ({ earningBase, modalityId }) =>
+      MODALITY.BASE_WITH_TIP == modalityId
+        ? formatToNumber(earningBase.discounts)
         : '---',
   },
   {
