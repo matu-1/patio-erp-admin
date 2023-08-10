@@ -41,6 +41,14 @@ export interface Order {
   orderStatus: OrderStatus[] | null;
   earningBase: EarningBase;
   bonus: number;
+  is_pickup: number;
+  is_refund: number;
+  store_name: string;
+  instructions: string;
+  has_drink: number;
+  multiple_delivery: number;
+  order_provider: string;
+  provider_id: string;
 }
 
 export interface Merchant {

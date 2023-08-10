@@ -589,6 +589,62 @@ export const orderColumns: TableColumns<Order> = [
     headerName: 'Payment Mode',
   },
   {
+    field: 'type',
+    headerName: 'Type',
+    valueFormatter: ({ is_pickup }) => (is_pickup == 0 ? 'delivery' : 'pickup'),
+  },
+  {
+    field: 'orderReadyAt',
+    headerName: 'Ready At',
+    valueFormatter: ({ order_ready_at }) =>
+      order_ready_at ? FormatDate.dateMoment(order_ready_at) : '---',
+  },
+  {
+    field: 'point',
+    headerName: 'Points',
+  },
+  {
+    field: 'isRefund',
+    headerName: 'Is Refund?',
+    valueFormatter: ({ is_refund }) => (is_refund ? 'Si' : 'No'),
+  },
+  {
+    field: 'instructions',
+    headerName: 'Instructions',
+  },
+  {
+    field: 'currency',
+    headerName: 'Currency',
+  },
+  {
+    field: 'comment',
+    headerName: 'Comment',
+  },
+  {
+    field: 'order_provider',
+    headerName: 'Provider',
+  },
+  {
+    field: 'provider_id',
+    headerName: 'Provider Id',
+  },
+  {
+    field: 'has_drink',
+    headerName: 'Has drink?',
+    valueFormatter: ({ has_drink }) => (has_drink ? 'Si' : 'No'),
+  },
+  {
+    field: 'multiple_delivery',
+    headerName: 'Multiple delivery?',
+    valueFormatter: ({ multiple_delivery }) =>
+      multiple_delivery ? 'Si' : 'No',
+  },
+  {
+    field: 'accepted_by',
+    headerName: 'Accepted by',
+    valueFormatter: ({ accepted_by }) => (accepted_by ? 'merchant' : 'central'),
+  },
+  {
     field: 'total',
     headerName: 'Total',
     valueFormatter: ({ total }) => formatNumber(total, 'es', '.2-2'),
