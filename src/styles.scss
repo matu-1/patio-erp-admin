@@ -162,3 +162,8 @@ button:not(.mat-button-disabled) .action-icon {
 .text-center {
   text-align: center;
 }
+.title-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -690,3 +690,45 @@ export const ordersCashFilterSchema: TextFieldSchema = [
     sm: '30%',
   },
 ];
+
+
+export const driverEarningFilterSchema: TextFieldSchema = [
+  {
+    name: 'start',
+    label: 'Fecha Inicial',
+    fieldType: TextFieldType.DatePicker,
+    value: DateUtils.getMinHour(),
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '12%',
+    sm: '25%',
+  },
+  {
+    name: 'end',
+    label: 'Fecha Final',
+    fieldType: TextFieldType.DatePicker,
+    value: DateUtils.getMaxHour(),
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '12%',
+    sm: '25%',
+  },
+  {
+    name: 'cityId',
+    label: 'Ciudad',
+    value: CONFIG.CITY_EEUU,
+    fieldType: TextFieldType.Dropdown,
+    df: '15%',
+    sm: '30%',
+  },
+];

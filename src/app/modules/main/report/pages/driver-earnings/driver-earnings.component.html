@@ -1,0 +1,28 @@
+<app-breadcrumbs [breadcrumbs]="[{title, path: ''}]"></app-breadcrumbs>
+<app-title-bar [title]="title">
+  <button mat-button [disabled]="!earnings" (click)="download()">
+    Exportar
+  </button>
+</app-title-bar>
+<app-simple-card class="mb-3" [isLoading]="isLoadingFilter">
+  <app-form-builder
+    [form]="form"
+    [schema]="driverEarningFilterSchema"
+    (frmSubmit)="filter()"
+  ></app-form-builder>
+</app-simple-card>
+<app-data-table
+  [rows]="earnings"
+  [columns]="driverEarningColumns"
+  (refresh)="filter()"
+>
+  <ng-template customColumn="actions" let-value="value">
+    <button
+      mat-icon-button
+      (click)="showDetailsDlg(value)"
+      matTooltip="Ver detalle"
+    >
+      <mat-icon class="action-icon">info</mat-icon>
+    </button>
+  </ng-template>
+</app-data-table>

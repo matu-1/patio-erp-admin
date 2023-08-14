@@ -24,7 +24,11 @@ import { OrderReceived } from '../interfaces/order-received.interface';
 import { FilterOrder, Order } from '../interfaces/order.interface';
 import { InvoiceByYear } from '../interfaces/invoice-by-year.interface';
 import { DriverDto } from '../interfaces/driver.interface';
-import { FindCashOrderDto, OrderCashDto } from '../interfaces/orders-cash.interface';
+import {
+  FindCashOrderDto,
+  OrderCashDto,
+} from '../interfaces/orders-cash.interface';
+import { DriverEarning } from '../interfaces/driver-earnings.interface';
 import {
   CreatePaymentDriverDto,
   GetPaymentDetailDto,
@@ -165,5 +169,15 @@ export class ReportService {
     return this.http.post<Response<OrderCashDto[]>>(API.ORDER.GET_CASH, dto, {
       ...PATIO_STORE_CONFIG_HTTP,
     });
+  }
+
+  getDriverEarnings(dto: FindCashOrderDto) {
+    return this.http.get<Response<DriverEarning[]>>(
+      API.DRIVER.GET_EARNING_FULL,
+      {
+        params: dto as any,
+        ...PATIO_STORE_CONFIG_HTTP,
+      }
+    );
   }
 }

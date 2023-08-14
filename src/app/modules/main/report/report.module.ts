@@ -19,6 +19,8 @@ import { DriversComponent } from './pages/drivers/drivers.component';
 import { DriverDetailComponent } from './pages/driver-detail/driver-detail.component';
 import { DocumentBoxComponent } from './components/document-box/document-box.component';
 import { OrdersCashComponent } from './pages/orders-cash/orders-cash.component';
+import { DriverEarningsComponent } from './pages/driver-earnings/driver-earnings.component';
+import { EarningsDetailDialog } from './components/earnings-detail/earnings-detail.dialog';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { OrdersCashComponent } from './pages/orders-cash/orders-cash.component';
     DriverDetailComponent,
     DocumentBoxComponent,
     OrdersCashComponent,
+    DriverEarningsComponent,
+    EarningsDetailDialog,
   ],
   imports: [
     CommonModule,

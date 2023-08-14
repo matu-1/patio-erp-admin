@@ -39,6 +39,7 @@ export const PAGE_ROUTE = {
     DRIVERS_ROOT: 'drivers',
     DRIVER_DETAIL_ROOT: 'drivers/:id',
     ORDERS_CASH_ROOT: 'orders-cash',
+    DRIVER_EARNINGS_ROOT: 'driver-earnings',
     get PAYMENT_DETAIL() {
       return `/${this.ROOT}/${this.PAYMENT_DETAIL_ROOT}`;
     },
@@ -68,6 +69,9 @@ export const PAGE_ROUTE = {
     },
     get ORDERS_CASH() {
       return `/${this.ROOT}/${this.ORDERS_CASH_ROOT}`;
+    },
+    get DRIVER_EARNINGS() {
+      return `/${this.ROOT}/${this.DRIVER_EARNINGS_ROOT}`;
     },
   },
   PAYMENT_DRIVER: {

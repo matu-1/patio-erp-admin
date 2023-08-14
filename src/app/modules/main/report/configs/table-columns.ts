@@ -18,6 +18,10 @@ import { Order } from '../interfaces/order.interface';
 import { PaymentDetail } from '../interfaces/payment-detail.interface';
 import { InvoiceByYear } from '../interfaces/invoice-by-year.interface';
 import { DriverDto } from '../interfaces/driver.interface';
+import {
+  DriverEarning,
+  EarningDetail,
+} from '../interfaces/driver-earnings.interface';
 
 export const paymentDetailColumns: TableColumns<PaymentDetail> = [
   {
@@ -910,5 +914,103 @@ export const orderCashColumns: TableColumns<Order> = [
     field: 'createdAt',
     headerName: 'Creado el',
     valueFormatter: ({ createdAt }) => FormatDate.date(createdAt),
+  },
+];
+
+export const driverEarningColumns: TableColumns<DriverEarning> = [
+  {
+    field: 'id',
+    headerName: 'Id',
+  },
+  {
+    field: 'name',
+    headerName: 'Name',
+  },
+  {
+    field: 'email',
+    headerName: 'Email',
+  },
+  {
+    field: 'phone',
+    headerName: 'Phone',
+  },
+  {
+    field: 'modality',
+    headerName: 'Modality',
+  },
+  {
+    field: 'total',
+    headerName: 'Total',
+    valueFormatter: ({ total }) => formatNumber(total, 'es', '.2-2'),
+  },
+  {
+    field: 'actions',
+    headerName: 'Actions',
+  },
+];
+
+export const earningDetailColumns: TableColumns<EarningDetail> = [
+  {
+    field: 'date',
+    headerName: 'Date',
+  },
+  {
+    field: 'quantity',
+    headerName: 'Quantity',
+  },
+  {
+    field: 'totalEarning',
+    headerName: 'Earning',
+    valueFormatter: ({ totalEarning }) => formatToNumber(totalEarning),
+  },
+  {
+    field: 'tips',
+    headerName: 'Tips',
+    valueFormatter: ({ tips }) => formatToNumber(tips),
+  },
+  {
+    field: 'discounts',
+    headerName: 'Discounts',
+  },
+  {
+    field: 'extraEarning',
+    headerName: 'Extra Earning',
+  },
+  {
+    field: 'extraEarningPoints',
+    headerName: 'Earning Points',
+  },
+  {
+    field: 'discountsService',
+    headerName: 'Discounts Service',
+    valueFormatter: ({ discountsService }) => formatToNumber(discountsService),
+  },
+  {
+    field: 'hoursWorked',
+    headerName: 'Hours Worked',
+    valueFormatter: ({ hoursWorked }) => formatToNumber(hoursWorked),
+  },
+  {
+    field: 'totalBonus',
+    headerName: 'Bonus',
+  },
+  {
+    field: 'timingExtraAmount',
+    headerName: 'Amount Timing',
+  },
+  {
+    field: 'timingBonus',
+    headerName: 'Amount by Timing',
+  },
+  {
+    field: 'totalDistance',
+    headerName: 'Distance (mi)',
+    valueFormatter: ({ totalDistance }) =>
+      totalDistance ? meterToMile(totalDistance) : '---',
+  },
+  {
+    field: 'total',
+    headerName: 'Total',
+    valueFormatter: ({ total }) => formatToNumber(total),
   },
 ];

@@ -1,0 +1,16 @@
+<div class="title-btn">
+  <h2 mat-dialog-title>{{data.name}} - <small>{{data.id}}</small></h2>
+  <button mat-button (click)="download()">Exportar</button>
+</div>
+<mat-dialog-content>
+  <app-data-table
+    class="dt-unstyle mb-3"
+    [rows]="data.detail"
+    [columns]="earningDetailColumns"
+    [showSearcher]="false"
+    [showPagination]="false"
+  ></app-data-table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

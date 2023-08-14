@@ -114,6 +114,11 @@ export const MENU: MenuItem[] = [
             icon: 'remove',
             route: PAGE_ROUTE.REPORT.ORDERS_CASH,
           },
+          {
+            label: 'Ganancias driver',
+            icon: 'remove',
+            route: PAGE_ROUTE.REPORT.DRIVER_EARNINGS,
+          },
         ],
       },
     ],
