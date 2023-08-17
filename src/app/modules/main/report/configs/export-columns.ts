@@ -5,7 +5,6 @@ import { FormatDate } from 'src/app/utils/format.date.util';
 import { formatToNumber, meterToMile } from 'src/app/utils/utils';
 import { CollectMerchantDto } from '../interfaces/collect-merchant.interface';
 import {
-  BankAccountType,
   HoursWorkedDriver,
   OrderDto,
 } from '../interfaces/hours-worked-driver.interface';
@@ -131,6 +130,12 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
     field: 'hoursWorked',
     headerName: 'Horas',
     valueFormatter: ({ hoursWorked }) => DateUtils.formatToTimer(hoursWorked),
+  },
+  {
+    field: 'pausedTime',
+    headerName: 'Paused Time',
+    valueFormatter: ({ pausedTime }) =>
+      DateUtils.formatToTimer(pausedTime ?? 0),
   },
   {
     field: 'totalEarning',
@@ -362,10 +367,10 @@ export const collectMerchantReportColumns: TableColumns<CollectMerchantDto> = [
     field: 'PAYMENT MODE',
     headerName: 'Payment Mode',
   },
-  {
-    field: 'BASIC FEE',
-    headerName: 'Basic Fee Driver',
-  },
+  // {
+  //   field: 'BASIC FEE',
+  //   headerName: 'Basic Fee Driver',
+  // },
   {
     field: 'basicFeeOrder',
     headerName: 'Basic Fee Order',
@@ -399,8 +404,8 @@ export const collectMerchantReportColumns: TableColumns<CollectMerchantDto> = [
   { field: 'DELIVERY TIME', headerName: 'Delivery Time' },
   { field: 'ARRIVED TIME', headerName: 'Arrived Time' },
   { field: 'DISTANCE MILES', headerName: 'Distance Miles' },
-  { field: 'vehicleType', headerName: 'Vehicle Type' },
-  { field: 'vehicleTypeDriver', headerName: 'Vehicle Type Driver' },
+  { field: 'vehicleType', headerName: 'Vehicle Type Order' },
+  // { field: 'vehicleTypeDriver', headerName: 'Vehicle Type Driver' },
   {
     field: 'observations',
     headerName: 'Observations',

@@ -30,4 +30,5 @@ export interface EarningDetail {
   totalPrepaidAmount: number;
   timingBonus: number;
   amountHour?: number;
+  pausedTime: number;
 }

@@ -30,6 +30,7 @@ export interface HoursWorkedDriver {
   averageCompleted: number;
   comments?: string;
   timingBonus: number;
+  pausedTime?: number;
 }
 
 export interface BankAccount {
@@ -94,6 +95,7 @@ export interface TimingDto {
   timing_id: number;
   startFinal: Date;
   bonus: Date;
+  pausedTime: number;
 }
 
 export interface HoursWorkedDto {

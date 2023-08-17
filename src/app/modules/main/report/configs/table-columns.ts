@@ -239,6 +239,12 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     valueFormatter: ({ hoursWorked }) => DateUtils.formatToTimer(hoursWorked),
   },
   {
+    field: 'pausedTime',
+    headerName: 'Paused Time',
+    valueFormatter: ({ pausedTime }) =>
+      DateUtils.formatToTimer(pausedTime ?? 0),
+  },
+  {
     field: 'totalEarning',
     headerName: 'Ganancia por Hora',
     valueFormatter: ({ totalEarning, modalityId }) =>
@@ -540,6 +546,11 @@ export const timingsColumns: TableColumns<TimingDto> = [
     valueFormatter: ({ startFinal, endFinal }) =>
       DateUtils.formatToTimer(DateUtils.diff(endFinal, startFinal, 'h')),
   },
+  {
+    field: 'pausedTime',
+    headerName: 'Paused Time',
+    valueFormatter: ({ pausedTime }) => DateUtils.formatToTimer(pausedTime),
+  },
 ];
 
 const BASE_WITH_TIP = 'Tarifa base + Propina';
@@ -785,10 +796,10 @@ export const collectMerchantColumns: TableColumns<CollectMerchantDto> = [
   { field: 'DELIVERY TIME', headerName: 'Delivery Time' },
   { field: 'ARRIVED TIME', headerName: 'Arrived Time' },
   { field: 'DISTANCE MILES', headerName: 'Distance Miles' },
-  { field: 'BASIC FEE', headerName: 'Basic Fee Driver' },
+  // { field: 'BASIC FEE', headerName: 'Basic Fee Driver' },
   { field: 'basicFeeOrder', headerName: 'Basic Fee Order' },
-  { field: 'vehicleType', headerName: 'Vehicle Type' },
-  { field: 'vehicleTypeDriver', headerName: 'Vehicle Type Driver' },
+  { field: 'vehicleType', headerName: 'Vehicle Type Order' },
+  // { field: 'vehicleTypeDriver', headerName: 'Vehicle Type Driver' },
   {
     field: 'observations',
     headerName: 'Observations',
@@ -988,7 +999,8 @@ export const earningDetailColumns: TableColumns<EarningDetail> = [
   {
     field: 'hoursWorked',
     headerName: 'Hours Worked',
-    valueFormatter: ({ hoursWorked }) => formatToNumber(hoursWorked),
+    valueFormatter: ({ hoursWorked }) =>
+      DateUtils.formatToTimer(hoursWorked ?? 0),
   },
   {
     field: 'totalBonus',
@@ -1007,6 +1019,12 @@ export const earningDetailColumns: TableColumns<EarningDetail> = [
     headerName: 'Distance (mi)',
     valueFormatter: ({ totalDistance }) =>
       totalDistance ? meterToMile(totalDistance) : '---',
+  },
+  {
+    field: 'pausedTime',
+    headerName: 'Paused Time',
+    valueFormatter: ({ pausedTime }) =>
+      DateUtils.formatToTimer(pausedTime ?? 0),
   },
   {
     field: 'total',
