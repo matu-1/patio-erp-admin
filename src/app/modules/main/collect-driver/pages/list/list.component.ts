@@ -59,7 +59,7 @@ export class ListComponent implements OnInit {
       isPayment: Number(isPayment),
       start: new Date(start),
       end: new Date(end),
-      category: category ? Number(category) : undefined,
+      // category: category ? Number(category) : undefined,
     });
   }
 
