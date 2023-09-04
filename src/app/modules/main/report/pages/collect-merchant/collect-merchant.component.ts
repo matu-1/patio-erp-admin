@@ -9,6 +9,7 @@ import { collectMerchantColumns } from '../../configs/table-columns';
 import { CollectMerchantDto } from '../../interfaces/collect-merchant.interface';
 import { ReportService } from '../../services/report.service';
 import { collectMerchantReportColumns } from '../../configs/export-columns';
+import { WeekType } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-collect-merchant',
@@ -24,7 +25,16 @@ export class CollectMerchantComponent implements OnInit {
   constructor(private reportService: ReportService) {}
 
   ngOnInit(): void {
+    this.resetForm();
     this.getMerchants();
+  }
+
+  resetForm() {
+    const { start, end } = this.form.value.week as WeekType;
+    this.form.patchValue({ start, end });
+    this.form.get('week')?.valueChanges.subscribe(({ start, end }) => {
+      this.form.patchValue({ start, end });
+    });
   }
 
   async getCollectMerchants() {
@@ -33,7 +43,8 @@ export class CollectMerchantComponent implements OnInit {
     const res = await handleRequest(() =>
       this.reportService.getCollectMerchants({
         ...value,
-        merchants: value.merchants.value,
+        // merchants: value.merchants.value,
+        start: DateUtils.getMinHourMoment(DateUtils.getMaxHour(value.start)),
         end: DateUtils.getMaxHour(value.end),
       })
     );

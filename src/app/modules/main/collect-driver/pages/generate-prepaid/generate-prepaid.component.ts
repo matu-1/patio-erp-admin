@@ -46,7 +46,7 @@ export class GeneratePrepaidComponent implements OnInit {
     const res = await handleRequest(() =>
       this.collectDriverService.getPaymentsDriver({
         ...value,
-        start: value.week.start,
+        start: DateUtils.getMinHour(value.week.start),
         end: DateUtils.getMaxHour(value.week.end),
         category: categoryValue.cash,
       })

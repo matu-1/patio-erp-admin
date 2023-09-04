@@ -6,7 +6,7 @@ import {
 import { CONFIG } from 'src/app/constants/config.constant';
 import { months } from 'src/app/constants/months.constant';
 import { DateUtils } from 'src/app/utils/date.util';
-import { generateYears } from 'src/app/utils/utils';
+import { generateYears, getWeeks } from 'src/app/utils/utils';
 import { CustomValidators } from 'src/app/utils/validators';
 
 export const paymentDetailSchema: TextFieldSchema = [
@@ -415,12 +415,18 @@ export const editBankAccountZelleSchema: TextFieldSchema = [
   },
 ];
 
+const weeksOptions = getWeeks().map((item) => ({
+  label: item.name,
+  value: item,
+}));
+
 export const collectMerchantSchema: TextFieldSchema = [
   ...hoursWorkedFilterSchema.slice(0, 2),
   {
     label: 'Merchants',
     name: 'merchants',
-    fieldType: TextFieldType.Autocomplete,
+    fieldType: TextFieldType.Dropdown,
+    multiple: true,
     getOptionLabel: (value) => value?.label,
     df: '25%',
     validators: [
@@ -430,6 +436,14 @@ export const collectMerchantSchema: TextFieldSchema = [
         validatorFn: Validators.required,
       },
     ],
+  },
+  {
+    label: 'Week',
+    name: 'week',
+    value: weeksOptions[0].value as any,
+    fieldType: TextFieldType.Dropdown,
+    options: weeksOptions,
+    df: '20%',
   },
 ];
 
