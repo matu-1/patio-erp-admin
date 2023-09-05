@@ -11,6 +11,7 @@ import { handleRequestPg, handleRequest } from 'src/app/utils/handle-request';
 import { InvoiceService } from '../../services/invoice.service';
 import { FormArray, FormGroup, AbstractControl } from '@angular/forms';
 import { switchMap } from 'rxjs';
+import { ReportService } from '../../../report/services/report.service';
 
 @Component({
   selector: 'app-create',
@@ -29,10 +30,12 @@ export class CreateComponent implements OnInit {
 
   constructor(
     private location: Location,
-    private invoiceService: InvoiceService
+    private invoiceService: InvoiceService,
+    private reportService: ReportService
   ) {}
 
   ngOnInit(): void {
+    this.getMerchants();
     this.changeValues();
     this.form.addControl(
       'discounts',
@@ -76,6 +79,19 @@ export class CreateComponent implements OnInit {
     this.formDiscounts.removeAt(index);
   }
 
+  async getMerchants() {
+    const res = await handleRequest(() => this.reportService.getMerchants());
+    if (res)
+      this.createInvoiceSchema[0].options = res.data.map(({ id, name }) => ({
+        value: id,
+        label: `${id} / ${name}`,
+      }));
+  }
+
+  get isLoading() {
+    return !this.createInvoiceSchema[0].options;
+  }
+
   async save() {
     const value = this.form.value;
     const res = await handleRequestPg(() => {
@@ -83,6 +99,8 @@ export class CreateComponent implements OnInit {
         switchMap((res) =>
           this.invoiceService.create({
             ...value,
+            merchant: value.merchant.label.split(' / ')[1],
+            merchantId: value.merchant.value,
             backupUrl: res.data,
           })
         )

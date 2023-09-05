@@ -1,7 +1,7 @@
 <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
 <app-title-bar [title]="title"></app-title-bar>
 <form [formGroup]="form" markAllSubmit (validSubmit)="save()">
-  <app-simple-card class="mb-3">
+  <app-simple-card class="mb-3" [isLoading]="isLoading">
     <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">
       <app-text-field
         *ngFor="let value of createInvoiceSchema"

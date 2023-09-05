@@ -14,6 +14,7 @@ export interface Invoice {
   startDate: Date;
   endDate: Date;
   backupUrl: string;
+  merchantId: number;
   discounts: Discount[];
 }
 

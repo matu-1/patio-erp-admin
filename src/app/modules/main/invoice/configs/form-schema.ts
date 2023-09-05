@@ -4,22 +4,22 @@ import {
   TextFieldType,
 } from 'src/app/components/text-field/text-field.interface';
 import { DateUtils } from 'src/app/utils/date.util';
+import { getWeeks } from 'src/app/utils/utils';
 import { CustomValidators } from 'src/app/utils/validators';
+
+const weeksOptions = getWeeks(1);
 
 export const createInvoiceSchema: TextFieldSchema = [
   {
     name: 'merchant',
     label: 'Merchant',
+    fieldType: TextFieldType.Autocomplete,
+    getOptionLabel: (value) => value?.label,
     validators: [
       {
         name: 'required',
         message: 'Is required',
         validatorFn: Validators.required,
-      },
-      {
-        message: 'Minimum 3 characters',
-        name: 'minlength',
-        validatorFn: Validators.minLength(3),
       },
     ],
     xs: '100%',
@@ -140,7 +140,7 @@ export const createInvoiceSchema: TextFieldSchema = [
   {
     name: 'startDate',
     label: 'Start Date',
-    value: new Date(),
+    value: weeksOptions[0].start,
     fieldType: TextFieldType.DatePicker,
     validators: [
       {
@@ -155,7 +155,7 @@ export const createInvoiceSchema: TextFieldSchema = [
   {
     name: 'endDate',
     label: 'End Date',
-    value: new Date(),
+    value: weeksOptions[0].end,
     fieldType: TextFieldType.DatePicker,
     validators: [
       {
@@ -266,5 +266,5 @@ export const invoiceFilterSchema: TextFieldSchema = [
     ],
     sm: '25%',
     df: '14%',
-  }
+  },
 ];
