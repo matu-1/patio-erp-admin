@@ -43,7 +43,7 @@ export class CollectMerchantComponent implements OnInit {
     const res = await handleRequest(() =>
       this.reportService.getCollectMerchants({
         ...value,
-        // merchants: value.merchants.value,
+        merchants: value.merchants.value,
         start: DateUtils.getMinHourMoment(DateUtils.getMaxHour(value.start)),
         end: DateUtils.getMaxHour(value.end),
       })
