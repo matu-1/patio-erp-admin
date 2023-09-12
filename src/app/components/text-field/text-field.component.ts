@@ -7,9 +7,10 @@ import {
   KeyValueDiffers,
   OnInit,
 } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { map, Observable, startWith } from 'rxjs';
+import { MatOptionSelectionChange } from '@angular/material/core';
+import { debounceTime, map, Observable, startWith } from 'rxjs';
 import { TextFieldValue, TextFieldType } from './text-field.interface';
 
 @Component({
@@ -28,6 +29,8 @@ export class TextFieldComponent implements OnInit, DoCheck {
   filteredOptions?: Observable<any[]>; //filter autocomplete
   value = this.textFieldValue?.value;
   private textFieldValueDiffer!: KeyValueDiffer<string, any>;
+  searchControl = new FormControl();
+  selectionMultipleValues: Record<number, boolean> = {}
 
   constructor(private differs: KeyValueDiffers) {}
 
@@ -49,7 +52,11 @@ export class TextFieldComponent implements OnInit, DoCheck {
 
   textFieldValueChanges(_: KeyValueChanges<string, any>) {
     if (this.textFieldValue.options && !this.filteredOptions)
-      this.changeValueAutocomplete();
+      this.changeValueAutocomplete(
+        this.textFieldValue.fieldType == TextFieldType.DropdownMultiSearch
+          ? this.searchControl
+          : this.control
+      );
   }
 
   get control() {
@@ -62,11 +69,12 @@ export class TextFieldComponent implements OnInit, DoCheck {
       : '';
   }
 
-  private changeValueAutocomplete() {
-    this.filteredOptions = this.control?.valueChanges.pipe(
+  private changeValueAutocomplete(control: AbstractControl | null) {
+    this.filteredOptions = control?.valueChanges.pipe(
       startWith(''),
+      debounceTime(500),
       map((value) => {
-        // console.log('changeValue:value', value);
+        console.log('changeValue:value', value);
         const parsedValue =
           typeof value == 'string' ? value : this.getOptionLabel(value);
         return this.filter(parsedValue);
@@ -93,8 +101,8 @@ export class TextFieldComponent implements OnInit, DoCheck {
       this.control.setValue(this.value);
   }
 
-  clearAutocomplete() {
-    this.control?.setValue('');
+  clearAutocomplete(control = this.control) {
+    control?.setValue('');
     this.value = '';
   }
 
@@ -107,5 +115,10 @@ export class TextFieldComponent implements OnInit, DoCheck {
     } else {
       this.control?.setValue('');
     }
+  }
+
+  changeOption(event: MatOptionSelectionChange) {
+    console.log("selection multiple value:", this.control?.value);
+    console.log('event', event.source.value, event.source.selected);
   }
 }

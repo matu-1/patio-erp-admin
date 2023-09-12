@@ -146,6 +146,44 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field
+    *ngSwitchCase="TextFieldType.DropdownMultiSearch"
+    appearance="legacy"
+    [class]="class!"
+    [ngClass]="{ 'full-width': textFieldValue.fullWidth ?? true }"
+  >
+    <mat-label>{{ textFieldValue.label }}</mat-label>
+    <mat-select [formControlName]="textFieldValue.name" [multiple]="true">
+      <mat-optgroup class="pt-2">
+        <mat-form-field class="full-width">
+          <mat-label>Search</mat-label>
+          <input matInput [formControl]="searchControl" />
+          <button
+            mat-icon-button
+            matSuffix
+            *ngIf="searchControl?.value"
+            (click)="clearAutocomplete(searchControl)"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </mat-optgroup>
+      <mat-optgroup *ngIf="(filteredOptions | async)?.length == 0">
+        No data
+      </mat-optgroup>
+      <mat-option
+        *ngFor="let option of filteredOptions | async"
+        [value]="option.value"
+        (onSelectionChange)="changeOption($event)"
+        >{{ option.label }}</mat-option
+      >
+    </mat-select>
+    <mat-error *ngFor="let error of textFieldValue.validators">
+      <ng-container *ngIf="control?.hasError(error.name)">
+        {{ error.message }}
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field
     *ngSwitchDefault
     appearance="legacy"
     [class]="class!"

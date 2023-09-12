@@ -7,7 +7,8 @@ export enum TextFieldType {
   Autocomplete,
   Radio,
   DatePicker,
-  File
+  File,
+  DropdownMultiSearch
 }
 
 export interface Option {
