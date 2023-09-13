@@ -30,7 +30,7 @@ export class TextFieldComponent implements OnInit, DoCheck {
   value = this.textFieldValue?.value;
   private textFieldValueDiffer!: KeyValueDiffer<string, any>;
   searchControl = new FormControl();
-  selectionMultipleValues: Record<number, boolean> = {}
+  selectionMultipleValues: Record<number, number> = {};
 
   constructor(private differs: KeyValueDiffers) {}
 
@@ -74,7 +74,7 @@ export class TextFieldComponent implements OnInit, DoCheck {
       startWith(''),
       debounceTime(500),
       map((value) => {
-        console.log('changeValue:value', value);
+        // console.log('changeValue:value', value);
         const parsedValue =
           typeof value == 'string' ? value : this.getOptionLabel(value);
         return this.filter(parsedValue);
@@ -118,7 +118,18 @@ export class TextFieldComponent implements OnInit, DoCheck {
   }
 
   changeOption(event: MatOptionSelectionChange) {
-    console.log("selection multiple value:", this.control?.value);
-    console.log('event', event.source.value, event.source.selected);
+    if (!event.isUserInput) return;
+    // console.log('changeOption:selection multiple value:', this.control?.value);
+    // console.log('event', event.source.value, event.source.selected);
+    if (this.selectionMultipleValues[event.source.value])
+      delete this.selectionMultipleValues[event.source.value];
+    else this.selectionMultipleValues[event.source.value] = event.source.value;
+    // console.log('this.selectionMultipleValues', this.selectionMultipleValues);
+  }
+
+  openChange(event: any) {
+    // console.log('openChange:event', event);
+    this.control?.setValue(Object.values(this.selectionMultipleValues));
+    if (!event) this.searchControl.setValue('');
   }
 }

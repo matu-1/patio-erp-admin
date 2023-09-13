@@ -1,3 +1,6 @@
 .full-width {
   width: 100%;
 }
+.search-tool ::ng-deep > span{
+  padding-top: 0.5rem !important;
+}

@@ -152,8 +152,12 @@
     [ngClass]="{ 'full-width': textFieldValue.fullWidth ?? true }"
   >
     <mat-label>{{ textFieldValue.label }}</mat-label>
-    <mat-select [formControlName]="textFieldValue.name" [multiple]="true">
-      <mat-optgroup class="pt-2">
+    <mat-select
+      [formControlName]="textFieldValue.name"
+      [multiple]="true"
+      (openedChange)="openChange($event)"
+    >
+      <mat-optgroup class="search-tool">
         <mat-form-field class="full-width">
           <mat-label>Search</mat-label>
           <input matInput [formControl]="searchControl" />
