@@ -1,5 +1,6 @@
 import { formatDate, formatNumber } from '@angular/common';
 import { TableColumns } from 'src/app/components/data-table/data-table.interface';
+import { FLAG_TEXT } from 'src/app/constants/constant';
 import { categoryText } from '../constants/payment-method';
 import { CollectDriver } from '../interfaces/payment-driver.interface';
 
@@ -68,5 +69,14 @@ export const paymentsDriverColumns: TableColumns<CollectDriver> = [
   {
     field: 'actions',
     headerName: 'Acciones',
+  },
+];
+
+export const paymentsDriverPrepaidColumns: TableColumns<CollectDriver> = [
+  ...paymentsDriverColumns.slice(0, -1),
+  {
+    field: 'showDiscount',
+    headerName: 'Show Discount',
+    valueFormatter: ({ showDiscount }) => FLAG_TEXT[showDiscount],
   },
 ];

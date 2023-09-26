@@ -20,6 +20,7 @@ export interface CollectDriver {
   averageCompleted?: number;
   comments?: string;
   detail?: HoursWorkedDriver;
+  showDiscount: number;
 }
 
 export interface PayDriverDto {

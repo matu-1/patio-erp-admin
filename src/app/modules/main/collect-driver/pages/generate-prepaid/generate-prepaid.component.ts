@@ -5,7 +5,7 @@ import { CollectDriverService } from '../../services/collect-driver.service';
 import { CollectDriver } from '../../interfaces/payment-driver.interface';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { collectPrepaidFilterSchema } from '../../configs/form-schema';
-import { paymentsDriverColumns } from '../../configs/table-columns';
+import { paymentsDriverPrepaidColumns } from '../../configs/table-columns';
 import { categoryValue } from '../../constants/payment-method';
 import { Location } from '@angular/common';
 import { Breadcrumbs } from 'src/app/components/breadcrumbs/breadcrumbs.interface';
@@ -24,7 +24,7 @@ export class GeneratePrepaidComponent implements OnInit {
   collectPrepaidSchema = [...collectPrepaidFilterSchema];
   form = buildform(collectPrepaidFilterSchema);
   formPrepaid = buildform(this.collectPrepaidSchema);
-  paymentsDriverColumns = paymentsDriverColumns;
+  paymentsDriverColumns = paymentsDriverPrepaidColumns;
   breadcrumbs: Breadcrumbs = [
     { path: PAGE_ROUTE.COLLECT_DRIVER.LIST, title: 'Cobros Driver' },
     { path: '', title: this.title },
