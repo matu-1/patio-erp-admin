@@ -36,6 +36,7 @@ import {
   RefreshPaymentDto,
   UpdateBankAccount,
 } from '../interfaces/payment-detail.interface';
+import { CONFIG } from 'src/app/constants/config.constant';
 
 @Injectable({
   providedIn: 'root',
@@ -142,6 +143,15 @@ export class ReportService {
     return this.http.get<Response<Merchant[]>>(API.MERCHANT.GET_MERCHANTS, {
       ...PATIO_STORE_CONFIG_HTTP,
     });
+  }
+
+  getMerchantsByCity(cityId = CONFIG.CITY_EEUU) {
+    return this.http.get<Response<Merchant[]>>(
+      routeParams(API.MERCHANT.GET_MERCHANTS_CITY, { cityId }),
+      {
+        ...PATIO_STORE_CONFIG_HTTP,
+      }
+    );
   }
 
   getInvoicesByYear(year: number) {

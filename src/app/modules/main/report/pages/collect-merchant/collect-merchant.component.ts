@@ -52,7 +52,7 @@ export class CollectMerchantComponent implements OnInit {
   }
 
   async getMerchants() {
-    const res = await handleRequest(() => this.reportService.getMerchants());
+    const res = await handleRequest(() => this.reportService.getMerchantsByCity());
     if (res)
       this.collectMerchantSchema[2].options = res.data.map(({ id, name }) => ({
         value: id,
