@@ -595,6 +595,7 @@ export const orderColumns: TableColumns<Order> = [
     valueFormatter: ({ assignedDrivers }) =>
       assignedDrivers ? assignedDrivers[0].fare_company_delivery : '---',
   },
+  { field: 'fare_merchant', headerName: 'Fee Merchant' },
   {
     field: 'vehicleType',
     headerName: 'Tipo Vehículo',

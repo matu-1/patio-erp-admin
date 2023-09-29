@@ -160,7 +160,7 @@
       <mat-optgroup class="search-tool">
         <mat-form-field class="full-width">
           <mat-label>Search</mat-label>
-          <input matInput [formControl]="searchControl" />
+          <input matInput [formControl]="searchControl" (keydown)="$event.stopPropagation()" />
           <button
             mat-icon-button
             matSuffix
