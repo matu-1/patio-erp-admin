@@ -371,10 +371,10 @@ export const collectMerchantReportColumns: TableColumns<CollectMerchantDto> = [
   //   field: 'BASIC FEE',
   //   headerName: 'Basic Fee Driver',
   // },
-  {
-    field: 'basicFeeOrder',
-    headerName: 'Basic Fee Order',
-  },
+  // {
+  //   field: 'basicFeeOrder',
+  //   headerName: 'Basic Fee Order',
+  // },
   { field: 'feeMerchant', headerName: 'Fee Merchant' },
   {
     field: 'TIP ORIGINAL',

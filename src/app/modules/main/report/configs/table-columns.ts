@@ -798,7 +798,7 @@ export const collectMerchantColumns: TableColumns<CollectMerchantDto> = [
   { field: 'ARRIVED TIME', headerName: 'Arrived Time' },
   { field: 'DISTANCE MILES', headerName: 'Distance Miles' },
   // { field: 'BASIC FEE', headerName: 'Basic Fee Driver' },
-  { field: 'basicFeeOrder', headerName: 'Basic Fee Order' },
+  // { field: 'basicFeeOrder', headerName: 'Basic Fee Order' },
   { field: 'feeMerchant', headerName: 'Fee Merchant' },
   { field: 'vehicleType', headerName: 'Vehicle Type Order' },
   // { field: 'vehicleTypeDriver', headerName: 'Vehicle Type Driver' },
