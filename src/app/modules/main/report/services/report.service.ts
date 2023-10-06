@@ -37,6 +37,7 @@ import {
   UpdateBankAccount,
 } from '../interfaces/payment-detail.interface';
 import { CONFIG } from 'src/app/constants/config.constant';
+import { Catering } from '../interfaces/catering.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -189,5 +190,12 @@ export class ReportService {
         ...PATIO_STORE_CONFIG_HTTP,
       }
     );
+  }
+
+  getCaterings(dto: FindCashOrderDto) {
+    return this.http.get<Response<Catering[]>>(API.ORDER.GET_CATERING, {
+      params: ObjectUtils.clear(dto) as any,
+      ...PATIO_STORE_CONFIG_HTTP,
+    });
   }
 }

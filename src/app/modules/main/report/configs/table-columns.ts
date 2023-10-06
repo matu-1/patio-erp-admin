@@ -18,6 +18,7 @@ import { Order } from '../interfaces/order.interface';
 import { PaymentDetail } from '../interfaces/payment-detail.interface';
 import { InvoiceByYear } from '../interfaces/invoice-by-year.interface';
 import { DriverDto } from '../interfaces/driver.interface';
+import { Catering } from '../interfaces/catering.interface';
 import {
   DriverEarning,
   EarningDetail,
@@ -1032,5 +1033,30 @@ export const earningDetailColumns: TableColumns<EarningDetail> = [
     field: 'total',
     headerName: 'Total',
     valueFormatter: ({ total }) => formatToNumber(total),
+  },
+];
+
+export const cateringColumns: TableColumns<Catering> = [
+  {
+    field: 'merchant_id',
+    headerName: 'Id',
+  },
+  {
+    field: 'merchant',
+    headerName: 'Merchant',
+  },
+  {
+    field: 'quantity',
+    headerName: 'Quantity',
+  },
+  {
+    field: 'tips',
+    headerName: 'Tips',
+    valueFormatter: ({ tips }) => formatToNumber(tips),
+  },
+  {
+    field: 'fareMerchant',
+    headerName: 'Fee Merchant',
+    valueFormatter: ({ fareMerchant }) => formatToNumber(fareMerchant),
   },
 ];

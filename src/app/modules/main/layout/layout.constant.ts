@@ -119,6 +119,11 @@ export const MENU: MenuItem[] = [
             icon: 'remove',
             route: PAGE_ROUTE.REPORT.DRIVER_EARNINGS,
           },
+          {
+            label: 'Catering',
+            icon: 'remove',
+            route: PAGE_ROUTE.REPORT.CATERING,
+          },
         ],
       },
     ],

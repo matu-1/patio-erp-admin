@@ -40,6 +40,7 @@ export const PAGE_ROUTE = {
     DRIVER_DETAIL_ROOT: 'drivers/:id',
     ORDERS_CASH_ROOT: 'orders-cash',
     DRIVER_EARNINGS_ROOT: 'driver-earnings',
+    CATERING_ROOT: 'catering',
     get PAYMENT_DETAIL() {
       return `/${this.ROOT}/${this.PAYMENT_DETAIL_ROOT}`;
     },
@@ -72,6 +73,9 @@ export const PAGE_ROUTE = {
     },
     get DRIVER_EARNINGS() {
       return `/${this.ROOT}/${this.DRIVER_EARNINGS_ROOT}`;
+    },
+    get CATERING() {
+      return `/${this.ROOT}/${this.CATERING_ROOT}`;
     },
   },
   PAYMENT_DRIVER: {

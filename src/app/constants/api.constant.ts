@@ -76,6 +76,7 @@ export const API = {
     GET_ALL: `${PATIO_STORE_API_URL}/orders`,
     GET_COLLECT_MERCHANT: `${PATIO_STORE_API_URL}/orders/report/merchants`,
     GET_CASH: `${PATIO_STORE_API_URL}/orders/cash/complete`,
+    GET_CATERING: `${PATIO_STORE_API_URL}/orders/report/catering`,
   },
   BANK_ACCOUNT: {
     GET_BY_ID: `${PATIO_STORE_API_URL}/bank-account/:id`,
