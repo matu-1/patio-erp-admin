@@ -34,6 +34,10 @@
         <span>Service</span>
         <p>Delivery / Standard</p>
       </div>
+      <div class="text-box">
+        <span>Instructions</span>
+        <p>{{ order.instructions }}</p>
+      </div>
     </div>
     <hr *ngIf="order" />
     <div *ngIf="order" class="order-section">

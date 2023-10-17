@@ -46,6 +46,7 @@ export class OrderTrackingComponent
 
   ngOnInit(): void {
     this.orderIntervalTimer = setInterval(() => this.getOrder(), TIME);
+    this.addChat();
   }
 
   ngAfterViewInit(): void {
@@ -219,5 +220,14 @@ export class OrderTrackingComponent
       order.assignedDrivers![0].phoneNumber
     }&text=Holaa`;
     window.open(link, '_blank');
+  }
+
+  addChat() {
+    //<script src="//code.jivosite.com/widget/cWUgmH4bLa" async></script>
+    const body = document.body;
+    const jivochat = document.createElement('script');
+    jivochat.async = true;
+    jivochat.src = '//code.jivosite.com/widget/cWUgmH4bLa';
+    body.appendChild(jivochat);
   }
 }

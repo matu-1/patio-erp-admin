@@ -35,6 +35,7 @@ export interface OrderDto {
   merchant: Merchant;
   assignedDrivers?: AssignedDriver[];
   products?: Product[];
+  instructions: string;
 }
 
 export interface AssignedDriver {
