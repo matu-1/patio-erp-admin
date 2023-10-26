@@ -31,6 +31,7 @@ export interface HoursWorkedDriver {
   comments?: string;
   timingBonus: number;
   pausedTime?: number;
+  bonus: Bonus[];
 }
 
 export interface BankAccount {
@@ -102,4 +103,16 @@ export interface HoursWorkedDto {
   start: Date;
   end: Date;
   cityId?: number;
+}
+
+export interface Bonus {
+  id: number;
+  title: string;
+  amount: number;
+  start: Date;
+  end: Date;
+  cityId: number;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: null;
 }

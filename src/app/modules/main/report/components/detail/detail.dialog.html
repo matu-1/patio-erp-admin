@@ -20,9 +20,20 @@
     <button mat-button (click)="timingsDownload()">Exportar</button>
   </div>
   <app-data-table
-    class="dt-unstyle"
+    class="dt-unstyle mb-3"
     [rows]="data.timings"
     [columns]="timingsColumns"
+    [showSearcher]="false"
+    [showPagination]="false"
+  ></app-data-table>
+  <div class="subtitle-root">
+    <h3>Bonus</h3>
+    <button mat-button (click)="bonusDownload()">Exportar</button>
+  </div>
+  <app-data-table
+    class="dt-unstyle"
+    [rows]="data.bonus"
+    [columns]="bonusColumns"
     [showSearcher]="false"
     [showPagination]="false"
   ></app-data-table>

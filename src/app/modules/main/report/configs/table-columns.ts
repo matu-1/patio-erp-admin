@@ -9,6 +9,7 @@ import { CollectMerchantDto } from '../interfaces/collect-merchant.interface';
 import { DeliveryDetail } from '../interfaces/delivery-detail.interface';
 import {
   BankAccountType,
+  Bonus,
   HoursWorkedDriver,
   OrderDto,
   TimingDto,
@@ -551,6 +552,36 @@ export const timingsColumns: TableColumns<TimingDto> = [
     field: 'pausedTime',
     headerName: 'Paused Time',
     valueFormatter: ({ pausedTime }) => DateUtils.formatToTimer(pausedTime),
+  },
+];
+
+export const bonusColumns: TableColumns<Bonus> = [
+  {
+    field: 'id',
+    headerName: 'Id',
+  },
+  {
+    field: 'title',
+    headerName: 'Titulo',
+  },
+  {
+    field: 'amount',
+    headerName: 'Monto',
+  },
+  {
+    field: 'start',
+    headerName: 'Fecha Inicial',
+    valueFormatter: ({ start }) => FormatDate.dateMoment(start),
+  },
+  {
+    field: 'end',
+    headerName: 'Fecha Final',
+    valueFormatter: ({ end }) => FormatDate.dateMoment(end),
+  },
+  {
+    field: 'createdAt',
+    headerName: 'Creado el',
+    valueFormatter: ({ createdAt }) => FormatDate.dateMoment(createdAt),
   },
 ];
 

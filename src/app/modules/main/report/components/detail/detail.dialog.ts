@@ -1,6 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ordersColumns, timingsColumns } from '../../configs/table-columns';
+import {
+  bonusColumns,
+  ordersColumns,
+  timingsColumns,
+} from '../../configs/table-columns';
 import { HoursWorkedDriver } from '../../interfaces/hours-worked-driver.interface';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
@@ -14,6 +18,7 @@ import { ordersColumnsExport } from '../../configs/export-columns';
 export class DetailDialog implements OnInit {
   ordersColumns = ordersColumns;
   timingsColumns = timingsColumns;
+  bonusColumns = bonusColumns;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: HoursWorkedDriver) {}
 
@@ -31,5 +36,9 @@ export class DetailDialog implements OnInit {
       parseByColumns(this.data.timings, timingsColumns),
       `timings`
     );
+  }
+
+  bonusDownload() {
+    ExcelUtils.download(parseByColumns(this.data.bonus, bonusColumns), `bonus`);
   }
 }
