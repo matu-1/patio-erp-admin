@@ -5,6 +5,12 @@
     <h1 *ngIf="order; else loading" class="status-text">
       {{ order.status | uppercase }}
     </h1>
+    <div *ngIf="order" class="status-container">
+      <div class="status-box"></div>
+      <div class="status-box"></div>
+      <div class="status-box"></div>
+      <div class="status-box"></div>
+    </div>
     <ng-template #loading><span class="loading">loading...</span></ng-template>
     <div *ngIf="order && order.assignedDrivers" class="order-section">
       <h2 class="subtitle">I am your driver</h2>
