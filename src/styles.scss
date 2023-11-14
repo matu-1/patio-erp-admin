@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "theme-variables";
+
 html,
 body {
   height: 100%;
@@ -169,4 +171,10 @@ button:not(.mat-button-disabled) .action-icon {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.bg-color-primary {
+  background-color: $primary-main !important;
+}
+.bg-color-accent {
+  background-color: $accent-main !important;
 }

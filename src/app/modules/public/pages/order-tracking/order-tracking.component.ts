@@ -230,4 +230,26 @@ export class OrderTrackingComponent
     jivochat.src = '//code.jivosite.com/widget/cWUgmH4bLa';
     body.appendChild(jivochat);
   }
+
+  get status() {
+    if (!this.order) return 'Loading...';
+    switch (this.order.status) {
+      case 'pending':
+      case 'confirmed':
+        return 'Cocinando';
+      case 'assigned':
+      case 'arrived':
+        return 'El driver está en camino a la tienda';
+      case 'dispatched':
+        return 'El driver se dirige a tu domicilio';
+      case 'delivered':
+      case 'complete':
+        return 'Completado';
+      case 'canceled':
+        return 'Cancelado';
+      default:
+        break;
+    }
+    return '';
+  }
 }

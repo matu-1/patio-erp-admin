@@ -3,13 +3,48 @@
   <div class="order-status">
     <mat-progress-bar *ngIf="!order" mode="indeterminate"></mat-progress-bar>
     <h1 *ngIf="order; else loading" class="status-text">
-      {{ order.status | uppercase }}
+      {{ status }}
     </h1>
     <div *ngIf="order" class="status-container">
-      <div class="status-box"></div>
-      <div class="status-box"></div>
-      <div class="status-box"></div>
-      <div class="status-box"></div>
+      <div
+        class="status-box"
+        [ngClass]="{
+          'bg-color-primary':
+            order.status == 'pending' ||
+            order.status == 'assigned' ||
+            order.status == 'arrived' ||
+            order.status == 'dispatched' ||
+            order.status == 'delivered' ||
+            order.status == 'complete'
+        }"
+      ></div>
+      <div
+        class="status-box"
+        [ngClass]="{
+          'bg-color-primary':
+            order.status == 'assigned' ||
+            order.status == 'arrived' ||
+            order.status == 'dispatched' ||
+            order.status == 'delivered' ||
+            order.status == 'complete'
+        }"
+      ></div>
+      <div
+        class="status-box"
+        [ngClass]="{
+          'bg-color-primary':
+            order.status == 'dispatched' ||
+            order.status == 'delivered' ||
+            order.status == 'complete'
+        }"
+      ></div>
+      <div
+        class="status-box"
+        [ngClass]="{
+          'bg-color-primary':
+            order.status == 'delivered' || order.status == 'complete'
+        }"
+      ></div>
     </div>
     <ng-template #loading><span class="loading">loading...</span></ng-template>
     <div *ngIf="order && order.assignedDrivers" class="order-section">
