@@ -30,6 +30,7 @@ import { ReportService } from '../../services/report.service';
 import { PaymentDriverType } from '../../../payment-driver/constants/payment-driver-type';
 import { TimingDto } from '../../interfaces/hours-worked-driver.interface';
 import { categoryValue } from '../../../collect-driver/constants/payment-method';
+import { SnackBar } from 'src/app/utils/snackbar';
 
 @Component({
   selector: 'app-hours-worked',
@@ -140,9 +141,12 @@ export class HoursWorkedComponent implements OnInit {
     return !Boolean(this.hoursWorkedFilterSchema[2].options);
   }
 
-  goDiscountsOrBonus(value: HoursWorkedDriver, type: PaymentDriverType = PaymentDriverType.Cobro) {
+  goDiscountsOrBonus(
+    value: HoursWorkedDriver,
+    type: PaymentDriverType = PaymentDriverType.Cobro
+  ) {
     //TODO: Redirect to collect driver
-    let { start, end } = this.form.value;
+    let { start, end, cityId } = this.form.value;
     start = DateUtils.getMinHour(start);
     end = DateUtils.getMaxHour(end);
     const routes = {
@@ -154,7 +158,7 @@ export class HoursWorkedComponent implements OnInit {
         value.name
       }&start=${start.toISOString()}&end=${end.toISOString()}&category=${
         categoryValue.other
-      }`
+      }&cityId=${cityId}`
     );
     window.open(url, '_bank');
   }
@@ -228,5 +232,32 @@ export class HoursWorkedComponent implements OnInit {
     return new Date(timing.startFinal) < start
       ? timing.endFinal
       : timing.startFinal;
+  }
+
+  async generatePayments() {
+    const value = this.form.value;
+    const start = DateUtils.getMinHourMoment(
+      DateUtils.getMaxHour(value.start)
+    ) as any;
+    const end = DateUtils.getMaxHourMoment(
+      DateUtils.getMaxHour(value.end)
+    ) as any;
+    const days = DateUtils.getDiffHours(end, start) / 24;
+    if (Math.round(days) != 7) {
+      SnackBar.show('Tiene que ser una semana el rango de fechas', {
+        variant: 'warning',
+      });
+      return;
+    }
+    const res = await handleRequestPg(
+      () =>
+        this.reportService.generatePayments({
+          type: 1,
+          startDate: start as any,
+          endDate: end as any,
+        }),
+      true
+    );
+    if (res) this.filter();
   }
 }

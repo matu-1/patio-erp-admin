@@ -69,4 +69,9 @@ export abstract class DateUtils {
       city == CONFIG.CITY_EEUU ? CONFIG.TZ.EE_UU : CONFIG.TZ.BOLIVIA
     );
   }
+
+  static getDiffHours(end: string | Date, start: string | Date) {
+    const duration = moment.duration(moment(end).diff(moment(start)));
+    return duration.asHours();
+  }
 }

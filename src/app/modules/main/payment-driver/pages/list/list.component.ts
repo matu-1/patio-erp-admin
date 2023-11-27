@@ -334,7 +334,7 @@ export class ListComponent implements OnInit {
         value.name
       }&start=${start.toISOString()}&end=${end.toISOString()}&category=${
         categoryValue.other
-      }`
+      }&cityId=${value.cityId}`
     );
     window.open(url, '_bank');
   }

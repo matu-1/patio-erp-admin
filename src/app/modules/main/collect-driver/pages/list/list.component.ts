@@ -23,6 +23,9 @@ import {
 import { CollectDriverService } from '../../services/collect-driver.service';
 import { EditDialog } from '../../../payment-driver/components/edit/edit.dialog';
 import { DivideDialog } from '../../components/divide/divide.dialog';
+import { ReportService } from '../../../report/services/report.service';
+import { CONFIG } from 'src/app/constants/config.constant';
+import * as moment from 'moment-timezone';
 
 @Component({
   selector: 'app-list',
@@ -42,16 +45,20 @@ export class ListComponent implements OnInit {
     private collectDriverService: CollectDriverService,
     private dialog: MatDialog,
     private location: Location,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private reportService: ReportService
   ) {}
 
   ngOnInit(): void {
     this.parseFormFromQuery();
+    this.setTimeZone(this.form.value.cityId);
     this.getPaymentsDriver();
+    this.getCities();
+    this.changeValues();
   }
 
   parseFormFromQuery() {
-    const { isPayment, driver, start, end, category } =
+    const { isPayment, driver, start, end, cityId } =
       this.activatedRoute.snapshot.queryParams;
     if (!isPayment || !driver || !start || !end) return;
     this.driver = driver;
@@ -59,6 +66,7 @@ export class ListComponent implements OnInit {
       isPayment: Number(isPayment),
       start: new Date(start),
       end: new Date(end),
+      cityId: Number(cityId),
       // category: category ? Number(category) : undefined,
     });
   }
@@ -69,10 +77,36 @@ export class ListComponent implements OnInit {
     const res = await handleRequest(() =>
       this.collectDriverService.getPaymentsDriver({
         ...value,
-        end: DateUtils.getMaxHour(value.end),
+        // end: DateUtils.getMaxHour(value.end),
+        start: DateUtils.getMinHourMoment(DateUtils.getMaxHour(value.start)),
+        end: DateUtils.getMaxHourMoment(DateUtils.getMaxHour(value.end)),
       })
     );
     if (res) this.paymentsDriver = res.data;
+  }
+
+  setTimeZone(cityId?: number) {
+    const timeZone =
+      cityId == CONFIG.CITY_EEUU ? 'America/New_York' : 'America/La_Paz';
+    moment.tz.setDefault(timeZone);
+  }
+
+  changeValues() {
+    this.form.get('cityId')?.valueChanges.subscribe((value) => {
+      this.setTimeZone(value);
+    });
+  }
+
+  async getCities() {
+    const res = await handleRequest(() => this.reportService.getCities());
+    if (res)
+      this.collectFilterSchema[4].options = [
+        // { value: undefined, label: 'All' },
+        ...res.data.map((item) => ({
+          value: item.id,
+          label: item.name,
+        })),
+      ];
   }
 
   openPaymentDlg(data: CollectDriver) {
