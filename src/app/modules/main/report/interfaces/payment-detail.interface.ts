@@ -41,6 +41,7 @@ export interface CreatePaymentDriverDto {
   startDate: Date;
   endDate: Date;
   type: number;
+  cityId?: number;
 }
 
 export interface RefreshPaymentDto {
@@ -50,6 +51,12 @@ export interface RefreshPaymentDto {
   driverId: number;
 }
 
-export interface UpdateBankAccount extends Omit<BankAccount, 'id' > {
+export interface UpdateBankAccount extends Omit<BankAccount, 'id'> {
   driverId: number;
+}
+
+export interface GenerateBonusDto {
+  start: Date;
+  end: Date;
+  cityId?: number;
 }

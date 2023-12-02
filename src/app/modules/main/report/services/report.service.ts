@@ -31,6 +31,7 @@ import {
 import { DriverEarning } from '../interfaces/driver-earnings.interface';
 import {
   CreatePaymentDriverDto,
+  GenerateBonusDto,
   GetPaymentDetailDto,
   PaymentDetail,
   RefreshPaymentDto,
@@ -197,5 +198,12 @@ export class ReportService {
       params: ObjectUtils.clear(dto) as any,
       ...PATIO_STORE_CONFIG_HTTP,
     });
+  }
+
+  generateBonusForPoints(dto: GenerateBonusDto) {
+    return this.http.post<Response<boolean>>(
+      API.PAYMENT_DRIVER.GENERATE_BONUS_POINTS,
+      dto
+    );
   }
 }

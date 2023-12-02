@@ -16,7 +16,7 @@ export const API = {
     SCHEDULE_PAYMENT: `${API_URL}/factura/schedule-payment`,
     RECALCULATE_INVOICE: `${API_URL}/factura/recalculate-invoice/:id`,
     INFO: `${API_URL}/factura/info/:id`,
-    GET_BY_YEAR: `${API_URL}/factura/invoice-by-year/:year`
+    GET_BY_YEAR: `${API_URL}/factura/invoice-by-year/:year`,
   },
   FACTURA_DETAIL: {
     GET_BY_INVOICE: `${API_URL}/detalle-factura/invoice/:id`,
@@ -56,6 +56,7 @@ export const API = {
     UPDATE: `${API_URL}/payment-driver/:id`,
     GENERATE_COLLECTION: `${API_URL}/payment-driver/generate-collection`,
     DIVIDE: `${API_URL}/payment-driver/divide/:id`,
+    GENERATE_BONUS_POINTS: `${API_URL}/payment-driver/generate-bonus`,
   },
   CLIENT: {
     GET_PAGINATED: `${API_URL}/client/paginated`,
@@ -92,5 +93,5 @@ export const API = {
   },
   FILE: {
     UPLOAD: `${PATIO_STORE_API_URL}/file/upload`,
-  }
+  },
 };

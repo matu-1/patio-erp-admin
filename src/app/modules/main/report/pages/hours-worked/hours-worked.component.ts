@@ -236,6 +236,7 @@ export class HoursWorkedComponent implements OnInit {
 
   async generatePayments() {
     const value = this.form.value;
+    const cityId = value.cityId;
     const start = DateUtils.getMinHourMoment(
       DateUtils.getMaxHour(value.start)
     ) as any;
@@ -249,15 +250,25 @@ export class HoursWorkedComponent implements OnInit {
       });
       return;
     }
-    const res = await handleRequestPg(
-      () =>
-        this.reportService.generatePayments({
-          type: 1,
-          startDate: start as any,
-          endDate: end as any,
-        }),
-      true
-    );
+    const [res] = await Promise.all([
+      handleRequestPg(
+        () =>
+          this.reportService.generatePayments({
+            type: 1,
+            startDate: start as any,
+            endDate: end as any,
+            cityId,
+          }),
+        true
+      ),
+      handleRequestPg(() =>
+        this.reportService.generateBonusForPoints({
+          start: start as any,
+          end: end as any,
+          cityId,
+        })
+      ),
+    ]);
     if (res) this.filter();
   }
 }
