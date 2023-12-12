@@ -710,7 +710,7 @@ export const orderColumns: TableColumns<Order> = [
   {
     field: 'createdAt',
     headerName: 'Creado el',
-    valueFormatter: ({ createdAt }) => formatDate(createdAt, FORMAT_DATE, 'es'),
+    valueFormatter: ({ createdAt }) => FormatDate.dateMoment(createdAt),
   },
   {
     field: 'extra_status',

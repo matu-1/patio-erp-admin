@@ -9,6 +9,8 @@ import { ordersFilterSchema } from '../../configs/form-schema';
 import { orderColumns } from '../../configs/table-columns';
 import { Order } from '../../interfaces/order.interface';
 import { ReportService } from '../../services/report.service';
+import { CONFIG } from 'src/app/constants/config.constant';
+import * as moment from 'moment-timezone';
 
 @Component({
   selector: 'app-orders',
@@ -28,9 +30,11 @@ export class OrdersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setTimeZone(this.form.value.cityId);
     this.getOrders();
     this.getCities();
     this.getMerchants();
+    this.changeValues();
   }
 
   async getCities() {
@@ -64,7 +68,13 @@ export class OrdersComponent implements OnInit {
     const res = await handleRequest(() =>
       this.reportService.getOrders({
         ...value,
-        endDate: DateUtils.getMaxHour(value.endDate),
+        // endDate: DateUtils.getMaxHour(value.endDate),
+        startDate: DateUtils.getMinHourMoment(
+          DateUtils.getMaxHour(value.startDate)
+        ),
+        endDate: DateUtils.getMaxHourMoment(
+          DateUtils.getMaxHour(value.endDate)
+        ),
       })
     );
     if (res) this.orders = res.data;
@@ -72,6 +82,18 @@ export class OrdersComponent implements OnInit {
 
   async filter() {
     this.getOrders();
+  }
+
+  setTimeZone(cityId?: number) {
+    const timeZone =
+      cityId == CONFIG.CITY_EEUU ? 'America/New_York' : 'America/La_Paz';
+    moment.tz.setDefault(timeZone);
+  }
+
+  changeValues() {
+    this.form.get('cityId')?.valueChanges.subscribe((value) => {
+      this.setTimeZone(value);
+    });
   }
 
   download() {

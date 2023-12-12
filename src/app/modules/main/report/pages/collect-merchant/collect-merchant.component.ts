@@ -10,6 +10,8 @@ import { CollectMerchantDto } from '../../interfaces/collect-merchant.interface'
 import { ReportService } from '../../services/report.service';
 import { collectMerchantReportColumns } from '../../configs/export-columns';
 import { WeekType } from 'src/app/utils/utils';
+import { CONFIG } from 'src/app/constants/config.constant';
+import * as moment from 'moment-timezone';
 
 @Component({
   selector: 'app-collect-merchant',
@@ -25,6 +27,7 @@ export class CollectMerchantComponent implements OnInit {
   constructor(private reportService: ReportService) {}
 
   ngOnInit(): void {
+    this.setTimeZone(CONFIG.CITY_EEUU);
     this.resetForm();
     this.getMerchants();
   }
@@ -45,14 +48,16 @@ export class CollectMerchantComponent implements OnInit {
         ...value,
         // merchants: value.merchants.value,
         start: DateUtils.getMinHourMoment(DateUtils.getMaxHour(value.start)),
-        end: DateUtils.getMaxHour(value.end),
+        end: DateUtils.getMaxHourMoment(DateUtils.getMaxHour(value.end)),
       })
     );
     if (res) this.collectMerchants = res.data;
   }
 
   async getMerchants() {
-    const res = await handleRequest(() => this.reportService.getMerchantsByCity());
+    const res = await handleRequest(() =>
+      this.reportService.getMerchantsByCity()
+    );
     if (res)
       this.collectMerchantSchema[2].options = res.data.map(({ id, name }) => ({
         value: id,
@@ -66,6 +71,12 @@ export class CollectMerchantComponent implements OnInit {
 
   filter() {
     this.getCollectMerchants();
+  }
+
+  setTimeZone(cityId?: number) {
+    const timeZone =
+      cityId == CONFIG.CITY_EEUU ? 'America/New_York' : 'America/La_Paz';
+    moment.tz.setDefault(timeZone);
   }
 
   download() {

@@ -177,6 +177,7 @@ export const ordersFilterSchema: TextFieldSchema = [
   {
     name: 'cityId',
     label: 'Ciudad',
+    value: CONFIG.CITY_EEUU,
     fieldType: TextFieldType.Dropdown,
     df: '15%',
     sm: '30%',
