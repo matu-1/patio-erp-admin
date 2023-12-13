@@ -24,8 +24,19 @@
       [textFieldValue]="value"
       [form]="form"
     ></app-text-field>
-    <div fxFlex.xs="100%" fxFlex="20%">
+    <div fxFlex.xs="100%" fxFlex="10%">
       <button type="submit" mat-raised-button color="accent">Filtrar</button>
+    </div>
+    <div
+      fxFlex="20%"
+      fxFlex.xs="100%"
+      style="align-self: center; text-align: end"
+    >
+      <h3 *ngIf="amount != undefined; else loadingTotal" class="mb-0">
+        <strong>Total:</strong> {{ amount | number }}
+        <strong class="ml-2">Cantidad:</strong> {{ deliveryDetailList!.length }}
+      </h3>
+      <ng-template #loadingTotal><h3 class="mb-0">Loading...</h3></ng-template>
     </div>
   </form>
 </app-simple-card>

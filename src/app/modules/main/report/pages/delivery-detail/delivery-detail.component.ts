@@ -7,6 +7,7 @@ import { deliveryDetailSchema } from '../../configs/form-schema';
 import { deliveryDetailColumns } from '../../configs/table-columns';
 import { DeliveryDetail } from '../../interfaces/delivery-detail.interface';
 import { ReportService } from '../../services/report.service';
+import { WeekType } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-delivery-detail',
@@ -22,7 +23,16 @@ export class DeliveryDetailComponent implements OnInit {
   constructor(private reportService: ReportService) {}
 
   ngOnInit(): void {
+    this.resetForm();
     this.getDeliveryDetail();
+  }
+
+  resetForm() {
+    const { start, end } = this.form.value.week as WeekType;
+    this.form.patchValue({ start, end });
+    this.form.get('week')?.valueChanges.subscribe(({ start, end }) => {
+      this.form.patchValue({ start, end });
+    });
   }
 
   async getDeliveryDetail() {
@@ -31,6 +41,7 @@ export class DeliveryDetailComponent implements OnInit {
     const res = await handleRequest(() =>
       this.reportService.getDeliveryDetail({
         ...value,
+        start: DateUtils.getMinHour(value.start),
         end: DateUtils.getMaxHour(value.end),
       })
     );
@@ -41,7 +52,14 @@ export class DeliveryDetailComponent implements OnInit {
     this.getDeliveryDetail();
   }
 
-  downloadExcel(){
+  downloadExcel() {
     ExcelUtils.download(this.deliveryDetailList!, 'delivery detail');
+  }
+
+  get amount() {
+    return this.deliveryDetailList?.reduce(
+      (acc, cur) => acc + Number(cur.monto),
+      0
+    );
   }
 }

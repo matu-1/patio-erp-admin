@@ -41,6 +41,11 @@ export const paymentDetailSchema: TextFieldSchema = [
   },
 ];
 
+const weeksOptions = getWeeks().map((item) => ({
+  label: item.name,
+  value: item,
+}));
+
 export const deliveryDetailSchema: TextFieldSchema = [
   {
     name: 'start',
@@ -71,6 +76,14 @@ export const deliveryDetailSchema: TextFieldSchema = [
     df: '20%',
   },
   {
+    label: 'Week',
+    name: 'week',
+    value: weeksOptions[0].value as any,
+    fieldType: TextFieldType.Dropdown,
+    options: weeksOptions,
+    df: '20%',
+  },
+  {
     name: 'showDetails',
     label: 'Ver Detalle',
     fieldType: TextFieldType.Dropdown,
@@ -85,7 +98,7 @@ export const deliveryDetailSchema: TextFieldSchema = [
         label: 'Si',
       },
     ],
-    df: '15%',
+    df: '10%',
   },
 ];
 
@@ -415,11 +428,6 @@ export const editBankAccountZelleSchema: TextFieldSchema = [
     df: '50%',
   },
 ];
-
-const weeksOptions = getWeeks().map((item) => ({
-  label: item.name,
-  value: item,
-}));
 
 export const collectMerchantSchema: TextFieldSchema = [
   ...hoursWorkedFilterSchema.slice(0, 2),
