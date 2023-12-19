@@ -118,7 +118,7 @@ export const paymentsDriverExportColumns: TableColumns<PaymentDriver> = [
   },
   {
     field: 'amountHour',
-    headerName: 'Monto Hora',
+    headerName: 'Monto Hora/Ord',
     valueFormatter: ({ detail }) =>
       detail ? formatToNumber(detail.amountHour) : '---',
   },
@@ -139,8 +139,8 @@ export const paymentsDriverExportColumns: TableColumns<PaymentDriver> = [
     headerName: 'Ganancia por Hora',
     valueFormatter: ({ detail }) =>
       detail &&
-      detail.modalityId != MODALITY.BASE_WITH_TIP &&
-      detail.modalityId != MODALITY.DISTANCE_WITH_TIP
+      detail.modalityId == MODALITY.ONLY_HOUR &&
+      detail.modalityId == MODALITY.HOUR_WITH_TIP
         ? formatToNumber(detail.totalEarning)
         : '---',
   },
@@ -157,6 +157,14 @@ export const paymentsDriverExportColumns: TableColumns<PaymentDriver> = [
     headerName: 'Ganancia por Distancia',
     valueFormatter: ({ detail }) =>
       detail && detail.modalityId == MODALITY.DISTANCE_WITH_TIP
+        ? formatToNumber(detail.totalEarning)
+        : '---',
+  },
+  {
+    field: 'totalEarning3',
+    headerName: 'Ganancia por orden fija',
+    valueFormatter: ({ detail }) =>
+      detail && detail.modalityId == MODALITY.ONLY_ORDER_FIXED
         ? formatToNumber(detail.totalEarning)
         : '---',
   },

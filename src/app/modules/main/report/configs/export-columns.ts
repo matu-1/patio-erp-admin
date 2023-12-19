@@ -118,7 +118,7 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
   },
   {
     field: 'amountHour',
-    headerName: 'Monto Hora',
+    headerName: 'Monto Hora/Ord',
     valueFormatter: ({ amountHour }) => formatToNumber(amountHour),
   },
   {
@@ -141,8 +141,8 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
     field: 'totalEarning',
     headerName: 'Ganancia por Hora',
     valueFormatter: ({ totalEarning, modalityId }) =>
-      modalityId != MODALITY.BASE_WITH_TIP &&
-      modalityId != MODALITY.DISTANCE_WITH_TIP
+      modalityId == MODALITY.ONLY_HOUR &&
+      modalityId == MODALITY.HOUR_WITH_TIP
         ? formatToNumber(totalEarning)
         : '---',
   },
@@ -159,6 +159,14 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
     headerName: 'Ganancia por Distancia',
     valueFormatter: ({ totalEarning, modalityId }) =>
       modalityId == MODALITY.DISTANCE_WITH_TIP
+        ? formatToNumber(totalEarning)
+        : '---',
+  },
+  {
+    field: 'totalEarning3',
+    headerName: 'Ganancia por orden fija',
+    valueFormatter: ({ totalEarning, modalityId }) =>
+      modalityId == MODALITY.ONLY_ORDER_FIXED
         ? formatToNumber(totalEarning)
         : '---',
   },

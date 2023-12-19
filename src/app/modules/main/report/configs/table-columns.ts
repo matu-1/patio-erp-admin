@@ -226,7 +226,7 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
   },
   {
     field: 'amountHour',
-    headerName: 'Monto Hora',
+    headerName: 'Monto Hora/Ord',
     valueFormatter: ({ amountHour }) => formatNumber(amountHour, 'es'),
   },
   {
@@ -250,8 +250,8 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     field: 'totalEarning',
     headerName: 'Ganancia por Hora',
     valueFormatter: ({ totalEarning, modalityId }) =>
-      modalityId != MODALITY.BASE_WITH_TIP &&
-      modalityId != MODALITY.DISTANCE_WITH_TIP
+      modalityId == MODALITY.ONLY_HOUR &&
+      modalityId == MODALITY.HOUR_WITH_TIP
         ? formatNumber(totalEarning, 'es')
         : '---',
   },
@@ -268,6 +268,14 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     headerName: 'Ganancia por Distancia',
     valueFormatter: ({ totalEarning, modalityId }) =>
       modalityId == MODALITY.DISTANCE_WITH_TIP
+        ? formatNumber(totalEarning, 'es')
+        : '---',
+  },
+  {
+    field: 'totalEarning3',
+    headerName: 'Ganancia por orden fija',
+    valueFormatter: ({ totalEarning, modalityId }) =>
+      modalityId == MODALITY.ONLY_ORDER_FIXED
         ? formatNumber(totalEarning, 'es')
         : '---',
   },
@@ -677,6 +685,10 @@ export const orderColumns: TableColumns<Order> = [
     headerName: 'Provider Id',
   },
   {
+    field: 'store_name',
+    headerName: 'Store',
+  },
+  {
     field: 'has_drink',
     headerName: 'Has drink?',
     valueFormatter: ({ has_drink }) => (has_drink ? 'Si' : 'No'),
@@ -1002,6 +1014,10 @@ export const earningDetailColumns: TableColumns<EarningDetail> = [
   {
     field: 'quantity',
     headerName: 'Quantity',
+  },
+  {
+    field: 'amountHour',
+    headerName: 'Amount Hr/Ord',
   },
   {
     field: 'totalEarning',

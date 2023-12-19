@@ -5,4 +5,5 @@ export const MODALITY = {
   ORDER_WITH_TIP: 4,
   BASE_WITH_TIP: 5,
   DISTANCE_WITH_TIP: 6,
+  ONLY_ORDER_FIXED: 7,
 };
