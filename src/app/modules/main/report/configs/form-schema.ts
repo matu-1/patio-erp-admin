@@ -198,8 +198,9 @@ export const ordersFilterSchema: TextFieldSchema = [
   {
     name: 'merchantId',
     label: 'Comercio',
-    fieldType: TextFieldType.Dropdown,
-    df: '17%',
+    fieldType: TextFieldType.Autocomplete,
+    getOptionLabel: (value) => value?.label,
+    df: '25%',
     sm: '30%',
   },
 ];

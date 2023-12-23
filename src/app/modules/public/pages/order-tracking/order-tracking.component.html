@@ -77,7 +77,11 @@
       </div>
       <div class="text-box">
         <span>Instructions</span>
-        <p>{{ order.instructions }}</p>
+        <p>{{ order.instructions ?? "---" }}</p>
+      </div>
+      <div class="text-box">
+        <span>Tip</span>
+        <p>{{ order.tip_original }}</p>
       </div>
     </div>
     <hr *ngIf="order" />
@@ -102,5 +106,19 @@
     >
       <mat-icon>{{ iconToggle }}</mat-icon>
     </button>
+    <button
+      mat-raised-button
+      color="accent"
+      class="pay-tip-btn"
+      (click)="showPayDialog()"
+    >
+      Tip your courier
+    </button>
   </div>
+</div>
+<div class="banner-text">
+  <h3 (click)="showPayDialog()">CLICK HERE TO TIP</h3>
+  In retaliation to the city's new courier pay rule, Uber and Doordash have
+  removed your ability to tip MOTOCKICK couriers. Please consider leaveing a tip for
+  MOTOCKICK couriers here. the entirety of the tip is paid out to the MOTOCKICK courier.
 </div>

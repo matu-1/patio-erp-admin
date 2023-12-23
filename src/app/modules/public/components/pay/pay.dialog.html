@@ -1,0 +1,49 @@
+<form [formGroup]="form" markAllSubmit (validSubmit)="save()">
+  <h2 mat-dialog-title>Please choose a tip amount</h2>
+  <mat-dialog-content>
+    <div class="button-container">
+      <button
+        class="mr-2"
+        color="primary"
+        mat-raised-button
+        type="button"
+        (click)="setAmount(3)"
+      >
+        $3
+      </button>
+      <button
+        class="mr-2"
+        color="primary"
+        type="button"
+        mat-raised-button
+        (click)="setAmount(4)"
+      >
+        $4
+      </button>
+      <button
+        class="mr-2"
+        color="primary"
+        type="button"
+        mat-raised-button
+        (click)="setAmount(5)"
+      >
+        $5
+      </button>
+    </div>
+    <div class="of-h">
+      <div fxLayout="row wrap" fxLayoutGap="16px 8px grid">
+        <app-text-field
+          *ngFor="let value of paySchema"
+          fxFlex.xs="100%"
+          [fxFlex]="value.df"
+          [form]="form"
+          [textFieldValue]="value"
+        ></app-text-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button cdkFocusInitial type="submit">Aceptar</button>
+  </mat-dialog-actions>
+</form>

@@ -14,6 +14,7 @@ export interface OrderDto {
   name_user: string;
   status: string;
   tip: number;
+  tip_original: number;
   total: number;
   discount: number;
   merchant_id: number;
@@ -35,7 +36,7 @@ export interface OrderDto {
   merchant: Merchant;
   assignedDrivers?: AssignedDriver[];
   products?: Product[];
-  instructions: string;
+  instructions?: string;
 }
 
 export interface AssignedDriver {

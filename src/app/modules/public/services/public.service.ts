@@ -7,6 +7,7 @@ import { Response } from 'src/app/utils/response';
 import { routeParams } from 'src/app/utils/route-params';
 import { Driver } from '../interfaces/driver.interface';
 import { OrderDto } from '../interfaces/order.interface';
+import { PayOrderTip, PaymentInfo, UpdateTipOrder } from '../interfaces/pay.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -42,5 +43,18 @@ export class PublicService {
       routeParams(API.DRIVER.GET_BY_ID, { id }),
       { ...PATIO_STORE_CONFIG_HTTP }
     );
+  }
+
+  payTip(dto: PayOrderTip) {
+    return this.http.post<Response<PaymentInfo>>(API.ORDER.PAY_TIP, dto, {
+      ...PATIO_STORE_CONFIG_HTTP,
+    });
+  }
+
+  updateTip(dto: UpdateTipOrder) {
+    return this.http.post<Response<any>>(API.ORDER.UPDATE_TIP, dto, {
+      ...PATIO_STORE_CONFIG_HTTP,
+      // params: { session_id },
+    });
   }
 }

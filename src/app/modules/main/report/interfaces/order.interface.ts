@@ -49,6 +49,7 @@ export interface Order {
   multiple_delivery: number;
   order_provider: string;
   provider_id: string;
+  fullProvider: string;
 }
 
 export interface Merchant {

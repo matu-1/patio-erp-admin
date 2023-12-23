@@ -8,10 +8,14 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Loader } from '@googlemaps/js-api-loader';
-import { handleRequest } from 'src/app/utils/handle-request';
+import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 import { OrderDto } from '../../interfaces/order.interface';
 import { PublicService } from '../../services/public.service';
 import { MAP_STYLES } from './order-tracking.constants';
+import { MatDialog } from '@angular/material/dialog';
+import { PayDialog } from '../../components/pay/pay.dialog';
+import { DIALOG_CONFIG_XS } from '../../../../constants/dialog.constant';
+import { PayOrderTip } from '../../interfaces/pay.interface';
 
 const TIME = 10000;
 const DRIVER_ICON = 'assets/images/icons/repartidor.png';
@@ -41,12 +45,14 @@ export class OrderTrackingComponent
 
   constructor(
     private publicService: PublicService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.orderIntervalTimer = setInterval(() => this.getOrder(), TIME);
     this.addChat();
+    this.update();
   }
 
   ngAfterViewInit(): void {
@@ -251,5 +257,41 @@ export class OrderTrackingComponent
         break;
     }
     return '';
+  }
+
+  showPayDialog() {
+    const id = this.activatedRoute.snapshot.params.id;
+    const dialogRef = this.matDialog.open(PayDialog, {
+      ...DIALOG_CONFIG_XS,
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe((data) => data && this.pay({ ...data, orderId: Number(id) }));
+  }
+
+  async pay(data: PayOrderTip) {
+    // console.log('data', data);
+    const res = await handleRequestPg(() => this.publicService.payTip(data));
+    if (res) {
+      console.log(res.data);
+      // window.open(res.data.url, '_blank');
+      // this.router.navigateByUrl(res.data.url);
+      window.open(res.data.url);
+    }
+  }
+
+  async update() {
+    const session_id = this.activatedRoute.snapshot.queryParams.session_id;
+    const id = this.activatedRoute.snapshot.params.id;
+    if (!session_id) return;
+    const res = await handleRequest(
+      () =>
+        this.publicService.updateTip({
+          providerId: session_id,
+          orderId: Number(id),
+        }),
+      true
+    );
+    if (res) this.getOrder();
   }
 }

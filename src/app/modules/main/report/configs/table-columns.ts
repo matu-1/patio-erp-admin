@@ -677,7 +677,7 @@ export const orderColumns: TableColumns<Order> = [
     headerName: 'Comment',
   },
   {
-    field: 'order_provider',
+    field: 'fullProvider',
     headerName: 'Provider',
   },
   {
