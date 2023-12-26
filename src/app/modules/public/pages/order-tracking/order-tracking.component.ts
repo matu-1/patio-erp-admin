@@ -273,10 +273,9 @@ export class OrderTrackingComponent
     // console.log('data', data);
     const res = await handleRequestPg(() => this.publicService.payTip(data));
     if (res) {
-      console.log(res.data);
+      // console.log(res.data);
       // window.open(res.data.url, '_blank');
-      // this.router.navigateByUrl(res.data.url);
-      window.open(res.data.url);
+      window.open(res.data.url, '_self');
     }
   }
 

@@ -98,27 +98,25 @@
         <p>{{ product.description }}</p>
       </div>
     </div>
-    <button
-      mat-mini-fab
-      color="primary"
-      class="toggle"
-      (click)="toggle(orderStatus)"
-    >
-      <mat-icon>{{ iconToggle }}</mat-icon>
-    </button>
-    <button
-      mat-raised-button
-      color="accent"
-      class="pay-tip-btn"
-      (click)="showPayDialog()"
-    >
-      Tip your courier
-    </button>
   </div>
+  <button
+    mat-mini-fab
+    color="primary"
+    class="toggle"
+    (click)="toggle(orderStatus)"
+  >
+    <mat-icon>{{ iconToggle }}</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    class="pay-tip-btn"
+    (click)="showPayDialog()"
+  >
+    Tip your courier
+  </button>
 </div>
-<div class="banner-text">
-  <h3 (click)="showPayDialog()">CLICK HERE TO TIP</h3>
-  In retaliation to the city's new courier pay rule, Uber and Doordash have
-  removed your ability to tip MOTOCKICK couriers. Please consider leaveing a tip for
-  MOTOCKICK couriers here. the entirety of the tip is paid out to the MOTOCKICK courier.
+<div class="banner-text" (click)="showPayDialog()">
+  <h3>CLICK HERE TO TIP</h3>
+  In retaliation to the city's new courier pay rule, Uber and Doordash have removed your ability to tip MOTOCLICK couriers. Please consider leaving a tip for MOTOCLICK couriers here. The entirety of the tip is paid out to the MOTOCLICK courier.
 </div>
