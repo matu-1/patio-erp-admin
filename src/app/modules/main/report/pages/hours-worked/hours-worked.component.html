@@ -18,13 +18,13 @@
     fxLayoutGap="16px 8px grid"
   >
     <app-text-field
-      fxFlex="20%"
+      [fxFlex]="value.df"
       fxFlex.xs="100%"
       *ngFor="let value of hoursWorkedFilterSchema"
       [form]="form"
       [textFieldValue]="value"
     ></app-text-field>
-    <div fxFlex="20%" fxFlex.xs="100%">
+    <div fxFlex="10%" fxFlex.xs="100%">
       <button mat-raised-button color="accent">Filtrar</button>
     </div>
     <div

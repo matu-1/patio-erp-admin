@@ -249,35 +249,41 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
   {
     field: 'totalEarning',
     headerName: 'Ganancia por Hora',
-    valueFormatter: ({ totalEarning, modalityId }) =>
-      modalityId == MODALITY.ONLY_HOUR &&
-      modalityId == MODALITY.HOUR_WITH_TIP
+    valueFormatter: ({ totalEarning, modalityId, merchant }) =>
+      !merchant &&
+      (modalityId == MODALITY.ONLY_HOUR || modalityId == MODALITY.HOUR_WITH_TIP)
         ? formatNumber(totalEarning, 'es')
         : '---',
   },
   {
     field: 'totalEarning1',
     headerName: 'Ganancia Tarifa Base',
-    valueFormatter: ({ totalEarning, modalityId }) =>
-      modalityId == MODALITY.BASE_WITH_TIP
+    valueFormatter: ({ totalEarning, modalityId, merchant }) =>
+      !merchant && modalityId == MODALITY.BASE_WITH_TIP
         ? formatNumber(totalEarning, 'es')
         : '---',
   },
   {
     field: 'totalEarning2',
     headerName: 'Ganancia por Distancia',
-    valueFormatter: ({ totalEarning, modalityId }) =>
-      modalityId == MODALITY.DISTANCE_WITH_TIP
+    valueFormatter: ({ totalEarning, modalityId, merchant }) =>
+      !merchant && modalityId == MODALITY.DISTANCE_WITH_TIP
         ? formatNumber(totalEarning, 'es')
         : '---',
   },
   {
     field: 'totalEarning3',
     headerName: 'Ganancia por orden fija',
-    valueFormatter: ({ totalEarning, modalityId }) =>
-      modalityId == MODALITY.ONLY_ORDER_FIXED
+    valueFormatter: ({ totalEarning, modalityId, merchant }) =>
+      !merchant && modalityId == MODALITY.ONLY_ORDER_FIXED
         ? formatNumber(totalEarning, 'es')
         : '---',
+  },
+  {
+    field: 'totalEarning4',
+    headerName: 'Ganancia Helper',
+    valueFormatter: ({ totalEarning, merchant }) =>
+      merchant ? formatNumber(totalEarning, 'es') : '---',
   },
   {
     field: 'totalFees',
@@ -288,6 +294,16 @@ export const hoursWorkedColumns: TableColumns<HoursWorkedDriver> = [
     field: 'feesTip',
     headerName: 'Fees 2',
     valueFormatter: ({ feesTip }) => formatNumber(feesTip, 'es'),
+  },
+  {
+    field: 'feeMerchant',
+    headerName: 'Fee Merchant',
+    valueFormatter: ({ feeMerchant }) => formatNumber(feeMerchant, 'es'),
+  },
+  {
+    field: 'merchant',
+    headerName: 'merchant',
+    valueFormatter: ({ merchant }) => merchant ?? 'No helper',
   },
   {
     field: 'discounts',
@@ -560,6 +576,15 @@ export const timingsColumns: TableColumns<TimingDto> = [
     field: 'pausedTime',
     headerName: 'Paused Time',
     valueFormatter: ({ pausedTime }) => DateUtils.formatToTimer(pausedTime),
+  },
+  {
+    field: 'amountHour',
+    headerName: 'Monto Hora/Ord',
+  },
+  {
+    field: 'merchant',
+    headerName: 'merchant',
+    valueFormatter: ({ merchant }) => merchant ?? 'No Helper',
   },
 ];
 
@@ -994,6 +1019,11 @@ export const driverEarningColumns: TableColumns<DriverEarning> = [
   {
     field: 'modality',
     headerName: 'Modality',
+  },
+  {
+    field: 'merchant',
+    headerName: 'Merchant',
+    valueFormatter: ({ merchant }) => merchant ?? '---',
   },
   {
     field: 'total',

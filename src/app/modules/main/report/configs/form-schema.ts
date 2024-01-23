@@ -136,7 +136,19 @@ export const hoursWorkedFilterSchema: TextFieldSchema = [
     label: 'Ciudad',
     value: CONFIG.CITY_EEUU,
     fieldType: TextFieldType.Dropdown,
-    df: '30%',
+    df: '20%',
+  },
+  {
+    name: 'isHelper',
+    label: 'Is Helper',
+    value: 0,
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      // { label: 'All', value: undefined },
+      { label: 'Si', value: 1 },
+      { label: 'No', value: 0 },
+    ],
+    df: '10%',
   },
 ];
 
@@ -715,7 +727,6 @@ export const ordersCashFilterSchema: TextFieldSchema = [
   },
 ];
 
-
 export const driverEarningFilterSchema: TextFieldSchema = [
   {
     name: 'start',
@@ -754,5 +765,17 @@ export const driverEarningFilterSchema: TextFieldSchema = [
     fieldType: TextFieldType.Dropdown,
     df: '15%',
     sm: '30%',
+  },
+  {
+    name: 'isHelper',
+    label: 'Is Helper',
+    value: 0,
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      // { label: 'All', value: undefined },
+      { label: 'Si', value: 1 },
+      { label: 'No', value: 0 },
+    ],
+    df: '10%',
   },
 ];

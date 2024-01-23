@@ -139,8 +139,8 @@ export const paymentsDriverExportColumns: TableColumns<PaymentDriver> = [
     headerName: 'Ganancia por Hora',
     valueFormatter: ({ detail }) =>
       detail &&
-      detail.modalityId == MODALITY.ONLY_HOUR &&
-      detail.modalityId == MODALITY.HOUR_WITH_TIP
+      (detail.modalityId == MODALITY.ONLY_HOUR ||
+        detail.modalityId == MODALITY.HOUR_WITH_TIP)
         ? formatToNumber(detail.totalEarning)
         : '---',
   },

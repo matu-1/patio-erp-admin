@@ -141,8 +141,7 @@ export const hoursWorkedColumnsExport: TableColumns<HoursWorkedDriver> = [
     field: 'totalEarning',
     headerName: 'Ganancia por Hora',
     valueFormatter: ({ totalEarning, modalityId }) =>
-      modalityId == MODALITY.ONLY_HOUR &&
-      modalityId == MODALITY.HOUR_WITH_TIP
+      modalityId == MODALITY.ONLY_HOUR || modalityId == MODALITY.HOUR_WITH_TIP
         ? formatToNumber(totalEarning)
         : '---',
   },

@@ -32,6 +32,8 @@ export interface HoursWorkedDriver {
   timingBonus: number;
   pausedTime?: number;
   bonus: Bonus[];
+  feeMerchant: number;
+  merchant?: number;
 }
 
 export interface BankAccount {
@@ -97,6 +99,7 @@ export interface TimingDto {
   startFinal: Date;
   bonus: Date;
   pausedTime: number;
+  merchant: string;
 }
 
 export interface HoursWorkedDto {

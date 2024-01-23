@@ -5,6 +5,7 @@ export interface DriverEarning {
   modality_id: number;
   phone: string;
   modality: string;
+  merchant: string;
   country: string;
   city_id: number;
   detail: EarningDetail[];
