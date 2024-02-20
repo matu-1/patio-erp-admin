@@ -472,6 +472,10 @@ export const ordersColumns: TableColumns<OrderDto> = [
     headerName: 'Puntos',
   },
   {
+    field: 'amount',
+    headerName: 'Monto (hr/ord)',
+  },
+  {
     field: 'earningWaiting',
     headerName: 'Ganancia Espera',
     valueFormatter: ({ earningBase, modalityId }) =>
@@ -760,9 +764,7 @@ export const orderColumns: TableColumns<Order> = [
             )
             .map(
               (status) =>
-                ` ${formatDate(status.createdAt, FORMAT_DATE, 'es')} (${
-                  status.status
-                })`
+                ` ${FormatDate.dateMoment(status.createdAt)} (${status.status})`
             )
             .join(' - ')
         : '--',

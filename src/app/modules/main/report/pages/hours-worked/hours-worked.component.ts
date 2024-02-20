@@ -94,9 +94,8 @@ export class HoursWorkedComponent implements OnInit {
     this.getHoursWorkedDriver();
   }
 
-  setTimeZone(cityId?: number) {
-    const timeZone =
-      cityId == CONFIG.CITY_EEUU ? 'America/New_York' : 'America/La_Paz';
+  setTimeZone(cityId = CONFIG.CITY_EEUU) {
+    const timeZone = DateUtils.getTimeZone(cityId);
     moment.tz.setDefault(timeZone);
   }
 

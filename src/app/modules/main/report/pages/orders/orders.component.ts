@@ -9,8 +9,8 @@ import { ordersFilterSchema } from '../../configs/form-schema';
 import { orderColumns } from '../../configs/table-columns';
 import { Order } from '../../interfaces/order.interface';
 import { ReportService } from '../../services/report.service';
-import { CONFIG } from 'src/app/constants/config.constant';
 import * as moment from 'moment-timezone';
+import { CONFIG } from 'src/app/constants/config.constant';
 
 @Component({
   selector: 'app-orders',
@@ -85,9 +85,8 @@ export class OrdersComponent implements OnInit {
     this.getOrders();
   }
 
-  setTimeZone(cityId?: number) {
-    const timeZone =
-      cityId == CONFIG.CITY_EEUU ? 'America/New_York' : 'America/La_Paz';
+  setTimeZone(cityId = CONFIG.CITY_EEUU) {
+    const timeZone = DateUtils.getTimeZone(cityId);
     moment.tz.setDefault(timeZone);
   }
 

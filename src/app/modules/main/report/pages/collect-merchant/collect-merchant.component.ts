@@ -56,7 +56,7 @@ export class CollectMerchantComponent implements OnInit {
 
   async getMerchants() {
     const res = await handleRequest(() =>
-      this.reportService.getMerchantsByCity()
+      this.reportService.getMerchants()
     );
     if (res)
       this.collectMerchantSchema[2].options = res.data.map(({ id, name }) => ({
@@ -73,9 +73,8 @@ export class CollectMerchantComponent implements OnInit {
     this.getCollectMerchants();
   }
 
-  setTimeZone(cityId?: number) {
-    const timeZone =
-      cityId == CONFIG.CITY_EEUU ? 'America/New_York' : 'America/La_Paz';
+  setTimeZone(cityId = CONFIG.CITY_EEUU) {
+    const timeZone = DateUtils.getTimeZone(cityId);
     moment.tz.setDefault(timeZone);
   }
 

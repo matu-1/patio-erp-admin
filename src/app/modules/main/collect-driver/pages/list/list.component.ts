@@ -85,9 +85,8 @@ export class ListComponent implements OnInit {
     if (res) this.paymentsDriver = res.data;
   }
 
-  setTimeZone(cityId?: number) {
-    const timeZone =
-      cityId == CONFIG.CITY_EEUU ? 'America/New_York' : 'America/La_Paz';
+  setTimeZone(cityId = CONFIG.CITY_EEUU) {
+    const timeZone = DateUtils.getTimeZone(cityId);
     moment.tz.setDefault(timeZone);
   }
 

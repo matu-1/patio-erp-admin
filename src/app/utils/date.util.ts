@@ -74,4 +74,10 @@ export abstract class DateUtils {
     const duration = moment.duration(moment(end).diff(moment(start)));
     return duration.asHours();
   }
+
+  static getTimeZone(cityId: number) {
+    return [CONFIG.CITY_EEUU, CONFIG.CITIES.PHILADELPHIA].includes(cityId)
+      ? 'America/New_York'
+      : 'America/La_Paz';
+  }
 }
