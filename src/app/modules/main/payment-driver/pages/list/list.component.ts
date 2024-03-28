@@ -98,6 +98,7 @@ export class ListComponent implements OnInit {
         start: params.start,
         end: params.end,
         category: params.category ? Number(params.category) : undefined,
+        cityId: Number(params.cityId),
       });
     }
   }

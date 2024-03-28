@@ -24,6 +24,7 @@ import {
   DriverEarning,
   EarningDetail,
 } from '../interfaces/driver-earnings.interface';
+import { getEarning } from './utils';
 
 export const paymentDetailColumns: TableColumns<PaymentDetail> = [
   {
@@ -810,27 +811,27 @@ export const orderColumns: TableColumns<Order> = [
   },
   {
     field: 'earning',
-    headerName: 'Total Ganancia Base',
-    valueFormatter: ({ earningBase, assignedDrivers }) =>
-      assignedDrivers?.[0]?.modality == BASE_WITH_TIP
-        ? formatToNumber(earningBase.earning)
-        : '---',
+    headerName: 'Ganancia',
+    valueFormatter: (item) => {
+      const earningData = getEarning(item);
+      return earningData ? formatToNumber(earningData.earning) : '---';
+    },
   },
   {
     field: 'fee',
     headerName: 'Fee',
-    valueFormatter: ({ earningBase, assignedDrivers }) =>
-      assignedDrivers?.[0]?.modality == BASE_WITH_TIP
-        ? formatToNumber(earningBase.discounts)
-        : '---',
+    valueFormatter: (item) => {
+      const earningData = getEarning(item);
+      return earningData ? formatToNumber(earningData.discounts) : '---';
+    },
   },
   {
     field: 'totalEarning',
     headerName: 'Total Ganancia',
-    valueFormatter: ({ earningBase: { totalEarning }, assignedDrivers }) =>
-      assignedDrivers?.[0]?.modality == BASE_WITH_TIP
-        ? formatToNumber(totalEarning, 3)
-        : '---',
+    valueFormatter: (item) => {
+      const earningData = getEarning(item);
+      return earningData ? formatToNumber(earningData.totalEarning, 3) : '---';
+    },
   },
 ];
 

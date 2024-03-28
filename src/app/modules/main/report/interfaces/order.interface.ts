@@ -50,6 +50,8 @@ export interface Order {
   order_provider: string;
   provider_id: string;
   fullProvider: string;
+  earningDistance: EarningBase;
+  earningOrderFixed: EarningBase;
 }
 
 export interface Merchant {
