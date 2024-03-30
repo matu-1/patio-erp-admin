@@ -228,6 +228,13 @@ export class ListComponent implements OnInit {
       [PaymentDriverType.Cobro]: PAGE_ROUTE.COLLECT_DRIVER.CREATE,
       [PaymentDriverType.Pago]: PAGE_ROUTE.PAYMENT_DRIVER.CREATE,
     };
+    if (!value.detail) {
+      SnackBar.show(
+        'Click al boton *Ver Detalle* (te redireccionara a horas trabajadas) y hacer ahi la operacion',
+        { variant: 'warning' }
+      );
+      return;
+    }
     this.router.navigate([routes[type]], {
       queryParams: {
         driverId: value.driverId,

@@ -9,9 +9,7 @@ import {
   categoryValue,
   categoryText,
 } from '../../collect-driver/constants/payment-method';
-import {
-  paySchema as payCollectSchema,
-} from '../../collect-driver/configs/form-schema';
+import { paySchema as payCollectSchema } from '../../collect-driver/configs/form-schema';
 
 export const paySchema: TextFieldSchema = [...payCollectSchema];
 
@@ -34,7 +32,7 @@ export const paymentFilterSchema: TextFieldSchema = [
       },
     ],
     sm: '25%',
-    df: '14%',
+    df: '20%',
   },
   {
     name: 'end',
@@ -49,7 +47,7 @@ export const paymentFilterSchema: TextFieldSchema = [
       },
     ],
     sm: '25%',
-    df: '14%',
+    df: '20%',
   },
   {
     name: 'isPayment',
@@ -61,7 +59,7 @@ export const paymentFilterSchema: TextFieldSchema = [
       { label: 'No', value: 0 },
     ],
     sm: '20%',
-    df: '12%',
+    df: '13%',
   },
   {
     label: 'Categoria',
@@ -90,6 +88,17 @@ export const paymentFilterSchema: TextFieldSchema = [
     label: 'Ciudad',
     value: CONFIG.CITY_EEUU,
     fieldType: TextFieldType.Dropdown,
+    df: '15%',
+  },
+  {
+    name: 'showDetails',
+    label: 'Show Details',
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      { value: 1, label: 'Si' },
+      { value: 0, label: 'No' },
+    ],
+    value: 0,
     df: '15%',
   },
 ];
@@ -127,7 +136,7 @@ export const editPaymentDriverSchema: TextFieldSchema = [
       },
     ],
     df: '100%',
-    hint: "Si se cambia y tiene pago generado debe refrescarlo"
+    hint: 'Si se cambia y tiene pago generado debe refrescarlo',
   },
 ];
 
