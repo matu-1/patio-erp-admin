@@ -29,7 +29,7 @@ export class OrderTrackingComponent
   implements OnInit, AfterViewInit, OnDestroy
 {
   loader = new Loader({
-    apiKey: 'AIzaSyD8aWuRDypYsJfeaBoOC3y9XATawNJ4Lrs',
+    apiKey: 'AIzaSyAxiBhG6BnAJFE9PntEToQS1AQIIeHAKjg',
     version: 'weekly',
   });
   @ViewChild('map') mapDiv!: ElementRef<HTMLDivElement>;
