@@ -4,6 +4,7 @@ import {
   TextFieldType,
 } from 'src/app/components/text-field/text-field.interface';
 import { CONFIG } from 'src/app/constants/config.constant';
+import { ORDER_STATE } from 'src/app/constants/constant';
 import { months } from 'src/app/constants/months.constant';
 import { DateUtils } from 'src/app/utils/date.util';
 import { generateYears, getWeeks } from 'src/app/utils/utils';
@@ -214,6 +215,21 @@ export const ordersFilterSchema: TextFieldSchema = [
     getOptionLabel: (value) => value?.label,
     df: '25%',
     sm: '30%',
+  },
+  {
+    name: 'status',
+    label: 'Estados',
+    fieldType: TextFieldType.Dropdown,
+    multiple: true,
+    options: [
+      // { label: 'All', value: undefined },
+      ...Object.values(ORDER_STATE).map((state) => ({
+        label: state,
+        value: state,
+      })),
+    ],
+    df: '15%',
+    sm: '20%',
   },
 ];
 

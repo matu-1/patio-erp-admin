@@ -95,10 +95,14 @@ export class ReportService {
   getOrders(dto: FilterOrder) {
     dto.driverStatus = 'assigned,complete';
     dto = ObjectUtils.clear(dto);
-    return this.http.get<Response<Order[]>>(API.ORDER.GET_ALL, {
-      ...PATIO_STORE_CONFIG_HTTP,
-      params: dto as any,
-    });
+    const urlParams = new URLSearchParams(dto as any);
+    return this.http.get<Response<Order[]>>(
+      `${API.ORDER.GET_ALL}?${urlParams}`,
+      {
+        ...PATIO_STORE_CONFIG_HTTP,
+        // params: dto as any,
+      }
+    );
   }
 
   refresh(dto: RefreshPaymentDto) {
