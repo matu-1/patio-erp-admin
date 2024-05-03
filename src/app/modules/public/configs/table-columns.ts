@@ -54,9 +54,11 @@ export const salesColumns: TableColumns<InvoiceDetail> = [
       formatNumber(Number(porcentaje_comision), 'es', '.2-2'),
   },
   {
-    field: 'monto',
+    // field: 'monto',
+    field: 'monto_conciliado',
     headerName: 'Monto',
-    valueFormatter: ({ monto }) => formatNumber(Number(monto), 'es', '.2-2'),
+    valueFormatter: ({ monto_conciliado }) =>
+      formatNumber(Number(monto_conciliado), 'es', '.2-2'),
   },
   {
     field: 'actions',
