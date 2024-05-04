@@ -22,6 +22,7 @@ import { OrdersCashComponent } from './pages/orders-cash/orders-cash.component';
 import { DriverEarningsComponent } from './pages/driver-earnings/driver-earnings.component';
 import { EarningsDetailDialog } from './components/earnings-detail/earnings-detail.dialog';
 import { CateringComponent } from './pages/catering/catering.component';
+import { MerchantCommissionComponent } from './pages/merchant-commission/merchant-commission.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CateringComponent } from './pages/catering/catering.component';
     DriverEarningsComponent,
     EarningsDetailDialog,
     CateringComponent,
+    MerchantCommissionComponent,
   ],
   imports: [
     CommonModule,

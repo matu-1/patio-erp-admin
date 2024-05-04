@@ -795,3 +795,44 @@ export const driverEarningFilterSchema: TextFieldSchema = [
     df: '10%',
   },
 ];
+
+export const merchantCommissionFilterSchema: TextFieldSchema = [
+  {
+    name: 'startDate',
+    label: 'Fecha Inicial',
+    fieldType: TextFieldType.DatePicker,
+    value: DateUtils.getMinHour(),
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '15%',
+    sm: '25%',
+  },
+  {
+    name: 'endDate',
+    label: 'Fecha Final',
+    fieldType: TextFieldType.DatePicker,
+    value: DateUtils.getMaxHour(),
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '15%',
+    sm: '25%',
+  },
+  {
+    name: 'cityId',
+    label: 'Ciudad',
+    value: CONFIG.CITIES.SANTA_CRUZ,
+    fieldType: TextFieldType.Dropdown,
+    df: '15%',
+    sm: '30%',
+  },
+];

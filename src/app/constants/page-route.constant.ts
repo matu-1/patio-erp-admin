@@ -41,6 +41,7 @@ export const PAGE_ROUTE = {
     ORDERS_CASH_ROOT: 'orders-cash',
     DRIVER_EARNINGS_ROOT: 'driver-earnings',
     CATERING_ROOT: 'catering',
+    MERCHANT_COMMISSION_ROOT: 'merchant-commission',
     get PAYMENT_DETAIL() {
       return `/${this.ROOT}/${this.PAYMENT_DETAIL_ROOT}`;
     },
@@ -76,6 +77,9 @@ export const PAGE_ROUTE = {
     },
     get CATERING() {
       return `/${this.ROOT}/${this.CATERING_ROOT}`;
+    },
+    get MERCHANT_COMMISSION() {
+      return `/${this.ROOT}/${this.MERCHANT_COMMISSION_ROOT}`;
     },
   },
   PAYMENT_DRIVER: {

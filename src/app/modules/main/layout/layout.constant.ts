@@ -124,6 +124,11 @@ export const MENU: MenuItem[] = [
             icon: 'remove',
             route: PAGE_ROUTE.REPORT.CATERING,
           },
+          {
+            label: 'Comisión comercio',
+            icon: 'remove',
+            route: PAGE_ROUTE.REPORT.MERCHANT_COMMISSION,
+          },
         ],
       },
     ],

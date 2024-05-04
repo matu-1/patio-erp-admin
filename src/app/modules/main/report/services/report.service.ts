@@ -39,6 +39,7 @@ import {
 } from '../interfaces/payment-detail.interface';
 import { CONFIG } from 'src/app/constants/config.constant';
 import { Catering } from '../interfaces/catering.interface';
+import { InvoiceData, OrderInvoiceParams } from '../interfaces/order-invoice';
 
 @Injectable({
   providedIn: 'root',
@@ -208,6 +209,16 @@ export class ReportService {
     return this.http.post<Response<boolean>>(
       API.PAYMENT_DRIVER.GENERATE_BONUS_POINTS,
       dto
+    );
+  }
+
+  getInvoicesData(dto: OrderInvoiceParams) {
+    return this.http.get<Response<InvoiceData[]>>(
+      API.ORDER_INVOICE.INVOICES_DATA,
+      {
+        params: ObjectUtils.clear(dto) as any,
+        ...PATIO_STORE_CONFIG_HTTP,
+      }
     );
   }
 }

@@ -5,6 +5,7 @@ export const CONFIG = {
   CITIES: {
     EEUU: 6,
     PHILADELPHIA: 9,
+    SANTA_CRUZ: 1,
   },
   TZ: {
     EE_UU: 'America/New_York',

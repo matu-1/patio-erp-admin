@@ -96,4 +96,7 @@ export const API = {
   FILE: {
     UPLOAD: `${PATIO_STORE_API_URL}/file/upload`,
   },
+  ORDER_INVOICE: {
+    INVOICES_DATA: `${PATIO_STORE_API_URL}/orders/invoices/data`,
+  },
 };

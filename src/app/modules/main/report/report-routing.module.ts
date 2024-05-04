@@ -13,6 +13,7 @@ import { DriverDetailComponent } from './pages/driver-detail/driver-detail.compo
 import { OrdersCashComponent } from './pages/orders-cash/orders-cash.component';
 import { DriverEarningsComponent } from './pages/driver-earnings/driver-earnings.component';
 import { CateringComponent } from './pages/catering/catering.component';
+import { MerchantCommissionComponent } from './pages/merchant-commission/merchant-commission.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path: PAGE_ROUTE.REPORT.CATERING_ROOT,
     component: CateringComponent,
+  },
+  {
+    path: PAGE_ROUTE.REPORT.MERCHANT_COMMISSION_ROOT,
+    component: MerchantCommissionComponent,
   },
   {
     path: '**',

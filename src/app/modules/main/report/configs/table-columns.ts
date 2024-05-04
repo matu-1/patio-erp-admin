@@ -25,6 +25,7 @@ import {
   EarningDetail,
 } from '../interfaces/driver-earnings.interface';
 import { getEarning } from './utils';
+import { InvoiceData } from '../interfaces/order-invoice';
 
 export const paymentDetailColumns: TableColumns<PaymentDetail> = [
   {
@@ -1138,5 +1139,42 @@ export const cateringColumns: TableColumns<Catering> = [
     field: 'fareMerchant',
     headerName: 'Fee Merchant',
     valueFormatter: ({ fareMerchant }) => formatToNumber(fareMerchant),
+  },
+];
+
+export const merchantCommissionColumns: TableColumns<InvoiceData> = [
+  {
+    field: 'merchant_id',
+    headerName: 'Id',
+  },
+  {
+    field: 'merchant',
+    headerName: 'Name',
+  },
+  {
+    field: 'merchantEmail',
+    headerName: 'Email',
+  },
+  {
+    field: 'phone',
+    headerName: 'Phone',
+  },
+  {
+    field: 'quantity',
+    headerName: 'Quantity',
+  },
+  {
+    field: 'total',
+    headerName: 'Total',
+    valueFormatter: ({ total }) => formatToNumber(total),
+  },
+  {
+    field: 'commissionPercentage',
+    headerName: 'Porcentaje comisión',
+  },
+  {
+    field: 'commissionAmount',
+    headerName: 'Monto comisión',
+    valueFormatter: ({ commissionAmount }) => formatToNumber(commissionAmount),
   },
 ];
