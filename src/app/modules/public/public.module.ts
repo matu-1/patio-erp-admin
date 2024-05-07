@@ -8,9 +8,10 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DirectivesModule } from 'src/app/directives/directives.module';
+import { MerchantCommissionDetailComponent } from './pages/merchant-commission-detail/merchant-commission-detail.component';
 
 @NgModule({
-  declarations: [OrderTrackingComponent, PayDialog],
+  declarations: [OrderTrackingComponent, PayDialog, MerchantCommissionDetailComponent],
   imports: [
     CommonModule,
     PublicRoutingModule,

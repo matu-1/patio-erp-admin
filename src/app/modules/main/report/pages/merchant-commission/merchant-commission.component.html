@@ -14,4 +14,9 @@
   [columns]="merchantCommissionColumns"
   (refresh)="filter()"
 >
+  <ng-template customColumn="actions" let-value="value">
+    <button mat-icon-button (click)="goDetail(value)" matTooltip="Ver detalle">
+      <mat-icon class="action-icon">info</mat-icon>
+    </button>
+  </ng-template>
 </app-data-table>

@@ -7,7 +7,12 @@ import { Response } from 'src/app/utils/response';
 import { routeParams } from 'src/app/utils/route-params';
 import { Driver } from '../interfaces/driver.interface';
 import { OrderDto } from '../interfaces/order.interface';
-import { PayOrderTip, PaymentInfo, UpdateTipOrder } from '../interfaces/pay.interface';
+import {
+  PayOrderTip,
+  PaymentInfo,
+  UpdateTipOrder,
+} from '../interfaces/pay.interface';
+import { InvoiceDataDetail } from '../../main/factura/interfaces/invoice-detail.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -56,5 +61,15 @@ export class PublicService {
       ...PATIO_STORE_CONFIG_HTTP,
       // params: { session_id },
     });
+  }
+
+  getInvoiceDataInfo(dto: any) {
+    return this.http.get<Response<InvoiceDataDetail>>(
+      API.ORDER_INVOICE.INVOICES_DATA_INFO,
+      {
+        params: dto as any,
+        ...PATIO_STORE_CONFIG_HTTP,
+      }
+    );
   }
 }

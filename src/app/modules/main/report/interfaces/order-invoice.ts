@@ -5,14 +5,14 @@ export interface OrderInvoiceParams {
 }
 
 export interface InvoiceData {
-  merchant_id: number;
-  merchant: string;
+  clientId: number;
+  client: string;
   quantity: number;
   commissionPercentage: number;
   phone: string;
   city: string;
   commissionAmount: number;
   total: number;
-  merchantStatus: string;
-  merchantEmail: string;
+  clientStatus: string;
+  clientEmail: string;
 }

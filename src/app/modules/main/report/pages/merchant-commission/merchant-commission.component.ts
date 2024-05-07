@@ -9,6 +9,9 @@ import { ExcelUtils } from 'src/app/utils/excel.util';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 import { merchantCommissionFilterSchema } from '../../configs/form-schema';
 import { merchantCommissionColumns } from '../../configs/table-columns';
+import { routeParams } from 'src/app/utils/route-params';
+import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-merchant-commission',
@@ -16,7 +19,7 @@ import { merchantCommissionColumns } from '../../configs/table-columns';
   styleUrls: ['./merchant-commission.component.scss'],
 })
 export class MerchantCommissionComponent implements OnInit {
-  title = 'Comisión comercio';
+  title = 'Comisión comercios';
   data?: InvoiceData[];
   merchantCommissionColumns = merchantCommissionColumns;
   merchantCommissionFilterSchema = merchantCommissionFilterSchema;
@@ -24,7 +27,8 @@ export class MerchantCommissionComponent implements OnInit {
 
   constructor(
     private reportService: ReportService,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -38,10 +42,9 @@ export class MerchantCommissionComponent implements OnInit {
     const res = await handleRequest(() =>
       this.reportService.getInvoicesData({
         ...value,
-        endDate: DateUtils.getMaxHour(value.end),
+        endDate: DateUtils.getMaxHour(value.endDate),
       })
     );
-    console.log('data', res?.data);
     if (res) this.data = res.data;
   }
 
@@ -67,5 +70,21 @@ export class MerchantCommissionComponent implements OnInit {
       parseByColumns(this.data!, merchantCommissionColumns),
       'comision-comercio'
     );
+  }
+
+  generateCode(invoice: InvoiceData) {
+    const value = this.form.value;
+    return window.btoa(
+      `${value.startDate.toISOString()}*${DateUtils.getMaxHour(
+        value.endDate
+      ).toISOString()}*${invoice.clientId}`
+    );
+  }
+
+  goDetail(invoice: InvoiceData) {
+    const url = routeParams(PAGE_ROUTE.PUBLIC.MERCHANT_COMMISSION_DETAIL, {
+      code: this.generateCode(invoice),
+    });
+    window.open(this.location.prepareExternalUrl(url), '_blank');
   }
 }

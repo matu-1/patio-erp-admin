@@ -4,6 +4,11 @@ import {
   PDFArray,
 } from '../../main/factura/interfaces/invoice-info.interface';
 import { formatDate, formatNumber } from '@angular/common';
+import {
+  InvoiceDataDetail,
+  PaymentMerchants,
+} from '../../main/factura/interfaces/invoice-detail.interface';
+import { formatToNumber } from 'src/app/utils/utils';
 
 export const additionalServiceColumns: TableColumns<InvoiceDetail> = [
   {
@@ -54,11 +59,10 @@ export const salesColumns: TableColumns<InvoiceDetail> = [
       formatNumber(Number(porcentaje_comision), 'es', '.2-2'),
   },
   {
-    // field: 'monto',
-    field: 'monto_conciliado',
+    field: 'monto',
+    // field: 'monto_conciliado',
     headerName: 'Monto',
-    valueFormatter: ({ monto_conciliado }) =>
-      formatNumber(Number(monto_conciliado), 'es', '.2-2'),
+    valueFormatter: ({ monto }) => formatNumber(Number(monto), 'es', '.2-2'),
   },
   {
     field: 'actions',
@@ -102,5 +106,42 @@ export const salesExcelColumns: TableColumns<PDFArray> = [
   {
     field: 'metodo_pago',
     headerName: 'Método Pago',
+  },
+];
+
+export const paymentMerchantsColumns: TableColumns<PaymentMerchants> = [
+  {
+    field: 'merchantId',
+    headerName: 'Id',
+  },
+  {
+    field: 'merchant',
+    headerName: 'Local',
+  },
+  {
+    field: 'quantity',
+    headerName: 'Cant. Pedidos',
+    valueFormatter: ({ quantity }) => quantity,
+  },
+  {
+    field: 'total',
+    headerName: 'Monto pedidos',
+    valueFormatter: ({ total }) => formatToNumber(total),
+  },
+  {
+    field: 'commissionPercentage',
+    headerName: 'Comisión',
+    valueFormatter: ({ commissionPercentage }) =>
+      formatToNumber(commissionPercentage),
+  },
+  {
+    // field: 'monto',
+    field: 'commissionAmount',
+    headerName: 'Monto',
+    valueFormatter: ({ commissionAmount }) => formatToNumber(commissionAmount),
+  },
+  {
+    field: 'actions',
+    headerName: 'Acciones',
   },
 ];

@@ -1144,15 +1144,15 @@ export const cateringColumns: TableColumns<Catering> = [
 
 export const merchantCommissionColumns: TableColumns<InvoiceData> = [
   {
-    field: 'merchant_id',
+    field: 'clientId',
     headerName: 'Id',
   },
   {
-    field: 'merchant',
-    headerName: 'Name',
+    field: 'client',
+    headerName: 'Cliente',
   },
   {
-    field: 'merchantEmail',
+    field: 'clientEmail',
     headerName: 'Email',
   },
   {
@@ -1161,7 +1161,7 @@ export const merchantCommissionColumns: TableColumns<InvoiceData> = [
   },
   {
     field: 'quantity',
-    headerName: 'Quantity',
+    headerName: 'Cantidad',
   },
   {
     field: 'total',
@@ -1176,5 +1176,9 @@ export const merchantCommissionColumns: TableColumns<InvoiceData> = [
     field: 'commissionAmount',
     headerName: 'Monto comisión',
     valueFormatter: ({ commissionAmount }) => formatToNumber(commissionAmount),
+  },
+  {
+    field: 'actions',
+    headerName: 'Actions',
   },
 ];

@@ -1,0 +1,68 @@
+<ng-container *ngIf="invoiceInfo">
+  <div class="toolbar">
+    <img src="assets/images/logo-ps.png" alt="logo" />
+    <span>{{ invoiceInfo.date }}</span>
+  </div>
+  <div class="root">
+    <h1 class="title">Detalle <small class="text-secondary"></small></h1>
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex.xs="100%" fxFlex="35%">
+        <h4 class="subtitle">De</h4>
+        <p class="text">Administración</p>
+        <p class="text">Teléfono: (+591) 77666780</p>
+        <p class="text">patioservicedelivery@gmail.com</p>
+      </div>
+      <div fxFlex.xs="100%" fxFlex="65%">
+        <h4 class="subtitle">A</h4>
+        <p class="text">
+          {{ invoiceInfo.name }}
+        </p>
+      </div>
+    </div>
+    <hr />
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex.xs="100%" fxFlex="50%">
+        <h3 class="subtitle">
+          Resumen {{ months[invoiceInfo.month - 1] }} {{ invoiceInfo.management }}
+        </h3>
+        <div>
+          <p>
+            Total Pedidos:
+            <span class="text-bold">{{ invoiceInfo.quantity| number }}</span>
+          </p>
+          <p>
+            Total de ventas realizadas:
+            <span class="text-bold">
+              {{ invoiceInfo.total | number: ".2-2" }} Bs.</span
+            >
+          </p>
+          <p>
+            Comisión:
+            <span class="text-bold"
+              >{{ invoiceInfo.commissionAmount | number: ".2-2" }} Bs.</span
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="mt-3">
+      <h3 class="subtitle">Ventas por el ERP</h3>
+      <app-data-table
+        class="dt-unstyle"
+        [rows]="invoiceInfo.paymentMerchants"
+        [columns]="paymentMerchantsColumns"
+        [showPagination]="false"
+        [showSearcher]="false"
+      >
+        <ng-template customColumn="id" let-i="index">
+          {{ i + 1 }}
+        </ng-template>
+        <ng-template customColumn="actions" let-value="value">
+          <button mat-button color="primary">...</button>
+          <!-- <button mat-button color="warn">PDF</button> -->
+        </ng-template>
+      </app-data-table>
+    </div>
+  </div>
+</ng-container>

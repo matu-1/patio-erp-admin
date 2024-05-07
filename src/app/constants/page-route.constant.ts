@@ -23,8 +23,12 @@ export const PAGE_ROUTE = {
     ROOT: 'public',
     INVOICE_DETAIL_ROOT: 'invoice/:code',
     ORDER_TRACKING_ROOT: 'order-tracking/:id',
+    MERCHANT_COMMISSION_DETAIL_ROOT: 'merchant-commission/:code',
     get INVOICE_DETAIL() {
       return `/${this.ROOT}/${this.INVOICE_DETAIL_ROOT}`;
+    },
+    get MERCHANT_COMMISSION_DETAIL() {
+      return `/${this.ROOT}/${this.MERCHANT_COMMISSION_DETAIL_ROOT}`;
     },
   },
   REPORT: {
