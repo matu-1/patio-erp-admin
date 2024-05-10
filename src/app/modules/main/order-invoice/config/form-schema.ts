@@ -1,0 +1,143 @@
+import {
+  TextFieldSchema,
+  TextFieldType,
+} from 'src/app/components/text-field/text-field.interface';
+import { months } from 'src/app/constants/months.constant';
+import { generateYears, titleCase } from 'src/app/utils/utils';
+import { CustomValidators } from 'src/app/utils/validators';
+
+export const orderInvoiceFilterSchema: TextFieldSchema = [
+  {
+    name: 'id',
+    label: 'Código',
+    validators: [
+      {
+        name: 'int',
+        validatorFn: CustomValidators.int,
+        message: 'Must be integer',
+      },
+    ],
+    df: '16.6%',
+    xs: '100%',
+    sm: '25%',
+  },
+  {
+    name: 'month',
+    label: 'Meses',
+    fieldType: TextFieldType.Dropdown,
+    multiple: true,
+    options: months.map((month, i) => ({
+      value: i + 1,
+      label: titleCase(month),
+    })),
+    df: '14.6%',
+    xs: '100%',
+    sm: '25%',
+  },
+  {
+    name: 'management',
+    label: 'Gestión',
+    fieldType: TextFieldType.Dropdown,
+    options: generateYears().map((year) => ({
+      label: year,
+      value: year,
+    })),
+    df: '14.6%',
+    xs: '100%',
+    sm: '25%',
+  },
+  {
+    name: 'city',
+    label: 'Ciudades',
+    fieldType: TextFieldType.Dropdown,
+    multiple: true,
+    df: '18.6%',
+    xs: '100%',
+    sm: '25%',
+  },
+  {
+    name: 'status',
+    label: 'Estados',
+    fieldType: TextFieldType.Dropdown,
+    multiple: true,
+    options: [
+      { value: 0, label: 'No Recibida' },
+      { value: 1, label: 'Recibida' },
+    ],
+    df: '18.6%',
+    xs: '100%',
+    sm: '25%',
+  },
+  {
+    name: 'paid',
+    label: 'Moras',
+    fieldType: TextFieldType.Dropdown,
+    multiple: true,
+    options: [
+      { value: 0, label: 'No Pagada' },
+      { value: 1, label: 'Pagada' },
+      { value: 2, label: 'Con pago parcial' },
+      { value: 3, label: 'Conciliado' },
+      { value: 4, label: 'Incobrable' },
+    ],
+    df: '16.6%',
+    xs: '100%',
+    sm: '25%',
+  },
+  {
+    name: 'collectorId',
+    label: 'Cobrador',
+    fieldType: TextFieldType.Dropdown,
+    options: [{ value: 1, label: 'Ejecutivo test' }], //todo no hay datos
+    df: '18.6%',
+    xs: '100%',
+    sm: '25%',
+  },
+  {
+    name: 'orderBy',
+    label: 'Ordenar',
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      { value: 'clientName', label: 'Nombre' },
+      { value: 'reconciledAmount', label: 'Monto' },
+    ],
+    df: '14.6%',
+    xs: '100%',
+    sm: '25%',
+  },
+  {
+    name: 'collectionStatus',
+    label: 'Programadas',
+    fieldType: TextFieldType.Dropdown,
+    multiple: true,
+    options: [
+      { value: 'en fecha', label: 'Futuras' },
+      { value: 'cobrar hoy', label: 'Hoy' },
+      { value: 'cobro vencido', label: 'Vencidas' },
+      { value: 'sin', label: 'Sin Programación' },
+    ],
+    df: '16.6%',
+    xs: '100%',
+    sm: '25%',
+  },
+  {
+    name: 'clientStatus',
+    label: 'Clientes',
+    fieldType: TextFieldType.Dropdown,
+    multiple: true,
+    options: [
+      { value: 'disabled', label: 'Bloqueado' },
+      { value: 'enabled', label: 'Desbloqueado' },
+    ],
+    df: '16.6%',
+    xs: '100%',
+    sm: '25%',
+  },
+  {
+    name: 'search',
+    label: 'Buscar',
+    df: '23%',
+    xs: '100%',
+    sm: '23%',
+  },
+];

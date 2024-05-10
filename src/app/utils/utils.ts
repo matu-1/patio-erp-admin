@@ -44,3 +44,7 @@ export function getWeeks(count = 10) {
   }
   return dates;
 }
+
+export function titleCase(title: string) {
+  return `${title[0].toUpperCase()}${title.slice(1).toLowerCase()}`;
+}

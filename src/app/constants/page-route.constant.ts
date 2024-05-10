@@ -145,4 +145,11 @@ export const PAGE_ROUTE = {
       return `/${this.ROOT}/${this.CREATE_ROOT}`;
     },
   },
+  ORDER_INVOICE: {
+    ROOT: 'order-invoice',
+    LIST_ROOT: '',
+    get LIST() {
+      return `/${this.ROOT}/${this.LIST_ROOT}`
+    }
+  }
 };

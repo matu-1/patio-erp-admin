@@ -1,0 +1,14 @@
+<app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
+<app-title-bar [title]="title"></app-title-bar>
+<app-simple-card class="mb-3" [isLoading]="isLoading">
+  <app-form-builder
+    [schema]="orderInvoiceFilterSchema"
+    [form]="form"
+    (frmSubmit)="filter()"
+  ></app-form-builder>
+</app-simple-card>
+<app-data-table
+  [columns]="orderInvoiceColumns"
+  [rows]="orderInvoices"
+  (refresh)="filter()"
+></app-data-table>

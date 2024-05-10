@@ -56,6 +56,13 @@ const routes: Routes = [
           import('./invoice/invoice.module').then((m) => m.InvoiceModule),
       },
       {
+        path: PAGE_ROUTE.ORDER_INVOICE.ROOT,
+        loadChildren: () =>
+          import('./order-invoice/order-invoice.module').then(
+            (m) => m.OrderInvoiceModule
+          ),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',

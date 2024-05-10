@@ -27,6 +27,11 @@ export const MENU: MenuItem[] = [
         icon: 'remove',
         route: PAGE_ROUTE.CLIENT.LIST,
       },
+      {
+        label: 'Invoices',
+        icon: 'remove',
+        route: PAGE_ROUTE.ORDER_INVOICE.LIST,
+      },
     ],
   },
   {
