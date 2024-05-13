@@ -1,5 +1,7 @@
 <app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
-<app-title-bar [title]="title"></app-title-bar>
+<app-title-bar [title]="title">
+  <button mat-raised-button color="accent" (click)="download()">Exportar</button>
+</app-title-bar>
 <app-simple-card class="mb-3" [isLoading]="isLoading">
   <app-form-builder
     [schema]="orderInvoiceFilterSchema"
@@ -7,8 +9,109 @@
     (frmSubmit)="filter()"
   ></app-form-builder>
 </app-simple-card>
+<div class="bullets mb-2">
+  <div *ngFor="let item of bullets" class="bullet">
+    <div class="bg-bullet" [class]="item.bgColor"></div>
+    <span> {{ item.title }}</span>
+  </div>
+</div>
 <app-data-table
   [columns]="orderInvoiceColumns"
   [rows]="orderInvoices"
   (refresh)="filter()"
-></app-data-table>
+  [showPagination]="false"
+  [rowClass]="getRowClass"
+>
+  <ng-template customColumn="clientName" let-value="value">
+    {{ value.clientName }} <br />
+    {{ value.city }} <br />
+    {{ value.phone }}
+  </ng-template>
+  <ng-template customColumn="status" let-value="value">
+    <ng-container *ngIf="value.paid == 0; else paidd">
+      {{ status[value.status] }}</ng-container
+    >
+    <ng-template #paidd>
+      <app-chip variant="primary" [class]="'bg-' + paid[value.paid]">{{
+        paid[value.paid]
+      }}</app-chip>
+    </ng-template>
+  </ng-template>
+  <ng-template customColumn="actions" let-value="value">
+    <button
+      *ngIf="hasPayment(value)"
+      mat-icon-button
+      matTooltip="Revertir pago"
+      (click)="openRevertPaymentDlg(value)"
+    >
+      <mat-icon>undo</mat-icon>
+    </button>
+    <ng-container *ngIf="!isDisable(value)">
+      <button
+        mat-icon-button
+        matTooltip="Recalcular Factura"
+        (click)="recalculateInvoice(value)"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        matTooltip="Editar factura"
+        (click)="openEditDlg(value)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        matTooltip="Click para dar por pagada la factura"
+        (click)="openPayDlg(value)"
+      >
+        <mat-icon>handshake</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        matTooltip="Programar pago"
+        (click)="openSchedulePaymentDlg(value)"
+      >
+        <mat-icon>schedule</mat-icon>
+      </button>
+    </ng-container>
+    <button
+      mat-icon-button
+      matTooltip="Ver la factura"
+      (click)="goDetail(value)"
+    >
+      <mat-icon>visibility</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      matTooltip="Enviar por correo"
+      (click)="sendMessageEmail(value)"
+    >
+      <mat-icon>email</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      matTooltip="Enviar por whatsapp"
+      (click)="sendMessageWhatsApp(value)"
+    >
+      <mat-icon>smartphone</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      matTooltip="Contacto no verificado"
+      *ngIf="value.verifiedContact == null"
+    >
+      <mat-icon>unpublished</mat-icon>
+    </button>
+  </ng-template>
+</app-data-table>
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 20, 50, 100]"
+  showFirstLastButtons
+  aria-label="Seleccionar página"
+  [length]="paginated.length"
+  [pageSize]="paginated.limit"
+  (page)="changePage($event)"
+>
+</mat-paginator>

@@ -1,3 +1,5 @@
+import { PaginationDto } from 'src/app/utils/pagination.dto';
+
 export interface OrderInvoice {
   id: number;
   userCreation: string;
@@ -36,3 +38,5 @@ export interface OrderInvoice {
   phone: string;
   quantity: number;
 }
+
+export interface ParamsOrderInvoice extends PaginationDto {}

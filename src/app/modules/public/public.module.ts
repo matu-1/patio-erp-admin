@@ -9,9 +9,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DirectivesModule } from 'src/app/directives/directives.module';
 import { MerchantCommissionDetailComponent } from './pages/merchant-commission-detail/merchant-commission-detail.component';
+import { OrderInvoiceDetailComponent } from './pages/order-invoice-detail/order-invoice-detail.component';
 
 @NgModule({
-  declarations: [OrderTrackingComponent, PayDialog, MerchantCommissionDetailComponent],
+  declarations: [
+    OrderTrackingComponent,
+    PayDialog,
+    MerchantCommissionDetailComponent,
+    OrderInvoiceDetailComponent,
+  ],
   imports: [
     CommonModule,
     PublicRoutingModule,
@@ -19,7 +25,7 @@ import { MerchantCommissionDetailComponent } from './pages/merchant-commission-d
     ComponentsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    DirectivesModule
+    DirectivesModule,
   ],
 })
 export class PublicModule {}

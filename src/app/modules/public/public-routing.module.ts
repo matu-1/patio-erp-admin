@@ -4,6 +4,7 @@ import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { InvoiceDetailComponent } from './pages/invoice-detail/invoice-detail.component';
 import { OrderTrackingComponent } from './pages/order-tracking/order-tracking.component';
 import { MerchantCommissionDetailComponent } from './pages/merchant-commission-detail/merchant-commission-detail.component';
+import { OrderInvoiceDetailComponent } from './pages/order-invoice-detail/order-invoice-detail.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: PAGE_ROUTE.PUBLIC.MERCHANT_COMMISSION_DETAIL_ROOT,
     component: MerchantCommissionDetailComponent,
+  },
+  {
+    path: PAGE_ROUTE.PUBLIC.ORDER_INVOICE_DETAIL_ROOT,
+    component: OrderInvoiceDetailComponent,
   },
   {
     path: '**',

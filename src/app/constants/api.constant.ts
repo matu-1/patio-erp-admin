@@ -99,5 +99,7 @@ export const API = {
   ORDER_INVOICE: {
     INVOICES_DATA: `${PATIO_STORE_API_URL}/orders/invoices/data`,
     INVOICES_DATA_INFO: `${PATIO_STORE_API_URL}/orders/invoices/info`,
+    GET_ALL: `${API_URL}/order-invoice`,
+    GET_INFO: `${API_URL}/order-invoice/info/:id`,
   },
 };

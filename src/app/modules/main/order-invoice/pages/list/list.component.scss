@@ -1,0 +1,22 @@
+mat-icon {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 1.35rem;
+}
+.bullets {
+  padding: 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.54);
+  .bullet {
+    margin: 0.2rem 1rem 0.2rem 0;
+    display: flex;
+    align-items: center;
+    div {
+      width: 25px;
+      height: 25px;
+      border-radius: 100%;
+      margin-right: 0.5rem;
+    }
+  }
+}
