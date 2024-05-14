@@ -5,9 +5,10 @@ import {
   ParamsOrderInvoice,
 } from '../interfaces/order-invoice.interface';
 import { API } from 'src/app/constants/api.constant';
-import { ResponsePagination } from 'src/app/utils/response';
+import { Response, ResponsePagination } from 'src/app/utils/response';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import { routeParams } from 'src/app/utils/route-params';
+import { OrderInvoiceInfo } from 'src/app/modules/public/interfaces/order-invoice-info.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,8 @@ export class OrderInvoiceService {
   }
 
   getInfo(id: number) {
-    return this.http.get<any>(routeParams(API.ORDER_INVOICE.GET_INFO, { id }));
+    return this.http.get<Response<OrderInvoiceInfo>>(
+      routeParams(API.ORDER_INVOICE.GET_INFO, { id })
+    );
   }
 }

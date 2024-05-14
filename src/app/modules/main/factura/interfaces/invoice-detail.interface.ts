@@ -23,32 +23,15 @@ export interface InvoiceDataDetail {
   date: string;
   management: number;
   month: number;
-  paymentMerchants: PaymentMerchants[];
+  paymentMerchants: PaymentMerchant[];
 }
 
-export interface PaymentMerchants {
-  nombre_cliente: string;
-  pedidos_sum: string;
-  monto_conciliado: string;
-  pagado: number;
-  monto_sin_comision: string;
-  monto: string;
-  id_factura: number;
-  nro_pedidos: number;
-  id_local: string;
-  porcentaje_comision: string;
-  id_servicio: string;
-  razon_adicional: null | string;
-  local: string;
-  porcentaje_comision_local: number;
-  ciudad: string;
-  latitude: string;
-  longitude: string;
-  fecha_cobro: null;
-  visto: number;
-  email: string;
-  telefono: string;
-  ///////
+export interface PaymentMerchant {
+  // id_servicio: string;
+  // razon_adicional: null | string;
+  // porcentaje_comision_local: number;
+  // latitude: string;
+  // longitude: string;
   clientId: number;
   client: string;
   quantity: number;
@@ -59,4 +42,35 @@ export interface PaymentMerchants {
   total: number;
   clientStatus: string;
   clientEmail: string;
+  email: string;
+  excel: PaymentMerchantExcel;
+  pdf: PaymentMerchantPDF;
+}
+
+export interface PaymentMerchantExcel {
+  month: number;
+  management: number;
+  orders: PaymentMerchantOrder[];
+}
+
+export interface PaymentMerchantOrder {
+  id: number;
+  paymentModeId: number;
+  commissionPercentage: number;
+  createdAt: Date;
+  total: number;
+  commissionAmount: number;
+}
+
+export interface PaymentMerchantPDF {
+  city: string;
+  date: string;
+  month: number;
+  management: number;
+  invoiceId: string;
+  total: number;
+  commissionAmount: number;
+  name: string;
+  client: string;
+  orders: PaymentMerchantOrder[];
 }

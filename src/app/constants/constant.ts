@@ -14,3 +14,9 @@ export const ORDER_STATE = {
   delivered: 'delivered',
   arrived: 'arrived',
 };
+
+export const PAYMENT_MODE_ID: Record<number, string> = {
+  1: 'CASH',
+  2: 'ONLINE',
+  3: 'QR',
+};
