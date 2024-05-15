@@ -39,7 +39,11 @@ import {
 } from '../interfaces/payment-detail.interface';
 import { CONFIG } from 'src/app/constants/config.constant';
 import { Catering } from '../interfaces/catering.interface';
-import { InvoiceData, OrderInvoiceParams } from '../interfaces/order-invoice';
+import {
+  CreateMultiOrderInvoiceDto,
+  InvoiceData,
+  OrderInvoiceParams,
+} from '../interfaces/order-invoice';
 
 @Injectable({
   providedIn: 'root',
@@ -220,5 +224,9 @@ export class ReportService {
         ...PATIO_STORE_CONFIG_HTTP,
       }
     );
+  }
+
+  generateOrderInvoices(dto: CreateMultiOrderInvoiceDto) {
+    return this.http.post<Response<boolean>>(API.ORDER_INVOICE.GENERATE, dto);
   }
 }

@@ -3,7 +3,7 @@ import { InvoiceData } from '../../interfaces/order-invoice';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { ReportService } from '../../services/report.service';
 import { DashboardService } from '../../../dashboard/services/dashboard.service';
-import { handleRequest } from 'src/app/utils/handle-request';
+import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
@@ -12,6 +12,9 @@ import { merchantCommissionColumns } from '../../configs/table-columns';
 import { routeParams } from 'src/app/utils/route-params';
 import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
+import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
 
 @Component({
   selector: 'app-merchant-commission',
@@ -28,7 +31,8 @@ export class MerchantCommissionComponent implements OnInit {
   constructor(
     private reportService: ReportService,
     private dashboardService: DashboardService,
-    private location: Location
+    private location: Location,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -86,5 +90,29 @@ export class MerchantCommissionComponent implements OnInit {
       code: this.generateCode(invoice),
     });
     window.open(this.location.prepareExternalUrl(url), '_blank');
+  }
+
+  generateOrderInvoicesDialog() {
+    const dialogRef = this.dialog.open(ConfirmDialog, {
+      ...DIALOG_CONFIG_XS,
+      data: {
+        message: '¿Está seguro de generar las facturas?',
+      },
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe((isOk) => isOk && this.generateOrderInvoices());
+  }
+
+  async generateOrderInvoices() {
+    const params = {
+      cityId: this.form.value.cityId,
+      startDate: this.form.value.startDate,
+      endDate: DateUtils.getMaxHour(this.form.value.endDate),
+    };
+    await handleRequestPg(
+      () => this.reportService.generateOrderInvoices(params),
+      true
+    );
   }
 }

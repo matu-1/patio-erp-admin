@@ -1,6 +1,7 @@
 <app-breadcrumbs [breadcrumbs]="[{title, path: ''}]"></app-breadcrumbs>
 <app-title-bar [title]="title">
   <button mat-button [disabled]="!data" (click)="download()">Exportar</button>
+  <button mat-button [disabled]="!data" (click)="generateOrderInvoicesDialog()">Generar facturas</button>
 </app-title-bar>
 <app-simple-card class="mb-3" [isLoading]="isLoadingFilter">
   <app-form-builder

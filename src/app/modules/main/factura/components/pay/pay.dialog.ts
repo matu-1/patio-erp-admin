@@ -78,6 +78,7 @@ export class PayDialog implements OnInit {
     const { value } = this.form;
     if (!value.id_caja && !value.cuenta_contable_id)
       return SnackBar.show('Debe seleccionar una Caja o Banco');
+    console.log("value", value);
     this.dialogRef.close({
       ...value,
       ingreso: Number(value.ingreso),

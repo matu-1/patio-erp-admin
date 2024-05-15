@@ -16,3 +16,9 @@ export interface InvoiceData {
   clientStatus: string;
   clientEmail: string;
 }
+
+export interface CreateMultiOrderInvoiceDto {
+  startDate: Date;
+  endDate: Date;
+  cityId?: number;
+}
