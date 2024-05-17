@@ -3,7 +3,10 @@ import { orderInvoiceFilterSchema } from '../../config/form-schema';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DashboardService } from '../../../dashboard/services/dashboard.service';
 import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
-import { OrderInvoice } from '../../interfaces/order-invoice.interface';
+import {
+  OrderInvoice,
+  RevertPaymentOrderInvoiceDto,
+} from '../../interfaces/order-invoice.interface';
 import { orderInvoiceColumns } from '../../config/table-columns';
 import { OrderInvoiceService } from '../../services/order-invoice.service';
 import { PaginationDto } from 'src/app/utils/pagination.dto';
@@ -15,6 +18,9 @@ import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { Location } from '@angular/common';
 import { ObjectUtils } from 'src/app/utils/object.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
+import { MatDialog } from '@angular/material/dialog';
+import { RevertPaymentDialog } from '../../components/revert-payment/revert-payment.dialog';
+import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
 
 @Component({
   selector: 'app-list',
@@ -35,7 +41,8 @@ export class ListComponent implements OnInit {
   constructor(
     private dashBoardService: DashboardService,
     private orderInvoiceService: OrderInvoiceService,
-    private location: Location
+    private location: Location,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -100,9 +107,22 @@ export class ListComponent implements OnInit {
     );
   }
 
-  openRevertPaymentDlg(value: OrderInvoice) {}
+  openRevertPaymentDlg(value: OrderInvoice) {
+    const dialogRef = this.dialog.open(RevertPaymentDialog, {
+      ...DIALOG_CONFIG_XS,
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe((data) => data && this.revertPayment(value, data));
+  }
 
-  recalculateInvoice(value: OrderInvoice) {}
+  async recalculateInvoice(value: OrderInvoice) {
+    const res = await handleRequestPg(
+      () => this.orderInvoiceService.refresh(value.id),
+      true
+    );
+    if (res) this.filter();
+  }
 
   openEditDlg(value: OrderInvoice) {}
 
@@ -133,5 +153,14 @@ export class ListComponent implements OnInit {
       true
     );
     if (res) ExcelUtils.download(res.data.records, `order-invoice`);
+  }
+
+  async revertPayment(value: OrderInvoice, dto: RevertPaymentOrderInvoiceDto) {
+    const res = await handleRequestPg(
+      () =>
+        this.orderInvoiceService.revertPayment({ ...dto, invoiceId: value.id }),
+      true
+    );
+    if (res) this.filter();
   }
 }

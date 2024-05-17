@@ -1,3 +1,4 @@
+import { Validators } from '@angular/forms';
 import {
   TextFieldSchema,
   TextFieldType,
@@ -139,5 +140,24 @@ export const orderInvoiceFilterSchema: TextFieldSchema = [
     df: '23%',
     xs: '100%',
     sm: '23%',
+  },
+];
+
+export const revertPaymentSchema: TextFieldSchema = [
+  {
+    label: 'Glosa',
+    name: 'gloss',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'minlength',
+        message: 'Minimum 3 characters',
+        validatorFn: Validators.minLength(3),
+      },
+    ],
   },
 ];

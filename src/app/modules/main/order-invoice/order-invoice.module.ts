@@ -6,15 +6,27 @@ import { ListComponent } from './pages/list/list.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { MaterialModule } from '../../material/material.module';
 import { DirectivesModule } from 'src/app/directives/directives.module';
+import { RevertPaymentDialog } from './components/revert-payment/revert-payment.dialog';
+import { PayDialog } from './components/pay/pay.dialog';
+import { EditDialog } from './components/edit/edit.dialog';
+import { SchedulePaymentDialog } from './components/schedule-payment/schedule-payment.dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ListComponent],
+  declarations: [
+    ListComponent,
+    RevertPaymentDialog,
+    PayDialog,
+    EditDialog,
+    SchedulePaymentDialog,
+  ],
   imports: [
     CommonModule,
     OrderInvoiceRoutingModule,
     ComponentsModule,
     MaterialModule,
     DirectivesModule,
+    ReactiveFormsModule,
   ],
 })
 export class OrderInvoiceModule {}

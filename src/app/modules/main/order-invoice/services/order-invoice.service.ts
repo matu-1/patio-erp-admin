@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   OrderInvoice,
   ParamsOrderInvoice,
+  RevertPaymentOrderInvoiceDto,
 } from '../interfaces/order-invoice.interface';
 import { API } from 'src/app/constants/api.constant';
 import { Response, ResponsePagination } from 'src/app/utils/response';
@@ -27,6 +28,20 @@ export class OrderInvoiceService {
   getInfo(id: number) {
     return this.http.get<Response<OrderInvoiceInfo>>(
       routeParams(API.ORDER_INVOICE.GET_INFO, { id })
+    );
+  }
+
+  refresh(id: number) {
+    return this.http.put<Response<OrderInvoice>>(
+      routeParams(API.ORDER_INVOICE.REFRESH, { id }),
+      {}
+    );
+  }
+
+  revertPayment(dto: RevertPaymentOrderInvoiceDto) {
+    return this.http.post<Response<OrderInvoice>>(
+      API.ORDER_INVOICE.REVERT_PAYMENT,
+      dto
     );
   }
 }

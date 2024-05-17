@@ -1,0 +1,15 @@
+<form [formGroup]="form" markAllSubmit (validSubmit)="save()">
+  <h2 mat-dialog-title>Revertir último pago</h2>
+  <div mat-dialog-content>
+    <app-text-field
+      *ngFor="let value of revertPaymentSchema"
+      [form]="form"
+      [textFieldValue]="value"
+    >
+    </app-text-field>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button cdkFocusInitial type="submit">Aceptar</button>
+  </div>
+</form>

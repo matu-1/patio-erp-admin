@@ -40,3 +40,8 @@ export interface OrderInvoice {
 }
 
 export interface ParamsOrderInvoice extends PaginationDto {}
+
+export interface RevertPaymentOrderInvoiceDto {
+  gloss: string;
+  invoiceId: number;
+}

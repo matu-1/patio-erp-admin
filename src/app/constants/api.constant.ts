@@ -102,5 +102,10 @@ export const API = {
     GET_ALL: `${API_URL}/order-invoice`,
     GET_INFO: `${API_URL}/order-invoice/info/:id`,
     GENERATE: `${API_URL}/order-invoice`,
+    REFRESH: `${API_URL}/order-invoice/recalculate-invoice/:id`,
+    REVERT_PAYMENT: `${API_URL}/order-invoice/revert-payment`,
+    PAY: `${API_URL}/order-invoice/pay`,
+    SCHEDULE_PAYMENT: `${API_URL}/order-invoice/schedule-payment`,
+    UPDATE: `${API_URL}/order-invoice/:id`,
   },
 };
