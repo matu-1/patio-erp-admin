@@ -21,6 +21,8 @@ import { ExcelUtils } from 'src/app/utils/excel.util';
 import { MatDialog } from '@angular/material/dialog';
 import { RevertPaymentDialog } from '../../components/revert-payment/revert-payment.dialog';
 import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
+import { PayDialog } from '../../components/pay/pay.dialog';
+import { SchedulePaymentDialog } from '../../components/schedule-payment/schedule-payment.dialog';
 
 @Component({
   selector: 'app-list',
@@ -126,10 +128,6 @@ export class ListComponent implements OnInit {
 
   openEditDlg(value: OrderInvoice) {}
 
-  openPayDlg(value: OrderInvoice) {}
-
-  openSchedulePaymentDlg(value: OrderInvoice) {}
-
   goDetail(value: OrderInvoice) {
     const url = routeParams(PAGE_ROUTE.PUBLIC.ORDER_INVOICE_DETAIL, {
       code: this.generateCode(value),
@@ -159,6 +157,50 @@ export class ListComponent implements OnInit {
     const res = await handleRequestPg(
       () =>
         this.orderInvoiceService.revertPayment({ ...dto, invoiceId: value.id }),
+      true
+    );
+    if (res) this.filter();
+  }
+
+  openPayDlg(value: OrderInvoice) {
+    const dialogRef = this.dialog.open(PayDialog, {
+      ...DIALOG_CONFIG_XS,
+      data: value,
+    });
+    dialogRef.afterClosed().subscribe(async (data) => {
+      if (data) this.pay(value, data);
+    });
+  }
+
+  async pay(invoice: OrderInvoice, data: any) {
+    const body = {
+      ...data,
+      orderInvoiceId: invoice.id,
+    };
+    const res = await handleRequestPg(
+      () => this.orderInvoiceService.pay(body),
+      true
+    );
+    if (res) this.filter();
+  }
+
+  openSchedulePaymentDlg(value: OrderInvoice) {
+    const dialogRef = this.dialog.open(SchedulePaymentDialog, {
+      ...DIALOG_CONFIG_XS,
+      data: value,
+    });
+    dialogRef.afterClosed().subscribe(async (data) => {
+      if (data) this.schedulePayment(value, data);
+    });
+  }
+
+  async schedulePayment(invoice: OrderInvoice, data: any) {
+    const res = await handleRequestPg(
+      () =>
+        this.orderInvoiceService.schedulePayment({
+          ...data,
+          invoiceId: invoice.id,
+        }),
       true
     );
     if (res) this.filter();

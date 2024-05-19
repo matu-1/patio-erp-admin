@@ -11,6 +11,7 @@ import { PayDialog } from './components/pay/pay.dialog';
 import { EditDialog } from './components/edit/edit.dialog';
 import { SchedulePaymentDialog } from './components/schedule-payment/schedule-payment.dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     DirectivesModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
   ],
 })
 export class OrderInvoiceModule {}

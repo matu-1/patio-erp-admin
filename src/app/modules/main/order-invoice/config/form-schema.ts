@@ -161,3 +161,88 @@ export const revertPaymentSchema: TextFieldSchema = [
     ],
   },
 ];
+
+export const paySchema: TextFieldSchema = [
+  {
+    name: 'cashId',
+    label: 'Caja',
+    fieldType: TextFieldType.Dropdown,
+    df: '50%',
+    xs: '100%',
+  },
+  {
+    name: 'accountingAccountId',
+    label: 'Banco',
+    fieldType: TextFieldType.Dropdown,
+    df: '50%',
+    xs: '100%',
+  },
+  {
+    name: 'amount',
+    label: 'Ingreso',
+    validators: [
+      {
+        name: 'required',
+        validatorFn: Validators.required,
+        message: 'Is required',
+      },
+      {
+        name: 'number',
+        validatorFn: CustomValidators.number,
+        message: 'must be number',
+      },
+    ],
+    df: '50%',
+    xs: '100%',
+  },
+  {
+    name: 'paidAt',
+    label: 'Fecha',
+    fieldType: TextFieldType.DatePicker,
+    validators: [
+      {
+        name: 'required',
+        validatorFn: Validators.required,
+        message: 'Is required',
+      },
+    ],
+    df: '50%',
+    xs: '100%',
+  },
+  {
+    name: 'reason',
+    label: 'Glosa',
+    fieldType: TextFieldType.Textarea,
+    minRows: 3,
+    maxRows: 6,
+    validators: [
+      {
+        name: 'required',
+        validatorFn: Validators.required,
+        message: 'Is required',
+      },
+      {
+        name: 'minlength',
+        validatorFn: Validators.minLength(2),
+        message: 'Minimum 2 characters',
+      },
+    ],
+    df: '100%',
+    xs: '100%',
+  },
+];
+
+export const schedulePaymentSchema: TextFieldSchema = [
+  {
+    name: 'collectionDate',
+    label: 'Fecha Cobro',
+    fieldType: TextFieldType.DatePicker,
+    validators: [
+      {
+        name: 'required',
+        validatorFn: Validators.required,
+        message: 'Is required',
+      },
+    ],
+  },
+];
