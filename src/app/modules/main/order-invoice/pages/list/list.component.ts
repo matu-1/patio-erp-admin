@@ -20,9 +20,13 @@ import { ObjectUtils } from 'src/app/utils/object.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import { MatDialog } from '@angular/material/dialog';
 import { RevertPaymentDialog } from '../../components/revert-payment/revert-payment.dialog';
-import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
+import {
+  DIALOG_CONFIG_SM,
+  DIALOG_CONFIG_XS,
+} from 'src/app/constants/dialog.constant';
 import { PayDialog } from '../../components/pay/pay.dialog';
 import { SchedulePaymentDialog } from '../../components/schedule-payment/schedule-payment.dialog';
+import { EditDialog } from '../../components/edit/edit.dialog';
 
 @Component({
   selector: 'app-list',
@@ -126,7 +130,23 @@ export class ListComponent implements OnInit {
     if (res) this.filter();
   }
 
-  openEditDlg(value: OrderInvoice) {}
+  openEditDlg(value: OrderInvoice) {
+    const dialogRef = this.dialog.open(EditDialog, {
+      ...DIALOG_CONFIG_SM,
+      data: value,
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe((data) => data && this.editInvoice(value, data));
+  }
+
+  async editInvoice(value: OrderInvoice, data: any) {
+    const res = await handleRequestPg(
+      () => this.orderInvoiceService.update(value.id, data),
+      true
+    );
+    if (res) this.filter();
+  }
 
   goDetail(value: OrderInvoice) {
     const url = routeParams(PAGE_ROUTE.PUBLIC.ORDER_INVOICE_DETAIL, {

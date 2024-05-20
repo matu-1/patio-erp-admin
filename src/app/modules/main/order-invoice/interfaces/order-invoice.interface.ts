@@ -37,6 +37,7 @@ export interface OrderInvoice {
   balance: string;
   phone: string;
   quantity: number;
+  issue_date: string;
 }
 
 export interface ParamsOrderInvoice extends PaginationDto {}

@@ -246,3 +246,148 @@ export const schedulePaymentSchema: TextFieldSchema = [
     ],
   },
 ];
+
+export const editSchema: TextFieldSchema = [
+  {
+    label: 'Cliente',
+    name: 'clientName',
+    disabled: true,
+    xs: '100%',
+    sm: '50%',
+    df: '60%',
+  },
+  {
+    label: 'Fecha Emisión',
+    name: 'issueDate', //issue_date
+    disabled: true,
+    xs: '100%',
+    sm: '50%',
+    df: '40%',
+  },
+  {
+    label: 'Nro. Factura',
+    name: 'invoiceNumber',
+    xs: '100%',
+    sm: '50%',
+    df: '33.3%',
+    validators: [
+      {
+        name: 'number',
+        message: 'must be number',
+        validatorFn: CustomValidators.int,
+      },
+    ],
+  },
+  {
+    label: 'Nit',
+    name: 'nit',
+    xs: '100%',
+    sm: '50%',
+    df: '33.3%',
+  },
+  {
+    label: 'Razón Social',
+    name: 'businessName',
+    xs: '100%',
+    sm: '50%',
+    df: '33.3%',
+  },
+  {
+    label: 'Monto Conciliado',
+    name: 'reconciledAmount',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'number',
+        message: 'must be number',
+        validatorFn: CustomValidators.number,
+      },
+    ],
+    xs: '100%',
+    sm: '50%',
+    df: '25%',
+  },
+  {
+    label: 'Monto',
+    name: 'amount',
+    disabled: true,
+    xs: '100%',
+    sm: '50%',
+    df: '25%',
+  },
+  {
+    label: 'Mes',
+    name: 'month',
+    disabled: true,
+    xs: '100%',
+    sm: '50%',
+    df: '25%',
+  },
+  {
+    label: 'Gestion',
+    name: 'management',
+    disabled: true,
+    xs: '100%',
+    sm: '50%',
+    df: '25%',
+  },
+  {
+    label: 'Comentario',
+    name: 'comments',
+    fieldType: TextFieldType.Textarea,
+    validators: [
+      {
+        name: 'minlength',
+        message: 'Mínimo 3 caracteres',
+        validatorFn: Validators.minLength(3),
+      },
+    ],
+    minRows: 3,
+    maxRows: 5,
+    xs: '100%',
+    sm: '50%',
+    df: '100%',
+  },
+  {
+    label: 'Monto Incobrable',
+    name: 'uncollectibleAmount',
+    validators: [
+      {
+        name: 'number',
+        message: 'must be number',
+        validatorFn: CustomValidators.number,
+      },
+    ],
+    xs: '100%',
+    sm: '50%',
+    df: '33.3%',
+  },
+  {
+    label: 'Es Recibo?',
+    name: 'isReceipt',
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      { value: 0, label: 'No' },
+      { value: 1, label: 'Si' },
+    ],
+    xs: '100%',
+    sm: '50%',
+    df: '33.3%',
+  },
+  {
+    label: 'Incobrable?',
+    name: 'uncollectible',
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      { value: 0, label: 'No' },
+      { value: 1, label: 'Si' },
+    ],
+    xs: '100%',
+    sm: '50%',
+    df: '33.3%',
+  },
+];
