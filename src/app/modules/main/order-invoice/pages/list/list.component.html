@@ -1,6 +1,8 @@
 <app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
 <app-title-bar [title]="title">
-  <button mat-raised-button color="accent" (click)="download()">Exportar</button>
+  <button mat-raised-button color="accent" (click)="download()">
+    Exportar
+  </button>
 </app-title-bar>
 <app-simple-card class="mb-3" [isLoading]="isLoading">
   <app-form-builder

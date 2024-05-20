@@ -27,6 +27,7 @@ import {
 import { PayDialog } from '../../components/pay/pay.dialog';
 import { SchedulePaymentDialog } from '../../components/schedule-payment/schedule-payment.dialog';
 import { EditDialog } from '../../components/edit/edit.dialog';
+import { months } from 'src/app/constants/months.constant';
 
 @Component({
   selector: 'app-list',
@@ -155,9 +156,31 @@ export class ListComponent implements OnInit {
     window.open(this.location.prepareExternalUrl(url), '_blank');
   }
 
-  sendMessageEmail(value: OrderInvoice) {}
+  sendMessageEmail(value: OrderInvoice) {
+    const code = this.generateCode(value);
+    const link = `http://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=${
+      value.email
+    }&su=[PATIO%20SERVICE]%20Recibo%20${months[value.month - 1]}%20${
+      value.management
+    }%20&body=Estimado%20Cliente%2C%0A%0ASírvase%20encontrar%20su%20factura%20correspondiente%20a%20${
+      months[value.month - 1]
+    }%20${
+      value.management
+    },%20a%20través%20del%20siguiente%20link:%0A%0Ahttp://labs.patio.com.bo/recibo/${code}%0A%0ASaludos`;
+    window.open(link, '_blank');
+  }
 
-  sendMessageWhatsApp(value: OrderInvoice) {}
+  sendMessageWhatsApp(value: OrderInvoice) {
+    const code = this.generateCode(value);
+    const link = `http://api.whatsapp.com/send?phone=591${
+      value.phone
+    }&text=Estimado%20cliente%20sirvase%20encontrar%20su%20recibo%20correspondiente%20a%20${
+      months[value.month - 1]
+    }%20${
+      value.management
+    },%20a%20través%20del%20siguiente%20link:%0A%0Ahttp://labs.patio.com.bo/recibo/${code}`;
+    window.open(link, '_blank');
+  }
 
   async download() {
     const params = ObjectUtils.clear(this.form.value);
