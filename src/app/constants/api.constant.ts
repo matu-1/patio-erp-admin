@@ -108,4 +108,11 @@ export const API = {
     SCHEDULE_PAYMENT: `${API_URL}/order-invoice/schedule-payment`,
     UPDATE: `${API_URL}/order-invoice/:id`,
   },
+  MERCHANT_CLIENT: {
+    GET_PAGINATED: `${PATIO_STORE_API_URL}/client/paginated`,
+    GET_BY_ID: `${PATIO_STORE_API_URL}/client/:id`,
+    CREATE: `${PATIO_STORE_API_URL}/client`,
+    UPDATE: `${PATIO_STORE_API_URL}/client/:id`,
+    CHANGE_STATUS: `${PATIO_STORE_API_URL}/client/change-status/:id`,
+  },
 };

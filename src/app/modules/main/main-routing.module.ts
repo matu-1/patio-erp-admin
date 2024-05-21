@@ -63,6 +63,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: PAGE_ROUTE.MERCHANT_CLIENT.ROOT,
+        loadChildren: () =>
+          import('./merchant-client/merchant-client.module').then(
+            (m) => m.MerchantClientModule
+          ),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',
