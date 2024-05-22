@@ -7,6 +7,8 @@ import { MerchantClientRoutingModule } from './merchant-client-routing.module';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { MaterialModule } from '../../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DirectivesModule } from 'src/app/directives/directives.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [ListComponent, EditComponent, CreateComponent],
@@ -16,6 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ComponentsModule,
     MaterialModule,
     ReactiveFormsModule,
+    DirectivesModule,
+    FlexLayoutModule,
   ],
 })
 export class MerchantClientModule {}

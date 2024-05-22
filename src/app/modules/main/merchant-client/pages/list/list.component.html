@@ -20,7 +20,11 @@
   [columns]="clientColumns"
   (refresh)="filter()"
 >
-  <ng-template customColumn="actions" let-value="value"> </ng-template>
+  <ng-template customColumn="actions" let-value="value">
+    <button mat-icon-button matTooltip="Editar">
+      <mat-icon class="action-icon" (click)="goEdit(value)">edit</mat-icon>
+    </button>
+  </ng-template>
 </app-data-table>
 <mat-paginator
   [length]="query.length"
