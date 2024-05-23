@@ -1,0 +1,19 @@
+<app-breadcrumbs [breadcrumbs]="[{ path: '', title }]"></app-breadcrumbs>
+<app-title-bar [title]="title">
+  <button mat-button (click)="goCreate()">Crear</button>
+  <button mat-button (click)="download()">Exportar</button>
+</app-title-bar>
+<app-data-table
+  [rows]="merchants"
+  [columns]="merchantColumns"
+  (refresh)="filter()"
+>
+  <ng-template customColumn="photo" let-value="value">
+    <img class="tiny-img" [src]="value.photo" [alt]="value.name" />
+  </ng-template>
+  <ng-template customColumn="actions" let-value="value">
+    <button mat-icon-button matTooltip="Editar">
+      <mat-icon class="action-icon" (click)="goEdit(value)">edit</mat-icon>
+    </button>
+  </ng-template>
+</app-data-table>

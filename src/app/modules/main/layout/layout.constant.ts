@@ -158,6 +158,11 @@ export const MENU: MenuItem[] = [
         icon: 'remove',
         route: PAGE_ROUTE.MERCHANT_CLIENT.LIST,
       },
+      {
+        label: 'Comercios',
+        icon: 'remove',
+        route: PAGE_ROUTE.MERCHANT.LIST,
+      },
     ],
   },
 ];

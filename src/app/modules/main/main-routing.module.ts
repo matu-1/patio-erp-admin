@@ -70,6 +70,11 @@ const routes: Routes = [
           ),
       },
       {
+        path: PAGE_ROUTE.MERCHANT.ROOT,
+        loadChildren: () =>
+          import('./merchant/merchant.module').then((m) => m.MerchantModule),
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full',

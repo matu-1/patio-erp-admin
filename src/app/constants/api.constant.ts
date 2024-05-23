@@ -42,6 +42,10 @@ export const API = {
   MERCHANT: {
     GET_MERCHANTS: `${PATIO_STORE_API_URL}/merchants`,
     GET_MERCHANTS_CITY: `${PATIO_STORE_API_URL}/merchants/city/:cityId`,
+    GET_PAGINATED: `${PATIO_STORE_API_URL}/client/paginated`,
+    GET_BY_ID: `${PATIO_STORE_API_URL}/client/:id`,
+    CREATE: `${PATIO_STORE_API_URL}/client`,
+    UPDATE: `${PATIO_STORE_API_URL}/client/:id`,
   },
   PAYMENT_DRIVER: {
     GET_ALL: `${API_URL}/payment-driver`,
