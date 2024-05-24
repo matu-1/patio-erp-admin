@@ -16,4 +16,10 @@ export class MerchantService {
       ...PATIO_STORE_CONFIG_HTTP,
     });
   }
+
+  create(dto: Merchant) {
+    return this.http.post<Response<Merchant[]>>(API.MERCHANT.CREATE, dto, {
+      ...PATIO_STORE_CONFIG_HTTP,
+    });
+  }
 }
