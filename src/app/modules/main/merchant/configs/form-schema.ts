@@ -195,3 +195,176 @@ export const merchantCreateSchema: TextFieldSchema = [
     sm: '33%',
   },
 ];
+
+export const merchantEditSchema: TextFieldSchema = [
+  {
+    label: 'Nombre',
+    name: 'name',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '25%',
+    xs: '100%',
+    sm: '33%',
+  },
+  // {
+  //   label: 'Ciudad',
+  //   name: 'city',
+  //   validators: [
+  //     {
+  //       name: 'required',
+  //       message: 'Is required',
+  //       validatorFn: Validators.required,
+  //     },
+  //   ],
+  //   df: '25%',
+  //   xs: '100%',
+  //   sm: '33%',
+  // },
+  {
+    label: 'Distancia Maxima',
+    name: 'max_distance',
+    // value: 8,
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'number',
+        message: 'must be an number',
+        validatorFn: CustomValidators.number,
+      },
+    ],
+    df: '25%',
+    xs: '100%',
+    sm: '33%',
+  },
+  {
+    label: 'Teléfono',
+    name: 'phone',
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'minlength',
+        message: 'Minimum 8 characteres',
+        validatorFn: Validators.minLength(8),
+      },
+      {
+        name: 'int',
+        message: 'must be integer',
+        validatorFn: CustomValidators.int,
+      },
+    ],
+    df: '25%',
+    xs: '100%',
+    sm: '33%',
+  },
+  {
+    label: 'Grupo CHAT',
+    name: 'groupChat',
+    options: [],
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '25%',
+    xs: '100%',
+    sm: '33%',
+  },
+  {
+    label: 'ExternalId',
+    name: 'externalId',
+    options: [],
+    validators: [],
+    df: '25%',
+    xs: '100%',
+    sm: '33%',
+  },
+  {
+    label: 'Asignar en Listo?',
+    name: 'readyAssignment',
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      { value: 0, label: 'No' },
+      { value: 1, label: 'Si' },
+    ],
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '25%',
+    xs: '100%',
+    sm: '33%',
+  },
+  {
+    label: 'Descontar Propina?',
+    name: 'discountTip',
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      { value: 0, label: 'No' },
+      { value: 1, label: 'Si' },
+    ],
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '25%',
+    xs: '100%',
+    sm: '33%',
+  },
+  {
+    label: 'P. Comisión',
+    name: 'commissionPercentage',
+    // value: 8,
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+      {
+        name: 'number',
+        message: 'must be an number',
+        validatorFn: CustomValidators.number,
+      },
+    ],
+    df: '25%',
+    xs: '100%',
+    sm: '33%',
+  },
+  {
+    label: 'Cliente',
+    name: 'clientId',
+    fieldType: TextFieldType.Autocomplete,
+    getOptionLabel: (value) => value?.label,
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '30%',
+    xs: '100%',
+    sm: '40%',
+  },
+];
