@@ -6,6 +6,7 @@ import { PATIO_STORE_CONFIG_HTTP } from 'src/app/constants/http-header.constant'
 import { HttpClient } from '@angular/common/http';
 import { routeParams } from 'src/app/utils/route-params';
 import { tap } from 'rxjs';
+import { ObjectUtils } from 'src/app/utils/object.util';
 
 @Injectable({
   providedIn: 'root',
@@ -17,13 +18,15 @@ export class MerchantService {
 
   constructor(private http: HttpClient) {}
 
-  getAll() {
+  getAll(params: any) {
     return this.http.get<Response<Merchant[]>>(API.MERCHANT.GET_MERCHANTS, {
       ...PATIO_STORE_CONFIG_HTTP,
+      params: ObjectUtils.clear(params),
     });
   }
 
   getById(id: number) {
+    this.isLoading.getById = true;
     return this.http
       .get<Response<Merchant>>(routeParams(API.MERCHANT.GET_BY_ID, { id }), {
         ...PATIO_STORE_CONFIG_HTTP,

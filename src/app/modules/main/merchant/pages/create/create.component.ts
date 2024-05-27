@@ -34,7 +34,7 @@ export class CreateComponent implements OnInit {
 
   async save() {
     const value = ObjectUtils.clear(this.form.value);
-    const res = await handleRequestPg(() => this.merchantService.getAll());
+    const res = await handleRequestPg(() => this.merchantService.create(value));
     if (res) this.goBack();
   }
 }

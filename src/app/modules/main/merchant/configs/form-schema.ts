@@ -5,6 +5,22 @@ import {
 } from 'src/app/components/text-field/text-field.interface';
 import { CustomValidators } from 'src/app/utils/validators';
 
+export const filterMerchantSchema: TextFieldSchema = [
+  {
+    label: 'Tiene cliente?',
+    name: 'hasClient',
+    fieldType: TextFieldType.Dropdown,
+    options: [
+      { label: 'Si', value: 1 },
+      { label: 'No', value: 0 },
+      { label: 'All', value: undefined },
+    ],
+    xs: '100%',
+    sm: '30%',
+    df: '20%',
+  },
+];
+
 export const merchantCreateSchema: TextFieldSchema = [
   {
     label: 'Nombre',

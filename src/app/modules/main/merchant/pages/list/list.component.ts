@@ -7,6 +7,8 @@ import { PAGE_ROUTE } from 'src/app/constants/page-route.constant';
 import { Router } from '@angular/router';
 import { routeParams } from 'src/app/utils/route-params';
 import { ExcelUtils } from 'src/app/utils/excel.util';
+import { buildform } from 'src/app/components/text-field/text-field.util';
+import { filterMerchantSchema } from '../../configs/form-schema';
 
 @Component({
   selector: 'app-list',
@@ -17,6 +19,8 @@ export class ListComponent implements OnInit {
   title = 'Comercios';
   merchants?: Merchant[];
   merchantColumns = merchantColumns;
+  form = buildform(filterMerchantSchema);
+  filterMerchantSchema = filterMerchantSchema;
 
   constructor(
     private merchantService: MerchantService,
@@ -29,7 +33,7 @@ export class ListComponent implements OnInit {
 
   async getMerchants() {
     this.merchants = undefined;
-    const res = await handleRequest(() => this.merchantService.getAll());
+    const res = await handleRequest(() => this.merchantService.getAll(this.form.value));
     if (res) this.merchants = res.data;
   }
 
