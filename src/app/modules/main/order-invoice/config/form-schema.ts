@@ -89,7 +89,14 @@ export const orderInvoiceFilterSchema: TextFieldSchema = [
     name: 'collectorId',
     label: 'Cobrador',
     fieldType: TextFieldType.Dropdown,
-    options: [{ value: 1, label: 'Ejecutivo test' }], //todo no hay datos
+    // options: [{ value: 1, label: 'Ejecutivo test' }], //todo no hay datos
+    options: [
+      { value: 1, label: 'Ejecutivo 1' },
+      { value: 2, label: 'Ejecutivo 2' },
+      { value: 3, label: 'Ejecutivo 3' },
+      { value: 4, label: 'Ejecutivo 4' },
+      { value: 5, label: 'Ejecutivo 5' },
+    ],
     df: '18.6%',
     xs: '100%',
     sm: '25%',
