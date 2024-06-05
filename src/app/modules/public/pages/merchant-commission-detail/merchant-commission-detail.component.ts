@@ -1,10 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { InvoiceDataDetail } from '../../../main/factura/interfaces/invoice-detail.interface';
-import { paymentMerchantsColumns } from '../../configs/table-columns';
+import {
+  InvoiceDataDetail,
+  PaymentMerchant,
+} from '../../../main/factura/interfaces/invoice-detail.interface';
+import {
+  paymentMerchantExcelColumns,
+  paymentMerchantsColumns,
+} from '../../configs/table-columns';
 import { handleRequestPg } from 'src/app/utils/handle-request';
 import { PublicService } from '../../services/public.service';
 import { ActivatedRoute } from '@angular/router';
 import { months } from 'src/app/constants/months.constant';
+import { createOrdersInvoicePDF } from '../../utils/create-orders-invoice';
+import { ExcelUtils } from 'src/app/utils/excel.util';
+import parseByColumns from 'src/app/components/data-table/parse-by-columns';
 
 @Component({
   selector: 'app-merchant-commission-detail',
@@ -44,5 +53,16 @@ export class MerchantCommissionDetailComponent implements OnInit {
       endDate: new Date(dataArray[1]),
       clientId: dataArray[2],
     };
+  }
+
+  exportToExcel(value: PaymentMerchant) {
+    ExcelUtils.download(
+      parseByColumns(value.excel?.orders ?? [], paymentMerchantExcelColumns),
+      'merchant orders'
+    );
+  }
+
+  exportToPDF(value: PaymentMerchant) {
+    createOrdersInvoicePDF(value.pdf);
   }
 }

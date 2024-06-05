@@ -23,23 +23,24 @@
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
       <div fxFlex.xs="100%" fxFlex="50%">
         <h3 class="subtitle">
-          Resumen {{ months[invoiceInfo.month - 1] }} {{ invoiceInfo.management }}
+          Resumen {{ months[invoiceInfo.month - 1] }}
+          {{ invoiceInfo.management }}
         </h3>
         <div>
           <p>
             Total Pedidos:
-            <span class="text-bold">{{ invoiceInfo.quantity| number }}</span>
+            <span class="text-bold">{{ invoiceInfo.quantity | number }}</span>
           </p>
           <p>
             Total de ventas realizadas:
             <span class="text-bold">
-              {{ invoiceInfo.total | number: ".2-2" }} Bs.</span
+              {{ invoiceInfo.total | number : ".2-2" }} Bs.</span
             >
           </p>
           <p>
             Comisión:
             <span class="text-bold"
-              >{{ invoiceInfo.commissionAmount | number: ".2-2" }} Bs.</span
+              >{{ invoiceInfo.commissionAmount | number : ".2-2" }} Bs.</span
             >
           </p>
         </div>
@@ -59,8 +60,12 @@
           {{ i + 1 }}
         </ng-template>
         <ng-template customColumn="actions" let-value="value">
-          <button mat-button color="primary">...</button>
-          <!-- <button mat-button color="warn">PDF</button> -->
+          <button mat-button color="primary" (click)="exportToExcel(value)">
+            EXCEL
+          </button>
+          <button mat-button color="warn" (click)="exportToPDF(value)">
+            PDF
+          </button>
         </ng-template>
       </app-data-table>
     </div>

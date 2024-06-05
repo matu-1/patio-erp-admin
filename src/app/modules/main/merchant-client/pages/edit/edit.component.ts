@@ -29,7 +29,10 @@ export class EditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => this.getClient(params.id));
+    this.activatedRoute.params.subscribe(async (params) => {
+      await this.getClient(params.id);
+      this.getCollectors();
+    });
   }
 
   async getClient(id: number) {
@@ -45,14 +48,33 @@ export class EditComponent implements OnInit {
   }
 
   get isLoading() {
-    return this.clientService.isLoading;
+    return this.clientService.isLoading || !clientEditSchema[3].options;
+  }
+
+  async getCollectors() {
+    const res = await handleRequest(() => this.clientService.getCollectors());
+    if (res) {
+      clientEditSchema[3].options = res.data.map(({ id, name }) => ({
+        value: id,
+        label: `${id} - ${name}`,
+      }));
+      this.form.patchValue({
+        collectorId: clientEditSchema[3].options.find(
+          (item) => item.value == this.form.value.collectorId
+        ),
+      });
+    }
   }
 
   async save() {
     const value = ObjectUtils.clear(this.form.value);
     const { id } = this.activatedRoute.snapshot.params;
     const res = await handleRequestPg(
-      () => this.clientService.update(id, value),
+      () =>
+        this.clientService.update(id, {
+          ...value,
+          collectorId: value.collectorId.value,
+        }),
       true
     );
     if (res) this.goBack();

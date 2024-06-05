@@ -6,7 +6,7 @@ import { Location } from '@angular/common';
 import { clientEditSchema } from '../../configs/form-schema';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { ObjectUtils } from 'src/app/utils/object.util';
-import { handleRequestPg } from 'src/app/utils/handle-request';
+import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';
 
 @Component({
   selector: 'app-create',
@@ -26,16 +26,35 @@ export class CreateComponent implements OnInit {
     private location: Location
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCollectors();
+  }
 
   goBack() {
     this.location.back();
   }
 
+  async getCollectors() {
+    const res = await handleRequest(() => this.clientService.getCollectors());
+    if (res)
+      clientEditSchema[3].options = res.data.map(({ id, name }) => ({
+        value: id,
+        label: `${id} - ${name}`,
+      }));
+  }
+
+  get isLoading() {
+    return !clientEditSchema[3].options;
+  }
+
   async save() {
     const value = ObjectUtils.clear(this.form.value);
     const res = await handleRequestPg(
-      () => this.clientService.create(value),
+      () =>
+        this.clientService.create({
+          ...value,
+          collectorId: value.collectorId.value,
+        }),
       true
     );
     if (res) this.goBack();

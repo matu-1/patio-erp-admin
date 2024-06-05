@@ -4,6 +4,7 @@ export interface Client {
   phone: string;
   email: string;
   webhookUrl: string;
+  collectorId?: number;
   createdAt: Date; //str
   updatedAt: Date; //str
   deletedAt: null;

@@ -15,6 +15,8 @@ export interface InvoiceData {
   total: number;
   clientStatus: string;
   clientEmail: string;
+  collectorName?: string;
+  collectorId?: number;
 }
 
 export interface CreateMultiOrderInvoiceDto {
