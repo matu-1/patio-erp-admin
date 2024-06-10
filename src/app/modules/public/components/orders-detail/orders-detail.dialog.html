@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Resumen (<small>{{data.merchant}}</small>)</h2>
+<div mat-dialog-content>
+  <div class="orders">
+    <div class="order" *ngFor="let order of data.pdf.orders">
+      <div class="header">
+        <strong> # {{order.id}}</strong>
+        <small>{{order.createdAt | date}}</small>
+      </div>
+      <div class="main">
+        <div>
+          <span
+            >{{order.total}}
+            <strong><small>({{order.totalOrder}})</small></strong></span
+          >
+          <span
+            >{{order.commissionAmount | number}}
+            <small>({{order.commissionPercentage}})%</small></span
+          >
+        </div>
+        <app-chip>{{paymentModeId[order.paymentModeId]}}</app-chip>
+      </div>
+      <div class="products">
+        <div class="product" *ngFor="let product of order.products">
+          <div>
+            <span>{{product.price}} $</span>
+            <app-chip>{{product.quantity}}</app-chip>
+          </div>
+          <span>{{product.commissionPercentage ?? '---'}} %</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</div>

@@ -14,6 +14,9 @@ import { months } from 'src/app/constants/months.constant';
 import { createOrdersInvoicePDF } from '../../utils/create-orders-invoice';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import parseByColumns from 'src/app/components/data-table/parse-by-columns';
+import { MatDialog } from '@angular/material/dialog';
+import { OrdersDetailDialog } from '../../components/orders-detail/orders-detail.dialog';
+import { DIALOG_CONFIG_SM } from 'src/app/constants/dialog.constant';
 
 @Component({
   selector: 'app-merchant-commission-detail',
@@ -27,7 +30,8 @@ export class MerchantCommissionDetailComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private publicService: PublicService
+    private publicService: PublicService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -64,5 +68,12 @@ export class MerchantCommissionDetailComponent implements OnInit {
 
   exportToPDF(value: PaymentMerchant) {
     createOrdersInvoicePDF(value.pdf);
+  }
+
+  showDetailDialog(value: PaymentMerchant) {
+    this.dialog.open(OrdersDetailDialog, {
+      ...DIALOG_CONFIG_SM,
+      data: value,
+    });
   }
 }

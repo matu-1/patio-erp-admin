@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ConfirmDialog } from 'src/app/components/confirm/confirm.dialog';
 import { buildform } from 'src/app/components/text-field/text-field.util';
 import { DIALOG_CONFIG_XS } from 'src/app/constants/dialog.constant';
-import { ArrayUtils } from 'src/app/utils/array.utils';
 import { DateUtils } from 'src/app/utils/date.util';
 import { ExcelUtils } from 'src/app/utils/excel.util';
 import { handleRequest, handleRequestPg } from 'src/app/utils/handle-request';

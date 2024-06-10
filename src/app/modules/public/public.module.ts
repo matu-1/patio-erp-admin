@@ -10,6 +10,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DirectivesModule } from 'src/app/directives/directives.module';
 import { MerchantCommissionDetailComponent } from './pages/merchant-commission-detail/merchant-commission-detail.component';
 import { OrderInvoiceDetailComponent } from './pages/order-invoice-detail/order-invoice-detail.component';
+import { OrdersDetailDialog } from './components/orders-detail/orders-detail.dialog';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { OrderInvoiceDetailComponent } from './pages/order-invoice-detail/order-
     PayDialog,
     MerchantCommissionDetailComponent,
     OrderInvoiceDetailComponent,
+    OrdersDetailDialog,
   ],
   imports: [
     CommonModule,

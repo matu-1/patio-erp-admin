@@ -16,6 +16,7 @@ export interface InvoiceDataDetail {
   quantity: number;
   commissionAmount: number;
   total: number;
+  totalOrder: number;
   name: string;
   email: string;
   phone: string;
@@ -32,8 +33,10 @@ export interface PaymentMerchant {
   // porcentaje_comision_local: number;
   // latitude: string;
   // longitude: string;
-  clientId: number;
-  client: string;
+  // clientId: number;
+  // client: string;
+  merchantId: number;
+  merchant: string;
   quantity: number;
   commissionPercentage: number;
   phone: string;
@@ -45,6 +48,7 @@ export interface PaymentMerchant {
   email: string;
   excel: PaymentMerchantExcel;
   pdf: PaymentMerchantPDF;
+  totalOrder: number;
 }
 
 export interface PaymentMerchantExcel {
@@ -53,13 +57,21 @@ export interface PaymentMerchantExcel {
   orders: PaymentMerchantOrder[];
 }
 
+export interface Product {
+  commissionPercentage?: number;
+  price: number;
+  quantity: number;
+}
+
 export interface PaymentMerchantOrder {
   id: number;
   paymentModeId: number;
   commissionPercentage: number;
   createdAt: Date;
   total: number;
+  totalOrder: number;
   commissionAmount: number;
+  products: Product[];
 }
 
 export interface PaymentMerchantPDF {

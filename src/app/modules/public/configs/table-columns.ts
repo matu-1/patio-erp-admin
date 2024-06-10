@@ -131,6 +131,11 @@ export const paymentMerchantsColumns: TableColumns<PaymentMerchant> = [
     valueFormatter: ({ total }) => formatToNumber(total),
   },
   {
+    field: 'totalOrder',
+    headerName: 'Total Order',
+    valueFormatter: ({ totalOrder }) => formatToNumber(totalOrder),
+  },
+  {
     field: 'commissionPercentage',
     headerName: 'Comisión',
     valueFormatter: ({ commissionPercentage }) =>
