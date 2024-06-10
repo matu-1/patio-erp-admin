@@ -13,6 +13,7 @@ export interface InvoiceData {
   city: string;
   commissionAmount: number;
   total: number;
+  totalOrder: number;
   clientStatus: string;
   clientEmail: string;
 }
