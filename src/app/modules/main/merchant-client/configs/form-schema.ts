@@ -67,6 +67,22 @@ export const clientEditSchema: TextFieldSchema = [
     sm: '33%',
   },
   {
+    label: 'Cobrador',
+    name: 'collectorId',
+    fieldType: TextFieldType.Autocomplete,
+    getOptionLabel: (value) => value?.label,
+    validators: [
+      {
+        name: 'required',
+        message: 'Is required',
+        validatorFn: Validators.required,
+      },
+    ],
+    df: '25%',
+    xs: '100%',
+    sm: '33%',
+  },
+  {
     label: 'WebhookUrl',
     name: 'webhookUrl',
     validators: [

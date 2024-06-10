@@ -1183,6 +1183,11 @@ export const merchantCommissionColumns: TableColumns<InvoiceData> = [
     valueFormatter: ({ totalOrder }) => formatToNumber(totalOrder),
   },
   {
+    field: 'collectorName',
+    headerName: 'Cobrador',
+    valueFormatter: (v) => v.collectorName ?? '---',
+  },
+  {
     field: 'actions',
     headerName: 'Actions',
   },

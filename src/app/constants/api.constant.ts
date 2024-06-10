@@ -119,4 +119,7 @@ export const API = {
     UPDATE: `${PATIO_STORE_API_URL}/client/:id`,
     CHANGE_STATUS: `${PATIO_STORE_API_URL}/client/change-status/:id`,
   },
+  COLLECTOR: {
+    GET_ALL: `${PATIO_STORE_API_URL}/collector`,
+  },
 };

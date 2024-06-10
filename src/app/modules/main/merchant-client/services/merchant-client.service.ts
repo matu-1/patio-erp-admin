@@ -7,6 +7,7 @@ import { routeParams } from 'src/app/utils/route-params';
 import { tap } from 'rxjs';
 import { PaginationDto } from 'src/app/utils/pagination.dto';
 import { PATIO_STORE_CONFIG_HTTP } from 'src/app/constants/http-header.constant';
+import { Collector } from '../interfaces/collector.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -55,5 +56,11 @@ export class MerchantClientService {
       dto,
       { ...PATIO_STORE_CONFIG_HTTP }
     );
+  }
+
+  getCollectors() {
+    return this.http.get<Response<Collector[]>>(API.COLLECTOR.GET_ALL, {
+      ...PATIO_STORE_CONFIG_HTTP,
+    });
   }
 }
