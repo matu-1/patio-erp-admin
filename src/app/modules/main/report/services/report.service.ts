@@ -174,6 +174,7 @@ export class ReportService {
   getDrivers() {
     return this.http.get<Response<DriverDto[]>>(API.DRIVER.GET_ALL, {
       ...PATIO_STORE_CONFIG_HTTP,
+      params: { all: 1 },
     });
   }
 

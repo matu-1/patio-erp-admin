@@ -68,6 +68,7 @@ export class CollectDriverService {
   getDrivers() {
     return this.http.get<Response<Driver[]>>(API.DRIVER.GET_ALL, {
       ...PATIO_STORE_CONFIG_HTTP,
+      params: { all: 1 },
     });
   }
 

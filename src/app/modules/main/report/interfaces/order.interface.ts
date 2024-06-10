@@ -69,6 +69,7 @@ export interface AssignedDriver {
 
 export interface OrderStatus {
   status: string;
+  reason?: string;
   createdAt: Date;
   userId: number;
 }

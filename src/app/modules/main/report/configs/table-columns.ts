@@ -772,6 +772,14 @@ export const orderColumns: TableColumns<Order> = [
         : '--',
   },
   {
+    field: 'reasonCancel',
+    headerName: 'Motivo cancelado',
+    valueFormatter: ({ orderStatus }) =>
+      orderStatus
+        ? orderStatus.find((item) => item.status == 'canceled')?.reason ?? '---'
+        : '---',
+  },
+  {
     field: 'meters_estimated_distance',
     headerName: 'Distancia (mts)',
   },
