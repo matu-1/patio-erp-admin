@@ -25,7 +25,10 @@
             <span>{{product.price}} $</span>
             <app-chip>{{product.quantity}}</app-chip>
           </div>
-          <span>{{product.commissionPercentage ?? '---'}} %</span>
+          <div>
+            <span>{{product.commissionPercentage ?? '---'}} %</span>
+            <strong>{{product.subtotal}} $</strong>
+          </div>
         </div>
       </div>
     </div>

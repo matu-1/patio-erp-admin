@@ -61,6 +61,7 @@ export interface Product {
   commissionPercentage?: number;
   price: number;
   quantity: number;
+  subtotal: number;
 }
 
 export interface PaymentMerchantOrder {
