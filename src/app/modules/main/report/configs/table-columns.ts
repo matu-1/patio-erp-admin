@@ -790,6 +790,15 @@ export const orderColumns: TableColumns<Order> = [
       meterToMile(meters_estimated_distance),
   },
   {
+    field: 'fullStatus',
+    headerName: 'Estado con Motivo',
+    valueFormatter: ({ orderStatus, status }) =>
+      orderStatus
+        ? orderStatus.find((item) => item.status == 'canceled')?.reason ??
+          status
+        : status,
+  },
+  {
     field: 'tip_original',
     headerName: 'Tip Original',
   },
