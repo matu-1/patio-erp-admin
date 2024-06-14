@@ -18,7 +18,7 @@ export interface OrderInvoice {
   collectionDate: null;
   issueDate: Date;
   management: number;
-  clientId: number;
+  client_id: number;
   collectorId: null;
   uncollectible: number;
   month: number;
@@ -93,4 +93,14 @@ export interface UpdateOrderInvoiceDto {
   balance: number;
   phone?: string;
   quantity: number;
+}
+
+export interface BulkInvoice {
+  telefono: number;
+  mensaje: string;
+}
+
+export interface ParamBulkInvoiceDto {
+  month: number;
+  management: number;
 }

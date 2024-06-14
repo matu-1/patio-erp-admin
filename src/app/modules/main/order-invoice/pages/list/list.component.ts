@@ -110,7 +110,7 @@ export class ListComponent implements OnInit {
 
   generateCode(invoice: OrderInvoice) {
     return window.btoa(
-      `${invoice.management}-${invoice.month}-${invoice.id}-${invoice.clientId}`
+      `${invoice.management}-${invoice.month}-${invoice.id}-${invoice.client_id}`
     );
   }
 
@@ -247,5 +247,18 @@ export class ListComponent implements OnInit {
       true
     );
     if (res) this.filter();
+  }
+
+  async downloadBulk() {
+    const date = new Date();
+    const res = await handleRequestPg(
+      () =>
+        this.orderInvoiceService.getBulkInvoices({
+          month: this.form.value.month ?? date.getMonth() + 1,
+          management: this.form.value.management ?? date.getFullYear(),
+        }),
+      true
+    );
+    if (res) ExcelUtils.download(res.data, `bulk-order-invoice`);
   }
 }

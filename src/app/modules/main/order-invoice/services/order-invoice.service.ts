@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   OrderInvoice,
+  ParamBulkInvoiceDto,
   ParamsOrderInvoice,
   PayOrderInvoiceDto,
   RevertPaymentOrderInvoiceDto,
@@ -63,6 +64,13 @@ export class OrderInvoiceService {
     return this.http.put<Response<OrderInvoice>>(
       routeParams(API.ORDER_INVOICE.UPDATE, { id }),
       dto
+    );
+  }
+
+  getBulkInvoices(dto: ParamBulkInvoiceDto) {
+    return this.http.get<Response<OrderInvoice[]>>(
+      `${API.ORDER_INVOICE.BULK_INVOICES}`,
+      { params: dto as any }
     );
   }
 }
