@@ -68,7 +68,7 @@ export class OrdersComponent implements OnInit {
     const res = await handleRequest(() =>
       this.reportService.getOrders({
         ...value,
-        merchantId: value.merchantId?.value,
+        // merchantId: value.merchantId?.value,
         // endDate: DateUtils.getMaxHour(value.endDate),
         startDate: DateUtils.getMinHourMoment(
           DateUtils.getMaxHour(value.startDate)
