@@ -115,4 +115,29 @@ export class MerchantCommissionComponent implements OnInit {
       true
     );
   }
+
+  genearateInvoiceDialog(invoice: InvoiceData) {
+    const dialogRef = this.dialog.open(ConfirmDialog, {
+      ...DIALOG_CONFIG_XS,
+      data: {
+        message: `¿Está seguro de generar la factura de ${invoice.client}?`,
+      },
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe((isOk) => isOk && this.genearateInvoice(invoice));
+  }
+
+  async genearateInvoice(invoice: InvoiceData) {
+    const params = {
+      cityId: this.form.value.cityId,
+      startDate: this.form.value.startDate,
+      endDate: DateUtils.getMaxHour(this.form.value.endDate),
+      clientId: invoice.clientId,
+    };
+    await handleRequestPg(
+      () => this.reportService.generateSingleOrderInvoice(params),
+      true
+    );
+  }
 }

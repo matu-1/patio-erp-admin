@@ -25,3 +25,8 @@ export interface CreateMultiOrderInvoiceDto {
   endDate: Date;
   cityId?: number;
 }
+
+export interface CreateSingleOrderInvoiceDto
+  extends CreateMultiOrderInvoiceDto {
+  clientId: number;
+}

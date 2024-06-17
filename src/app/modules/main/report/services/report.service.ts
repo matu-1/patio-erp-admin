@@ -41,6 +41,7 @@ import { CONFIG } from 'src/app/constants/config.constant';
 import { Catering } from '../interfaces/catering.interface';
 import {
   CreateMultiOrderInvoiceDto,
+  CreateSingleOrderInvoiceDto,
   InvoiceData,
   OrderInvoiceParams,
 } from '../interfaces/order-invoice';
@@ -229,5 +230,12 @@ export class ReportService {
 
   generateOrderInvoices(dto: CreateMultiOrderInvoiceDto) {
     return this.http.post<Response<boolean>>(API.ORDER_INVOICE.GENERATE, dto);
+  }
+
+  generateSingleOrderInvoice(dto: CreateSingleOrderInvoiceDto) {
+    return this.http.post<Response<boolean>>(
+      API.ORDER_INVOICE.GENERATE_SINGLE,
+      dto
+    );
   }
 }

@@ -1,7 +1,9 @@
 <app-breadcrumbs [breadcrumbs]="[{title, path: ''}]"></app-breadcrumbs>
 <app-title-bar [title]="title">
   <button mat-button [disabled]="!data" (click)="download()">Exportar</button>
-  <button mat-button [disabled]="!data" (click)="generateOrderInvoicesDialog()">Generar facturas</button>
+  <button mat-button [disabled]="!data" (click)="generateOrderInvoicesDialog()">
+    Generar facturas
+  </button>
 </app-title-bar>
 <app-simple-card class="mb-3" [isLoading]="isLoadingFilter">
   <app-form-builder
@@ -18,6 +20,13 @@
   <ng-template customColumn="actions" let-value="value">
     <button mat-icon-button (click)="goDetail(value)" matTooltip="Ver detalle">
       <mat-icon class="action-icon">info</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      (click)="genearateInvoiceDialog(value)"
+      matTooltip="Generar invoice"
+    >
+      <mat-icon class="action-icon">library_books</mat-icon>
     </button>
   </ng-template>
 </app-data-table>
