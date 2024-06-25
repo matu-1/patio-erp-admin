@@ -250,7 +250,7 @@ export class OrderTrackingComponent
         return 'The driver goes to your home';
       case 'delivered':
       case 'complete':
-        return 'completed';
+        return 'Completed';
       case 'canceled':
         return 'Cancelled';
       default:
