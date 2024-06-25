@@ -242,17 +242,17 @@ export class OrderTrackingComponent
     switch (this.order.status) {
       case 'pending':
       case 'confirmed':
-        return 'Cocinando';
+        return 'Cooking';
       case 'assigned':
       case 'arrived':
-        return 'El driver está en camino a la tienda';
+        return 'The driver is on its way to the store';
       case 'dispatched':
-        return 'El driver se dirige a tu domicilio';
+        return 'The driver goes to your home';
       case 'delivered':
       case 'complete':
-        return 'Completado';
+        return 'completed';
       case 'canceled':
-        return 'Cancelado';
+        return 'Cancelled';
       default:
         break;
     }
